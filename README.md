@@ -5,7 +5,7 @@
 <h2>Features</h2>
 
 <ul>
-
+	
 	<li>Hardware accelerated using CSS3 for supported iOS, Android and WebKit browsers.</li>
 
 	<li>Responsive support to work with the most dynamic desktop and mobile sites.</li>
