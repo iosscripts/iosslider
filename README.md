@@ -31,10 +31,7 @@
 <p>The <a href="http://jquery.com" target="_blank">jQuery</a> library and iosSlider Plugin scripts must be included in the HTML header of the web page. The jQuery library must be included first for the iosSlider plugin to function.</p>
 
 <pre>
-<!-- jQuery library -->
 <script type = 'text/javascript' src = '/iosSlider/jquery-1.6.1.min.js'></script>
-
-<!-- iosSlider plugin -->
 <script type = 'text/javascript' src = '/iosSlider/jquery.iosslider.js'></script>
 </pre>
 
@@ -43,18 +40,15 @@
 <p>Add the iosSlider HTML code within the body of the web page. The HTML can contain as little as one slide element, but if you want to leverage the <em>snapToChildren</em> setting, you will need to use multiple slides.</p>
 
 <pre>
-<!-- slider container -->
 <div class = 'iosSlider'>
 
-<!-- slider -->
-<div class = 'slider'>
+	<div class = 'slider'>
 
-<!-- slides -->
-<div class = 'slide'>...</div>
-<div class = 'slide'>...</div>
-<div class = 'slide'>...</div>
+		<div class = 'slide'>...</div>
+		<div class = 'slide'>...</div>
+		<div class = 'slide'>...</div>
 
-</div>
+	</div>
 
 </div>
 </pre>
@@ -66,32 +60,33 @@
 <pre>
 /* slider container */
 .iosSlider {
-/* required */
-position: relative;
-top: 0;
-left: 0;
-overflow: hidden;
 
-/* optional */
-width: 630px;
-height: 214px;
+	/* required */
+	position: relative;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	
+	/* optional */
+	width: 630px;
+	height: 214px;
 }
 
 /* slider */
 .iosSlider .slider {
-/* required */
-width: 100%;
-height: 100%;
+	/* required */
+	width: 100%;
+	height: 100%;
 }
 
 /* slide */
 .iosSlider .slider .slide {
-/* required */
-float: left;
+	/* required */
+	float: left;
 
-/* optional */
-width: 630px;
-height: 214px;
+	/* optional */
+	width: 630px;
+	height: 214px;
 }
 </pre>
 
@@ -107,17 +102,17 @@ $('.iosSlider').iosSlider();
 
 /* some custom settings */
 $('.iosSlider').iosSlider({
-snapToChildren: true,
-scrollbar: true,
-scrollbarHide: false,
-desktopClickDrag: true,
-scrollbarLocation: 'bottom',
-scrollbarHeight: '6px',
-scrollbarBackground: 'url(_img/some-img.png) repeat 0 0',
-scrollbarBorder: '1px solid #000',
-scrollbarMargin: '0 30px 16px 30px',
-scrollbarOpacity: '0.75',
-onSlideChange: changeSlideIdentifier
+	snapToChildren: true,
+	scrollbar: true,
+	scrollbarHide: false,
+	desktopClickDrag: true,
+	scrollbarLocation: 'bottom',
+	scrollbarHeight: '6px',
+	scrollbarBackground: 'url(_img/some-img.png) repeat 0 0',
+	scrollbarBorder: '1px solid #000',
+	scrollbarMargin: '0 30px 16px 30px',
+	scrollbarOpacity: '0.75',
+	onSlideChange: changeSlideIdentifier
 });
 
 });
