@@ -2,7 +2,9 @@
 
 <p>iosSlider is a <a href="http://jquery.com" target="_blank">jQuery</a> plugin which turns any wide element into a touch enabled horizontal slider.</p>
 					
-<h3>Features</h3>
+<h2>Features</h2>
+
+<hr />
 
 <ul>
 
@@ -20,7 +22,9 @@
 
 </ul>
 
-<h3>Tutorial</h3>
+<h2>Tutorial</h2>
+
+<hr />
 
 <h4>Getting Ready</h4>
 
@@ -125,7 +129,9 @@ $(document).ready(function() {
 
 </div>
 					
-<h3>Settings & Options</h3>
+<h2>Settings & Options</h2>
+
+<hr />
 
 <p>You can pass along any of the following key/value pairs listed below to the iosSlider() function or modify them at the bottom of the the iosSlider() JavaScript file directly.</p>
 
@@ -290,7 +296,9 @@ Returned parameter: 'args' (array) { settings, sliderObject, currentSlideObject,
 </tbody>
 </table>
 					
-<h3>Public Methods</h3>
+<h2>Public Methods</h2>
+
+<hr />
 
 <table class="api">
 	<thead>
@@ -313,7 +321,9 @@ Returned parameter: 'args' (array) { settings, sliderObject, currentSlideObject,
 	</tbody>
 </table>
 
-<h3>License</h3>
+<h2>License</h2>
+
+<hr />
 
 <p>You may use iosSlider (beta) freely, without restriction in any material intended for sale or distribution. Attribution is not required but always appreciated. You are not permitted to make the resources found on iosscripts.com available for distribution elsewhere "as is" without prior&nbsp;consent.</p>
 
