@@ -4,8 +4,6 @@
 					
 <h2>Features</h2>
 
-<hr />
-
 <ul>
 
 	<li>Hardware accelerated using CSS3 for supported iOS, Android and WebKit browsers.</li>
@@ -23,8 +21,6 @@
 </ul>
 
 <h2>Tutorial</h2>
-
-<hr />
 
 <h4>Getting Ready</h4>
 
@@ -130,8 +126,6 @@ $(document).ready(function() {
 </div>
 					
 <h2>Settings & Options</h2>
-
-<hr />
 
 <p>You can pass along any of the following key/value pairs listed below to the iosSlider() function or modify them at the bottom of the the iosSlider() JavaScript file directly.</p>
 
@@ -298,8 +292,6 @@ Returned parameter: 'args' (array) { settings, sliderObject, currentSlideObject,
 					
 <h2>Public Methods</h2>
 
-<hr />
-
 <table class="api">
 	<thead>
 		<tr>
@@ -322,8 +314,6 @@ Returned parameter: 'args' (array) { settings, sliderObject, currentSlideObject,
 </table>
 
 <h2>License</h2>
-
-<hr />
 
 <p>You may use iosSlider (beta) freely, without restriction in any material intended for sale or distribution. Attribution is not required but always appreciated. You are not permitted to make the resources found on iosscripts.com available for distribution elsewhere "as is" without prior&nbsp;consent.</p>
 
