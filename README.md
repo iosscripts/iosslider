@@ -30,34 +30,34 @@
 
 <p>The <a href="http://jquery.com" target="_blank">jQuery</a> library and iosSlider Plugin scripts must be included in the HTML header of the web page. The jQuery library must be included first for the iosSlider plugin to function.</p>
 
-<pre><code>
-<!-- jQuery library -->
-<script type = 'text/javascript' src = '/iosSlider/jquery-1.6.1.min.js'></script>
+<pre>
+&lt;!-- jQuery library --&gt;
+&lt;script type = 'text/javascript' src = '/iosSlider/jquery-1.6.1.min.js'&gt;&lt;/script&gt;
 
-<!-- iosSlider plugin -->
-<script type = 'text/javascript' src = '/iosSlider/jquery.iosslider.js'></script>
-</code></pre>
+&lt;!-- iosSlider plugin --&gt;
+&lt;script type = 'text/javascript' src = '/iosSlider/jquery.iosslider.js'&gt;&lt;/script&gt;
+</pre>
 
 <h4>Add the HTML</h4>
 
 <p>Add the iosSlider HTML code within the body of the web page. The HTML can contain as little as one slide element, but if you want to leverage the <em>snapToChildren</em> setting, you will need to use multiple slides.</p>
 
-<pre><code>
-<!-- slider container -->
-<div class = 'iosSlider'>
+<pre>
+&lt;!-- slider container --&gt;
+&lt;div class = 'iosSlider'&gt;
 	
-	<!-- slider -->
-	<div class = 'slider'>
+	&lt;!-- slider --&gt;
+	&lt;div class = 'slider'&gt;
 	
-		<!-- slides -->
-		<div class = 'slide'>...</div>
-		<div class = 'slide'>...</div>
-		<div class = 'slide'>...</div>
+		&lt;!-- slides --&gt;
+		&lt;div class = 'slide'&gt;...&lt;/div&gt;
+		&lt;div class = 'slide'&gt;...&lt;/div&gt;
+		&lt;div class = 'slide'&gt;...&lt;/div&gt;
 
-	</div>
+	&lt;/div&gt;
 
-</div>
-</code></pre>
+&lt;/div&gt;
+</pre>
 
 <h4>Add the CSS</h4>
 
