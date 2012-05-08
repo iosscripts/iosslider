@@ -30,20 +30,26 @@
 
 <p>The <a href="http://jquery.com" target="_blank">jQuery</a> library and iosSlider Plugin scripts must be included in the HTML header of the web page. The jQuery library must be included first for the iosSlider plugin to function.</p>
 
-<pre>
+<pre><code>
+<!-- jQuery library -->
 <script type = 'text/javascript' src = '/iosSlider/jquery-1.6.1.min.js'></script>
+
+<!-- iosSlider plugin -->
 <script type = 'text/javascript' src = '/iosSlider/jquery.iosslider.js'></script>
-</pre>
+</code></pre>
 
 <h4>Add the HTML</h4>
 
 <p>Add the iosSlider HTML code within the body of the web page. The HTML can contain as little as one slide element, but if you want to leverage the <em>snapToChildren</em> setting, you will need to use multiple slides.</p>
 
-<pre>
+<pre><code>
+<!-- slider container -->
 <div class = 'iosSlider'>
-
+	
+	<!-- slider -->
 	<div class = 'slider'>
-
+	
+		<!-- slides -->
 		<div class = 'slide'>...</div>
 		<div class = 'slide'>...</div>
 		<div class = 'slide'>...</div>
@@ -51,7 +57,7 @@
 	</div>
 
 </div>
-</pre>
+</code></pre>
 
 <h4>Add the CSS</h4>
 
@@ -60,7 +66,6 @@
 <pre>
 /* slider container */
 .iosSlider {
-
 	/* required */
 	position: relative;
 	top: 0;
