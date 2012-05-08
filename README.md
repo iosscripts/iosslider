@@ -24,29 +24,26 @@
 
 <h4>Getting Ready</h4>
 
-<p>To get started, you will need to download the iosSlider script. Click <a href = '<?php echo $downloadLink; ?>' target = '_blank'>here</a> to download the latest version. This download contains the iosSlider script, the jQuery library, and source files for the examples shown above.</p>
+<p>To get started, you will need to download the iosSlider script. Click <a href = 'http://iosscripts.com/iosslider/' target = '_blank'>here</a> to download the latest version. This download contains the iosSlider script, the jQuery library, and source files for the examples shown above.</p>
 
 <h4>Include the Necessary JavaScript Files</h4>
 
 <p>The <a href="http://jquery.com" target="_blank">jQuery</a> library and iosSlider Plugin scripts must be included in the HTML header of the web page. The jQuery library must be included first for the iosSlider plugin to function.</p>
 
-<div class = 'code'>
-
-<pre class = 'prettyprint lang-html'><?php echo htmlentities("<!-- jQuery library -->
-<script type = 'text/javascript' src = '/iosSlider/jquery-1.7.min.js'></script>
+<pre>
+<!-- jQuery library -->
+<script type = 'text/javascript' src = '/iosSlider/jquery-1.6.1.min.js'></script>
 
 <!-- iosSlider plugin -->
-<script type = 'text/javascript' src = '/iosSlider/jquery.ios-slider-0.8.8.js'></script>"); ?></pre>
-
-</div>
+<script type = 'text/javascript' src = '/iosSlider/jquery.iosslider.js'></script>
+</pre>
 
 <h4>Add the HTML</h4>
 
 <p>Add the iosSlider HTML code within the body of the web page. The HTML can contain as little as one slide element, but if you want to leverage the <em>snapToChildren</em> setting, you will need to use multiple slides.</p>
 
-<div class = 'code'>
-
-<pre class = 'prettyprint lang-html'><?php echo htmlentities("<!-- slider container -->
+<pre>
+<!-- slider container -->
 <div class = 'iosSlider'>
 
 <!-- slider -->
@@ -59,17 +56,15 @@
 
 </div>
 
-</div>"); ?></pre>
-
 </div>
+</pre>
 
 <h4>Add the CSS</h4>
 
-<p>Place the CSS in your stylesheet. The <em>required</em> CSS attributes are included to guarantee optimal performance. Feel free to apply as many other CSS attributes as you want. To see some <em>real-world</em> examples of this, check the examples folder of the <a href = '<?php echo $downloadLink; ?>' target = '_blank'>iosSlider</a> download.</p>
+<p>Place the CSS in your stylesheet. The <em>required</em> CSS attributes are included to guarantee optimal performance. Feel free to apply as many other CSS attributes as you want. To see some <em>real-world</em> examples of this, check the examples folder of the <a href = 'http://iosscripts.com/iosslider/' target = '_blank'>iosSlider</a> download.</p>
 
-<div class = 'code'>
-
-<pre class = 'prettyprint lang-css'><?php echo htmlentities("/* slider container */
+<pre>
+/* slider container */
 .iosSlider {
 /* required */
 position: relative;
@@ -97,17 +92,15 @@ float: left;
 /* optional */
 width: 630px;
 height: 214px;
-}"); ?></pre>
-
-</div>
+}
+</pre>
 
 <h4>Add the JavaScript</h4>
 
 <p>Add the code below to your JavaScript file. The following code uses the jQuery selector to fire the iosSlider jQuery plugin. If you are unfamiliar with jQuery, here is <a href="http://docs.jquery.com/Tutorials:How_jQuery_Works" target="_blank">a tutorial</a> to get you started.</p>
 
-<div class = 'code'>
-
-<pre class = 'prettyprint lang-js'><?php echo htmlentities("$(document).ready(function() {
+<pre>
+$(document).ready(function() {
 
 /* basic - default settings */
 $('.iosSlider').iosSlider();
@@ -127,7 +120,8 @@ scrollbarOpacity: '0.75',
 onSlideChange: changeSlideIdentifier
 });
 
-});");?></pre>
+});
+</pre>
 
 </div>
 					
