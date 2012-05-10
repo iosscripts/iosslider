@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.9.3 beta (05/03/2012)
+ * Version: v0.9.3 beta (05/09/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
@@ -746,7 +746,7 @@
 					$(scrollerNode).children().each(function(j) {
 						
 						$(this).css({
-							float: 'left'
+							'float': 'left'
 						});
 						
 						childrenOffsets[j] = sliderMax * -1;
