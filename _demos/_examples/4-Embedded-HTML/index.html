@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	
+		<!-- META -->
+		<meta charset = "utf-8">
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta name = "apple-mobile-web-app-capable" content = "yes" /> 
+		
+		<style type="text/css">
+			.iosSlider {
+				position: relative;
+				top: 0;
+				left: 0;
+				overflow: hidden;
+				width: 900px;
+				height: 300px;
+			}
+			
+			.iosSlider .prevButton {
+				position: absolute;
+				top: 130px;
+				left: 0;
+				width: 20px;
+				height: 40px;
+				background: url(slider-buttons.png) no-repeat 0 0;
+				z-index: 2;
+			}
+			
+			.iosSlider .nextButton {
+				position: absolute;
+				top: 130px;
+				right: 0;
+				width: 20px;
+				height: 40px;
+				background: url(slider-buttons.png) no-repeat 100% 0;
+				z-index: 2;
+			}
+			
+			.iosSlider .slider {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.iosSlider .slider .item {
+				position: relative;
+				top: 0;
+				left: 0;
+				width: 820px;
+				height: 300px;
+				margin: 0 40px 0 40px;
+			}
+			
+			.iosSlider .slider .item .image {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 300px;
+			}
+			
+			.iosSlider .slider .item .image .bg {
+				border: 10px solid #000;
+				border-right: 0;
+				height: 180px;
+				width: 340px;
+				opacity: 0.5;
+				display: none;
+			}
+			
+			.iosSlider .slider .item .text {
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				width: 180px;
+				height: 260px;
+				padding: 20px;
+			}
+			
+			.iphoneUI .iosSlider .slider .item .text {
+				display: none;
+			}
+			
+			.iosSlider .slider .item .text .bg {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 220px;
+				height: 300px;
+				background: #000;
+				opacity: 0.5;
+			}
+			
+			.iphoneUI .iosSlider .slider .item .text .bg {
+				display: none;
+			}
+			
+			.iosSlider .slider .item .title {
+				position: relative;
+				top: 0;
+				left: 0;
+				text-indent: -1px;
+			}
+			
+			.iosSlider .slider .item .title span {
+				color: #fff;
+				font: bold 40px/40px "Helvetica Neue",Helvetica,Arial,sans-serif;
+				text-shadow: 0 -1px 1px #000;
+			}
+			
+			.iosSlider .slider .item .desc {
+				position: relative;
+				top: 0;
+				left: 0;
+				margin: 10px 0 0 0;
+			}
+			
+			.iosSlider .slider .item .desc span {
+				color: #fff;
+				font: normal 16px/22px "Helvetica Neue",Helvetica,Arial,sans-serif;
+				text-shadow: 0 -1px 1px #000;
+			}
+			
+			.iosSlider .slider .item .button {
+				position: absolute;
+				right: 20px;
+				bottom: 20px;
+				padding: 0 10px 0 10px;
+				margin: 10px 0 0 0;
+				background: #aaa;
+				border: 1px solid #000;
+				cursor: pointer;
+			}
+			
+			.iosSlider .slider .item .button span {
+				color: #000;
+				font: normal 14px/30px "Helvetica Neue",Helvetica,Arial,sans-serif;
+				text-shadow: 0 1px 1px #fff;
+			}
+			
+			.iosSlider .slider #item1 .image {
+				background: url(h-slider-1.jpg) no-repeat 50% 50%;
+			}
+			
+			.iosSlider .slider #item2 .image {
+				background: url(h-slider-2.jpg) no-repeat 50% 50%;
+			}
+			
+			.iosSlider .slider #item3 .image {
+				background: url(h-slider-3.jpg) no-repeat 20% 50%;
+			}
+			
+			.iosSlider .slider #item4 .image {
+				background: url(h-slider-4.jpg) no-repeat 50% 50%;
+			}
+		</style>
+		
+		<!-- jQuery library -->
+		<script type="text/javascript" src = "../../../_lib/jquery-1.6.1.min.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../../_src/jquery.iosslider.min.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+			
+				$('.iosSlider').iosSlider({
+					scrollbar: true,
+					snapToChildren: true,
+					desktopClickDrag: true,
+					scrollbarMargin: '5px 40px 0 40px',
+					scrollbarBorderRadius: 0,
+					scrollbarHeight: '2px',
+					navPrevSelector: $('.prevButton'),
+					navNextSelector: $('.nextButton')
+				});
+				
+			});
+		</script>
+		
+		<title>Ex #4: Embedded HTML</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'iosSlider'>
+			
+			<div class = 'slider'>
+			
+				<div class = 'item' id = 'item1'>
+					
+					<div class = 'image'>
+						<div class = 'bg'></div>
+					</div>
+					
+					<div class = 'text'>
+						
+						<div class = 'bg'></div>
+						
+						<div class = 'title'>
+							<span>Touch Me.</span>
+						</div>
+						
+						<div class = 'desc'>
+							<span>Hardware accelerated using CSS3 for supported iOS, Android and WebKit</span>
+						</div>
+						
+						<div class = 'button'>
+							<span>Read More &rsaquo;</span>
+						</div>
+						
+					</div>
+					
+				</div>
+				
+				<div class = 'item' id = 'item2'>
+				
+					<div class = 'image'>
+						<div class = 'bg'></div>
+					</div>
+					
+					<div class = 'text'>
+					
+						<div class = 'bg'></div>
+					
+						<div class = 'title'>
+							<span>Respond.</span>
+						</div>
+						
+						<div class = 'desc'>
+							<span>Responsive to change in browser width and adjust automatically</span>
+						</div>
+						
+						<div class = 'button'>
+							<span>Read More &rsaquo;</span>
+						</div>
+						
+					</div>
+					
+				</div>
+				
+				<div class = 'item' id = 'item3'>
+				
+					<div class = 'image'>
+						<div class = 'bg'></div>
+					</div>
+					
+					<div class = 'text'>
+						
+						<div class = 'bg'></div>
+						
+						<div class = 'title'>
+							<span>Flexible.</span>
+						</div>
+						
+						<div class = 'desc'>
+							<span>Run multiple sliders on the same web page</span>
+						</div>
+						
+						<div class = 'button'>
+							<span>Read More &rsaquo;</span>
+						</div>
+						
+					</div>
+				
+				</div>
+				
+				<div class = 'item' id = 'item4'>
+				
+					<div class = 'image'>
+						<div class = 'bg'></div>
+					</div>
+					
+					<div class = 'text'>
+						
+						<div class = 'bg'></div>
+	
+						<div class = 'title'>
+							<span>Custom.</span>
+						</div>
+						
+						<div class = 'desc'>
+							<span>Set momentum, elasticity, scrollbars and more...</span>
+						</div>
+						
+						<div class = 'button'>
+							<span>Read More &rsaquo;</span>
+						</div>
+						
+					</div>
+				
+				</div>
+			
+			</div>
+			
+			<div class = 'prevButton'></div>
+		
+			<div class = 'nextButton'></div>
+			
+		</div>
+	
+	</body>
+
+</html>

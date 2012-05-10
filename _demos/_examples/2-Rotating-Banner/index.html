@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	
+		<!-- META -->
+		<meta charset = "utf-8">
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta name = "apple-mobile-web-app-capable" content = "yes" /> 
+		
+		<style type="text/css">
+			.iosSlider {
+				width: 900px;
+				height: 300px;
+			}
+			
+			.iosSlider .slider {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.iosSlider .slider .item {
+				position: relative;
+				top: 0;
+				left: 0;
+				width: 900px;
+				height: 300px;
+				background: #fff;
+				margin: 0 0 0 0;
+			}
+			
+			.iosSlider .slider #item1 {
+				background: url(h-slider-1.jpg) no-repeat 50% 0;
+			}
+			
+			.iosSlider .slider #item2 {
+				background: url(h-slider-2.jpg) no-repeat 50% 0;
+			}
+			
+			.iosSlider .slider #item3 {
+				background: url(h-slider-3.jpg) no-repeat 50% 0;
+			}
+			
+			.iosSlider .slider #item4 {
+				background: url(h-slider-4.jpg) no-repeat 50% 0;
+			}
+			
+			.iosSlider .slider .item .text1 {
+				position: absolute;
+				top: 30px;
+				right: 150px;
+				opacity: 0;
+				filter: alpha(opacity:0);
+				background: #000;
+			}
+			
+			.iosSlider .slider .item .text1 span {
+				color: #fff;
+				font: bold 50px/60px "Helvetica Neue",Helvetica,Arial,sans-serif;
+				padding: 0 8px;
+			}
+			
+			.iosSlider .slider .item .text2 {
+				position: absolute;
+				top: 90px;
+				right: 0;
+				opacity: 0;
+				filter: alpha(opacity:0);
+				background: #000;
+				padding: 5px 7px 7px 7px;
+			}
+			
+			.iosSlider .slider .item .text2 span {
+				color: #fff;
+				font: normal 16px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;	
+			}
+			
+			.iosSliderButtons {
+				position: absolute;
+				bottom: 10px;
+				left: 10px;
+				width: 200px;
+				height: 10px;
+			}
+			
+			.iosSliderButtons .button {
+				float: left;
+				width: 9px;
+				height: 9px;
+				background: #999;
+				margin: 0 10px 0 0;
+				opacity: 0.25;
+				filter: alpha(opacity:25);
+				border: 1px solid #000;
+			}
+			
+			.iosSliderButtons .selected {
+				background: #000;
+				opacity: 1;
+				filter: alpha(opacity:100);
+			}
+		</style>
+		
+		<!-- jQuery library -->
+		<script type="text/javascript" src = "../../../_lib/jquery-1.6.1.min.js"></script>
+		<script type="text/javascript" src = "../../../_lib/jquery.easing-1.3.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../../_src/jquery.iosslider.min.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+			
+				$('.iosSlider').iosSlider({
+					scrollbar: true,
+					snapToChildren: true,
+					desktopClickDrag: true,
+					scrollbarLocation: 'top',
+					scrollbarMargin: '10px 10px 0 10px',
+					scrollbarBorderRadius: '0',
+					responsiveSlideWidth: true,
+					navSlideSelector: $('.iosSliderButtons .button'),
+					infiniteSlider: true,
+					startAtSlide: '2',
+					onSlideChange: slideContentChange,
+					onSlideComplete: slideContentComplete,
+					onSliderLoaded: slideContentLoaded
+				});
+				
+				function slideContentChange(args) {
+					
+					/* indicator */
+					$(args.sliderObject).parent().find('.iosSliderButtons .button').removeClass('selected');
+					$(args.sliderObject).parent().find('.iosSliderButtons .button:eq(' + args.currentSlideNumber + ')').addClass('selected');
+					
+				}
+				
+				function slideContentComplete(args) {
+					
+					/* animation */
+					$(args.sliderObject).find('.text1, .text2').attr('style', '');
+					
+					$(args.currentSlideObject).children('.text1').animate({
+						right: '100px',
+						opacity: '1'
+					}, 400, 'easeOutQuint');
+					
+					$(args.currentSlideObject).children('.text2').delay(200).animate({
+						right: '50px',
+						opacity: '1'
+					}, 400, 'easeOutQuint');
+					
+				}
+				
+				function slideContentLoaded(args) {
+					
+					/* animation */
+					$(args.sliderObject).find('.text1, .text2').attr('style', '');
+					
+					$(args.currentSlideObject).children('.text1').animate({
+						right: '100px',
+						opacity: '1'
+					}, 400, 'easeOutQuint');
+					
+					$(args.currentSlideObject).children('.text2').delay(200).animate({
+						right: '50px',
+						opacity: '1'
+					}, 400, 'easeOutQuint');
+					
+					/* indicator */
+					$(args.sliderObject).parent().find('.iosSliderButtons .button').removeClass('selected');
+					$(args.sliderObject).parent().find('.iosSliderButtons .button:eq(' + args.currentSlideNumber + ')').addClass('selected');
+					
+				}
+				
+			});
+		</script>
+		
+		<title>Ex #2: Rotating Banner</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'iosSlider'>
+		
+			<div class = 'slider'>
+			
+				<div class = 'item' id = 'item1'>
+					
+					<div class = 'text1'><span>Touch Me.</span></div>
+					
+					<div class = 'text2'><span>Hardware accelerated using<br />CSS3 for supported iOS,<br />Android and WebKit</span></div>
+					
+				</div>
+				
+				<div class = 'item' id = 'item2'>
+				
+					<div class = 'text1'><span>Responsive.</span></div>
+					
+					<div class = 'text2'><span>Respond to change in browser<br />width and adjust automatically</span></div>
+					
+				</div>
+				
+				<div class = 'item' id = 'item3'>
+				
+					<div class = 'text1'><span>Flexible.</span></div>
+					
+					<div class = 'text2'><span>Run multiple sliders on<br />the same web page</span></div>
+				
+				</div>
+				
+				<div class = 'item' id = 'item4'>
+				
+					<div class = 'text1'><span>Customize.</span></div>
+					
+					<div class = 'text2'><span>Set momentum, elasticity,<br />scrollbars and more...</span></div>
+				
+				</div>
+			
+			</div>
+			
+			<div class = 'iosSliderButtons'>
+				<div class = 'button'></div>
+				<div class = 'button'></div>
+				<div class = 'button'></div>
+				<div class = 'button'></div>
+			</div>
+		
+		</div>
+	
+	</body>
+
+</html>
