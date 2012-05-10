@@ -1,8 +1,10 @@
 <h1>Changelog</h1>
 					
-<h4>2012/05/03 - v0.9.2.1 (beta)</h4>
+<h4>2012/05/09 - v0.9.3 (beta)</h4>
 
 <ul>
+	<li>Fixed iosslider breaking in minified version.</li>
+	<li><em>onSlideComplete</em> returning inconsistent data sets between the goToSlide function and click+drag behavior.</li>
 	<li>Changed option name: <em>autoSlideSpeed</em> to <em>autoSlideTransTimer</em>.</li>
 	<li>Fixed a rounding issue where <em>autoSlideTransTimer</em> could not be set to 0.</li>
 	<li>Fixed <em>startAtSlide</em> not initializing.</li>
