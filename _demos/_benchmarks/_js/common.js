@@ -124,6 +124,12 @@ $(document).ready(function() {
 		});
 	});
 	
+	$('.full-width-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		infiniteSlider: true
+	});
+	
 });
 
 function callbackSliderLoadedChanged(args) {
