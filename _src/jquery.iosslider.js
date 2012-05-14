@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.9.3 beta (05/09/2012)
+ * Version: v0.9.4 beta (05/13/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
@@ -170,10 +170,11 @@
 			}
 			
 			var testNodeOffsets = helpers.getAnimationSteps(settings, xScrollDistance, nodeOffset, sliderMax, sliderMin, childrenOffsets);
+			var newChildOffset = helpers.calcActiveOffset(settings, testNodeOffsets[testNodeOffsets.length-1], snapDirection, childrenOffsets, sliderMax, stageWidth, activeChildOffset);
 			
-			var newChildOffset = snapToChildren ?
+			/*var newChildOffset = snapToChildren ?
 				helpers.calcActiveOffset(settings, nodeOffset, snapDirection, childrenOffsets, sliderMax, stageWidth, activeChildOffset) :
-				helpers.calcActiveOffset(settings, testNodeOffsets[testNodeOffsets.length-1], snapDirection, childrenOffsets, sliderMax, stageWidth, activeChildOffset);
+				helpers.calcActiveOffset(settings, testNodeOffsets[testNodeOffsets.length-1], snapDirection, childrenOffsets, sliderMax, stageWidth, activeChildOffset);*/
 			
 			if(settings.infiniteSlider) {
 	
@@ -405,13 +406,13 @@
 				
 			}
 			
-			if(snapDirection < 0) {
+			if((snapDirection < 0) && (newChildOffset == activeChildOffset)) {
 				
 				newChildOffset = activeChildOffset + 1;
 			
 				if(newChildOffset >= childrenOffsets.length) newChildOffset = childrenOffsets.length - 1;
 				
-			} else if(snapDirection > 0) {
+			} else if((snapDirection > 0) && (newChildOffset == activeChildOffset)) {
 				
 				newChildOffset = activeChildOffset - 1;
 				

@@ -60,6 +60,11 @@ $(document).ready(function() {
 		snapToChildren: true
 	});
 	
+	$('.short-width-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true
+	});
+	
 	$('.autoslide-slider3').iosSlider({
 		desktopClickDrag: true,
 		snapToChildren: true,
