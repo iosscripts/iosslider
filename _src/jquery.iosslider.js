@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.9.4 beta (05/13/2012)
+ * Version: v0.9.3.1 beta (05/13/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
