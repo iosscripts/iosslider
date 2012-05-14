@@ -135,6 +135,12 @@ $(document).ready(function() {
 		infiniteSlider: true
 	});
 	
+	$('.form-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		infiniteSlider: true
+	});
+	
 });
 
 function callbackSliderLoadedChanged(args) {

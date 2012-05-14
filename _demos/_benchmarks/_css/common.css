@@ -636,3 +636,40 @@ p {
 .full-width-slider .slider #item5 {
 	background: #777;
 }
+
+/* form */
+.form-slider {
+	position: relative;
+	overflow: hidden;
+	width: 1000px;
+	height: 200px;
+}
+
+.form-slider .slider {
+	height: 100%;
+}
+
+.form-slider .slider .item {
+	width: 100%;
+	height: 100%;
+}
+
+.form-slider .slider #item1 {
+	background: #666;
+}
+
+.form-slider .slider #item2 {
+	background: #999;
+}
+
+.form-slider .slider #item3 {
+	background: #aaa;
+}
+
+.form-slider .slider #item4 {
+	background: #ddd;
+}
+
+.form-slider .slider #item5 {
+	background: #777;
+}
