@@ -1,8 +1,9 @@
 <h1>Changelog</h1>
 					
-<h4>2012/05/09 - v0.9.3 (beta)</h4>
+<h4>2012/05/14 - v0.9.3.1 (beta)</h4>
 
 <ul>
+	<li>Fixed issue preventing sliding beyond +/-1 slide while <em>snapToSlide</em> is active.</li>
 	<li>Fixed iosslider breaking in minified version.</li>
 	<li><em>onSlideComplete</em> returning inconsistent data sets between the goToSlide function and click+drag behavior.</li>
 	<li>Changed option name: <em>autoSlideSpeed</em> to <em>autoSlideTransTimer</em>.</li>
