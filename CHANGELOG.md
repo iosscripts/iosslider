@@ -1,8 +1,10 @@
 <h1>Changelog</h1>
 					
-<h4>2012/05/14 - v0.9.3.1 (beta)</h4>
+<h4>2012/05/16 - v0.9.4 (beta)</h4>
 
 <ul>
+	<li>Fixed issue #11</li>
+	<li>Fixed issue where rapid window resizing causes slides to jump.</li>
 	<li>Fixed issue preventing sliding beyond +/-1 slide while <em>snapToSlide</em> is active.</li>
 	<li>Fixed iosslider breaking in minified version.</li>
 	<li><em>onSlideComplete</em> returning inconsistent data sets between the goToSlide function and click+drag behavior.</li>
