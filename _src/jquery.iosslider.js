@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.9.3.2 beta (05/15/2012)
+ * Version: v0.9.4 beta (05/16/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
@@ -718,12 +718,12 @@
 					if(settings.responsiveSlideWidth) {
 						
 						$(slideNodes).each(function(j) {
-						
-							var thisSlideWidth = $(this).outerWidth(true);
 							
-							if(thisSlideWidth > containerWidth) {
+							var thisSlideWidth = $(this).outerWidth(true);
+
+							if(thisSlideWidth > stageWidth) {
 								
-								thisSlideWidth = containerWidth + ($(this).outerWidth(true) - $(this).width()) * -1;
+								thisSlideWidth = stageWidth + ($(this).outerWidth(true) - $(this).width()) * -1;
 							
 							} else {
 								
@@ -1038,7 +1038,7 @@
 							eventY = e.pageY;
 							isMouseDown = true;
 							currentSlider = this;
-							
+
 							$(this).css({
 								cursor: grabInCursor
 							});
