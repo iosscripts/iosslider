@@ -1034,20 +1034,20 @@
 								document.selection.empty();
 							}
 							
-						}
-	
-						if(isTouch) {
-							eventX = event.touches[0].pageX;
-							eventY = event.touches[0].pageY;
-						} else {
 							eventX = e.pageX;
 							eventY = e.pageY;
 							isMouseDown = true;
 							currentSlider = this;
 							
-							$(scrollerNode).css({
+							$(this).css({
 								cursor: grabInCursor
 							});
+							
+						} else {
+						
+							eventX = event.touches[0].pageX;
+							eventY = event.touches[0].pageY;
+						
 						}
 						
 						xCurrentScrollRate = new Array(0, 0);
