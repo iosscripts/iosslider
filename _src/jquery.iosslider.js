@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.9.4 beta (05/16/2012)
+ * Version: v0.9.4.1 beta (05/18/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
@@ -39,6 +39,7 @@
 	var scrollIntervalTime = 10;
 	var scrollbarDistance = 0;
 	var isTouch = 'ontouchstart' in window;
+	var supportsOrientationChange = 'onorientationchange' in window;
 	var isWebkit = false;
 	var isIe7 = false;
 	var isIe8 = false;
@@ -998,22 +999,16 @@
 				
 				}
 				
-				if(isTouch && iosSliderSettings[sliderNumber].responsiveSlideWidth) {
+				if(iosSliderSettings[sliderNumber].responsiveSlideWidth) {
 					
-					$(window).bind('orientationchange.iosSliderEvent', function() {
+					var orientationEvent = supportsOrientationChange ? 'orientationchange' : 'resize';
+					
+					$(window).bind(orientationEvent + '.iosSliderEvent', function() {
 							
 						if(!init()) return true;
 						
 					});
 					
-				} else if(iosSliderSettings[sliderNumber].responsiveSlideWidth) {
-				
-					$(window).bind('resize.iosSliderEvent', function(e) {
-	
-						if(!init()) return true;
-					
-					});
-				
 				}
 				
 				if(isTouch || settings.desktopClickDrag) {
