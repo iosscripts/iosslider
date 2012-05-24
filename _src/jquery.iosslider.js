@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.9.4.1 beta (05/18/2012)
+ * Version: v0.9.4.1 beta (05/24/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
@@ -99,7 +99,7 @@
 		
 		slowScrollHorizontalInterval: function(node, newOffset, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, activeChildOffset, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, settings) {
 	
-			newChildOffset = helpers.calcActiveOffset(settings, newOffset, 0, childrenOffsets, sliderMax, stageWidth, infiniteSliderOffset, undefined);
+			newChildOffset = helpers.calcActiveOffset(settings, newOffset, 0, childrenOffsets, sliderMax, stageWidth, infiniteSliderOffset, activeChildOffset);
 			if(newChildOffset != activeChildOffset) {
 				settings.onSlideChange(new helpers.args(settings, node, $(node).children(':eq(' + activeChildOffset + ')'), activeChildOffset%infiniteSliderOffset));
 			}
@@ -245,7 +245,7 @@
 			
 			if(onChangeEventLastFired[sliderNumber] != newChildOffset) {
 			
-				settings.onSlideComplete(new helpers.args(settings, node, slideNode, newChildOffset));
+				settings.onSlideComplete(new helpers.args(settings, $(node), slideNode, newChildOffset));
 			
 			}
 			
@@ -974,8 +974,6 @@
 					
 					}
 					
-					helpers.onSlideComplete(settings, scrollerNode, $(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')'), activeChildOffsets[sliderNumber]%infiniteSliderOffset, sliderNumber);
-					
 					$(stageNode).data('iosslider', {
 						obj: $this,
 						settings: settings,
@@ -1061,11 +1059,14 @@
 						if(settings.infiniteSlider) {
 							
 							if(activeChildOffsets[sliderNumber]%numberOfSlides == 0) {
-								var cloneSlide = $(this).children(':eq(' + activeChildOffsets[sliderNumber] + ')').clone(this);
+								
+								var cloneSlide = $(this).children(':eq(' + activeChildOffsets[sliderNumber] + ')').clone(true);
+								
 								$(this).children().each(function(i) {
-										
-									if(i+1%numberOfSlides == 0) {
-										$(cloneSlide).replaceWith($(this));
+									
+									if(i%numberOfSlides == 0) {	
+										/* $(this).replaceWith($(cloneSlide)); */
+										/* $(cloneSlide).appendTo($(this)); */
 									}
 								
 								});

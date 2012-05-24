@@ -159,6 +159,7 @@ function callbackSliderLoadedChanged(args) {
 function callbackSliderComplete(args) {
 	
 	console.log(args);
+	$(args.currentSlideObject).html('text-added');
 	
 }
 
