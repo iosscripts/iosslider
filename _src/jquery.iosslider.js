@@ -655,7 +655,7 @@
 				if(settings.infiniteSlider) {
 		
 					settings.scrollbar = false;
-					$(scrollerNode).children().clone(true).prependTo(scrollerNode).clone(true).appendTo(scrollerNode);
+					$(scrollerNode).children().clone(true, true).prependTo(scrollerNode).clone(true, true).appendTo(scrollerNode);
 					infiniteSliderOffset = numberOfSlides;
 					
 				}
@@ -1060,16 +1060,16 @@
 							
 							if(activeChildOffsets[sliderNumber]%numberOfSlides == 0) {
 								
-								var cloneSlide = $(this).children(':eq(' + activeChildOffsets[sliderNumber] + ')').clone(true);
-								
 								$(this).children().each(function(i) {
 									
-									if(i%numberOfSlides == 0) {	
-										/* $(this).replaceWith($(cloneSlide)); */
-										/* $(cloneSlide).appendTo($(this)); */
+									if((i%numberOfSlides == 0) && (i != activeChildOffsets[sliderNumber])) {
+										$(this).replaceWith(function() {
+											return $(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')').clone(true);
+										});
 									}
-								
+									
 								});
+								
 							}
 							
 						}

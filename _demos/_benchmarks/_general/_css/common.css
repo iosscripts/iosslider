@@ -247,6 +247,7 @@ p {
 	height: 198px;
 	border: 1px dotted #ddd;
 	background: #000;
+	cursor: pointer;
 }
 
 .autoslide-slider1 .slider #item1,
@@ -417,6 +418,7 @@ p {
 	height: 198px;
 	border: 1px dotted #ddd;
 	background: #000;
+	cursor: pointer;
 }
 
 .destroy-slider .slider {
@@ -523,6 +525,7 @@ p {
 	height: 198px;
 	border: 1px dotted #ddd;
 	background: #000;
+	cursor: pointer;
 }
 
 .callback-slider .slider {
