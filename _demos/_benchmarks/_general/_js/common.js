@@ -147,6 +147,11 @@ $(document).ready(function() {
 		infiniteSlider: true
 	});
 	
+	$('.thirty-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true
+	});
+	
 });
 
 function callbackSliderLoadedChanged(args) {
