@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.9.4.1 beta (05/24/2012)
+ * Version: v0.9.4.2 beta (05/27/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
@@ -97,7 +97,7 @@
 			
 		},
 		
-		slowScrollHorizontalInterval: function(node, newOffset, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, activeChildOffset, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, settings) {
+		slowScrollHorizontalInterval: function(node, newOffset, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, activeChildOffset, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, settings) {
 	
 			newChildOffset = helpers.calcActiveOffset(settings, newOffset, 0, childrenOffsets, sliderMax, stageWidth, infiniteSliderOffset, activeChildOffset);
 			if(newChildOffset != activeChildOffset) {
@@ -107,10 +107,10 @@
 			newOffset = Math.floor(newOffset);
 			
 			helpers.setSliderOffset(node, newOffset);
-			
+
 			if(settings.scrollbar) {
 				
-				scrollbarDistance = Math.floor((newOffset * -1) / (sliderMax) * (stageWidth - scrollMargin - scrollbarWidth));
+				scrollbarDistance = Math.floor((newOffset * -1) / (sliderMax) * (scrollbarStageWidth - scrollMargin - scrollbarWidth));
 				var width = scrollbarWidth - scrollBorder;
 				
 				if(newOffset >= sliderMin) {
@@ -125,7 +125,7 @@
 				
 				} else if(newOffset <= ((sliderMax * -1) + 1)) {
 					
-					width = stageWidth - scrollMargin - scrollBorder - scrollbarDistance;
+					width = scrollbarStageWidth - scrollMargin - scrollBorder - scrollbarDistance;
 					
 					helpers.setSliderOffset($('.' + scrollbarClass), scrollbarDistance);
 					
@@ -147,7 +147,7 @@
 			
 		},
 		
-		slowScrollHorizontal: function(node, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings) {
+		slowScrollHorizontal: function(node, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings) {
 	
 			var distanceOffsetArray = new Array();
 			var nodeOffset = helpers.getSliderOffset(node, 'x');
@@ -237,7 +237,7 @@
 					}
 				}
 					
-				scrollTimeouts[scrollTimeouts.length] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * j, node, distanceOffsetArray[j], sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, newChildOffset, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, settings);
+				scrollTimeouts[scrollTimeouts.length] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * j, node, distanceOffsetArray[j], sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, newChildOffset, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, settings);
 				
 			}
 			
@@ -432,7 +432,7 @@
 		
 		},
 		
-		changeSlide: function(slide, node, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, scrollbarNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings) {
+		changeSlide: function(slide, node, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, scrollbarNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings) {
 			
 			helpers.autoSlidePause(scrollbarNumber);
 			
@@ -477,7 +477,7 @@
 			
 			if(settings.infiniteSlider) {
 				slide = (slide%numberOfSlides) + numberOfSlides;
-			}
+			} 
 			
 			for(var i = 0; i < stepArray.length; i++) {
 				
@@ -487,7 +487,7 @@
 					}
 				}
 				
-				scrollTimeouts[i] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * (i + 1), node, stepArray[i], sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, slide, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, settings);
+				scrollTimeouts[i] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * (i + 1), node, stepArray[i], sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, slide, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, settings);
 					
 			}
 
@@ -499,13 +499,13 @@
 			
 			helpers.hideScrollbar(settings, scrollTimeouts, i, stepArray, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder);
 			
-			helpers.autoSlide(node, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, scrollbarNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+			helpers.autoSlide(node, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, scrollbarNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 			
 			return slide;
 			
 		},
 		
-		autoSlide: function(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings) {
+		autoSlide: function(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings) {
 			
 			if(!settings.autoSlide) return false;
 			
@@ -517,9 +517,10 @@
 					activeChildOffsets[sliderNumber] = activeChildOffsets[sliderNumber] - numberOfSlides;
 				}
 				
-				activeChildOffsets[sliderNumber] = helpers.changeSlide(activeChildOffsets[sliderNumber] + 1, scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+				var nextSlide = settings.infiniteSlider ? activeChildOffsets[sliderNumber] + 1 : (activeChildOffsets[sliderNumber] + 1) % numberOfSlides;
+				activeChildOffsets[sliderNumber] = helpers.changeSlide(nextSlide, scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 				
-				helpers.autoSlide(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+				helpers.autoSlide(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 				
 			}, settings.autoSlideTimer + settings.autoSlideTransTimer);
 			
@@ -532,10 +533,10 @@
 		},
 		
 		/* timers */
-		slowScrollHorizontalIntervalTimer: function(scrollIntervalTime, node, step, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, slide, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, settings) {
+		slowScrollHorizontalIntervalTimer: function(scrollIntervalTime, node, step, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, slide, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, settings) {
 		
 			var scrollTimeout = setTimeout(function() {
-				helpers.slowScrollHorizontalInterval(node, step, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, slide, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, settings);
+				helpers.slowScrollHorizontalInterval(node, step, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, slide, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, settings);
 			}, scrollIntervalTime);
 			
 			return scrollTimeout;
@@ -599,6 +600,7 @@
 				'scrollbar': false,
 				'scrollbarHide': true,
 				'scrollbarLocation': 'top',
+				'scrollbarContainer': '',
 				'scrollbarOpacity': 0.4,
 				'scrollbarHeight': '4px',
 				'scrollbarBorder': '0',
@@ -633,6 +635,7 @@
 				var yCurrentScrollRate = new Array(0, 0);
 				var scrollbarBlockClass = 'scrollbarBlock' + scrollbarNumber;
 				var scrollbarClass = 'scrollbar' + scrollbarNumber;
+				var scrollbarStageWidth;
 				var scrollbarWidth;
 				var containerWidth;
 				var containerHeight;
@@ -683,8 +686,12 @@
 				slideNodes = $(scrollerNode).children();
 						
 				if(settings.scrollbar) {
-				
-					$(scrollerNode).parent().append("<div class = '" + scrollbarBlockClass + "'><div class = '" + scrollbarClass + "'></div></div>");
+					
+					if(settings.scrollbarContainer != '') {
+						$(settings.scrollbarContainer).append("<div class = '" + scrollbarBlockClass + "'><div class = '" + scrollbarClass + "'></div></div>");
+					} else {
+						$(scrollerNode).parent().append("<div class = '" + scrollbarBlockClass + "'><div class = '" + scrollbarClass + "'></div></div>");
+					}
 				
 				}
 				
@@ -830,7 +837,8 @@
 						
 						scrollMargin = parseInt($('.' + scrollbarBlockClass).css('marginLeft')) + parseInt($('.' + scrollbarBlockClass).css('marginRight'));
 						scrollBorder = parseInt($('.' + scrollbarBlockClass + ' .' + scrollbarClass).css('borderLeftWidth'), 10) + parseInt($('.' + scrollbarBlockClass + ' .' + scrollbarClass).css('borderRightWidth'), 10);
-						scrollbarWidth = Math.floor((stageWidth) / (sliderMax + stageWidth) * (stageWidth - scrollMargin));
+						scrollbarStageWidth = (settings.scrollbarContainer != '') ? $(settings.scrollbarContainer).width() : stageWidth;
+						scrollbarWidth = (scrollbarStageWidth - scrollMargin) / numberOfSlides;
 		
 						if(!settings.scrollbarHide) {
 							scrollbarStartOpacity = settings.scrollbarOpacity;
@@ -839,7 +847,7 @@
 						$('.' + scrollbarBlockClass).css({ 
 							position: 'absolute',
 							left: 0,
-							width: stageWidth - scrollMargin + 'px',
+							width: scrollbarStageWidth - scrollMargin + 'px',
 							margin: settings.scrollbarMargin
 						});
 						
@@ -858,7 +866,7 @@
 							border: settings.scrollbarBorder,
 							'webkitPerspective': 1000,
 							'webkitBackfaceVisibility': 'hidden',
-							'webkitTransform': 'translateX(' + Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1) / (sliderMax) * (stageWidth - scrollMargin - scrollbarWidth)) + 'px)',
+							'webkitTransform': 'translateX(' + Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1) / (sliderMax) * (scrollbarStageWidth - scrollMargin - scrollbarWidth)) + 'px)',
 							opacity: scrollbarStartOpacity,
 							filter: 'alpha(opacity:' + (scrollbarStartOpacity * 100) + ')',
 							boxShadow: settings.scrollbarShadow
@@ -871,7 +879,7 @@
 						if(!isTouch) {	
 							$('.' + scrollbarClass).css({
 								position: 'relative',
-								left: Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1) / (sliderMax) * (stageWidth - scrollMargin - scrollbarWidth))
+								left: Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1) / (sliderMax) * (scrollbarStageWidth - scrollMargin - scrollbarWidth))
 							});
 						}
 						
@@ -898,7 +906,7 @@
 									goToSlide = j + infiniteSliderOffset;
 								}
 								
-								activeChildOffsets[sliderNumber] = helpers.changeSlide(goToSlide, scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+								activeChildOffsets[sliderNumber] = helpers.changeSlide(goToSlide, scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 							});
 						
 						});
@@ -913,7 +921,7 @@
 						
 						$(settings.navPrevSelector).unbind('click.iosSliderEvent').bind('click.iosSliderEvent', function() {					
 							if((activeChildOffsets[sliderNumber] > 0) || settings.infiniteSlider) {
-								activeChildOffsets[sliderNumber] = helpers.changeSlide(activeChildOffsets[sliderNumber] - 1, scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+								activeChildOffsets[sliderNumber] = helpers.changeSlide(activeChildOffsets[sliderNumber] - 1, scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 							} 
 						});
 					
@@ -927,7 +935,7 @@
 						
 						$(settings.navNextSelector).unbind('click.iosSliderEvent').bind('click.iosSliderEvent', function() {
 							if((activeChildOffsets[sliderNumber] < childrenOffsets.length-1) || settings.infiniteSlider) {
-								activeChildOffsets[sliderNumber] = helpers.changeSlide(activeChildOffsets[sliderNumber] + 1, scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+								activeChildOffsets[sliderNumber] = helpers.changeSlide(activeChildOffsets[sliderNumber] + 1, scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 							}
 						});
 					
@@ -952,7 +960,7 @@
 									
 								} else {
 									
-									helpers.autoSlide(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+									helpers.autoSlide(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 									
 									isAutoSlideToggleOn = false;
 									
@@ -965,7 +973,7 @@
 						}
 						
 						if(!isAutoSlideToggleOn) {
-							helpers.autoSlide(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+							helpers.autoSlide(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 						}
 	
 						if(!isTouch) {
@@ -976,7 +984,7 @@
 							
 							$(stageNode).bind('mouseleave.iosSliderEvent', function() {
 								if(!isAutoSlideToggleOn) {
-									helpers.autoSlide(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+									helpers.autoSlide(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 								}
 							});
 						
@@ -985,7 +993,7 @@
 							$(stageNode).bind('touchend.iosSliderEvent', function() {
 							
 								if(!isAutoSlideToggleOn) {
-									helpers.autoSlide(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+									helpers.autoSlide(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 								}
 							
 							});
@@ -1004,6 +1012,7 @@
 						sliderMax: sliderMax,
 						scrollbarClass: scrollbarClass,
 						scrollbarWidth: scrollbarWidth, 
+						scrollbarStageWidth: scrollbarStageWidth,
 						stageWidth: stageWidth, 
 						scrollMargin: scrollMargin, 
 						scrollBorder: scrollBorder, 
@@ -1110,7 +1119,7 @@
 							
 							helpers.setSliderOffset(this, scrollPosition);
 							
-							helpers.setSliderOffset($('.' + scrollbarClass), (stageWidth - scrollMargin - scrollbarWidth));
+							helpers.setSliderOffset($('.' + scrollbarClass), (scrollbarStageWidth - scrollMargin - scrollbarWidth));
 							
 							$('.' + scrollbarClass).css({
 								width: (scrollbarWidth - scrollBorder) + 'px'
@@ -1218,7 +1227,7 @@
 								
 								helpers.showScrollbar(settings, scrollbarClass);
 			
-								scrollbarDistance = Math.floor((xScrollStartPosition - eventX - edgeDegradation) / (sliderMax) * (stageWidth - scrollMargin - scrollbarWidth));
+								scrollbarDistance = Math.floor((xScrollStartPosition - eventX - edgeDegradation) / (sliderMax) * (scrollbarStageWidth - scrollMargin - scrollbarWidth));
 								var width = scrollbarWidth;
 								
 								if(scrollPosition >= sliderMin) {
@@ -1233,7 +1242,7 @@
 									
 								} else if(scrollPosition <= ((sliderMax * -1) + 1)) {
 									
-									width = stageWidth - scrollMargin - scrollBorder - scrollbarDistance;
+									width = scrollbarStageWidth - scrollMargin - scrollBorder - scrollbarDistance;
 									
 									helpers.setSliderOffset($('.' + scrollbarClass), scrollbarDistance);
 									
@@ -1270,14 +1279,14 @@
 							for(var j = 0; j < sizeof(event.touches.length); j++) {
 								
 								if(event.touches[j].pageX == lastTouch) {
-									helpers.slowScrollHorizontal(this, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+									helpers.slowScrollHorizontal(this, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 								}
 								
 							}
 							
 						} else {
 							
-							helpers.slowScrollHorizontal(this, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+							helpers.slowScrollHorizontal(this, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 							
 						}
 						
@@ -1323,7 +1332,7 @@
 									return false;
 								}
 								
-								helpers.slowScrollHorizontal(currentSlider, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+								helpers.slowScrollHorizontal(currentSlider, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 								
 								currentSlider = undefined;
 							
@@ -1393,7 +1402,7 @@
 					slide = slide + data.infiniteSliderOffset;
 				}
 								
-				helpers.changeSlide(slide, $(data.scrollerNode), slideTimeouts[data.sliderNumber], data.sliderMax, data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollMargin, data.scrollBorder, data.childrenOffsets, data.sliderNumber, data.infiniteSliderOffset, data.infiniteSliderWidth, data.numberOfSlides, data.settings);
+				helpers.changeSlide(slide, $(data.scrollerNode), slideTimeouts[data.sliderNumber], data.sliderMax, data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.childrenOffsets, data.sliderNumber, data.infiniteSliderOffset, data.infiniteSliderWidth, data.numberOfSlides, data.settings);
 				
 				activeChildOffsets[data.sliderNumber] = slide;
 

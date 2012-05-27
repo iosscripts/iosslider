@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	
+		<!-- META -->
+		<meta charset = "utf-8">
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta name = "apple-mobile-web-app-capable" content = "yes" /> 
+		
+		<!-- CSS -->
+		<link rel = "stylesheet" href = "_css/default.css" />
+		<link rel = "stylesheet" media = "screen" href = "_css/common.css" />
+		
+		<!-- jQuery library -->
+		<script type="text/javascript" src = "../../_lib/jquery-1.6.1.min.js"></script>
+		<script src = "../../_lib/jquery.easing-1.3.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../_src/jquery.iosslider.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				$('.iosSlider').iosSlider({
+					desktopClickDrag: true,
+					snapToChildren: true,
+					navSlideSelector: '.sliderContainer .slideSelectors .item',
+					onSlideComplete: slideComplete,
+					onSliderLoaded: sliderLoaded,
+					onSlideChange: slideChange,
+					autoSlide: true,
+					scrollbar: true,
+					scrollbarContainer: '.sliderContainer .scrollbarContainer',
+					scrollbarMargin: '0'
+				});
+				
+			});
+			
+			function slideChange(args) {
+			
+				$('.sliderContainer .slideSelectors .item').removeClass('selected');
+				$('.sliderContainer .slideSelectors .item:eq(' + args.currentSlideNumber + ')').addClass('selected');
+			
+			}
+			
+			function slideComplete(args) {
+					
+				$(args.sliderObject).find('.text1, .text2').attr('style', '');
+				
+				$(args.currentSlideObject).find('.text1').animate({
+					right: '100px',
+					opacity: '0.8'
+				}, 400, 'easeOutQuint');
+				
+				$(args.currentSlideObject).find('.text2').delay(200).animate({
+					right: '50px',
+					opacity: '0.8'
+				}, 400, 'easeOutQuint');
+				
+			}
+			
+			function sliderLoaded(args) {
+					
+				slideComplete(args);
+				
+				slideChange(args);
+				
+			}
+		</script>
+		
+		<title>iosScripts.com demo</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'fluidHeight'>
+			
+			<div class = 'sliderContainer'>
+			
+				<div class = 'iosSlider'>
+				
+					<div class = 'slider'>
+					
+						<div class = 'item item1'>
+							<div class = 'inner'>
+								<div class = 'selectorShadow'></div>
+								
+								<div class = 'text1'><span>Touch Me.</span></div>
+					
+								<div class = 'text2'><span>Hardware accelerated using<br />CSS3 for supported iOS,<br />Android and WebKit</span></div>
+							</div>
+						</div>
+						
+						<div class = 'item item2'>
+							<div class = 'inner'>
+								<div class = 'selectorShadow'></div>
+								
+								<div class = 'text1'><span>Responsive.</span></div>
+					
+								<div class = 'text2'><span>Respond to change in browser<br />width and adjust automatically</span></div>
+							</div>
+						</div>
+						
+						<div class = 'item item3'>
+							<div class = 'inner'>
+								<div class = 'selectorShadow'></div>
+								
+								<div class = 'text1'><span>Flexible.</span></div>
+					
+								<div class = 'text2'><span>Run multiple sliders on<br />the same web page</span></div>
+							</div>
+						</div>
+						
+						<div class = 'item item4'>
+							<div class = 'inner'>
+								<div class = 'selectorShadow'></div>
+								
+								<div class = 'text1'><span>Cross-platform.</span></div>
+					
+								<div class = 'text2'><span>Support a wide variety of browsers<br />to maximize your user base</span></div>
+							</div>
+						</div>
+						
+						<div class = 'item item5'>
+							<div class = 'inner'>
+								<div class = 'selectorShadow'></div>
+								
+								<div class = 'text1'><span>Customize.</span></div>
+					
+								<div class = 'text2'><span>Set momentum, elasticity,<br />scrollbars and more...</span></div>
+							</div>
+						</div>
+					
+					</div>
+				
+				</div>
+				
+				<div class = 'slideSelectors'>
+				
+					<div class = 'item selected'></div>
+					
+					<div class = 'item'></div>
+					
+					<div class = 'item'></div>
+					
+					<div class = 'item'></div>
+					
+					<div class = 'item'></div>
+				
+				</div>
+				
+				<div class = 'scrollbarContainer'></div>
+				
+			</div>
+		
+		</div>
+	
+	</body>
+
+</html>
