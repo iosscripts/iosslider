@@ -141,11 +141,12 @@
 
 .sliderContainer .scrollbarContainer {
 	position: relative;
-	bottom: 5px;
+	bottom: 4px;
 	left: 0;
 	width: 1024px;
-	height: 10px;
+	height: 4px;
 	margin: 0 auto;
+	z-index: 1;
 }
 
 @media screen and (max-width: 1105px) {

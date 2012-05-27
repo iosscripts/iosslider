@@ -442,6 +442,11 @@
 			
 			var steps = Math.ceil(settings.autoSlideTransTimer / 10) + 1;
 			var startOffset = helpers.getSliderOffset(node, 'x');
+			if(settings.infiniteSlider) {
+				if((startOffset > (childrenOffsets[numberOfSlides + 1] + stageWidth)) && (slide == (numberOfSlides * 2 - 2))) {
+					startOffset = startOffset - infiniteSliderWidth;
+				}
+			}
 			var endOffset = childrenOffsets[slide];
 			var offsetDiff = endOffset - startOffset;
 			var stepArray = new Array();
@@ -449,7 +454,7 @@
 			var nextStep;
 			
 			helpers.showScrollbar(settings, scrollbarClass);
-			
+
 			for(var i = 0; i <= steps; i++) {
 
 				t = i;
@@ -458,15 +463,13 @@
 				nextStep = startOffset + offsetDiff*(Math.pow(t,5) + 1);
 				
 				if(settings.infiniteSlider) {
-				
+					
 					if(nextStep > (childrenOffsets[numberOfSlides + 1] + stageWidth)) {
 						nextStep = nextStep - infiniteSliderWidth;
-						slide = numberOfSlides * 2 - 1;
 					}
 					
 					if(nextStep < (childrenOffsets[numberOfSlides * 2 - 1] - stageWidth)) {
 						nextStep = nextStep + infiniteSliderWidth;
-						slide = numberOfSlides + 1;
 					}
 				
 				}
@@ -500,7 +503,7 @@
 			helpers.hideScrollbar(settings, scrollTimeouts, i, stepArray, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder);
 			
 			helpers.autoSlide(node, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, scrollbarNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
-			
+
 			return slide;
 			
 		},
