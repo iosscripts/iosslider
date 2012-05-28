@@ -3,6 +3,7 @@
 <h4>2012/05/28 - v0.9.4.2 (beta)</h4>
 
 <ul>
+	<li>Added option: <em>scrollbarContainer</em>. The scrollbar will be loaded and contained by this selection. The scrollbar width will be defined by this container.</li>
 	<li>Fixed issue #11, #15, #18, #20</li>
 	<li>Fixed issue where rapid window resizing causes slides to jump.</li>
 	<li>Fixed issue preventing sliding beyond +/-1 slide while <em>snapToSlide</em> is active.</li>

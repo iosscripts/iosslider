@@ -184,6 +184,11 @@ $(document).ready(function() {
 <td>(string, 'bottom' or 'top') Location that the scrollbar will appear.</td>
 </tr>
 <tr>
+<td>scrollbarContainer</td>
+<td>''</td>
+<td>(string) A jQuery selection (ex. $('#scrollbarContainer') ), the scrollbar will be loaded and contained by this selection. The scrollbar will width will be defined by this container.</td>
+</tr>
+<tr>
 <td>scrollbarOpacity</td>
 <td>0.4</td>
 <td>(decimal) The css opacity of the scrollbar when visible.</td>
