@@ -375,7 +375,15 @@ p {
 	height: 200px;
 }
 
-.short-width-slider .slider {
+.short-width-slider-2 {
+	position: relative;
+	overflow: hidden;
+	width: 900px;
+	height: 200px;
+}
+
+.short-width-slider .slider,
+.short-width-slider-2 .slider {
 	height: 100%;
 }
 
@@ -384,24 +392,54 @@ p {
 	height: 100%;
 }
 
-.short-width-slider .slider #item1 {
+.short-width-slider-2 .slider .item {
+	width: 300px;
+	height: 100%;
+}
+
+.short-width-slider .slider #item1,
+.short-width-slider-2 .slider #item1 {
 	background: #666;
 }
 
-.short-width-slider .slider #item2 {
+.short-width-slider .slider #item2,
+.short-width-slider-2 .slider #item2 {
 	background: #999;
 }
 
-.short-width-slider .slider #item3 {
+.short-width-slider .slider #item3,
+.short-width-slider-2 .slider #item3 {
 	background: #aaa;
 }
 
-.short-width-slider .slider #item4 {
+.short-width-slider .slider #item4,
+.short-width-slider-2 .slider #item4 {
 	background: #ddd;
 }
 
-.short-width-slider .slider #item5 {
+.short-width-slider .slider #item5,
+.short-width-slider-2 .slider #item5 {
 	background: #777;
+}
+
+.short-width-slider-2 .next {
+	position: absolute;
+	top: 79px;
+	right: 10px;
+	width: 40px;
+	height: 40px;
+	border: 1px dotted #ddd;
+	background: #000;
+}
+
+.short-width-slider-2 .prev {
+	position: absolute;
+	top: 79px;
+	left: 10px;
+	width: 40px;
+	height: 40px;
+	border: 1px dotted #ddd;
+	background: #000;
 }
 
 /* destroy */

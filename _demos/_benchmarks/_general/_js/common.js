@@ -65,6 +65,14 @@ $(document).ready(function() {
 		snapToChildren: true
 	});
 	
+	$('.short-width-slider-2').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		infiniteSlider: true,
+		navNextSelector: '.short-width-slider-2 .next',
+		navPrevSelector: '.short-width-slider-2 .prev'
+	});
+	
 	$('.autoslide-slider3').iosSlider({
 		desktopClickDrag: true,
 		snapToChildren: true,
