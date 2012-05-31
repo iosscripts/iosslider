@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.9.4.3 beta (05/29/2012)
+ * Version: v0.9.4.4 beta (05/30/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
@@ -1046,7 +1046,9 @@
 				
 				if(isTouch || settings.desktopClickDrag) {
 					
-					$(scrollerNode).bind('touchstart.iosSliderEvent mousedown.iosSliderEvent', function(e) {
+					var touchStartEvent = isTouch ? 'touchstart.iosSliderEvent' : 'mousedown.iosSliderEvent';
+					
+					$(scrollerNode).bind(touchStartEvent, function(e) {
 
 						helpers.autoSlidePause(sliderNumber);
 						
@@ -1141,8 +1143,10 @@
 						
 					});
 					
-					$(scrollerNode).bind('touchmove.iosSliderEvent mousemove.iosSliderEvent', function(e) {
-						
+					var touchMoveEvent = isTouch ? 'touchmove.iosSliderEvent' : 'mousemove.iosSliderEvent';
+					
+					$(scrollerNode).bind(touchMoveEvent, function(e) {
+
 						if(!isTouch) {
 							
 							if (window.getSelection) {
@@ -1279,7 +1283,7 @@
 					});
 					
 					$(scrollerNode).bind('touchend.iosSliderEvent', function() {
-	
+
 						if(event.touches.length != 0) {
 							
 							for(var j = 0; j < sizeof(event.touches.length); j++) {
@@ -1299,7 +1303,7 @@
 					});
 					
 					if(!isTouch) {
-						
+
 						var eventObject = $(window);
 	
 						if(isIe8 || isIe7) {
@@ -1334,7 +1338,7 @@
 								
 								isMouseDown = false;
 								
-								if((currentSlider == undefined) || (xCurrentScrollRate[0] == 0)) {
+								if(currentSlider == undefined) {
 									return false;
 								}
 								
