@@ -620,6 +620,7 @@
 				'navPrevSelector': '',
 				'navNextSelector': '',
 				'navSelectorHistoryFallback': false,
+				'disableSlideOn': '',
 				'autoSlideToggleSelector': '',
 				'autoSlide': false,
 				'autoSlideTimer': 5000,
@@ -1054,6 +1055,12 @@
 					var touchStartEvent = isTouch ? 'touchstart.iosSliderEvent' : 'mousedown.iosSliderEvent';
 					
 					$(scrollerNode).bind(touchStartEvent, function(e) {
+						
+						if(settings.disableSlideOn) {
+							$(settings.disableSlideOn).bind(touchMoveEvent, function(e) {
+								e.stopPropagation();
+							});
+						}
 
 						helpers.autoSlidePause(sliderNumber);
 						
@@ -1151,7 +1158,7 @@
 					var touchMoveEvent = isTouch ? 'touchmove.iosSliderEvent' : 'mousemove.iosSliderEvent';
 					
 					$(scrollerNode).bind(touchMoveEvent, function(e) {
-
+						
 						if(!isTouch) {
 							
 							if (window.getSelection) {
