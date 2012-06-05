@@ -620,6 +620,7 @@
 				'navPrevSelector': '',
 				'navNextSelector': '',
 				'navSelectorHistoryFallback': false,
+				'disableSlideOn': '',
 				'autoSlideToggleSelector': '',
 				'autoSlide': false,
 				'autoSlideTimer': 5000,
@@ -1151,6 +1152,10 @@
 					var touchMoveEvent = isTouch ? 'touchmove.iosSliderEvent' : 'mousemove.iosSliderEvent';
 					
 					$(scrollerNode).bind(touchMoveEvent, function(e) {
+						
+						if(settings.disableSlideOn && $(e.target).closest(settings.disableSlideOn).length) {
+							return;
+						}
 
 						if(!isTouch) {
 							
