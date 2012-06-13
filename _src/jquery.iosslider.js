@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.9.4.4 beta (05/30/2012)
+ * Version: v0.9.4.5 beta (06/12/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
@@ -1146,7 +1146,9 @@
 					var touchMoveEvent = isTouch ? 'touchmove.iosSliderEvent' : 'mousemove.iosSliderEvent';
 					
 					$(scrollerNode).bind(touchMoveEvent, function(e) {
-
+						
+						var edgeDegradation = 0;
+						
 						if(!isTouch) {
 							
 							if (window.getSelection) {
@@ -1216,7 +1218,6 @@
 								currentTouches = event.touches.length;
 							}
 									
-							var edgeDegradation = 0;
 							elasticPullResistance = settings.elasticPullResistance;
 							
 							if(scrollPosition > sliderMin) {
