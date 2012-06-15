@@ -732,13 +732,10 @@
 					sliderMax = 0;
 					childrenOffsets = new Array();
 					containerWidth = $(stageNode).parent().width();
-					containerHeight = $(stageNode).parent().height();
 					stageWidth = $(stageNode).outerWidth(true);
-					stageHeight = $(stageNode).height();
 					
 					if(settings.responsiveSlideWidth) {
 						stageWidth = ($(stageNode).outerWidth(true) > containerWidth) ? containerWidth : $(stageNode).outerWidth(true);
-						stageHeight = ($(stageNode).height() > containerHeight) ? containerHeight : $(stageNode).height();
 					}
 					
 					$(stageNode).css({
@@ -747,8 +744,7 @@
 						left: '0',
 						overflow: 'hidden',
 						zIndex: 1,
-						width: stageWidth,
-						height: stageHeight
+						width: stageWidth
 					});
 					
 					if(settings.responsiveSlideWidth) {
@@ -810,6 +806,17 @@
 						cursor: grabOutCursor,
 						width: sliderMax + stageWidth + 'px',
 						overflow: 'hidden'
+					});
+					
+					containerHeight = $(stageNode).parent().height();
+					stageHeight = $(stageNode).height();
+					
+					if(settings.responsiveSlideWidth) {
+						stageHeight = ($(stageNode).height() > containerHeight) ? containerHeight : $(stageNode).height();
+					}
+					
+					$(stageNode).css({
+						height: stageHeight
 					});
 					
 					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);
