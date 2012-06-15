@@ -160,6 +160,11 @@ $(document).ready(function() {
 		snapToChildren: true
 	});
 	
+	$('.undefined-height-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true
+	});
+	
 });
 
 function callbackSliderLoadedChanged(args) {
