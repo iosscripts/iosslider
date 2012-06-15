@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.9.4.5 beta (06/12/2012)
+ * Version: v0.9.4.6 beta (06/15/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
@@ -719,6 +719,8 @@
 						
 				settings.onSliderLoaded(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')'), activeChildOffsets[sliderNumber]%infiniteSliderOffset));
 				
+				onChangeEventLastFired[sliderNumber] = activeChildOffsets[sliderNumber]%infiniteSliderOffset;
+				
 				function init() {
 					
 					helpers.autoSlidePause(sliderNumber);
@@ -1276,8 +1278,8 @@
 						}
 						
 						newChildOffset = helpers.calcActiveOffset(settings, (xScrollStartPosition - eventX - edgeDegradation) * -1, 0, childrenOffsets, sliderMax, stageWidth, infiniteSliderOffset, undefined);
-						if(newChildOffset != intermediateChildOffset) {
-							intermediateChildOffset = newChildOffset;
+						if(newChildOffset != activeChildOffsets[sliderNumber]) {
+							activeChildOffsets[sliderNumber] = newChildOffset;
 							settings.onSlideChange(new helpers.args(settings, this, $(this).children(':eq(' + newChildOffset + ')'), newChildOffset%infiniteSliderOffset));	
 						}
 						
