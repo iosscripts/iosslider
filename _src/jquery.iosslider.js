@@ -580,7 +580,8 @@
 			event.preventDefault();
 		},
 		
-		preventClick: function() {
+		preventClick: function(event) {
+			event.stopImmediatePropagation();
 			return false;
 		},
 		
@@ -1336,6 +1337,27 @@
 									}
 								
 									$(this).data('onclick').call(this, event || window.event);
+								}
+								
+							});
+
+							$(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')').find('*').each(function() {
+				
+								var clickObject = $(this).data('events');
+								
+								if(clickObject != undefined) {
+									if(clickObject.click[0].namespace != 'iosSliderEvent') {
+										
+										if(!xScrollStarted) { 
+											return false;
+										}
+									
+										$(this).one('click.disableClick', helpers.preventClick);
+									    var handlers = $(this).data('events').click;
+									    var handler = handlers.pop();
+									    handlers.splice(0, 0, handler);
+										
+									}
 								}
 								
 							});

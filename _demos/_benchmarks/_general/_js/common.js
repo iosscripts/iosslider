@@ -165,14 +165,14 @@ $(document).ready(function() {
 		snapToChildren: true
 	});
 	
+	$('.bind-event-slider .linkBlock').bind('click', function() {
+		window.open('http://google.ca');
+	});
+	
 	$('.bind-event-slider').iosSlider({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true
-	});
-	
-	$('.bind-event-slider .linkBlock').bind('click', function() {
-		window.open('http://google.ca');
 	});
 	
 });
@@ -190,38 +190,3 @@ function callbackSliderComplete(args) {
 	$(args.currentSlideObject).html('text-added');
 	
 }
-
-/*function animateSlideContent1Complete(args) {
-	
-	$(args.sliderObject).find('.text1, .text2').attr('style', '');
-	
-	$(args.currentSlideObject).children('.text1').animate({
-		right: '100px',
-		opacity: 1
-	}, 400, 'easeOutQuint');
-	
-	$(args.currentSlideObject).children('.text2').delay(200).animate({
-		right: '50px',
-		opacity: 1
-	}, 400, 'easeOutQuint');
-	
-}
-
-function animateSlideContent1Loaded(args) {
-	
-	$(args.sliderObject).find('.text1, .text2').attr('style', '');
-	
-	$(args.currentSlideObject).children('.text1').animate({
-		right: '100px',
-		opacity: 1
-	}, 400, 'easeOutQuint');
-	
-	$(args.currentSlideObject).children('.text2').delay(200).animate({
-		right: '50px',
-		opacity: 1
-	}, 400, 'easeOutQuint');
-	
-	$(args.sliderObject).parent().find('.iosSlider1Buttons .button').removeClass('selected');
-	$(args.sliderObject).parent().find('.iosSlider1Buttons .button:eq(' + args.currentSlideNumber + ')').addClass('selected');
-	
-}*/
