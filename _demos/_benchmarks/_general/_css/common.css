@@ -831,3 +831,49 @@ p {
 .undefined-height-slider .slider #item5 {
 	background: #777;
 }
+
+/* bind event slider */
+.bind-event-slider {
+	position: relative;
+	overflow: hidden;
+	width: 1000px;
+	height: 200px;
+}
+
+.bind-event-slider .slider .item .linkBlock {
+	float: left;
+	width: 300px;
+	height: 198px;
+	border: 1px dotted #ddd;
+	background: #000;
+	cursor: pointer;
+}
+
+.bind-event-slider .slider {
+	height: 100%;
+}
+
+.bind-event-slider .slider .item {
+	width: 100%;
+	height: 100%;
+}
+
+.bind-event-slider .slider #item1 {
+	background: #666;
+}
+
+.bind-event-slider .slider #item2 {
+	background: #999;
+}
+
+.bind-event-slider .slider #item3 {
+	background: #aaa;
+}
+
+.bind-event-slider .slider #item4 {
+	background: #ddd;
+}
+
+.bind-event-slider .slider #item5 {
+	background: #999;
+}

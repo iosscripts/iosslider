@@ -165,6 +165,16 @@ $(document).ready(function() {
 		snapToChildren: true
 	});
 	
+	$('.bind-event-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		infiniteSlider: true
+	});
+	
+	$('.bind-event-slider .linkBlock').bind('click', function() {
+		window.open('http://google.ca');
+	});
+	
 });
 
 function callbackSliderLoadedChanged(args) {
