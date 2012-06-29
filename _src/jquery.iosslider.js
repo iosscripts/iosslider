@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.9.4.7 beta (06/25/2012)
+ * Version: v0.9.4.8 beta (06/29/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
@@ -73,7 +73,7 @@
 		hideScrollbar: function(settings, scrollTimeouts, j, distanceOffsetArray, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder) {
 			
 			if(settings.scrollbar && settings.scrollbarHide) {
-				
+					
 				for(var i = j; i < j+25; i++) {
 					
 					scrollTimeouts[scrollTimeouts.length] = helpers.hideScrollbarIntervalTimer(scrollIntervalTime * i, distanceOffsetArray[j], ((j + 24) - i) / 24, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, settings);
@@ -100,7 +100,7 @@
 		slowScrollHorizontalInterval: function(node, newOffset, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, activeChildOffset, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, sliderNumber, settings) {
 	
 			newChildOffset = helpers.calcActiveOffset(settings, newOffset, 0, childrenOffsets, sliderMax, stageWidth, infiniteSliderOffset, activeChildOffset);
-			if(newChildOffset != activeChildOffsets[sliderNumber]) {
+			if((newChildOffset != activeChildOffsets[sliderNumber]) && (settings.onSlideChange != '')) {
 				activeChildOffsets[sliderNumber] = newChildOffset;
 				settings.onSlideChange(new helpers.args(settings, node, $(node).children(':eq(' + activeChildOffset + ')'), activeChildOffset%infiniteSliderOffset));
 			}
@@ -234,6 +234,7 @@
 				clearTimeout(scrollTimeouts[j]);
 			}
 			
+			var lastCheckOffset = 0;
 			for(var j = jStart; j < distanceOffsetArray.length; j = j + 2) {
 				
 				if(settings.infiniteSlider) {
@@ -241,8 +242,14 @@
 						distanceOffsetArray[j] = distanceOffsetArray[j] - (childrenOffsets[numberOfSlides]);
 					}
 				}
+				
+				if((j == jStart) || (Math.abs(distanceOffsetArray[j] - lastCheckOffset) > 1) || (j >= (distanceOffsetArray.length - 2))) {
+				
+					lastCheckOffset	= distanceOffsetArray[j];
 					
-				scrollTimeouts[scrollTimeouts.length] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * j, node, distanceOffsetArray[j], sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, newChildOffset, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, sliderNumber, settings);
+					scrollTimeouts[scrollTimeouts.length] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * j, node, distanceOffsetArray[j], sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, newChildOffset, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, sliderNumber, settings);
+				
+				}
 				
 			}
 			
@@ -485,6 +492,7 @@
 				slide = (slide%numberOfSlides) + numberOfSlides;
 			} 
 			
+			var lastCheckOffset = 0;
 			for(var i = 0; i < stepArray.length; i++) {
 				
 				if(settings.infiniteSlider) {
@@ -493,7 +501,13 @@
 					}
 				}
 				
-				scrollTimeouts[i] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * (i + 1), node, stepArray[i], sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, slide, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, scrollbarNumber, settings);
+				if((i == 0) || (Math.abs(stepArray[i] - lastCheckOffset) > 1) || (i >= (stepArray.length - 2))) {
+
+					lastCheckOffset	= stepArray[i];
+					
+					scrollTimeouts[i] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * (i + 1), node, stepArray[i], sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, slide, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, scrollbarNumber, settings);
+						
+				}
 					
 			}
 
@@ -626,7 +640,7 @@
 				'autoSlideTransTimer': 750,
 				'infiniteSlider': false,
 				'onSliderLoaded': function() {},
-				'onSlideChange': function() {},
+				'onSlideChange': '',
 				'onSlideComplete': function() {}
 			}, options);
 			
@@ -1286,7 +1300,7 @@
 						}
 						
 						newChildOffset = helpers.calcActiveOffset(settings, (xScrollStartPosition - eventX - edgeDegradation) * -1, 0, childrenOffsets, sliderMax, stageWidth, infiniteSliderOffset, undefined);
-						if(newChildOffset != activeChildOffsets[sliderNumber]) {
+						if((newChildOffset != activeChildOffsets[sliderNumber]) && (settings.onSlideChange != '')) {
 							activeChildOffsets[sliderNumber] = newChildOffset;
 							settings.onSlideChange(new helpers.args(settings, this, $(this).children(':eq(' + newChildOffset + ')'), newChildOffset%infiniteSliderOffset));	
 						}
