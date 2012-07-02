@@ -320,6 +320,12 @@ Returned parameter: 'args' (array) { settings, sliderObject, currentSlideObject,
 
 <h2>License</h2>
 
-<p>You may use iosSlider (beta) freely, without restriction in any material intended for sale or distribution. Attribution is not required but always appreciated. You are not permitted to make the resources found on iosscripts.com available for distribution elsewhere "as is" without prior&nbsp;consent.</p>
+<h3>Personal or non-profit</h3>
 
-<p>If you would like to feature iosSlider (beta) on your site, please do not link directly to the resource zip files. Please link to the appropriate page on iosscripts.com where users can find the&nbsp;download.</p>
+<p>You may use iosSlider free for personal or non-profit purposes, without restriction. Attribution is not required but always appreciated.</p>
+
+<h3>Commercial</h3>
+
+<p>For commercial projects, you must purchase a license. You may download and play with the script before deciding to fully implement it in your project. Making sure you are satisfied, and knowing iosSlider is the right script for your project is paramount.</p>
+
+<p>You are not permitted to make the resources found on iosscripts.com available for distribution elsewhere without prior consent. If you would like to feature iosSlider on your site, please do not link directly to the resource zip files. Please link to this page (http://iosscripts.com/iosslider) on iosscripts.com where users can find the download.</p>
