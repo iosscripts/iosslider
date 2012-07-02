@@ -1,8 +1,9 @@
 <h1>Changelog</h1>
 
-<h4>2012/06/26 - v1.0</h4>
+<h4>2012/07/02 - v1.0.1</h4>
 
 <ul>
+	<li>Resolved issue #40</li>
 	<li>Improved slide animation efficiency by ~30%.</li>
 	<li>Updated disclaimer.</li>
 </ul>
