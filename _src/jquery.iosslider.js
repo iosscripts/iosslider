@@ -1,18 +1,21 @@
 /*
- * iosSlider - http://iosscripts.com/iosslider-jquery-horizontal-slider-for-iphone-ipad-safari/
+ * iosSlider - http://iosscripts.com/iosslider/
  * 
- * A jQuery Horizontal Slider for iPhone/iPad Safari (Beta) 
+ * A jQuery Horizontal Slider for iPhone/iPad Safari 
  * This plugin turns any wide element into a touch enabled horizontal slider.
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v0.9.4.8 beta (06/29/2012)
+ * Version: v1.0 (07/01/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
  *
- * 1) You may use iosSlider freely, without restriction in any material intended for sale 
- *    or distribution. Attribution is not required but always appreciated.
+ * 1) You may use iosSlider free for personal or non-profit purposes, without restriction. 
+ 	  Attribution is not required but always appreciated. For commercial projects, you 
+ 	  must purchase a license. You may download and play with the script before deciding to 
+ 	  fully implement it in your project. Making sure you are satisfied, and knowing iosSlider 
+ 	  is the right script for your project is paramount.
  * 2) You are not permitted to make the resources found on iosscripts.com available for 
  *    distribution elsewhere "as is" without prior consent. If you would like to feature 
  *    iosSlider on your site, please do not link directly to the resource zip files. Please 
