@@ -914,3 +914,54 @@ p {
 .bind-event-slider .slider #item5 {
 	background: #999;
 }
+
+/* test */
+.iosSlider-test {
+	position: relative;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	width: 464px;
+	height: 110px;
+}
+
+.iosSlider-test .slider {
+	
+}
+
+.iosSlider-test .slider .slide {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 130px;
+	height: 114px;
+	margin: 0 10px 0 10px;
+	border: 2px;
+	background: #aaa;
+}
+
+.iosSlider-test .slider .slide .task_holder {
+	background-repeat: no-repeat;
+	position: relative;
+	top: 5px;
+	left: 5px;
+	height: 106px;
+	width: 133px;
+	z-index: 1;
+	font-family: Verdana, Helvetica;
+}
+
+.iosSlider-test .slider .slide .task_holder .task_holder_task_id {
+	height: 16px;
+	position: relative;
+	top: 14px;
+	text-align: center;
+	font-size: 87%;
+	color: #0063DC;
+	z-index: 2;
+}
+
+.iosSlider-test .slider .slide .task_holder .task_holder_task_id a {
+	position: absolute;
+	top: 0;
+}

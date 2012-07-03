@@ -183,6 +183,8 @@ $(document).ready(function() {
 		infiniteSlider: true
 	});
 	
+	$('.iosSlider-test').iosSlider();
+	
 });
 
 function callbackSliderStart(args) {
