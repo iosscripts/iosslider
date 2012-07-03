@@ -135,7 +135,8 @@ $(document).ready(function() {
 		navSlideSelector: $('.callback-slider .paging .box'),
 		onSliderLoaded: callbackSliderLoadedChanged,
 		onSlideChange: callbackSliderLoadedChanged,
-		onSlideComplete: callbackSliderComplete
+		onSlideComplete: callbackSliderComplete,
+		onSlideStart: callbackSliderStart
 	});
 	
 	$('.callback-slider-container .goToBlock .go').each(function(i) {
@@ -184,11 +185,17 @@ $(document).ready(function() {
 	
 });
 
+function callbackSliderStart(args) {
+
+	console.log('slide start: ' + args.currentSlideNumber);
+	
+}
+
 function callbackSliderLoadedChanged(args) {
 	
 	$(args.sliderObject).siblings('.paging').children('.box').removeClass('selected');
 	$(args.sliderObject).siblings('.paging').children('.box:eq(' + args.currentSlideNumber + ')').addClass('selected');
-	console.log(args);
+	console.log('loaded/changed: ' + args);
 	
 }
 

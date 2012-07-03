@@ -9,14 +9,15 @@
  * Version: v1.0.3 (07/03/2012)
  * Requires: jQuery v1.3+
  *
- * My Rules:
+ * Terms of use:
  *
- * 1) You may use iosSlider free for personal or non-profit purposes, without restriction. 
- 	  Attribution is not required but always appreciated. For commercial projects, you 
- 	  must purchase a license. You may download and play with the script before deciding to 
- 	  fully implement it in your project. Making sure you are satisfied, and knowing iosSlider 
- 	  is the right script for your project is paramount.
- * 2) You are not permitted to make the resources found on iosscripts.com available for 
+ * 1) iosSlider is licensed under the Creative Commons Ð Attribution-NonCommercial 3.0 License.
+ * 2) You may use iosSlider free for personal or non-profit purposes, without restriction. 
+ *	  Attribution is not required but always appreciated. For commercial projects, you 
+ *	  must purchase a license. You may download and play with the script before deciding to 
+ *	  fully implement it in your project. Making sure you are satisfied, and knowing iosSlider 
+ *	  is the right script for your project is paramount.
+ * 3) You are not permitted to make the resources found on iosscripts.com available for 
  *    distribution elsewhere "as is" without prior consent. If you would like to feature 
  *    iosSlider on your site, please do not link directly to the resource zip files. Please 
  *    link to the appropriate page on iosscripts.com where users can find the download.
@@ -511,6 +512,10 @@
 					scrollTimeouts[i] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * (i + 1), node, stepArray[i], sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, slide, childrenOffsets, infiniteSliderWidth, infiniteSliderOffset, numberOfSlides, scrollbarNumber, settings);
 						
 				}
+				
+				if((i == 0) && (settings.onSlideStart != '')) {
+					settings.onSlideStart(new helpers.args(settings, node, $(node).children(':eq(' + slide + ')'), slide%infiniteSliderOffset));
+				}
 					
 			}
 			
@@ -641,7 +646,8 @@
 				'autoSlideTimer': 5000,
 				'autoSlideTransTimer': 750,
 				'infiniteSlider': false,
-				'onSliderLoaded': function() {},
+				'onSliderLoaded': '',
+				'onSlideStart': '',
 				'onSlideChange': '',
 				'onSlideComplete': function() {}
 			}, options);
@@ -733,8 +739,10 @@
 					$(this).data('onclick', this.onclick);
 				
 				});
-						
-				settings.onSliderLoaded(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')'), activeChildOffsets[sliderNumber]%infiniteSliderOffset));
+				
+				if(settings.onSliderLoaded != '') {
+					settings.onSliderLoaded(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')'), activeChildOffsets[sliderNumber]%infiniteSliderOffset));
+				}
 				
 				onChangeEventLastFired[sliderNumber] = activeChildOffsets[sliderNumber]%infiniteSliderOffset;
 				
@@ -1221,6 +1229,14 @@
 						yCurrentScrollRate[1] = eventY;
 						yScrollDistance = (yCurrentScrollRate[1] - yCurrentScrollRate[0]) / 2;
 						
+						if(!xScrollStarted) {
+							
+							if(settings.onSlideStart != '') {
+								settings.onSlideStart(new helpers.args(settings, this, $(this).children(':eq(' + newChildOffset + ')'), newChildOffset%infiniteSliderOffset));
+							}
+							
+						}
+
 						if(((xScrollDistance > 5) || (xScrollDistance < -5)) && (isTouch)) {
 						
 							event.preventDefault();
@@ -1420,7 +1436,6 @@
 		    	
 	    		helpers.autoSlidePause(data.sliderNumber);
 		    	isEventCleared[data.sliderNumber] = true;
-		    	$(window).unbind('.iosSliderEvent');
 		    	$(this).unbind('.iosSliderEvent');
 	    		$(this).children(':first-child').unbind('.iosSliderEvent');
 	    		$(this).children(':first-child').children().unbind('.iosSliderEvent');
