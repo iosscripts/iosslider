@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.2 (07/02/2012)
+ * Version: v1.0.3 (07/03/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
@@ -104,10 +104,9 @@
 	
 			newChildOffset = helpers.calcActiveOffset(settings, newOffset, 0, childrenOffsets, sliderMax, stageWidth, infiniteSliderOffset, activeChildOffset);
 			if((newChildOffset != activeChildOffsets[sliderNumber]) && (settings.onSlideChange != '')) {
-				console.log(activeChildOffsets[sliderNumber] + ', ' + newChildOffset);
-				activeChildOffsets[sliderNumber] = newChildOffset;
 				settings.onSlideChange(new helpers.args(settings, node, $(node).children(':eq(' + activeChildOffset + ')'), activeChildOffset%infiniteSliderOffset));
 			}
+			activeChildOffsets[sliderNumber] = newChildOffset;
 						
 			newOffset = Math.floor(newOffset);
 			
@@ -447,7 +446,7 @@
 		},
 		
 		changeSlide: function(slide, node, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, scrollbarNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings) {
-			
+
 			helpers.autoSlidePause(scrollbarNumber);
 			
 			for(var j = 0; j < scrollTimeouts.length; j++) {

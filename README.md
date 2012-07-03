@@ -229,9 +229,14 @@ $(document).ready(function() {
 <td>(boolean) Desktop click and drag fallback for the desktop slider.</td>
 </tr>
 <tr>
-<td>responsiveSlideWidth</td>
+<td>responsiveSlideContainer</td>
 <td>true</td>
-<td>(boolean) Width of slides becomes responsive to the width of its parent element. Slides dynamically collapse to the width/height of the parent element when wider/taller.</td>
+<td>(boolean) Width of slide container becomes responsive to the width/height of its parent element. Slide container dynamically collapse to the width/height of the parent element when wider/taller.</td>
+</tr>
+<tr>
+<td>responsiveSlides</td>
+<td>true</td>
+<td>(boolean) Width of slides becomes responsive to the width/height of its parent element. Slides dynamically collapse to the width/height of the parent element of the slider when wider/taller.</td>
 </tr>
 <tr>
 <td>navSlideSelector</td>
