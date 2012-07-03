@@ -27,7 +27,14 @@ $(document).ready(function() {
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true,
-		responsiveSlideWidth: false
+		responsiveSlideContainer: false
+	});
+	
+	$('.responsive-slider-2').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		infiniteSlider: true,
+		responsiveSlides: false
 	});
 	
 	$('.autoslide-slider1').iosSlider({

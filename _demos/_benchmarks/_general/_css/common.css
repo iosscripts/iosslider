@@ -217,6 +217,43 @@ p {
 	background: #777;
 }
 
+/* responsive-2 */
+.responsive-slider-2 {
+	position: relative;
+	overflow: hidden;
+	width: 1000px;
+	height: 200px;
+}
+
+.responsive-slider-2 .slider {
+	height: 100%;
+}
+
+.responsive-slider-2 .slider .item {
+	width: 2000px;
+	height: 100%;
+}
+
+.responsive-slider-2 .slider #item1 {
+	background: #666;
+}
+
+.responsive-slider-2 .slider #item2 {
+	background: #999;
+}
+
+.responsive-slider-2 .slider #item3 {
+	background: #aaa;
+}
+
+.responsive-slider-2 .slider #item4 {
+	background: #ddd;
+}
+
+.responsive-slider-2 .slider #item5 {
+	background: #777;
+}
+
 /* autoslide */
 .autoslide-slider1,
 .autoslide-slider2,

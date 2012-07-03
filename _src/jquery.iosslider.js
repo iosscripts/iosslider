@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.1 (07/02/2012)
+ * Version: v1.0.2 (07/02/2012)
  * Requires: jQuery v1.3+
  *
  * My Rules:
@@ -632,7 +632,8 @@
 				'scrollbarBorderRadius': '100px',
 				'scrollbarShadow': '0 0 0 #000',
 				'desktopClickDrag': false,
-				'responsiveSlideWidth': true,
+				'responsiveSlideContainer': true,
+				'responsiveSlides': true,
 				'navSlideSelector': '',
 				'navPrevSelector': '',
 				'navNextSelector': '',
@@ -751,7 +752,7 @@
 					containerWidth = $(stageNode).parent().width();
 					stageWidth = $(stageNode).outerWidth(true);
 					
-					if(settings.responsiveSlideWidth) {
+					if(settings.responsiveSlideContainer) {
 						stageWidth = ($(stageNode).outerWidth(true) > containerWidth) ? containerWidth : $(stageNode).outerWidth(true);
 					}
 					
@@ -764,7 +765,7 @@
 						width: stageWidth
 					});
 					
-					if(settings.responsiveSlideWidth) {
+					if(settings.responsiveSlides) {
 						
 						$(slideNodes).each(function(j) {
 							
@@ -828,7 +829,7 @@
 					containerHeight = $(stageNode).parent().height();
 					stageHeight = $(stageNode).height();
 					
-					if(settings.responsiveSlideWidth) {
+					if(settings.responsiveSlideContainer) {
 						stageHeight = ($(stageNode).height() > containerHeight) ? containerHeight : $(stageNode).height();
 					}
 					
@@ -1058,7 +1059,7 @@
 				
 				}
 				
-				if(iosSliderSettings[sliderNumber].responsiveSlideWidth) {
+				if(iosSliderSettings[sliderNumber].responsiveSlides || iosSliderSettings[sliderNumber].responsiveSlideContainer) {
 					
 					var orientationEvent = supportsOrientationChange ? 'orientationchange' : 'resize';
 					
