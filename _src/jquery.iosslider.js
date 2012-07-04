@@ -6,12 +6,12 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.4 (07/03/2012)
+ * Version: v1.0.5 (07/03/2012)
  * Requires: jQuery v1.3+
  *
  * Terms of use:
  *
- * 1) iosSlider is licensed under the Creative Commons Ð Attribution-NonCommercial 3.0 License.
+ * 1) iosSlider is licensed under the Creative Commons – Attribution-NonCommercial 3.0 License.
  * 2) You may use iosSlider free for personal or non-profit purposes, without restriction. 
  *	  Attribution is not required but always appreciated. For commercial projects, you 
  *	  must purchase a license. You may download and play with the script before deciding to 
@@ -1232,7 +1232,7 @@
 						if(!xScrollStarted) {
 							
 							if(settings.onSlideStart != '') {
-								settings.onSlideStart(new helpers.args(settings, this, $(this).children(':eq(' + newChildOffset + ')'), newChildOffset%infiniteSliderOffset));
+								settings.onSlideStart(new helpers.args(settings, this, $(this).children(':eq(' + activeChildOffsets[sliderNumber] + ')'), activeChildOffsets[sliderNumber]%infiniteSliderOffset));
 							}
 							
 						}

@@ -285,6 +285,12 @@ $(document).ready(function() {
 Returned parameter: 'args' (array) { settings, sliderObject, currentSlideObject, currentSlideNumber }</td>
 </tr>
 <tr>
+<td>onSlideStart</td>
+<td>null</td>
+<td>(function) Executed when the slider has begun to move.<br />
+Returned parameter: 'args' (array) { settings, sliderObject, currentSlideObject, currentSlideNumber }</td>
+</tr>
+<tr>
 <td>onSlideChange</td>
 <td>null</td>
 <td>(function) Executed when the slider has entered the range of a new slide.<br />
