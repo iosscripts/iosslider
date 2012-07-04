@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.5 (07/03/2012)
+ * Version: v1.0.6 (07/04/2012)
  * Requires: jQuery v1.3+
  *
  * Terms of use:
@@ -1378,6 +1378,7 @@
 								var clickObject = $(this).data('events');
 								
 								if(clickObject != undefined) {
+									console.log(clickObject);
 									if(clickObject.click[0].namespace != 'iosSliderEvent') {
 										
 										if(!xScrollStarted) { 
