@@ -1377,18 +1377,21 @@
 				
 								var clickObject = $(this).data('events');
 								
-								if(clickObject.click != undefined) {
-
-									if(clickObject.click[0].namespace != 'iosSliderEvent') {
-										
-										if(!xScrollStarted) { 
-											return false;
-										}
+								if(clickObject != undefined) {
+									if(clickObject.click != undefined) {
 									
-										$(this).one('click.disableClick', helpers.preventClick);
-									    var handlers = $(this).data('events').click;
-									    var handler = handlers.pop();
-									    handlers.splice(0, 0, handler);
+										if(clickObject.click[0].namespace != 'iosSliderEvent') {
+											
+											if(!xScrollStarted) { 
+												return false;
+											}
+										
+											$(this).one('click.disableClick', helpers.preventClick);
+										    var handlers = $(this).data('events').click;
+										    var handler = handlers.pop();
+										    handlers.splice(0, 0, handler);
+											
+										}
 										
 									}
 								}
