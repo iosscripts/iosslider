@@ -282,26 +282,25 @@ $(document).ready(function() {
 <td>onSliderLoaded</td>
 <td>null</td>
 <td>(function) Executed when slider has finished loading initially.<br />
-Returned parameter: 'args' (array) { settings, sliderObject, currentSlideObject, currentSlideNumber }</td>
+Returned parameter: 'args' (array) { settings, sliderContainerObject, sliderObject, currentSlideObject, currentSlideNumber, numberOfSlides }</td>
 </tr>
 <tr>
 <td>onSlideStart</td>
 <td>null</td>
 <td>(function) Executed when the slider has begun to move.<br />
-Returned parameter: 'args' (array) { settings, sliderObject, currentSlideObject, currentSlideNumber }</td>
+Returned parameter: 'args' (array) { settings, sliderContainerObject, sliderObject, currentSlideObject, currentSlideNumber, numberOfSlides }</td>
 </tr>
 <tr>
 <td>onSlideChange</td>
 <td>null</td>
 <td>(function) Executed when the slider has entered the range of a new slide.<br />
-Returned parameter: 'args' (array) { settings, sliderObject, currentSlideObject, currentSlideNumber }</td>
+Returned parameter: 'args' (array) { settings, sliderContainerObject, sliderObject, currentSlideObject, currentSlideNumber, numberOfSlides }</td>
 </tr>
 <tr>
 <td>onSlideComplete</td>
 <td>null</td>
 <td>(function) Executed when the slider has come to a stop on a new slide.<br />
-Returned parameter: 'args' (array) { settings, sliderObject, currentSlideObject, currentSlideNumber }
-</td>
+Returned parameter: 'args' (array) { settings, sliderContainerObject, sliderObject, currentSlideObject, currentSlideNumber, numberOfSlides }</td>
 </tr>
 </tbody>
 </table>

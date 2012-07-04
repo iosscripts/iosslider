@@ -1,8 +1,9 @@
 <h1>Changelog</h1>
 
-<h4>2012/07/03 - v1.0.5</h4>
+<h4>2012/07/04 - v1.0.8</h4>
 
 <ul>
+	<li>Added new args for function callbacks: sliderContainerObject, numberOfSlides</li>
 	<li>Added new callback option <em>onSlideStart</em>. Check Setting for details</li>
 	<li>Fixed an issue where next/prev buttons not working</li>
 	<li>Broke option <em>responsiveSlideWidth</em> into 2 options: <em>responsiveSlideContainer</em> and <em>responsiveSlides</em></li>
