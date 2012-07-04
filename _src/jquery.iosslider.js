@@ -1377,8 +1377,8 @@
 				
 								var clickObject = $(this).data('events');
 								
-								if(clickObject != undefined) {
-									console.log(clickObject);
+								if(clickObject.click != undefined) {
+
 									if(clickObject.click[0].namespace != 'iosSliderEvent') {
 										
 										if(!xScrollStarted) { 
