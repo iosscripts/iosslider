@@ -330,12 +330,14 @@ Returned parameter: 'args' (array) { settings, sliderContainerObject, sliderObje
 
 <h2>License</h2>
 
+<p>iosSlider is licensed under the <a href = 'http://creativecommons.org/licenses/by-nc/3.0/' target = '_blank'>Creative Commons &ndash; Attribution-NonCommercial 3.0</a> License.</p>
+
 <h3>Personal or non-profit</h3>
 
 <p>You may use iosSlider free for personal or non-profit purposes, without restriction. Attribution is not required but always appreciated.</p>
 
 <h3>Commercial</h3>
 
-<p>For commercial projects, you must purchase a license. You may download and play with the script before deciding to fully implement it in your project. Making sure you are satisfied, and knowing iosSlider is the right script for your project is paramount.</p>
+<p>For commercial projects, you must <a href = 'http://sites.fastspring.com/iosscripts/product/iosslider' target = '_blank'>purchase a license</a>. You may download and play with the script before deciding to fully implement it in your project. Making sure you are satisfied, and knowing iosSlider is the right script for your project is paramount.</p>
 
 <p>You are not permitted to make the resources found on iosscripts.com available for distribution elsewhere without prior consent. If you would like to feature iosSlider on your site, please do not link directly to the resource zip files. Please link to this page (http://iosscripts.com/iosslider) on iosscripts.com where users can find the download.</p>
