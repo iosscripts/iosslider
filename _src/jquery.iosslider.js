@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.8 (07/04/2012)
+ * Version: v1.0.9 (07/05/2012)
  * Requires: jQuery v1.3+
  *
  * Terms of use:
@@ -705,7 +705,9 @@
 				var $this = $(this);
 				var data = $this.data('iosslider');	
 				if(data != undefined) return true;
-           
+           		
+           		$(this).find('img').bind('dragstart.iosSliderEvent', function(event) { event.preventDefault(); });
+
 				if(settings.infiniteSlider) {
 		
 					settings.scrollbar = false;

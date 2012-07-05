@@ -183,7 +183,11 @@ $(document).ready(function() {
 		infiniteSlider: true
 	});
 	
-	$('.iosSlider-test').iosSlider();
+	$('.image-drag-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		infiniteSlider: true
+	});
 	
 });
 
