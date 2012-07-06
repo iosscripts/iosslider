@@ -1,8 +1,9 @@
 <h1>Changelog</h1>
 
-<h4>2012/07/05 - v1.0.9</h4>
+<h4>2012/07/06 - v1.0.10</h4>
 
 <ul>
+	<li>Support for firefox (android) added.</li>
 	<li>Resolved issue #51</li>
 	<li>Added new args for function callbacks: sliderContainerObject, numberOfSlides</li>
 	<li>Added new callback option <em>onSlideStart</em>. Check Setting for details</li>
