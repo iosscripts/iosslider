@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.9 (07/05/2012)
+ * Version: v1.0.10 (07/06/2012)
  * Requires: jQuery v1.3+
  *
  * Terms of use:
@@ -286,7 +286,7 @@
 				xy = 5;
 			}
 			
-			if(isTouch || isWebkit) {
+			if(isTouch && isWebkit) {
 			
 				var webkitTransformArray = $(node).css('-webkit-transform').split(',');
 				sliderOffset = parseInt(webkitTransformArray[xy], 10);
@@ -303,14 +303,14 @@
 		
 		setSliderOffset: function(node, sliderOffset) {
 			
-			if(isTouch || isWebkit) {
+			if(isTouch && isWebkit) {
 			
 				$(node).css({
 					webkitTransform: 'translateX(' + sliderOffset + 'px)'
 				});
 			
 			} else {
-			
+
 				$(node).css({
 					left: sliderOffset + 'px'
 				});
@@ -910,22 +910,17 @@
 							border: settings.scrollbarBorder,
 							'webkitPerspective': 1000,
 							'webkitBackfaceVisibility': 'hidden',
-							'webkitTransform': 'translateX(' + Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1) / (sliderMax) * (scrollbarStageWidth - scrollMargin - scrollbarWidth)) + 'px)',
+							'position': 'relative',
 							opacity: scrollbarStartOpacity,
 							filter: 'alpha(opacity:' + (scrollbarStartOpacity * 100) + ')',
 							boxShadow: settings.scrollbarShadow
 						});
+						
+						helpers.setSliderOffset($('.' + scrollbarBlockClass + ' .' + scrollbarClass), Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1) / (sliderMax) * (scrollbarStageWidth - scrollMargin - scrollbarWidth)));
 		
 						$('.' + scrollbarBlockClass).css({
 							display: 'block'
 						});
-						
-						if(!isTouch) {	
-							$('.' + scrollbarClass).css({
-								position: 'relative',
-								left: Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1) / (sliderMax) * (scrollbarStageWidth - scrollMargin - scrollbarWidth))
-							});
-						}
 						
 					}
 					
@@ -1087,6 +1082,8 @@
 					var touchStartEvent = isTouch ? 'touchstart.iosSliderEvent' : 'mousedown.iosSliderEvent';
 					
 					$(scrollerNode).bind(touchStartEvent, function(e) {
+						
+						var e = e.originalEvent;
 
 						helpers.autoSlidePause(sliderNumber);
 						
@@ -1113,9 +1110,9 @@
 							
 						} else {
 						
-							eventX = event.touches[0].pageX;
-							eventY = event.touches[0].pageY;
-						
+							eventX = e.touches[0].pageX;
+							eventY = e.touches[0].pageY;
+							
 						}
 						
 						xCurrentScrollRate = new Array(0, 0);
@@ -1184,9 +1181,10 @@
 					var touchMoveEvent = isTouch ? 'touchmove.iosSliderEvent' : 'mousemove.iosSliderEvent';
 					
 					$(scrollerNode).bind(touchMoveEvent, function(e) {
-						
+
+						var e = e.originalEvent;
 						var edgeDegradation = 0;
-						
+
 						if(!isTouch) {
 							
 							if (window.getSelection) {
@@ -1202,8 +1200,8 @@
 						}
 						
 						if(isTouch) {
-							eventX = event.touches[0].pageX;
-							eventY = event.touches[0].pageY;
+							eventX = e.touches[0].pageX;
+							eventY = e.touches[0].pageY;
 						} else {
 							eventX = e.pageX;
 							eventY = e.pageY;
@@ -1243,7 +1241,7 @@
 
 						if(((xScrollDistance > 5) || (xScrollDistance < -5)) && (isTouch)) {
 						
-							event.preventDefault();
+							e.preventDefault();
 							xScrollStarted = true;
 							
 						} else if(!isTouch) {
@@ -1257,11 +1255,11 @@
 							var scrollPosition = helpers.getSliderOffset(this, 'x');
 							
 							if(isTouch) {
-								if(currentTouches != event.touches.length) {
+								if(currentTouches != e.touches.length) {
 									xScrollStartPosition = (scrollPosition * -1) + eventX;	
 								}
 								
-								currentTouches = event.touches.length;
+								currentTouches = e.touches.length;
 							}
 									
 							elasticPullResistance = settings.elasticPullResistance;
@@ -1316,9 +1314,9 @@
 							}
 							
 							if(isTouch) {
-								lastTouch = event.touches[0].pageX;
+								lastTouch = e.touches[0].pageX;
 							}
-						
+							
 						}
 						
 						newChildOffset = helpers.calcActiveOffset(settings, (xScrollStartPosition - eventX - edgeDegradation) * -1, 0, childrenOffsets, sliderMax, stageWidth, infiniteSliderOffset, undefined);
@@ -1329,13 +1327,15 @@
 						
 					});
 					
-					$(scrollerNode).bind('touchend.iosSliderEvent', function() {
-
-						if(event.touches.length != 0) {
+					$(scrollerNode).bind('touchend.iosSliderEvent', function(e) {
+						
+						var e = e.originalEvent;
+						
+						if(e.touches.length != 0) {
 							
-							for(var j = 0; j < sizeof(event.touches.length); j++) {
+							for(var j = 0; j < sizeof(e.touches.length); j++) {
 								
-								if(event.touches[j].pageX == lastTouch) {
+								if(e.touches[j].pageX == lastTouch) {
 									helpers.slowScrollHorizontal(this, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 								}
 								

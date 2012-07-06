@@ -189,6 +189,12 @@ $(document).ready(function() {
 		infiniteSlider: true
 	});
 	
+	$('.iosSlider-test').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		infiniteSlider: true
+	});
+	
 });
 
 function callbackSliderStart(args) {

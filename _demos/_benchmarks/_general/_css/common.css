@@ -915,7 +915,7 @@ p {
 	background: #999;
 }
 
-/* test */
+/* image drag */
 .image-drag-slider {
 	position: relative;
 	top: 0;
@@ -951,5 +951,38 @@ p {
 }
 
 .image-drag-slider .slider #item5 {
+	background: #999;
+}
+
+/* test */
+.iosSlider-test {
+	
+}
+
+.iosSlider-test .slider {
+}
+
+.iosSlider-test .slider .slide {
+	width: 100%;
+	height: 100%;
+}
+
+.iosSlider-test .slider .item1 {
+	background: #666;
+}
+
+.iosSlider-test .slider .item2 {
+	background: #999;
+}
+
+.iosSlider-test .slider .item3 {
+	background: #aaa;
+}
+
+.iosSlider-test .slider .item4 {
+	background: #ddd;
+}
+
+.iosSlider-test .slider .item5 {
 	background: #999;
 }
