@@ -609,39 +609,6 @@
 		
 		enableClick: function() {
 			return true;
-		},
-		
-		destroy: function(node, data, clearStyle) {
-			
-			if(clearStyle == undefined) {
-	    		clearStyle = true;
-	    	}
-	    	
-    		helpers.autoSlidePause(data.sliderNumber);
-	    	isEventCleared[data.sliderNumber] = true;
-	    	$(node).unbind('.iosSliderEvent');
-    		$(node).children(':first-child').unbind('.iosSliderEvent');
-    		$(node).children(':first-child').children().unbind('.iosSliderEvent');
-	    	
-	    	if(clearStyle) {
-    			$(node).attr('style', '');
-	    		$(node).children(':first-child').attr('style', '');
-	    		$(node).children(':first-child').children().attr('style', '');
-	    		
-	    		$(data.settings.navSlideSelector).attr('style', '');
-	    		$(data.settings.navPrevSelector).attr('style', '');
-	    		$(data.settings.navNextSelector).attr('style', '');
-	    		$(data.settings.autoSlideToggleSelector).attr('style', '');
-    		}
-    		
-    		if(data.settings.infiniteSlider) {
-    			$(node).children(':first-child').html();
-    			$(node).children(':first-child').html($(node).children(':first-child').children(':nth-child(-n+' + data.numberOfSlides + ')').clone(true));
-    		}
-    		
-    		$this = $(node);
-    		$this.removeData('iosslider');
-		
 		}
         
     }
@@ -650,7 +617,7 @@
     
     var methods = {
 		
-		init: function(options) {
+		init: function(options, node) {
 			
 			var settings = $.extend({
 				'elasticPullResistance': 0.6, 		
@@ -687,7 +654,11 @@
 				'onSlideComplete': function() {}
 			}, options);
 			
-			return this.each(function(i) {
+			if(node == undefined) {
+				node = this;
+			}
+			
+			return $(node).each(function(i) {
 				
 				scrollbarNumber++;
 				var sliderNumber = scrollbarNumber;
@@ -1463,15 +1434,55 @@
 			
 		},
 		
-		destroy: function(clearStyle) {
+		destroy: function(clearStyle, node) {
 			
-			return this.each(function() {
+			if(node == undefined) {
+				node == this;
+			}
+			
+			return $(node).each(function() {
 			
 				var $this = $(this);
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 				
-				helpers.destroy(this, data, clearStyle);
+				if(clearStyle == undefined) {
+		    		clearStyle = true;
+		    	}
+		    	
+	    		helpers.autoSlidePause(data.sliderNumber);
+		    	isEventCleared[data.sliderNumber] = true;
+		    	$(this).unbind('.iosSliderEvent');
+	    		$(this).children(':first-child').unbind('.iosSliderEvent');
+	    		$(this).children(':first-child').children().unbind('.iosSliderEvent');
+		    	
+		    	if(clearStyle) {
+	    			$(this).attr('style', '');
+		    		$(this).children(':first-child').attr('style', '');
+		    		$(this).children(':first-child').children().attr('style', '');
+		    		
+		    		$(data.settings.navSlideSelector).attr('style', '');
+		    		$(data.settings.navPrevSelector).attr('style', '');
+		    		$(data.settings.navNextSelector).attr('style', '');
+		    		$(data.settings.autoSlideToggleSelector).attr('style', '');
+	    		}
+	    		
+	    		if(data.settings.infiniteSlider) {
+	    			$(this).children(':first-child').html();
+	    			$(this).children(':first-child').html($(this).children(':first-child').children(':nth-child(-n+' + data.numberOfSlides + ')').clone(true));
+	    		}
+	    		
+	    		if(data.settings.scrollbar) {
+	    			$('.scrollbarBlock' + data.sliderNumber).remove();
+	    		}
+	    		
+	    		var scrollTimeouts = slideTimeouts[data.sliderNumber];
+	    		
+	    		for(var i = 0; i < scrollTimeouts.length; i++) {
+					clearTimeout(scrollTimeouts[i]);
+				}
+	    		
+	    		$this.removeData('iosslider');
 		    	
 			});
 		
@@ -1485,15 +1496,21 @@
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 				
-				helpers.destroy(this, data, false);
+				methods.destroy(false, this);
+				methods.init(data.settings, this);
+				methods.goToSlide(2, this);
 		    	
 			});
 		
 		},
 		
-		goToSlide: function(slide) {
+		goToSlide: function(slide, node) {
 			
-			return this.each(function() {
+			if(node == undefined) {
+				node == this;
+			}
+			
+			return $(node).each(function() {
 					
 				var $this = $(this);
 				var data = $this.data('iosslider');
