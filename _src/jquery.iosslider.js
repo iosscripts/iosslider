@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.10 (07/06/2012)
+ * Version: v1.0.11 (07/11/2012)
  * Requires: jQuery v1.3+
  *
  * Terms of use:
@@ -320,7 +320,7 @@
 		},
 		
 		setBrowserInfo: function() {
-			
+
 			if(navigator.userAgent.match('WebKit') != null) {
 				isWebkit = true;
 				grabOutCursor = '-webkit-grab';
@@ -609,6 +609,39 @@
 		
 		enableClick: function() {
 			return true;
+		},
+		
+		destroy: function(node, data, clearStyle) {
+			
+			if(clearStyle == undefined) {
+	    		clearStyle = true;
+	    	}
+	    	
+    		helpers.autoSlidePause(data.sliderNumber);
+	    	isEventCleared[data.sliderNumber] = true;
+	    	$(node).unbind('.iosSliderEvent');
+    		$(node).children(':first-child').unbind('.iosSliderEvent');
+    		$(node).children(':first-child').children().unbind('.iosSliderEvent');
+	    	
+	    	if(clearStyle) {
+    			$(node).attr('style', '');
+	    		$(node).children(':first-child').attr('style', '');
+	    		$(node).children(':first-child').children().attr('style', '');
+	    		
+	    		$(data.settings.navSlideSelector).attr('style', '');
+	    		$(data.settings.navPrevSelector).attr('style', '');
+	    		$(data.settings.navNextSelector).attr('style', '');
+	    		$(data.settings.autoSlideToggleSelector).attr('style', '');
+    		}
+    		
+    		if(data.settings.infiniteSlider) {
+    			$(node).children(':first-child').html();
+    			$(node).children(':first-child').html($(node).children(':first-child').children(':nth-child(-n+' + data.numberOfSlides + ')').clone(true));
+    		}
+    		
+    		$this = $(node);
+    		$this.removeData('iosslider');
+		
 		}
         
     }
@@ -1438,33 +1471,21 @@
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 				
-				if(clearStyle == undefined) {
-		    		clearStyle = true;
-		    	}
+				helpers.destroy(this, data, clearStyle);
 		    	
-	    		helpers.autoSlidePause(data.sliderNumber);
-		    	isEventCleared[data.sliderNumber] = true;
-		    	$(this).unbind('.iosSliderEvent');
-	    		$(this).children(':first-child').unbind('.iosSliderEvent');
-	    		$(this).children(':first-child').children().unbind('.iosSliderEvent');
-		    	
-		    	if(clearStyle) {
-	    			$(this).attr('style', '');
-		    		$(this).children(':first-child').attr('style', '');
-		    		$(this).children(':first-child').children().attr('style', '');
-		    		
-		    		$(data.settings.navSlideSelector).attr('style', '');
-		    		$(data.settings.navPrevSelector).attr('style', '');
-		    		$(data.settings.navNextSelector).attr('style', '');
-		    		$(data.settings.autoSlideToggleSelector).attr('style', '');
-	    		}
-	    		
-	    		if(data.settings.infiniteSlider) {
-	    			$(this).children(':first-child').html();
-	    			$(this).children(':first-child').html($(this).children(':first-child').children(':nth-child(-n+' + data.numberOfSlides + ')').clone(true));
-	    		}
-	    		
-	    		$this.removeData('iosslider');
+			});
+		
+		},
+		
+		update: function() {
+			
+			return this.each(function() {
+			
+				var $this = $(this);
+				var data = $this.data('iosslider');
+				if(data == undefined) return false;
+				
+				helpers.destroy(this, data, false);
 		    	
 			});
 		

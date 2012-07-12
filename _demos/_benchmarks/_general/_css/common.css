@@ -954,35 +954,64 @@ p {
 	background: #999;
 }
 
-/* test */
-.iosSlider-test {
-	
+/* add/remove slide slider */
+.add-remove-slide-slider {
+	position: relative;
+	overflow: hidden;
+	width: 1000px;
+	height: 200px;
 }
 
-.iosSlider-test .slider {
+.add-remove-slide-slider .slider {
+	height: 100%;
 }
 
-.iosSlider-test .slider .slide {
+.add-remove-slide-slider .slider .item {
 	width: 100%;
 	height: 100%;
 }
 
-.iosSlider-test .slider .item1 {
+.add-remove-slide-slider .slider .item1 {
 	background: #666;
 }
 
-.iosSlider-test .slider .item2 {
+.add-remove-slide-slider .slider .item2 {
 	background: #999;
 }
 
-.iosSlider-test .slider .item3 {
+.add-remove-slide-slider .slider .item3 {
 	background: #aaa;
 }
 
-.iosSlider-test .slider .item4 {
+.add-remove-slide-slider .slider .item4 {
 	background: #ddd;
 }
 
-.iosSlider-test .slider .item5 {
+.add-remove-slide-slider .slider .item5 {
 	background: #999;
+}
+
+.add-remove-slide-slider-container {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 1084px;
+	height: 200px;
+}
+
+.add-remove-slide-slider-container .destInitBlock {
+	position: absolute;
+	top: 0;
+	right: 42px;
+	width: 36px;
+	height: 200px;
+}
+
+.add-remove-slide-slider-container .destInitBlock .add,
+.add-remove-slide-slider-container .destInitBlock .rem {
+	width: 36px;
+	height: 36px;
+	background: #aaa;
+	margin: 0 0 5px 0;
+	cursor: pointer;
 }

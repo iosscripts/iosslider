@@ -189,13 +189,27 @@ $(document).ready(function() {
 		infiniteSlider: true
 	});
 	
-	$('.iosSlider-test').iosSlider({
+	$('.add-remove-slide-slider').iosSlider({
 		desktopClickDrag: true,
 		snapToChildren: true,
-		infiniteSlider: true
+		scrollbar: true,
+		scrollbarHide: false
+	});
+	
+	$('.add-remove-slide-slider-container .destInitBlock .add').bind('click', function() {
+	
+		addSlide();
+	
 	});
 	
 });
+
+function addSlide() {
+
+	$('.add-remove-slide-slider .slider').append("<div class = 'item item1'>new</div>");
+	$('.add-remove-slide-slider').iosSlider('update');
+
+}
 
 function callbackSliderStart(args) {
 
