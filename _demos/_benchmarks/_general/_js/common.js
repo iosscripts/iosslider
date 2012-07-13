@@ -80,6 +80,11 @@ $(document).ready(function() {
 		navPrevSelector: '.short-width-slider-2 .prev'
 	});
 	
+	$('.short-width-slider-3').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true
+	});
+	
 	$('.autoslide-slider3').iosSlider({
 		desktopClickDrag: true,
 		snapToChildren: true,

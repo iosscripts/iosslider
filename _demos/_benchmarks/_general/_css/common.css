@@ -73,10 +73,12 @@ p {
 }
 
 .default-slider .slider {
+	width: 100%;
 	height: 100%;
 }
 
 .default-slider .slider .item {
+	float: left;
 	width: 1000px;
 	height: 100%;
 }
@@ -405,7 +407,8 @@ p {
 }
 
 /* short size slides */
-.short-width-slider {
+.short-width-slider,
+.short-width-slider-3 {
 	position: relative;
 	overflow: hidden;
 	width: 1000px;
@@ -420,7 +423,8 @@ p {
 }
 
 .short-width-slider .slider,
-.short-width-slider-2 .slider {
+.short-width-slider-2 .slider,
+.short-width-slider-3 .slider {
 	height: 100%;
 }
 
@@ -434,28 +438,38 @@ p {
 	height: 100%;
 }
 
+.short-width-slider-3 .slider .item {
+	width: 33.333%;
+	height: 100%;
+}
+
 .short-width-slider .slider #item1,
-.short-width-slider-2 .slider #item1 {
+.short-width-slider-2 .slider #item1,
+.short-width-slider-3 .slider #item1 {
 	background: #666;
 }
 
 .short-width-slider .slider #item2,
-.short-width-slider-2 .slider #item2 {
+.short-width-slider-2 .slider #item2,
+.short-width-slider-3 .slider #item2 {
 	background: #999;
 }
 
 .short-width-slider .slider #item3,
-.short-width-slider-2 .slider #item3 {
+.short-width-slider-2 .slider #item3,
+.short-width-slider-3 .slider #item3 {
 	background: #aaa;
 }
 
 .short-width-slider .slider #item4,
-.short-width-slider-2 .slider #item4 {
+.short-width-slider-2 .slider #item4,
+.short-width-slider-3 .slider #item4 {
 	background: #ddd;
 }
 
 .short-width-slider .slider #item5,
-.short-width-slider-2 .slider #item5 {
+.short-width-slider-2 .slider #item5,
+.short-width-slider-3 .slider #item5 {
 	background: #777;
 }
 

@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.12 (07/13/2012)
+ * Version: v1.0.13 (07/13/2012)
  * Requires: jQuery v1.3+
  *
  * Terms of use:
@@ -760,6 +760,7 @@
 					
 					$(stageNode).css('width', '');
 					$(stageNode).css('height', '');
+					$(scrollerNode).css('width', '');
 					$(slideNodes).css('width', '');
 					
 					sliderMax = 0;
