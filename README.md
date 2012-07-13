@@ -325,6 +325,21 @@ Returned parameter: 'args' (array) { settings, sliderContainerObject, sliderObje
 			<td>$('div').iosSlider('goToSlide', slideNum);</td>
 			<td>Moves to the selected slide.<br /><em>Required parameter: 'slideNumber' (integer, default: null)</em></td>
 		</tr>
+		
+		<tr>
+			<td>$('div').iosSlider('update');</td>
+			<td>Updates/reinitializes internal variables/CSS attributes based on changes to the HTML/CSS/JS structure of the slider.</td>
+		</tr>
+		
+		<tr>
+			<td>$('div').iosSlider('addSlide', slideHTML, slidePosition);</td>
+			<td>Adds a slide defined by 'slideHTML' and placed at position 'slidePosition'.<br /><em>Required parameters: 'slideHTML' (string, default: null), 'slidePosition' (integer, default: null)</em></td>
+		</tr>
+		
+		<tr>
+			<td>$('div').iosSlider('removeSlide', slideNum);</td>
+			<td>Removes a slide from the slider.<br /><em>Required parameter: 'slideNumber' (integer, default: null)</em></td>
+		</tr>
 	</tbody>
 </table>
 

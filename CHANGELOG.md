@@ -1,8 +1,9 @@
 <h1>Changelog</h1>
 
-<h4>2012/07/06 - v1.0.10</h4>
+<h4>2012/07/13 - v1.0.14</h4>
 
 <ul>
+	<li>Added public methods: <em>update</em>, <em>addSlide</em>, <em>removeSlide</em></li>
 	<li>Support for firefox/opera (android) added.</li>
 	<li>Resolved issue #51</li>
 	<li>Added new args for function callbacks: sliderContainerObject, numberOfSlides</li>
