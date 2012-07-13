@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.13 (07/13/2012)
+ * Version: v1.0.14 (07/13/2012)
  * Requires: jQuery v1.3+
  *
  * Terms of use:
@@ -1088,7 +1088,9 @@
 					
 					$(scrollerNode).bind(touchStartEvent, function(e) {
 						
-						var e = e.originalEvent;
+						if((!isIe7) && (!isIe8)) {
+							var e = e.originalEvent;
+						}
 
 						helpers.autoSlidePause(sliderNumber);
 						
@@ -1106,6 +1108,7 @@
 							
 							eventX = e.pageX;
 							eventY = e.pageY;
+							
 							isMouseDown = true;
 							currentSlider = this;
 
@@ -1187,7 +1190,9 @@
 					
 					$(scrollerNode).bind(touchMoveEvent, function(e) {
 
-						var e = e.originalEvent;
+						if((!isIe7) && (!isIe8)) {
+							var e = e.originalEvent;
+						}
 						var edgeDegradation = 0;
 
 						if(!isTouch) {
