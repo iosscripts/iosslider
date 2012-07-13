@@ -202,8 +202,13 @@ $(document).ready(function() {
 	});
 	
 	$('.add-remove-slide-slider-container .destInitBlock .add').bind('click', function() {
-	
-		$('.add-remove-slide-slider').iosSlider('addSlide', "<div class = 'item item1'>new slide</div>", 2);
+		
+		var slide = $("<div/>", {
+			'class': 'item item1',
+			'id': 'item1'
+		});
+		
+		$('.add-remove-slide-slider').iosSlider('addSlide', slide, 2);
 	
 	});
 	
@@ -214,13 +219,6 @@ $(document).ready(function() {
 	});
 	
 });
-
-function addSlide() {
-
-	$('.add-remove-slide-slider .slider').append("<div class = 'item item1'>new slide</div>");
-	/* $('.add-remove-slide-slider').iosSlider('update'); */
-
-}
 
 function callbackSliderStart(args) {
 

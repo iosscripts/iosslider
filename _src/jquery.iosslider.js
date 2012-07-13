@@ -1514,7 +1514,7 @@
 		
 		},
 		
-		addSlide: function(slideHTML, slidePosition) {
+		addSlide: function(slideNode, slidePosition) {
 		
 			return this.each(function() {
 			
@@ -1522,7 +1522,7 @@
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 
-				$(data.scrollerNode).children(':eq(' + (slidePosition - 2) + ')').after(slideHTML);
+				$(data.scrollerNode).children(':eq(' + (slidePosition - 2) + ')').after(slideNode);
 				if(activeChildOffsets[data.sliderNumber] > (slidePosition - 2)) {
 					activeChildOffsets[data.sliderNumber]++;
 				}
