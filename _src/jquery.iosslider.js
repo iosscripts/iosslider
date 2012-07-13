@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.11 (07/12/2012)
+ * Version: v1.0.12 (07/13/2012)
  * Requires: jQuery v1.3+
  *
  * Terms of use:
@@ -1437,7 +1437,7 @@
 		destroy: function(clearStyle, node) {
 			
 			if(node == undefined) {
-				node == this;
+				node = this;
 			}
 			
 			return $(node).each(function() {
@@ -1488,18 +1488,58 @@
 		
 		},
 		
-		update: function() {
+		update: function(node) {
 			
-			return this.each(function() {
+			if(node == undefined) {
+				node = this;
+			}
 			
+			return $(node).each(function() {
+
 				var $this = $(this);
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 				
 				methods.destroy(false, this);
+				data.settings.startAtSlide = activeChildOffsets[data.sliderNumber] + 1;
 				methods.init(data.settings, this);
-				methods.goToSlide(2, this);
 		    	
+			});
+		
+		},
+		
+		addSlide: function(slideHTML, slidePosition) {
+		
+			return this.each(function() {
+			
+				var $this = $(this);
+				var data = $this.data('iosslider');
+				if(data == undefined) return false;
+
+				$(data.scrollerNode).children(':eq(' + (slidePosition - 2) + ')').after(slideHTML);
+				if(activeChildOffsets[data.sliderNumber] > (slidePosition - 2)) {
+					activeChildOffsets[data.sliderNumber]++;
+				}
+				methods.update(this);
+			
+			});
+		
+		},
+		
+		removeSlide: function(slideNumber) {
+		
+			return this.each(function() {
+			
+				var $this = $(this);
+				var data = $this.data('iosslider');
+				if(data == undefined) return false;
+
+				$(data.scrollerNode).children(':eq(' + (slideNumber - 1) + ')').remove();
+				if(activeChildOffsets[data.sliderNumber] > (slideNumber - 1)) {
+					activeChildOffsets[data.sliderNumber]--;
+				}
+				methods.update(this);
+			
 			});
 		
 		},
@@ -1507,7 +1547,7 @@
 		goToSlide: function(slide, node) {
 			
 			if(node == undefined) {
-				node == this;
+				node = this;
 			}
 			
 			return $(node).each(function() {

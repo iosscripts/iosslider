@@ -198,7 +198,13 @@ $(document).ready(function() {
 	
 	$('.add-remove-slide-slider-container .destInitBlock .add').bind('click', function() {
 	
-		addSlide();
+		$('.add-remove-slide-slider').iosSlider('addSlide', "<div class = 'item item1'>new slide</div>", 2);
+	
+	});
+	
+	$('.add-remove-slide-slider-container .destInitBlock .rem').bind('click', function() {
+	
+		$('.add-remove-slide-slider').iosSlider('removeSlide', 2);
 	
 	});
 	
@@ -206,8 +212,8 @@ $(document).ready(function() {
 
 function addSlide() {
 
-	$('.add-remove-slide-slider .slider').append("<div class = 'item item1'>new</div>");
-	$('.add-remove-slide-slider').iosSlider('update');
+	$('.add-remove-slide-slider .slider').append("<div class = 'item item1'>new slide</div>");
+	/* $('.add-remove-slide-slider').iosSlider('update'); */
 
 }
 
