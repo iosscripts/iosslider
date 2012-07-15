@@ -206,9 +206,11 @@ $(document).ready(function() {
 		var slide = $("<div/>", {
 			'class': 'item item1',
 			'id': 'item1'
-		});
+		}).append($('<img />', {
+			'src': '../../_site-demo/_img/h-slider-1.jpg'
+		}));;
 		
-		$('.add-remove-slide-slider').iosSlider('addSlide', slide, 2);
+		$('.add-remove-slide-slider').iosSlider('addSlide', slide, 6);
 	
 	});
 	
@@ -216,6 +218,16 @@ $(document).ready(function() {
 	
 		$('.add-remove-slide-slider').iosSlider('removeSlide', 2);
 	
+	});
+	
+	$('.drag-scrollbar-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		scrollbarDrag: true,
+		scrollbarContainer: '.drag-scrollbar-scroll-container',
+		scrollbarMargin: 0, 
+		scrollbarHeight: '40px',
+		scrollbarBorderRadius: 0
 	});
 	
 });

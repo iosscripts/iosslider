@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.14 (07/13/2012)
+ * Version: v1.0.15 (07/15/2012)
  * Requires: jQuery v1.3+
  *
  * Terms of use:
@@ -627,6 +627,7 @@
 				'snapToChildren': false,
 				'startAtSlide': 1,
 				'scrollbar': false,
+				'dragScrollbar': false,
 				'scrollbarHide': true,
 				'scrollbarLocation': 'top',
 				'scrollbarContainer': '',
@@ -706,6 +707,10 @@
 				isEventCleared[sliderNumber] = false;
 				var intermediateChildOffset = -1;
 				slideTimeouts[sliderNumber] = new Array();
+				if(settings.scrollbarDrag) {
+					settings.scrollbar = true;
+					settings.scrollbarHide = false;
+				}
 				var $this = $(this);
 				var data = $this.data('iosslider');	
 				if(data != undefined) return true;
@@ -725,7 +730,9 @@
 				if(settings.scrollbar) {
 					
 					if(settings.scrollbarContainer != '') {
-						$(settings.scrollbarContainer).append("<div class = '" + scrollbarBlockClass + "'><div class = '" + scrollbarClass + "'></div></div>");
+						$(settings.scrollbarContainer).css({
+							position: 'relative'
+						}).append("<div class = '" + scrollbarBlockClass + "'><div class = '" + scrollbarClass + "'></div></div>");
 					} else {
 						$(scrollerNode).parent().append("<div class = '" + scrollbarBlockClass + "'><div class = '" + scrollbarClass + "'></div></div>");
 					}
@@ -927,6 +934,12 @@
 							display: 'block'
 						});
 						
+					}
+					
+					if(settings.scrollbarDrag) {
+						$('.' + scrollbarBlockClass + ' .' + scrollbarClass).css({
+							cursor: grabOutCursor
+						});
 					}
 					
 					if(settings.infiniteSlider) {
@@ -1521,8 +1534,13 @@
 				var $this = $(this);
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
-
-				$(data.scrollerNode).children(':eq(' + (slidePosition - 2) + ')').after(slideNode);
+				
+				if(slidePosition <= data.numberOfSlides) {
+					$(data.scrollerNode).children(':eq(' + (slidePosition - 1) + ')').before(slideNode);
+				} else {
+					$(data.scrollerNode).children(':eq(' + (slidePosition - 2) + ')').after(slideNode);
+				}
+				
 				if(activeChildOffsets[data.sliderNumber] > (slidePosition - 2)) {
 					activeChildOffsets[data.sliderNumber]++;
 				}
