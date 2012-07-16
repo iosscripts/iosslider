@@ -842,8 +842,6 @@
 					sliderMax = sliderMax - stageWidth;
 					
 					$(scrollerNode).css({
-						'webkitPerspective': 1000,
-						'webkitBackfaceVisibility': 'hidden',
 						position: 'relative',
 						cursor: grabOutCursor,
 						width: sliderMax + stageWidth + 'px',
