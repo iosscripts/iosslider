@@ -227,7 +227,8 @@ $(document).ready(function() {
 		scrollbarContainer: '.drag-scrollbar-scroll-container',
 		scrollbarMargin: 0, 
 		scrollbarHeight: '40px',
-		scrollbarBorderRadius: 0
+		scrollbarBorderRadius: 0,
+		scrollbarOpacity: 1
 	});
 	
 });

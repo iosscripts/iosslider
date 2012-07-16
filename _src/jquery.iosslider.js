@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.15 (07/15/2012)
+ * Version: v1.0.16 (07/15/2012)
  * Requires: jQuery v1.3+
  *
  * Terms of use:
@@ -671,6 +671,7 @@
 				var yCurrentScrollRate = new Array(0, 0);
 				var scrollbarBlockClass = 'scrollbarBlock' + scrollbarNumber;
 				var scrollbarClass = 'scrollbar' + scrollbarNumber;
+				var scrollBarNode;
 				var scrollbarStageWidth;
 				var scrollbarWidth;
 				var containerWidth;
@@ -934,6 +935,8 @@
 							display: 'block'
 						});
 						
+						scrollbarNode = $('.' + scrollbarBlockClass + ' .' + scrollbarClass);
+						
 					}
 					
 					if(settings.scrollbarDrag) {
@@ -1098,9 +1101,16 @@
 				if(isTouch || settings.desktopClickDrag) {
 					
 					var touchStartEvent = isTouch ? 'touchstart.iosSliderEvent' : 'mousedown.iosSliderEvent';
+					var touchSelection = $(scrollerNode);
 					
-					$(scrollerNode).bind(touchStartEvent, function(e) {
-						
+					if(settings.scrollbarDrag) {
+					
+						touchSelection = touchSelection.add(scrollbarNode);
+					
+					} 
+					
+					$(touchSelection).bind(touchStartEvent, function(e) {
+					
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
@@ -1123,7 +1133,7 @@
 							eventY = e.pageY;
 							
 							isMouseDown = true;
-							currentSlider = this;
+							currentSlider = scrollerNode;
 
 							$(this).css({
 								cursor: grabInCursor
@@ -1145,7 +1155,7 @@
 							clearTimeout(scrollTimeouts[j]);
 						}
 						
-						var scrollPosition = helpers.getSliderOffset(this, 'x');
+						var scrollPosition = helpers.getSliderOffset(scrollerNode, 'x');
 						
 						intermediateChildOffset = activeChildOffsets[sliderNumber];
 						
@@ -1153,7 +1163,7 @@
 							
 							if(activeChildOffsets[sliderNumber]%numberOfSlides == 0) {
 								
-								$(this).children().each(function(i) {
+								$(scrollerNode).children().each(function(i) {
 									
 									if((i%numberOfSlides == 0) && (i != activeChildOffsets[sliderNumber])) {
 										$(this).replaceWith(function() {
@@ -1171,7 +1181,7 @@
 						
 							scrollPosition = sliderMin;
 							
-							helpers.setSliderOffset(this, scrollPosition);
+							helpers.setSliderOffset($('.' + scrollbarClass), scrollPosition);
 							
 							$('.' + scrollbarClass).css({
 								width: (scrollbarWidth - scrollBorder) + 'px'
@@ -1181,7 +1191,7 @@
 						
 							scrollPosition = sliderMax * -1;
 							
-							helpers.setSliderOffset(this, scrollPosition);
+							helpers.setSliderOffset(scrollerNode, scrollPosition);
 							
 							helpers.setSliderOffset($('.' + scrollbarClass), (scrollbarStageWidth - scrollMargin - scrollbarWidth));
 							
@@ -1191,8 +1201,8 @@
 							
 						} 
 						
-						xScrollStartPosition = (helpers.getSliderOffset(this, 'x') - eventX) * -1;
-						yScrollStartPosition = (helpers.getSliderOffset(this, 'y') - eventY) * -1;
+						xScrollStartPosition = (helpers.getSliderOffset(scrollerNode, 'x') - eventX) * -1;
+						yScrollStartPosition = (helpers.getSliderOffset(scrollerNode, 'y') - eventY) * -1;
 						
 						xCurrentScrollRate[1] = eventX;
 						yCurrentScrollRate[1] = eventY;
@@ -1201,11 +1211,12 @@
 					
 					var touchMoveEvent = isTouch ? 'touchmove.iosSliderEvent' : 'mousemove.iosSliderEvent';
 					
-					$(scrollerNode).bind(touchMoveEvent, function(e) {
-
+					$(touchSelection).bind(touchMoveEvent, function(e) {
+						
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
+						
 						var edgeDegradation = 0;
 
 						if(!isTouch) {
@@ -1236,11 +1247,11 @@
 						
 						if(settings.infiniteSlider) {
 	
-							if(helpers.getSliderOffset(this, 'x') > (childrenOffsets[numberOfSlides + 1] + stageWidth)) {
+							if(helpers.getSliderOffset(scrollerNode, 'x') > (childrenOffsets[numberOfSlides + 1] + stageWidth)) {
 								xScrollStartPosition = xScrollStartPosition + infiniteSliderWidth;
 							}
 							
-							if(helpers.getSliderOffset(this, 'x') < (childrenOffsets[numberOfSlides * 2 - 1] - stageWidth)) {
+							if(helpers.getSliderOffset(scrollerNode, 'x') < (childrenOffsets[numberOfSlides * 2 - 1] - stageWidth)) {
 								xScrollStartPosition = xScrollStartPosition - infiniteSliderWidth;
 							}
 							
@@ -1257,7 +1268,7 @@
 						if(!xScrollStarted) {
 							
 							if(settings.onSlideStart != '') {
-								settings.onSlideStart(new helpers.args(settings, this, $(this).children(':eq(' + activeChildOffsets[sliderNumber] + ')'), activeChildOffsets[sliderNumber]%infiniteSliderOffset));
+								settings.onSlideStart(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')'), activeChildOffsets[sliderNumber]%infiniteSliderOffset));
 							}
 							
 						}
@@ -1274,8 +1285,10 @@
 						}
 						
 						if(xScrollStarted) {
-	
-							var scrollPosition = helpers.getSliderOffset(this, 'x');
+							
+							var scrollMultiplier = 1;
+							
+							var scrollPosition = helpers.getSliderOffset(scrollerNode, 'x');
 							
 							if(isTouch) {
 								if(currentTouches != e.touches.length) {
@@ -1284,28 +1297,37 @@
 								
 								currentTouches = e.touches.length;
 							}
-									
-							elasticPullResistance = settings.elasticPullResistance;
-							
+								
 							if(scrollPosition > sliderMin) {
 							
-								edgeDegradation = (xScrollStartPosition - eventX) * elasticPullResistance;
+								edgeDegradation = (xScrollStartPosition - eventX) * settings.elasticPullResistance;
 								
 							}
 							
 							if(scrollPosition < (sliderMax * -1)) {
 								
-								edgeDegradation = (sliderMax + ((xScrollStartPosition - eventX) * -1)) * elasticPullResistance * -1;
+								edgeDegradation = (sliderMax + ((xScrollStartPosition - eventX) * -1)) * settings.elasticPullResistance * -1;
 											
 							}
 							
-							helpers.setSliderOffset(this, (xScrollStartPosition - eventX - edgeDegradation) * -1);
+							if($(this).is($(scrollbarNode))) {
+								
+								scrollMultiplier = -1 * sliderMax/(scrollbarStageWidth - scrollbarWidth);
+
+							}
+							
+							helpers.setSliderOffset(scrollerNode, (xScrollStartPosition - eventX - edgeDegradation) * -1 * scrollMultiplier);
 							
 							if(settings.scrollbar) {
 								
 								helpers.showScrollbar(settings, scrollbarClass);
-			
-								scrollbarDistance = Math.floor((xScrollStartPosition - eventX - edgeDegradation) / (sliderMax) * (scrollbarStageWidth - scrollMargin - scrollbarWidth));
+								
+								if($(this).is($(scrollbarNode))) {
+									scrollbarDistance = (xScrollStartPosition - eventX) * -1;
+								} else {
+									scrollbarDistance = Math.floor((xScrollStartPosition - eventX - edgeDegradation) / (sliderMax) * (scrollbarStageWidth - scrollMargin - scrollbarWidth));
+								}
+								
 								var width = scrollbarWidth;
 								
 								if(scrollPosition >= sliderMin) {
@@ -1345,7 +1367,7 @@
 						newChildOffset = helpers.calcActiveOffset(settings, (xScrollStartPosition - eventX - edgeDegradation) * -1, 0, childrenOffsets, sliderMax, stageWidth, infiniteSliderOffset, undefined);
 						if((newChildOffset != activeChildOffsets[sliderNumber]) && (settings.onSlideChange != '')) {
 							activeChildOffsets[sliderNumber] = newChildOffset;
-							settings.onSlideChange(new helpers.args(settings, this, $(this).children(':eq(' + newChildOffset + ')'), newChildOffset%infiniteSliderOffset));	
+							settings.onSlideChange(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + newChildOffset + ')'), newChildOffset%infiniteSliderOffset));	
 						}
 						
 					});
