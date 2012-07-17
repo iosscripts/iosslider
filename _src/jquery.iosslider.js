@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.18 (07/16/2012)
+ * Version: v1.0.19 (07/17/2012)
  * Requires: jQuery v1.3+
  *
  * Terms of use:
@@ -152,7 +152,7 @@
 			
 		},
 		
-		slowScrollHorizontal: function(node, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings) {
+		slowScrollHorizontal: function(node, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, currentEventNode, settings) {
 			
 			var distanceOffsetArray = new Array();
 			var nodeOffset = helpers.getSliderOffset(node, 'x');
@@ -174,6 +174,11 @@
 				xScrollDistance = maxSlideVelocity * -1;
 			} else if(xScrollDistance > maxSlideVelocity) {
 				xScrollDistance = maxSlideVelocity;
+			}
+			
+			if(!$(node).is($(currentEventNode))) {
+				snapDirection = snapDirection * -1;
+				xScrollDistance = xScrollDistance * -2;
 			}
 			
 			var testNodeOffsets = helpers.getAnimationSteps(settings, xScrollDistance, nodeOffset, sliderMax, sliderMin, childrenOffsets);
@@ -620,7 +625,7 @@
 		init: function(options, node) {
 			
 			var settings = $.extend({
-				'elasticPullResistance': 0.6, 		
+				'elasticPullResistance': 0.4, 		
 				'frictionCoefficient': 0.92,
 				'elasticFrictionCoefficient': 0.6,
 				'snapFrictionCoefficient': 0.92,
@@ -638,6 +643,7 @@
 				'scrollbarBackground': '#000',
 				'scrollbarBorderRadius': '100px',
 				'scrollbarShadow': '0 0 0 #000',
+				'scrollbarElasticPullResistance': 0.9,
 				'desktopClickDrag': false,
 				'responsiveSlideContainer': true,
 				'responsiveSlides': true,
@@ -672,6 +678,7 @@
 				var scrollbarBlockClass = 'scrollbarBlock' + scrollbarNumber;
 				var scrollbarClass = 'scrollbar' + scrollbarNumber;
 				var scrollbarNode;
+				var scrollbarBlockNode;
 				var scrollbarStageWidth;
 				var scrollbarWidth;
 				var containerWidth;
@@ -706,6 +713,7 @@
 				var isAutoSlideToggleOn = false;
 				iosSliders[sliderNumber] = stageNode;
 				isEventCleared[sliderNumber] = false;
+				var currentEventNode;
 				var intermediateChildOffset = -1;
 				slideTimeouts[sliderNumber] = new Array();
 				if(settings.scrollbarDrag) {
@@ -936,6 +944,7 @@
 						});
 						
 						scrollbarNode = $('.' + scrollbarBlockClass + ' .' + scrollbarClass);
+						scrollbarBlockNode = $('.' + scrollbarBlockClass);
 						
 					}
 					
@@ -1102,15 +1111,19 @@
 					
 					var touchStartEvent = isTouch ? 'touchstart.iosSliderEvent' : 'mousedown.iosSliderEvent';
 					var touchSelection = $(scrollerNode);
+					var touchSelectionMove = $(scrollerNode);
 					
 					if(settings.scrollbarDrag) {
 					
 						touchSelection = touchSelection.add(scrollbarNode);
-					
+						touchSelectionMove = touchSelectionMove.add(scrollbarBlockNode);
+						
 					} 
 					
 					$(touchSelection).bind(touchStartEvent, function(e) {
-					
+						
+						currentEventNode = $(this).is($(scrollbarNode)) ? scrollbarNode : scrollerNode;
+
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
@@ -1211,7 +1224,7 @@
 					
 					var touchMoveEvent = isTouch ? 'touchmove.iosSliderEvent' : 'mousemove.iosSliderEvent';
 					
-					$(touchSelection).bind(touchMoveEvent, function(e) {
+					$(touchSelectionMove).bind(touchMoveEvent, function(e) {
 						
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
@@ -1287,7 +1300,8 @@
 						if(xScrollStarted) {
 							
 							var scrollPosition = helpers.getSliderOffset(scrollerNode, 'x');
-							var scrollbarMultiplier = $(this).is($(scrollbarNode)) ? (-1 * (sliderMax) / (scrollbarStageWidth - scrollMargin - scrollbarWidth)) : 1;
+							var scrollbarMultiplier = $(this).is($(scrollbarBlockNode)) ? (-1 * (sliderMax) / (scrollbarStageWidth - scrollMargin - scrollbarWidth)) : 1;
+							var elasticPullResistance = $(this).is($(scrollbarBlockNode)) ? settings.scrollbarElasticPullResistance : settings.elasticPullResistance;
 							
 							if(isTouch) {
 								if(currentTouches != e.touches.length) {
@@ -1299,13 +1313,13 @@
 								
 							if(scrollPosition > sliderMin) {
 										
-								edgeDegradation = ((xScrollStartPosition - eventX) * scrollbarMultiplier) * settings.elasticPullResistance / scrollbarMultiplier;
+								edgeDegradation = ((xScrollStartPosition - eventX) * scrollbarMultiplier) * elasticPullResistance / scrollbarMultiplier;
 								
 							}
 							
 							if(scrollPosition < (sliderMax * -1)) {
 								
-								edgeDegradation = (sliderMax + ((xScrollStartPosition - eventX) * -1 * scrollbarMultiplier)) * settings.elasticPullResistance * -1 / scrollbarMultiplier;
+								edgeDegradation = (sliderMax + ((xScrollStartPosition - eventX) * -1 * scrollbarMultiplier)) * elasticPullResistance * -1 / scrollbarMultiplier;
 											
 							}
 						
@@ -1370,14 +1384,14 @@
 							for(var j = 0; j < sizeof(e.touches.length); j++) {
 								
 								if(e.touches[j].pageX == lastTouch) {
-									helpers.slowScrollHorizontal(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+									helpers.slowScrollHorizontal(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, currentEventNode, settings);
 								}
 								
 							}
 							
 						} else {
 							
-							helpers.slowScrollHorizontal(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+							helpers.slowScrollHorizontal(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, currentEventNode, settings);
 							
 						}
 						
@@ -1448,7 +1462,7 @@
 									return false;
 								}
 								
-								helpers.slowScrollHorizontal(currentSlider, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+								helpers.slowScrollHorizontal(currentSlider, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, currentEventNode, settings);
 								
 								currentSlider = undefined;
 							
