@@ -12,12 +12,36 @@ $(document).ready(function() {
 		});
 	});
 	
-	$('.snap-slider').iosSlider({
+	var snapSlider = $('.snap-slider');
+	var sliderText = $('.infinite-slider');
+	var slide_text;
+	var slide_thumbnail;
+	
+	snapSlider.iosSlider({
 		desktopClickDrag: true,
-		snapToChildren: true
+		snapToChildren: true,
+		onSlideChange: function(e) { slide_text = true; slide_thumbnail = false; sliderChange(e, 'text'); }
 	});
 	
-	$('.infinite-slider').iosSlider({
+	function sliderChange(e, type) {
+	
+		if(type == 'thumbnail')
+		{
+		if(slide_thumbnail == true)
+		{
+		sliderThumbnail.iosSlider('goToSlide', e.currentSlideNumber+1);
+		}
+		} else {
+		
+			if(slide_text == true) {
+				sliderText.iosSlider('goToSlide', e.currentSlideNumber+1);
+			}
+			
+		} 
+	
+	}
+	
+	sliderText.iosSlider({
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true
