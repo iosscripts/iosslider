@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.17 (07/16/2012)
+ * Version: v1.0.18 (07/16/2012)
  * Requires: jQuery v1.3+
  *
  * Terms of use:
@@ -1299,15 +1299,13 @@
 								
 							if(scrollPosition > sliderMin) {
 										
-								edgeDegradation = (xScrollStartPosition - eventX) * settings.elasticPullResistance;
-								console.log(edgeDegradation);
+								edgeDegradation = ((xScrollStartPosition - eventX) * scrollbarMultiplier) * settings.elasticPullResistance / scrollbarMultiplier;
 								
 							}
 							
 							if(scrollPosition < (sliderMax * -1)) {
 								
-								edgeDegradation = (sliderMax + ((xScrollStartPosition - eventX) * -1)) * settings.elasticPullResistance * -1;
-								console.log(xScrollStartPosition + ', ' + eventX);
+								edgeDegradation = (sliderMax + ((xScrollStartPosition - eventX) * -1 * scrollbarMultiplier)) * settings.elasticPullResistance * -1 / scrollbarMultiplier;
 											
 							}
 						
@@ -1363,7 +1361,7 @@
 						
 					});
 					
-					$(scrollerNode).bind('touchend.iosSliderEvent', function(e) {
+					$(touchSelection).bind('touchend.iosSliderEvent', function(e) {
 						
 						var e = e.originalEvent;
 						
@@ -1372,14 +1370,14 @@
 							for(var j = 0; j < sizeof(e.touches.length); j++) {
 								
 								if(e.touches[j].pageX == lastTouch) {
-									helpers.slowScrollHorizontal(this, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+									helpers.slowScrollHorizontal(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 								}
 								
 							}
 							
 						} else {
 							
-							helpers.slowScrollHorizontal(this, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+							helpers.slowScrollHorizontal(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 							
 						}
 						
@@ -1440,7 +1438,7 @@
 							
 							if(!isEventCleared[sliderNumber]) {
 								
-								$(scrollerNode).css({
+								$(touchSelection).css({
 									cursor: grabOutCursor
 								});
 								
