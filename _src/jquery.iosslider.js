@@ -1305,7 +1305,7 @@
 							
 							if(isTouch) {
 								if(currentTouches != e.touches.length) {
-									xScrollStartPosition = scrollPosition + eventX;
+									xScrollStartPosition = (scrollPosition * -1) + eventX;
 								}
 								
 								currentTouches = e.touches.length;
