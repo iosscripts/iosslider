@@ -42,7 +42,10 @@
 			
 				$('.sliderContainer .slideSelectors .item').removeClass('selected');
 				$('.sliderContainer .slideSelectors .item:eq(' + args.currentSlideNumber + ')').addClass('selected');
-				console.log(args);
+				try {
+					console.log(args);
+				} catch(err) {
+				}
 				
 			}
 			
