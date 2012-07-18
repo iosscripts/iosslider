@@ -981,7 +981,7 @@ p {
 }
 
 .add-remove-slide-slider .slider .item {
-	width: 100%;
+	width: 1000px;
 	height: 100%;
 }
 
@@ -1003,6 +1003,10 @@ p {
 
 .add-remove-slide-slider .slider .item5 {
 	background: #999;
+}
+
+.add-remove-slide-slider .slider .item6 {
+	background: #000;
 }
 
 .add-remove-slide-slider-container {

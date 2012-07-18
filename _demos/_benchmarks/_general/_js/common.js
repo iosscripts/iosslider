@@ -228,19 +228,18 @@ $(document).ready(function() {
 	$('.add-remove-slide-slider-container .destInitBlock .add').bind('click', function() {
 		
 		var slide = $("<div/>", {
-			'class': 'item item1',
-			'id': 'item1'
+			'class': 'item item6'
 		}).append($('<img />', {
 			'src': '../../_site-demo/_img/h-slider-1.jpg'
-		}));;
+		}));
 		
-		$('.add-remove-slide-slider').iosSlider('addSlide', slide, 6);
+		$('.add-remove-slide-slider').iosSlider('addSlide', slide, 1);
 	
 	});
 	
 	$('.add-remove-slide-slider-container .destInitBlock .rem').bind('click', function() {
 	
-		$('.add-remove-slide-slider').iosSlider('removeSlide', 2);
+		$('.add-remove-slide-slider').iosSlider('removeSlide', 1);
 	
 	});
 	

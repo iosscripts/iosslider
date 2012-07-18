@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.19 (07/17/2012)
+ * Version: v1.0.20 (07/17/2012)
  * Requires: jQuery v1.6+
  *
  * Terms of use:
@@ -625,14 +625,14 @@
 		init: function(options, node) {
 			
 			var settings = $.extend({
-				'elasticPullResistance': 0.4, 		
+				'elasticPullResistance': 0.6, 		
 				'frictionCoefficient': 0.92,
 				'elasticFrictionCoefficient': 0.6,
 				'snapFrictionCoefficient': 0.92,
 				'snapToChildren': false,
 				'startAtSlide': 1,
 				'scrollbar': false,
-				'dragScrollbar': false,
+				'scrollbarDrag': false,
 				'scrollbarHide': true,
 				'scrollbarLocation': 'top',
 				'scrollbarContainer': '',
@@ -715,6 +715,7 @@
 				isEventCleared[sliderNumber] = false;
 				var currentEventNode;
 				var intermediateChildOffset = -1;
+				var preventXScroll = false;
 				slideTimeouts[sliderNumber] = new Array();
 				if(settings.scrollbarDrag) {
 					settings.scrollbar = true;
@@ -850,8 +851,6 @@
 					sliderMax = sliderMax - stageWidth;
 					
 					$(scrollerNode).css({
-						'webkitPerspective': 1000,
-						'webkitBackfaceVisibility': 'hidden',
 						position: 'relative',
 						cursor: grabOutCursor,
 						width: sliderMax + stageWidth + 'px',
@@ -1112,6 +1111,7 @@
 					var touchStartEvent = isTouch ? 'touchstart.iosSliderEvent' : 'mousedown.iosSliderEvent';
 					var touchSelection = $(scrollerNode);
 					var touchSelectionMove = $(scrollerNode);
+					var preventDefault = null;
 					
 					if(settings.scrollbarDrag) {
 					
@@ -1285,7 +1285,11 @@
 							}
 							
 						}
-
+						
+						if(((yScrollDistance > 3) || (yScrollDistance < -3)) && (isTouch) && (!xScrollStarted)) {
+							preventXScroll = true;
+						}
+						
 						if(((xScrollDistance > 5) || (xScrollDistance < -5)) && (isTouch)) {
 						
 							e.preventDefault();
@@ -1297,7 +1301,7 @@
 							
 						}
 						
-						if(xScrollStarted) {
+						if(xScrollStarted && !preventXScroll) {
 							
 							var scrollPosition = helpers.getSliderOffset(scrollerNode, 'x');
 							var scrollbarMultiplier = $(this).is($(scrollbarBlockNode)) ? (-1 * (sliderMax) / (scrollbarStageWidth - scrollMargin - scrollbarWidth)) : 1;
@@ -1395,6 +1399,8 @@
 							
 						}
 						
+						preventXScroll = false;
+						
 					});
 					
 					if(!isTouch) {
@@ -1467,6 +1473,8 @@
 								currentSlider = undefined;
 							
 							}
+							
+							preventXScroll = false;
 							
 						});
 						

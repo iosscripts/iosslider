@@ -150,8 +150,8 @@ $(document).ready(function() {
 </tr>
 <tr>
 <td>elasticFrictionCoefficient</td>
-<td>0.8</td>
-<td>(decimal, 0.0 - 1.0) Additonal friction coefficient applied when momentum slides outside the bounds of the slider.</td>
+<td>0.6</td>
+<td>(decimal, 0.0 - 1.0) Additonal friction coefficient applied when momentum/user moves slides outside the bounds of the slider.</td>
 </tr>
 <tr>
 <td>snapFrictionCoefficient</td>
@@ -173,6 +173,13 @@ $(document).ready(function() {
 <td>false</td>
 <td>(boolean) Show or hide the scrollbar.</td>
 </tr>
+
+<tr>
+	<td>scrollbarDrag</td>
+	<td>false</td>
+	<td>(boolean) Enables click/drag, touch/drag functionality on the scrollbar. When enabled, the options scrollbar and scrollbarHide are automatically set to true and false respectively.</td>
+</tr>
+
 <tr>
 <td>scrollbarHide</td>
 <td>true</td>
@@ -223,6 +230,13 @@ $(document).ready(function() {
 <td>'none'</td>
 <td>(string) The css box-shadow of the scrollbar.</td>
 </tr>
+
+<tr>
+	<td>scrollbarElasticPullResistance</td>
+	<td>0.9</td>
+	<td>(decimal, 0.0 - 1.0) Additonal friction coefficient applied to the scrollbar when momentum/user moves slides outside the bounds of the slider.</td>
+</tr>
+
 <tr>
 <td>desktopClickDrag</td>
 <td>false</td>
