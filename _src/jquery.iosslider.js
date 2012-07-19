@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.20 (07/17/2012)
+ * Version: v1.0.21 (07/18/2012)
  * Requires: jQuery v1.6+
  *
  * Terms of use:
@@ -734,8 +734,6 @@
 					infiniteSliderOffset = numberOfSlides;
 					
 				}
-				
-				slideNodes = $(scrollerNode).children();
 						
 				if(settings.scrollbar) {
 					
@@ -778,6 +776,7 @@
 					$(stageNode).css('width', '');
 					$(stageNode).css('height', '');
 					$(scrollerNode).css('width', '');
+					slideNodes = $(scrollerNode).children();
 					$(slideNodes).css('width', '');
 					
 					sliderMax = 0;
@@ -847,7 +846,7 @@
 					childrenOffsets.splice(lastChildOffset + 1, childrenOffsets.length);
 		
 					childrenOffsets[childrenOffsets.length] = (sliderMax - stageWidth) * -1;
-					
+
 					sliderMax = sliderMax - stageWidth;
 					
 					$(scrollerNode).css({
@@ -1612,12 +1611,24 @@
 				var $this = $(this);
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
-				
+					
 				slide = (slide - 1)%data.numberOfSlides;
 				if(data.settings.infiniteSlider) {
+					
+					var middle = data.numberOfSlides * 0.5;
+					var half = (middle + activeChildOffsets[data.sliderNumber]) % data.numberOfSlides;
+					var direction = (slide < half) ? 1 : -1;
 					slide = slide + data.infiniteSliderOffset;
+					
+					if((direction < 0) && ((activeChildOffsets[data.sliderNumber]%data.numberOfSlides) < middle)) {
+						slide = slide - data.infiniteSliderOffset;
+					}
+					
+					if((direction > 0) && ((activeChildOffsets[data.sliderNumber]%data.numberOfSlides) > middle)) {
+						slide = slide + data.infiniteSliderOffset;
+					}
 				}
-								
+
 				helpers.changeSlide(slide, $(data.scrollerNode), slideTimeouts[data.sliderNumber], data.sliderMax, data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.childrenOffsets, data.sliderNumber, data.infiniteSliderOffset, data.infiniteSliderWidth, data.numberOfSlides, data.settings);
 				
 				activeChildOffsets[data.sliderNumber] = slide;

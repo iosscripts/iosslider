@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		
+		<!-- META -->
+		<meta charset = "utf-8">
+		
+		<!-- CSS -->
+		<link rel = "stylesheet" href = "_css/default.css" />
+		<link rel = "stylesheet" media = "screen" href = "_css/common.css" />
+		
+		<!-- JS -->
+		<script src = "../../_lib/jquery-1.6.1.min.js"></script>
+		<script src = "../../_lib/jquery.easing-1.3.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../_src/jquery.iosslider.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				var sliderThumbnail = $('.iosSlider1');
+				var sliderText = $('.iosSlider2');
+				var slide_text = true;
+				var slide_thumbnail = true;
+				var slide_started = false;
+				
+				var sliderChange = function(e, type) {
+					
+					if(slide_started) {
+						return false;
+					}
+					
+					slide_started = true;
+					
+					var current_slide = (e.currentSlideNumber+1);
+					
+					if(type == 'thumbnail') {
+					
+						if(slide_thumbnail == true) {
+						
+							sliderThumbnail.iosSlider('goToSlide', current_slide);
+						
+						}
+					
+					} else {
+						
+						if(slide_text == true) {
+						
+							sliderText.iosSlider('goToSlide', current_slide);
+							
+						}
+					
+					}
+		
+					$('.iosSlider2 .indicatorsBlock .indicators .item').removeClass('selected');
+					$('.iosSlider2 .indicatorsBlock .indicators .item').eq(current_slide-1).addClass('selected');
+					
+				}
+				
+				var slideComplete = function(e) {
+				
+					slide_started = false;
+				
+				}
+				
+				sliderThumbnail.iosSlider({
+					snapToChildren: true,
+					desktopClickDrag: true,
+					infiniteSlider: true,
+					onSlideChange: function(e){ slide_text = true; slide_thumbnail = false; sliderChange(e, 'text'); },
+					onSlideComplete: slideComplete,
+					navNextSelector: $('.iosSlider2 .next'),
+					navPrevSelector: $('.iosSlider2 .prev')
+				});
+				
+				sliderText.iosSlider({
+					snapToChildren: true,
+					desktopClickDrag: false,
+					infiniteSlider: true,
+					onSlideChange: function(e){ slide_text = false; slide_thumbnail = true; sliderChange(e, 'thumbnail') },
+					onSlideComplete: slideComplete
+				});
+			}); 
+		</script>
+		
+		<title>iosScripts/iosSlider demos - hostus</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'container'>
+			
+			<div class = 'iosSlider1Container'>
+				
+				<div class = 'iosSlider1'>
+				
+					<div class = 'slider'>
+					
+						<div class = 'item item1'></div>
+						<div class = 'item item2'></div>
+						<div class = 'item item3'></div>
+					
+					</div>
+				
+				</div>
+				
+			</div>
+			
+			<div class = 'iosSlider2Container'>
+				
+				<div class = 'iosSlider2'>
+				
+					<div class = 'slider'>
+					
+						<div class = 'item item1'></div>
+						<div class = 'item item2'></div>
+						<div class = 'item item3'></div>
+					
+					</div>
+					
+					<div class = 'prev'></div>
+					<div class = 'next'></div>
+					
+					<div class = 'indicatorsBlock'>
+						<div class = 'indicators'>
+							<div class = 'item first selected'></div>
+							<div class = 'item'></div>
+							<div class = 'item'></div>
+						</div>
+					</div>
+				
+				</div>
+				
+			</div>
+		
+		</div>
+			
+	</body>
+	
+</html>
