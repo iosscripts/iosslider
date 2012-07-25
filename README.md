@@ -292,6 +292,19 @@ $(document).ready(function() {
 <td>false</td>
 <td>(boolean) Makes the slider loop in both directions infinitely with no end. When set to true, the option <em>scrollbar</em> is automatically disabled.</td>
 </tr>
+
+<tr>
+	<td>stageCSS</td>
+	<td>{ position: 'relative', top: '0', left: '0', overflow: 'hidden', zIndex: 1 }</td>
+	<td>(object)</td>
+</tr>
+
+<tr>
+	<td>sliderCSS</td>
+	<td>{ overflow: 'hidden' }</td>
+	<td>(object)</td>
+</tr>
+
 <tr>
 <td>onSliderLoaded</td>
 <td>null</td>
@@ -353,6 +366,16 @@ Returned parameter: 'args' (array) { settings, sliderContainerObject, sliderObje
 		<tr>
 			<td>$('div').iosSlider('removeSlide', slideNum);</td>
 			<td>Removes a slide from the slider.<br /><em>Required parameter: 'slideNumber' (integer, default: null)</em></td>
+		</tr>
+		
+		<tr>
+			<td>$('div').iosSlider('lock');</td>
+			<td>Locks the slider. Temporarily disabling touch/drag events within the slider without unbinding them.</td>
+		</tr>
+		
+		<tr>
+			<td>$('div').iosSlider('unlock');</td>
+			<td>Unlocks the slider. Enables touch/drag events previously disabled by the lock method.</td>
 		</tr>
 	</tbody>
 </table>
