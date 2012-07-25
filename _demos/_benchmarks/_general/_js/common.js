@@ -219,15 +219,21 @@ $(document).ready(function() {
 	
 	});
 	
-	$('.drag-scrollbar-slider').iosSlider({
+	$('.lock-slider').iosSlider({
 		desktopClickDrag: true,
-		snapToChildren: true,
-		scrollbarDrag: true,
-		scrollbarContainer: '.drag-scrollbar-scroll-container',
-		scrollbarMargin: 0, 
-		scrollbarHeight: '40px',
-		scrollbarBorderRadius: 0,
-		scrollbarOpacity: 1
+		snapToChildren: true
+	});
+	
+	$('.lock-slider-container .destInitBlock .lock').bind('click', function() {
+		
+		$('.lock-slider').iosSlider('lock');
+	
+	});
+	
+	$('.lock-slider-container .destInitBlock .unlock').bind('click', function() {
+	
+		$('.lock-slider').iosSlider('unlock');
+	
 	});
 	
 });

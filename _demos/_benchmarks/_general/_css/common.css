@@ -1075,3 +1075,69 @@ p {
 	width: 1000px;
 	height: 40px;
 }
+
+/* lock slider */
+.lock-slider {
+	position: relative;
+	overflow: hidden;
+	width: 1000px;
+	height: 200px;
+}
+
+.lock-slider .slider {
+	height: 100%;
+}
+
+.lock-slider .slider .item {
+	width: 1000px;
+	height: 100%;
+}
+
+.lock-slider .slider .item1 {
+	background: #666;
+}
+
+.lock-slider .slider .item2 {
+	background: #999;
+}
+
+.lock-slider .slider .item3 {
+	background: #aaa;
+}
+
+.lock-slider .slider .item4 {
+	background: #ddd;
+}
+
+.lock-slider .slider .item5 {
+	background: #999;
+}
+
+.lock-slider .slider .item6 {
+	background: #000;
+}
+
+.lock-slider-container {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 1084px;
+	height: 200px;
+}
+
+.lock-slider-container .destInitBlock {
+	position: absolute;
+	top: 0;
+	right: 42px;
+	width: 36px;
+	height: 200px;
+}
+
+.lock-slider-container .destInitBlock .lock,
+.lock-slider-container .destInitBlock .unlock {
+	width: 36px;
+	height: 36px;
+	background: #aaa;
+	margin: 0 0 5px 0;
+	cursor: pointer;
+}

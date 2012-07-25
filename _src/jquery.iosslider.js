@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.21 (07/18/2012)
+ * Version: v1.0.22 (07/24/2012)
  * Requires: jQuery v1.6+
  *
  * Terms of use:
@@ -59,6 +59,7 @@
 	var isEventCleared = new Array();
 	var slideTimeouts = new Array();
 	var activeChildOffsets = new Array();
+	var touchLocks = new Array();
 	
 	/* private functions */
 	var helpers = {
@@ -716,6 +717,7 @@
 				var currentEventNode;
 				var intermediateChildOffset = -1;
 				var preventXScroll = false;
+				touchLocks[sliderNumber] = false;
 				slideTimeouts[sliderNumber] = new Array();
 				if(settings.scrollbarDrag) {
 					settings.scrollbar = true;
@@ -1120,6 +1122,8 @@
 					} 
 					
 					$(touchSelection).bind(touchStartEvent, function(e) {
+						
+						if(touchLocks[sliderNumber]) return false;
 						
 						currentEventNode = $(this).is($(scrollbarNode)) ? scrollbarNode : scrollerNode;
 
@@ -1560,9 +1564,9 @@
 		},
 		
 		addSlide: function(slideNode, slidePosition) {
-		
+
 			return this.each(function() {
-			
+				
 				var $this = $(this);
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
@@ -1635,6 +1639,36 @@
 
 			});
 			
+		},
+		
+		/* Locks the slider. Temporarily disabling touch events within the slider without unbinding them. */
+		lock: function() {
+			
+			return this.each(function() {
+			
+				var $this = $(this);
+				var data = $this.data('iosslider');
+				if(data == undefined) return false;
+
+				touchLocks[data.sliderNumber] = true;
+			
+			});
+			
+		},
+		
+		/* Unlocks the slider. Enables touch events previously disabled by the lock method. */
+		unlock: function() {
+		
+			return this.each(function() {
+			
+				var $this = $(this);
+				var data = $this.data('iosslider');
+				if(data == undefined) return false;
+
+				touchLocks[data.sliderNumber] = false;
+			
+			});
+		
 		}
 	
 	}
