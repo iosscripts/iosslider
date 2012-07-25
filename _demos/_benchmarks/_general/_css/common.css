@@ -25,7 +25,7 @@ p {
 	position: relative;
 	top: 0;
 	left: 0;
-	width: 1042px;
+	width: 942px;
 	height: 200px;
 }
 
@@ -48,7 +48,7 @@ p {
 .default-slider {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -79,7 +79,7 @@ p {
 
 .default-slider .slider .item {
 	float: left;
-	width: 1000px;
+	width: 900px;
 	height: 100%;
 }
 
@@ -107,7 +107,7 @@ p {
 .snap-slider {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -116,7 +116,7 @@ p {
 }
 
 .snap-slider .slider .item {
-	width: 1000px;
+	width: 900px;
 	height: 100%;
 }
 
@@ -142,7 +142,7 @@ p {
 
 /* infinite */
 .responsive-container {
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -158,7 +158,7 @@ p {
 }
 
 .infinite-slider .slider .item {
-	width: 1000px;
+	width: 900px;
 	height: 100%;
 }
 
@@ -186,7 +186,7 @@ p {
 .responsive-slider {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -195,7 +195,7 @@ p {
 }
 
 .responsive-slider .slider .item {
-	width: 1000px;
+	width: 900px;
 	height: 100%;
 }
 
@@ -223,7 +223,7 @@ p {
 .responsive-slider-2 {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -262,7 +262,7 @@ p {
 .autoslide-slider3 {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -275,7 +275,7 @@ p {
 .autoslide-slider1 .slider .item,
 .autoslide-slider2 .slider .item,
 .autoslide-slider3 .slider .item {
-	width: 1000px;
+	width: 900px;
 	height: 100%;
 }
 
@@ -323,7 +323,7 @@ p {
 	position: relative;
 	top: 0;
 	left: 0;
-	width: 1042px;
+	width: 942px;
 	height: 200px;
 }
 
@@ -369,7 +369,7 @@ p {
 .variable-width-slider {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -411,7 +411,7 @@ p {
 .short-width-slider-3 {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -497,7 +497,7 @@ p {
 .destroy-slider {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -515,7 +515,7 @@ p {
 }
 
 .destroy-slider .slider .item {
-	width: 1000px;
+	width: 900px;
 	height: 100%;
 }
 
@@ -543,7 +543,7 @@ p {
 	position: relative;
 	top: 0;
 	left: 0;
-	width: 1084px;
+	width: 984px;
 	height: 200px;
 }
 
@@ -604,7 +604,7 @@ p {
 .callback-slider {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -622,7 +622,7 @@ p {
 }
 
 .callback-slider .slider .item {
-	width: 1000px;
+	width: 900px;
 	height: 100%;
 }
 
@@ -672,7 +672,7 @@ p {
 	position: relative;
 	top: 0;
 	left: 0;
-	width: 1084px;
+	width: 984px;
 	height: 200px;
 }
 
@@ -733,7 +733,7 @@ p {
 .form-slider {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -770,11 +770,11 @@ p {
 .media-query-slider {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 900px) {
 
 	.media-query-slider {
 		width: 600px;
@@ -815,7 +815,7 @@ p {
 .thirty-slider {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -852,7 +852,7 @@ p {
 .undefined-height-slider {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 }
 
 .undefined-height-slider .slider {
@@ -887,7 +887,7 @@ p {
 .bind-event-slider {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -935,7 +935,7 @@ p {
 	top: 0;
 	left: 0;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -972,7 +972,7 @@ p {
 .add-remove-slide-slider {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -981,7 +981,7 @@ p {
 }
 
 .add-remove-slide-slider .slider .item {
-	width: 1000px;
+	width: 900px;
 	height: 100%;
 }
 
@@ -1013,7 +1013,7 @@ p {
 	position: relative;
 	top: 0;
 	left: 0;
-	width: 1084px;
+	width: 984px;
 	height: 200px;
 }
 
@@ -1038,7 +1038,7 @@ p {
 .drag-scrollbar-slider {
 	position: relative;
 	overflow: hidden;
-	width: 1000px;
+	width: 900px;
 	height: 200px;
 }
 
@@ -1072,10 +1072,9 @@ p {
 }
 
 .drag-scrollbar-scroll-container {
-	width: 1000px;
+	width: 900px;
 	height: 40px;
 }
-
 /* lock slider */
 .lock-slider {
 	position: relative;
