@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.22 (07/24/2012)
+ * Version: v1.0.23 (07/24/2012)
  * Requires: jQuery v1.6+
  *
  * Terms of use:
@@ -625,7 +625,7 @@
 		
 		init: function(options, node) {
 			
-			var settings = $.extend({
+			var settings = $.extend(true, {
 				'elasticPullResistance': 0.6, 		
 				'frictionCoefficient': 0.92,
 				'elasticFrictionCoefficient': 0.6,
@@ -656,10 +656,20 @@
 				'autoSlideTimer': 5000,
 				'autoSlideTransTimer': 750,
 				'infiniteSlider': false,
+				'stageCSS': {
+					position: 'relative',
+					top: '0',
+					left: '0',
+					overflow: 'hidden',
+					zIndex: 1
+				},
+				'sliderCSS': {
+					overflow: 'hidden'
+				},
 				'onSliderLoaded': '',
 				'onSlideStart': '',
 				'onSlideChange': '',
-				'onSlideComplete': function() {}
+				'onSlideComplete': ''
 			}, options);
 			
 			if(node == undefined) {
@@ -791,11 +801,11 @@
 					}
 					
 					$(stageNode).css({
-						position: 'relative',
-						top: '0',
-						left: '0',
-						overflow: 'hidden',
-						zIndex: 1,
+						position: settings.stageCSS.position,
+						top: settings.stageCSS.top,
+						left: settings.stageCSS.left,
+						overflow: settings.stageCSS.overflow,
+						zIndex: settings.stageCSS.zIndex,
 						width: stageWidth
 					});
 					
@@ -853,9 +863,9 @@
 					
 					$(scrollerNode).css({
 						position: 'relative',
+						overflow: settings.sliderCSS.overflow,
 						cursor: grabOutCursor,
-						width: sliderMax + stageWidth + 'px',
-						overflow: 'hidden'
+						width: sliderMax + stageWidth + 'px'
 					});
 					
 					containerHeight = $(stageNode).parent().height();
