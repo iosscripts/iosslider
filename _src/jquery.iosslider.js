@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.23 (07/24/2012)
+ * Version: v1.0.24 (07/27/2012)
  * Requires: jQuery v1.6+
  *
  * Terms of use:
@@ -273,7 +273,7 @@
 		
 		onSlideComplete: function(settings, node, slideNode, newChildOffset, sliderNumber) {
 			
-			if(onChangeEventLastFired[sliderNumber] != newChildOffset) {
+			if((onChangeEventLastFired[sliderNumber] != newChildOffset) && (settings.onSlideComplete != '')) {
 			
 				settings.onSlideComplete(new helpers.args(settings, $(node), slideNode, newChildOffset));
 			
@@ -666,6 +666,7 @@
 				'sliderCSS': {
 					overflow: 'hidden'
 				},
+				'unselectableSelector': '',
 				'onSliderLoaded': '',
 				'onSlideStart': '',
 				'onSlideChange': '',
@@ -750,9 +751,7 @@
 				if(settings.scrollbar) {
 					
 					if(settings.scrollbarContainer != '') {
-						$(settings.scrollbarContainer).css({
-							position: 'relative'
-						}).append("<div class = '" + scrollbarBlockClass + "'><div class = '" + scrollbarClass + "'></div></div>");
+						$(settings.scrollbarContainer).append("<div class = '" + scrollbarBlockClass + "'><div class = '" + scrollbarClass + "'></div></div>");
 					} else {
 						$(scrollerNode).parent().append("<div class = '" + scrollbarBlockClass + "'><div class = '" + scrollbarClass + "'></div></div>");
 					}
@@ -806,7 +805,13 @@
 						left: settings.stageCSS.left,
 						overflow: settings.stageCSS.overflow,
 						zIndex: settings.stageCSS.zIndex,
+						'webkitPerspective': 1000,
+						'webkitBackfaceVisibility': 'hidden',
 						width: stageWidth
+					});
+					
+					$(settings.unselectableSelector).css({
+						cursor: 'default'
 					});
 					
 					if(settings.responsiveSlides) {
@@ -865,6 +870,8 @@
 						position: 'relative',
 						overflow: settings.sliderCSS.overflow,
 						cursor: grabOutCursor,
+						'webkitPerspective': 1000,
+						'webkitBackfaceVisibility': 'hidden',
 						width: sliderMax + stageWidth + 'px'
 					});
 					
@@ -1135,6 +1142,8 @@
 						
 						if(touchLocks[sliderNumber]) return false;
 						
+						if($(settings.unselectableSelector).filter(e.target).length == 1) return false;
+						
 						currentEventNode = $(this).is($(scrollbarNode)) ? scrollbarNode : scrollerNode;
 
 						if((!isIe7) && (!isIe8)) {
@@ -1238,6 +1247,8 @@
 					var touchMoveEvent = isTouch ? 'touchmove.iosSliderEvent' : 'mousemove.iosSliderEvent';
 					
 					$(touchSelectionMove).bind(touchMoveEvent, function(e) {
+						
+						if($(settings.unselectableSelector).filter(e.target).length == 1) return false;
 						
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
@@ -1394,6 +1405,8 @@
 					
 					$(touchSelection).bind('touchend.iosSliderEvent', function(e) {
 						
+						if($(settings.unselectableSelector).filter(e.target).length == 1) return false;
+						
 						var e = e.originalEvent;
 						
 						if(e.touches.length != 0) {
@@ -1530,6 +1543,7 @@
 		    		$(data.settings.navPrevSelector).attr('style', '');
 		    		$(data.settings.navNextSelector).attr('style', '');
 		    		$(data.settings.autoSlideToggleSelector).attr('style', '');
+		    		$(data.settings.unselectableSelector).attr('style', '');
 	    		}
 	    		
 	    		if(data.settings.infiniteSlider) {

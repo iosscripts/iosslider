@@ -296,13 +296,19 @@ $(document).ready(function() {
 <tr>
 	<td>stageCSS</td>
 	<td>{ position: 'relative', top: '0', left: '0', overflow: 'hidden', zIndex: 1 }</td>
-	<td>(object)</td>
+	<td>(object) The customizable CSS of the stage object.</td>
 </tr>
 
 <tr>
 	<td>sliderCSS</td>
 	<td>{ overflow: 'hidden' }</td>
-	<td>(object)</td>
+	<td>(object) The customizable CSS of the slider object.</td>
+</tr>
+
+<tr>
+	<td>unselectableSelector</td>
+	<td>null</td>
+	<td>(string) A jQuery selection (ex. $('.unselectable') ), each element returned by the selector will become removed from touch/click move events.</td>
 </tr>
 
 <tr>

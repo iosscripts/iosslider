@@ -219,6 +219,17 @@ $(document).ready(function() {
 	
 	});
 	
+	$('.drag-scrollbar-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		scrollbarDrag: true,
+		scrollbarContainer: '.drag-scrollbar-scroll-container',
+		scrollbarMargin: 0,
+		scrollbarHeight: '40px',
+		scrollbarBorderRadius: 0,
+		scrollbarOpacity: 1
+	});
+	
 	$('.lock-slider').iosSlider({
 		desktopClickDrag: true,
 		snapToChildren: true
@@ -234,6 +245,12 @@ $(document).ready(function() {
 	
 		$('.lock-slider').iosSlider('unlock');
 	
+	});
+	
+	$('.unselectable-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		unselectableSelector: $('.unselectable')
 	});
 	
 });
