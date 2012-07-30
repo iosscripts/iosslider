@@ -3,9 +3,19 @@ body {
 	overflow: hidden;
 }
 
+.containerOuter {
+	position: absolute;
+	left: 0;
+	right: 0;
+	background: #aaa;
+	height: 200px;
+	overflow: hidden;
+}
+
 .container {
 	position: relative;
-	width: 1000px;
+	width: 800px;
+	height: 200px;
 	margin: 0 auto;
 	overflow: visible;
 }
@@ -16,7 +26,7 @@ body {
 	left: 0;
 	width: 100%;
 	height: 200px;
-	margin: 20px 0 0 0;
+	margin: 0 0 0 0;
 	overflow: visible;
 }
 
@@ -24,13 +34,13 @@ body {
 	position: relative;
 	top: 0;
 	left: 0;
-	overflow: hidden;
+	overflow: visible;
 	width: 100%;
 	height: 200px;
 }
 
 .iosSlider .slider {
-	width: 100%;
+	width: 10000px;
 	height: 100%;
 }
 

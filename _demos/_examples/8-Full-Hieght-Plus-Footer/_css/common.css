@@ -1,0 +1,68 @@
+html, body, .wrap { 
+	height: 100%;
+	max-height: 100%;
+}
+
+body > .wrap {
+	height: auto; 
+	min-height: 100%;
+}
+
+div.main { 
+	padding-bottom: 200px; 
+}
+
+.container {
+}
+
+/* slider */
+.iosSlider {
+	position: relative;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+.iosSlider .slider {
+	width: 100%;
+	height: 100%;
+}
+
+.iosSlider .slider .item {
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+
+.iosSlider .slider .item1 {
+	background: #666;
+}
+
+.iosSlider .slider .item2 {
+	background: #999;
+}
+
+.iosSlider .slider .item3 {
+	background: #aaa;
+}
+
+.iosSlider .slider .item4 {
+	background: #ddd;
+}
+
+.iosSlider .slider .item5 {
+	background: #777;
+}
+
+/* footer */
+.footer {
+	position: relative;
+	margin-top: -200px;
+	height: 200px;
+	width: 100%;
+	padding: 0;
+	clear: both;
+	background: #aaa;
+}

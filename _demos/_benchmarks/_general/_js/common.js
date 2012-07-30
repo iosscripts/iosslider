@@ -253,6 +253,12 @@ $(document).ready(function() {
 		unselectableSelector: $('.unselectable')
 	});
 	
+	$('.scrollbar-y-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		responsiveSlides: false
+	});
+	
 });
 
 function callbackSliderStart(args) {
