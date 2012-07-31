@@ -11,7 +11,7 @@
  *
  * Terms of use:
  *
- * 1) iosSlider is licensed under the Creative Commons – Attribution-NonCommercial 3.0 License.
+ * 1) iosSlider is licensed under the Creative Commons ï¿½ Attribution-NonCommercial 3.0 License.
  * 2) You may use iosSlider free for personal or non-profit purposes, without restriction. 
  *	  Attribution is not required but always appreciated. For commercial projects, you 
  *	  must purchase a license. You may download and play with the script before deciding to 
@@ -646,6 +646,7 @@
 				'scrollbarShadow': '0 0 0 #000',
 				'scrollbarElasticPullResistance': 0.9,
 				'desktopClickDrag': false,
+                'responsiveSlideContainerHeight': false,
 				'responsiveSlideContainer': true,
 				'responsiveSlides': true,
 				'navSlideSelector': '',
@@ -793,11 +794,11 @@
 					sliderMax = 0;
 					childrenOffsets = new Array();
 					containerWidth = $(stageNode).parent().width();
-					stageWidth = $(stageNode).outerWidth(true);
-					
-					if(settings.responsiveSlideContainer) {
-						stageWidth = ($(stageNode).outerWidth(true) > containerWidth) ? containerWidth : $(stageNode).outerWidth(true);
-					}
+                    stageWidth = $(stageNode).outerWidth(true);
+
+                    if(settings.responsiveSlideContainer) {
+                        stageWidth = ($(stageNode).outerWidth(true) > containerWidth) ? containerWidth : $(stageNode).outerWidth(true);
+                    }
 					
 					$(stageNode).css({
 						position: settings.stageCSS.position,
@@ -826,7 +827,7 @@
 							
 							} else {
 								
-								thisSlideWidth = $(this).width();
+								thisSlideWidth = stageWidth;
 								
 							}
 							
@@ -877,17 +878,19 @@
 					
 					containerHeight = $(stageNode).parent().height();
 					stageHeight = $(stageNode).height();
-					
+
 					if(settings.responsiveSlideContainer) {
-						stageHeight = ($(stageNode).height() > containerHeight) ? containerHeight : $(stageNode).height();
-					}
-					
-					$(stageNode).css({
-						height: stageHeight
-					});
-					
+                        stageHeight = ($(stageNode).height() > containerHeight) ? containerHeight : $(stageNode).height();
+                    }
+
+                    if (settings.responsiveSlideContainerHeight == false) {
+                        $(stageNode).css({
+                            height: stageHeight
+                        });
+                    }
+
 					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);
-					
+
 					if(sliderMax <= 0) {
 						
 						$(scrollerNode).css({
