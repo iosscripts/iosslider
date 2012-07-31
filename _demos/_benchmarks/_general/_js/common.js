@@ -255,8 +255,7 @@ $(document).ready(function() {
 	
 	$('.scrollbar-y-slider').iosSlider({
 		desktopClickDrag: true,
-		snapToChildren: true,
-		responsiveSlides: false
+		snapToChildren: true
 	});
 	
 });
