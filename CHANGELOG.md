@@ -1,8 +1,9 @@
 <h1>Changelog</h1>
 
-<h4>2012/07/17 - v1.0.23</h4>
+<h4>2012/07/31 - v1.0.25</h4>
 
 <ul>
+	<li>Improved jQuery support from 1.6+ to 1.4+</li>
 	<li>Added public methods: <em>lock</em>, <em>unlock</em></li>
 	<li>Added options: <em>stageCSS</em>, <em>sliderCSS</em></li>
 	<li>Added options: <em>scrollbarDrag</em>, <em>scrollbarElasticPullResistance</em></li>

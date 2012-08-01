@@ -6,8 +6,11 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.24 (07/27/2012)
- * Requires: jQuery v1.6+
+ * Version: v1.0.25 (07/31/2012)
+ * Minimum requirements: jQuery v1.4+
+ * 
+ * Advanced requirements:
+ * 1) jQuery bind() click event override on slide requires jQuery v1.6+
  *
  * Terms of use:
  *
@@ -177,7 +180,7 @@
 				xScrollDistance = maxSlideVelocity;
 			}
 			
-			if(!$(node).is($(currentEventNode))) {
+			if(!($(node)[0] === $(currentEventNode)[0])) {
 				snapDirection = snapDirection * -1;
 				xScrollDistance = xScrollDistance * -2;
 			}
@@ -1144,7 +1147,7 @@
 						
 						if($(settings.unselectableSelector).filter(e.target).length == 1) return false;
 						
-						currentEventNode = $(this).is($(scrollbarNode)) ? scrollbarNode : scrollerNode;
+						currentEventNode = ($(this)[0] === $(scrollbarNode)[0]) ? scrollbarNode : scrollerNode;
 
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
@@ -1328,8 +1331,8 @@
 						if(xScrollStarted && !preventXScroll) {
 							
 							var scrollPosition = helpers.getSliderOffset(scrollerNode, 'x');
-							var scrollbarMultiplier = $(this).is($(scrollbarBlockNode)) ? (-1 * (sliderMax) / (scrollbarStageWidth - scrollMargin - scrollbarWidth)) : 1;
-							var elasticPullResistance = $(this).is($(scrollbarBlockNode)) ? settings.scrollbarElasticPullResistance : settings.elasticPullResistance;
+							var scrollbarMultiplier = ($(this)[0] === $(scrollbarBlockNode)[0]) ? (-1 * (sliderMax) / (scrollbarStageWidth - scrollMargin - scrollbarWidth)) : 1;
+							var elasticPullResistance = ($(this)[0] === $(scrollbarBlockNode)[0])  ? settings.scrollbarElasticPullResistance : settings.elasticPullResistance;
 							
 							if(isTouch) {
 								if(currentTouches != e.touches.length) {
@@ -1456,31 +1459,35 @@
 								}
 								
 							});
+							
+							if(parseFloat($().jquery) >= 1.6) {
+							
+								$(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')').find('*').each(function() {
+													
+									var clickObject = $(this).data('events');
 
-							$(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')').find('*').each(function() {
-				
-								var clickObject = $(this).data('events');
-								
-								if(clickObject != undefined) {
-									if(clickObject.click != undefined) {
-									
-										if(clickObject.click[0].namespace != 'iosSliderEvent') {
+									if(clickObject != undefined) {
+										if(clickObject.click != undefined) {
+
+											if(clickObject.click[0].namespace != 'iosSliderEvent') {
+												
+												if(!xScrollStarted) { 
+													return false;
+												}
 											
-											if(!xScrollStarted) { 
-												return false;
+												$(this).one('click.disableClick', helpers.preventClick);
+											    var handlers = $(this).data('events').click;
+											    var handler = handlers.pop();
+											    handlers.splice(0, 0, handler);
+												
 											}
-										
-											$(this).one('click.disableClick', helpers.preventClick);
-										    var handlers = $(this).data('events').click;
-										    var handler = handlers.pop();
-										    handlers.splice(0, 0, handler);
 											
 										}
-										
 									}
-								}
-								
-							});
+									
+								});
+							
+							}
 							
 							if(!isEventCleared[sliderNumber]) {
 								
@@ -1493,7 +1500,7 @@
 								if(currentSlider == undefined) {
 									return false;
 								}
-								
+
 								helpers.slowScrollHorizontal(currentSlider, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, currentEventNode, settings);
 								
 								currentSlider = undefined;
