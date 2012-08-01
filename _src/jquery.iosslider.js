@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.25 (07/31/2012)
+ * Version: v1.0.26 (08/01/2012)
  * Minimum requirements: jQuery v1.4+
  * 
  * Advanced requirements:
@@ -287,7 +287,7 @@
 		},
 		
 		getSliderOffset: function(node, xy) {
-			
+
 			var sliderOffset = 0;
 			if(xy == 'x') {
 				xy = 4;
@@ -299,7 +299,7 @@
 			
 				var webkitTransformArray = $(node).css('-webkit-transform').split(',');
 				sliderOffset = parseInt(webkitTransformArray[xy], 10);
-				
+					
 			} else {
 			
 				sliderOffset = parseInt($(node).css('left'), 10);
@@ -315,7 +315,7 @@
 			if(isTouch && isWebkit) {
 			
 				$(node).css({
-					webkitTransform: 'translateX(' + sliderOffset + 'px)'
+					webkitTransform: 'matrix(1,0,0,1,' + sliderOffset + ',0)'
 				});
 			
 			} else {
@@ -1181,7 +1181,7 @@
 						
 							eventX = e.touches[0].pageX;
 							eventY = e.touches[0].pageY;
-							
+
 						}
 						
 						xCurrentScrollRate = new Array(0, 0);
@@ -1241,7 +1241,7 @@
 						
 						xScrollStartPosition = (helpers.getSliderOffset(this, 'x') - eventX) * -1;
 						yScrollStartPosition = (helpers.getSliderOffset(this, 'y') - eventY) * -1;
-						
+
 						xCurrentScrollRate[1] = eventX;
 						yCurrentScrollRate[1] = eventY;
 						
@@ -1332,7 +1332,7 @@
 							
 							var scrollPosition = helpers.getSliderOffset(scrollerNode, 'x');
 							var scrollbarMultiplier = ($(this)[0] === $(scrollbarBlockNode)[0]) ? (-1 * (sliderMax) / (scrollbarStageWidth - scrollMargin - scrollbarWidth)) : 1;
-							var elasticPullResistance = ($(this)[0] === $(scrollbarBlockNode)[0])  ? settings.scrollbarElasticPullResistance : settings.elasticPullResistance;
+							var elasticPullResistance = ($(this)[0] === $(scrollbarBlockNode)[0]) ? settings.scrollbarElasticPullResistance : settings.elasticPullResistance;
 							
 							if(isTouch) {
 								if(currentTouches != e.touches.length) {
@@ -1353,7 +1353,7 @@
 								edgeDegradation = (sliderMax + ((xScrollStartPosition - eventX) * -1 * scrollbarMultiplier)) * elasticPullResistance * -1 / scrollbarMultiplier;
 											
 							}
-						
+
 							helpers.setSliderOffset(scrollerNode, (xScrollStartPosition - eventX - edgeDegradation) * -1 * scrollbarMultiplier);
 
 							if(settings.scrollbar) {
@@ -1397,7 +1397,7 @@
 							}
 							
 						}
-						
+
 						newChildOffset = helpers.calcActiveOffset(settings, (xScrollStartPosition - eventX - edgeDegradation) * -1, 0, childrenOffsets, sliderMax, stageWidth, infiniteSliderOffset, undefined);
 						if((newChildOffset != activeChildOffsets[sliderNumber]) && (settings.onSlideChange != '')) {
 							activeChildOffsets[sliderNumber] = newChildOffset;
