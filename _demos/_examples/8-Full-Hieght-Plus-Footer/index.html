@@ -22,10 +22,31 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				
-				$('.iosSlider').iosSlider({
+				$('.iosSlider1').iosSlider({
 					snapToChildren: true,
-					desktopClickDrag: true,
-					infiniteSlider: true
+					desktopClickDrag: true
+				});
+				
+				$('.iosSlider2').iosSlider({
+					snapToChildren: true,
+					desktopClickDrag: true
+				});
+				
+				$('.toggle').bind('click', function() {
+
+					if($('.main').hasClass('sliderHidden')) {
+						
+						$('.main').removeClass('sliderHidden');
+					
+					} else {
+					
+						$('.main').addClass('sliderHidden');
+					
+					}
+					
+					/* call to rerender iosSlider */
+					$('.iosSlider1').iosSlider('update');
+				
 				});
 				
 			}); 
@@ -36,34 +57,60 @@
 	</head>
 	
 	<body>
-		
-		<div class = 'wrap'>
-    	
-    		<div class = 'main'>
 				
-				<div class = 'container'>
+		<div class = 'main'>
+			
+			<div class = 'slider1Container'>
+			
+				<div class = 'iosSlider1'>
+				
+					<div class = 'slider'>
 					
-					<div class = 'iosSlider'>
-					
-						<div class = 'slider'>
-						
-							<div class = 'item item1'></div>
-							<div class = 'item item2'></div>
-							<div class = 'item item3'></div>
-							<div class = 'item item4'></div>
-							<div class = 'item item5'></div>
-						
-						</div>
+						<div class = 'item item1'>slider 1</div>
+						<div class = 'item item2'></div>
+						<div class = 'item item3'></div>
+						<div class = 'item item4'></div>
+						<div class = 'item item5'></div>
+						<div class = 'item item1'></div>
+						<div class = 'item item2'></div>
+						<div class = 'item item3'></div>
+						<div class = 'item item4'></div>
+						<div class = 'item item5'></div>
 					
 					</div>
 				
 				</div>
-				
+			
 			</div>
 			
+			<div class = 'slider2Container'>
+				
+				<div class = 'iosSlider2'>
+				
+					<div class = 'slider'>
+					
+						<div class = 'item item1'>slider 2</div>
+						<div class = 'item item2'></div>
+						<div class = 'item item3'></div>
+						<div class = 'item item4'></div>
+						<div class = 'item item5'></div>
+						<div class = 'item item1'></div>
+						<div class = 'item item2'></div>
+						<div class = 'item item3'></div>
+						<div class = 'item item4'></div>
+						<div class = 'item item5'></div>
+					
+					</div>
+				
+				</div>
+			
+			</div>
+			
+			<div class = 'toggle'>show/hide toggle</div>
+		
 		</div>
 		
-		<div class = 'footer'></div>
+		<div class = 'footer'>footer</div>
 			
 	</body>
 	
