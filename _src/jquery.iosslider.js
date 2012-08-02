@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.26 (08/01/2012)
+ * Version: v1.0.27 (08/02/2012)
  * Minimum requirements: jQuery v1.4+
  * 
  * Advanced requirements:
@@ -565,6 +565,16 @@
 			
 			clearTimeout(autoSlideTimeouts[sliderNumber]);
 
+		},
+		
+		isUnselectable: function(node, settings) {
+
+			if(settings.unselectableSelector != '') {
+				if($(node).closest(settings.unselectableSelector).size() == 1) return true;
+			}
+			
+			return false;
+			
 		},
 		
 		/* timers */
@@ -1133,6 +1143,7 @@
 					var touchSelection = $(scrollerNode);
 					var touchSelectionMove = $(scrollerNode);
 					var preventDefault = null;
+					var isUnselectable = false;
 					
 					if(settings.scrollbarDrag) {
 					
@@ -1143,9 +1154,11 @@
 					
 					$(touchSelection).bind(touchStartEvent, function(e) {
 						
-						if(touchLocks[sliderNumber]) return false;
+						if(touchLocks[sliderNumber]) return true;
 						
-						if($(settings.unselectableSelector).filter(e.target).length == 1) return false;
+						isUnselectable = helpers.isUnselectable(e.target, settings);
+						
+						if(isUnselectable) return true;
 						
 						currentEventNode = ($(this)[0] === $(scrollbarNode)[0]) ? scrollbarNode : scrollerNode;
 
@@ -1251,11 +1264,11 @@
 					
 					$(touchSelectionMove).bind(touchMoveEvent, function(e) {
 						
-						if($(settings.unselectableSelector).filter(e.target).length == 1) return false;
-						
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
+						
+						if(isUnselectable) return true;
 						
 						var edgeDegradation = 0;
 
@@ -1408,9 +1421,9 @@
 					
 					$(touchSelection).bind('touchend.iosSliderEvent', function(e) {
 						
-						if($(settings.unselectableSelector).filter(e.target).length == 1) return false;
-						
 						var e = e.originalEvent;
+						
+						if(isUnselectable) return true;
 						
 						if(e.touches.length != 0) {
 							

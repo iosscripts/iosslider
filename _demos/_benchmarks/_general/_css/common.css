@@ -1185,12 +1185,18 @@ p {
 	background: #000;
 }
 
-.unselectable-slider .slider .item .unselectable {
+.unselectable-slider .slider .item div.unselectable {
 	float: left;
 	width: 300px;
 	height: 198px;
 	border: 1px dotted #ddd;
 	background: #000;
+}
+
+.unselectable-slider .slider .item div.unselectable .child {
+	margin: 20px;
+	height: 158px;
+	background: #aaa;
 }
 
 /* y-scrollbar slider */

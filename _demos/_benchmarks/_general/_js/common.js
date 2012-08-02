@@ -250,7 +250,7 @@ $(document).ready(function() {
 	$('.unselectable-slider').iosSlider({
 		desktopClickDrag: true,
 		snapToChildren: true,
-		unselectableSelector: $('.unselectable')
+		unselectableSelector: '.unselectable'
 	});
 	
 	$('.scrollbar-y-slider').iosSlider({
