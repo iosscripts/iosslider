@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.27 (08/02/2012)
+ * Version: v1.0.28 (08/06/2012)
  * Minimum requirements: jQuery v1.4+
  * 
  * Advanced requirements:
@@ -14,7 +14,7 @@
  *
  * Terms of use:
  *
- * 1) iosSlider is licensed under the Creative Commons – Attribution-NonCommercial 3.0 License.
+ * 1) iosSlider is licensed under the Creative Commons â€“ Attribution-NonCommercial 3.0 License.
  * 2) You may use iosSlider free for personal or non-profit purposes, without restriction. 
  *	  Attribution is not required but always appreciated. For commercial projects, you 
  *	  must purchase a license. You may download and play with the script before deciding to 
