@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.28 (08/06/2012)
+ * Version: v1.0.29 (08/09/2012)
  * Minimum requirements: jQuery v1.4+
  * 
  * Advanced requirements:
@@ -888,7 +888,7 @@
 						width: sliderMax + stageWidth + 'px'
 					});
 					
-					containerHeight = $(stageNode).parent().height();
+					containerHeight = $(stageNode).parent().outerHeight(true);
 					stageHeight = $(stageNode).height();
 					
 					if(settings.responsiveSlideContainer) {
