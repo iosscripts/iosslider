@@ -242,6 +242,13 @@ $(document).ready(function() {
 <td>false</td>
 <td>(boolean) Desktop click and drag fallback for the desktop slider.</td>
 </tr>
+
+<tr>
+	<td>keyboardControls</td>
+	<td>false</td>
+	<td>(boolean) Left/right keyboard arrows can be used to navigate the slider.</td>
+</tr>
+
 <tr>
 <td>responsiveSlideContainer</td>
 <td>true</td>

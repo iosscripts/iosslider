@@ -258,6 +258,12 @@ $(document).ready(function() {
 		snapToChildren: true
 	});
 	
+	$('.keyboard-control-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		keyboardControls: true
+	});
+	
 });
 
 function callbackSliderStart(args) {

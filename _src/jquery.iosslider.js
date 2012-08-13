@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.30 (08/12/2012)
+ * Version: v1.0.31 (08/12/2012)
  * Minimum requirements: jQuery v1.4+
  * 
  * Advanced requirements:
@@ -659,6 +659,7 @@
 				'scrollbarShadow': '0 0 0 #000',
 				'scrollbarElasticPullResistance': 0.9,
 				'desktopClickDrag': false,
+				'keyboardControls': false,
 				'responsiveSlideContainer': true,
 				'responsiveSlides': true,
 				'navSlideSelector': '',
@@ -1137,6 +1138,38 @@
 					
 				}
 				
+				if(settings.keyboardControls) {
+					
+					$(document).bind('keydown.iosSliderEvent', function(e) {
+						
+						if((!isIe7) && (!isIe8)) {
+							var e = e.originalEvent;
+						}
+						
+						switch(e.keyCode) {
+							
+							case 37:
+								
+								if((activeChildOffsets[sliderNumber] > 0) || settings.infiniteSlider) {
+									helpers.changeSlide(activeChildOffsets[sliderNumber] - 1, scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+								} 
+								
+							break;
+							
+							case 39:
+								
+								if((activeChildOffsets[sliderNumber] < childrenOffsets.length-1) || settings.infiniteSlider) {
+									helpers.changeSlide(activeChildOffsets[sliderNumber] + 1, scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+								}
+								
+							break;
+							
+						}
+					
+					});
+					
+				}
+					
 				if(isTouch || settings.desktopClickDrag) {
 					
 					var touchStartEvent = isTouch ? 'touchstart.iosSliderEvent' : 'mousedown.iosSliderEvent';
