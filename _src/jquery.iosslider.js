@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.29 (08/09/2012)
+ * Version: v1.0.30 (08/12/2012)
  * Minimum requirements: jQuery v1.4+
  * 
  * Advanced requirements:
@@ -1550,6 +1550,8 @@
 		    	
 	    		helpers.autoSlidePause(data.sliderNumber);
 		    	isEventCleared[data.sliderNumber] = true;
+		    	$(window).unbind('.iosSliderEvent');
+		    	$(document).unbind('.iosSliderEvent');
 		    	$(this).unbind('.iosSliderEvent');
 	    		$(this).children(':first-child').unbind('.iosSliderEvent');
 	    		$(this).children(':first-child').children().unbind('.iosSliderEvent');
