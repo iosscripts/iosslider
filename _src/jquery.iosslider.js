@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.31 (08/12/2012)
+ * Version: v1.0.32 (08/14/2012)
  * Minimum requirements: jQuery v1.4+
  * 
  * Advanced requirements:
@@ -1359,7 +1359,7 @@
 							
 						}
 						
-						if(((yScrollDistance > 3) || (yScrollDistance < -3)) && (isTouch) && (!xScrollStarted)) {
+						if(((yScrollDistance > 3) || (yScrollDistance < -3)) && ((xScrollDistance < 3) && (xScrollDistance > -3)) && (isTouch) && (!xScrollStarted)) {
 							preventXScroll = true;
 						}
 						
@@ -1442,12 +1442,12 @@
 								lastTouch = e.touches[0].pageX;
 							}
 							
-						}
-
-						newChildOffset = helpers.calcActiveOffset(settings, (xScrollStartPosition - eventX - edgeDegradation) * -1, 0, childrenOffsets, sliderMax, stageWidth, infiniteSliderOffset, undefined);
-						if((newChildOffset != activeChildOffsets[sliderNumber]) && (settings.onSlideChange != '')) {
-							activeChildOffsets[sliderNumber] = newChildOffset;
-							settings.onSlideChange(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + newChildOffset + ')'), newChildOffset%infiniteSliderOffset));	
+							newChildOffset = helpers.calcActiveOffset(settings, (xScrollStartPosition - eventX - edgeDegradation) * -1, 0, childrenOffsets, sliderMax, stageWidth, infiniteSliderOffset, undefined);
+							if((newChildOffset != activeChildOffsets[sliderNumber]) && (settings.onSlideChange != '')) {
+								activeChildOffsets[sliderNumber] = newChildOffset;
+								settings.onSlideChange(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + newChildOffset + ')'), newChildOffset%infiniteSliderOffset));	
+							}
+							
 						}
 						
 					});
@@ -1460,7 +1460,7 @@
 						
 						if(e.touches.length != 0) {
 							
-							for(var j = 0; j < sizeof(e.touches.length); j++) {
+							for(var j = 0; j < e.touches.length; j++) {
 								
 								if(e.touches[j].pageX == lastTouch) {
 									helpers.slowScrollHorizontal(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, currentEventNode, settings);
