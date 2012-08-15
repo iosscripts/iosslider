@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.32 (08/14/2012)
+ * Version: v1.0.33 (08/15/2012)
  * Minimum requirements: jQuery v1.4+
  * 
  * Advanced requirements:
@@ -726,7 +726,7 @@
 				var currentTouches = 0;
 				var scrollerNode = $(this).children(':first-child');
 				var slideNodes;
-				var numberOfSlides = $(scrollerNode).children().size();
+				var numberOfSlides = $(scrollerNode).children().not('script').size();
 				var xScrollStarted = false;
 				var lastChildOffset = 0;
 				var isMouseDown = false;
@@ -801,7 +801,7 @@
 					$(stageNode).css('width', '');
 					$(stageNode).css('height', '');
 					$(scrollerNode).css('width', '');
-					slideNodes = $(scrollerNode).children();
+					slideNodes = $(scrollerNode).children().not('script');
 					$(slideNodes).css('width', '');
 					
 					sliderMax = 0;
@@ -831,7 +831,7 @@
 					if(settings.responsiveSlides) {
 						
 						$(slideNodes).each(function(j) {
-							
+
 							var thisSlideWidth = $(this).outerWidth(true);
 
 							if(thisSlideWidth > stageWidth) {
@@ -845,6 +845,7 @@
 							}
 							
 							$(this).css({
+								'float': 'left',
 								width: thisSlideWidth
 							});
 						
@@ -852,11 +853,7 @@
 					
 					}
 	
-					$(scrollerNode).children().each(function(j) {
-						
-						$(this).css({
-							'float': 'left'
-						});
+					$(slideNodes).each(function(j) {
 						
 						childrenOffsets[j] = sliderMax * -1;
 						
