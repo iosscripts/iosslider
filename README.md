@@ -325,7 +325,7 @@ $(document).ready(function() {
 
 <h3>Advanced Settings & Options</h3>
 
-<p>Advanced callbacks allow further customization through end user created functions/hooks. For additional information regarding parameters supplied to these callbacks, see below callback list.</p>
+<p>Advanced callbacks allow further customization through end user created functions/hooks. For additional information regarding parameters supplied to these callbacks, see parameter object details directly below the following table.</p>
 
 <table class="api">
 <thead>
@@ -359,7 +359,9 @@ $(document).ready(function() {
 </tbody>
 </table>
 
-<p>Callback parameter object details.</p>
+<h3>Callback parameter object details.</h3>
+
+<p>All callback functions listed above return the same object, for our example, we will call this object 'args'.</p>
 
 <pre>
 args = {
@@ -394,8 +396,11 @@ args = {
 <p>Accessing callback parameter data following the above object structure.</p>
 
 <pre>
-/* all callback functions return the same object, in this example we call this object 'args' */
-function anyCallback(args) {
+$('.iosSlider').iosSlider({
+	onSlideChange: someCallback
+});
+
+function someCallback(args) {
 	
 	/* accessing user defined settings from initialization */
 	var autoSlideToggleSelector = args.settings.autoSlideToggleSelector;
