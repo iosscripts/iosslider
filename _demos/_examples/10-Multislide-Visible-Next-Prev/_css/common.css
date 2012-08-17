@@ -1,0 +1,52 @@
+.container {
+	/* defaults for resposive height container */
+	position: relative;
+	width: 900px;
+	height: 300px;
+	margin: 0 auto;
+	overflow: visible;
+}
+
+.iosSlider {
+	width: 100%;
+	height: 300px;
+}
+
+.iosSlider .slider {
+	width: 100%;
+	height: 100%;
+}
+
+.iosSlider .slider .item {
+	float: left;
+	width: 50%;
+}
+
+.iosSlider .slider .item img {
+	width: 100%;
+	height: auto;
+}
+
+.container .prev {
+	position: absolute;
+	top: 65px;
+	left: -60px;
+	width: 40px;
+	height: 40px;
+	background: #000;
+	z-index: 10;
+}
+
+.container .next {
+	position: absolute;
+	top: 65px;
+	right: -60px;
+	width: 40px;
+	height: 40px;
+	background: #000;
+	z-index: 10;
+}
+
+.container .unselectable {
+	opacity: 0.2;
+}

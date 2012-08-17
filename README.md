@@ -318,6 +318,61 @@ $(document).ready(function() {
 	<td>(string) A jQuery selection (ex. $('.unselectable') ), each element returned by the selector will become removed from touch/click move events.</td>
 </tr>
 
+</tbody>
+</table>
+
+<h2>Callback Options</h2>
+
+<p>All callbacks return one object. The objects contents are as follows:</p>
+
+<pre>
+args = {
+	settings: {
+		/* all settings from api */
+	},
+	data: {
+		obj,
+		settings,
+		scrollerNode,
+		numberOfSlides,
+		sliderNumber,
+		childrenOffsets,
+		sliderMax,
+		scrollbarClass,
+		scrollbarWidth, 
+		scrollbarStageWidth,
+		stageWidth, 
+		scrollMargin, 
+		scrollBorder, 
+		infiniteSliderOffset, 
+		infiniteSliderWidth
+	},
+	sliderObject,
+	sliderContainerObject,
+	currentSlideObject,
+	currentSlideNumber,
+	currentSliderOffset
+}
+
+function anyCallback(args) {
+
+	/* accessing nested data */
+	args.settings.autoSlideToggleSelector;
+	args.data.sliderMax;
+	args.currentSlideNumber;
+
+}
+</pre>
+
+<table class="api">
+<thead>
+<tr>
+<th width="25%">Key</th>
+<th width="10%">Value</th>
+<th width="55%">Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>onSliderLoaded</td>
 <td>null</td>

@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.34 (08/15/2012)
+ * Version: v1.0.35 (08/15/2012)
  * Minimum requirements: jQuery v1.4+
  * 
  * Advanced requirements:
@@ -610,11 +610,12 @@
 						
 		args: function(settings, node, activeSlideNode, newChildOffset) {
 			this.settings = settings;
+			this.data = $(node).parent().data('iosslider');
 			this.sliderObject = node;
 			this.sliderContainerObject = $(node).parent();
 			this.currentSlideObject = activeSlideNode;
 			this.currentSlideNumber = newChildOffset;
-			this.numberOfSlides = $(node).parent().data('iosslider').numberOfSlides;
+			this.currentSliderOffset = helpers.getSliderOffset(node, 'x') * -1;
 		},
 		
 		preventDrag: function(event) {
