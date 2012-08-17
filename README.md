@@ -127,6 +127,8 @@ $(document).ready(function() {
 					
 <h2>Settings & Options</h2>
 
+<h3>Basic Settings & Options</h3>
+
 <p>You can pass along any of the following key/value pairs listed below to the iosSlider() function or modify them at the bottom of the the iosSlider() JavaScript file directly.</p>
 
 <table class="api">
@@ -321,7 +323,7 @@ $(document).ready(function() {
 </tbody>
 </table>
 
-<h2>Callback Options</h2>
+<h3>Advanced Settings & Options</h3>
 
 <p>All callbacks return one object. The objects contents are as follows:</p>
 
