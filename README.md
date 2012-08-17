@@ -127,9 +127,9 @@ $(document).ready(function() {
 					
 <h2>Settings & Options</h2>
 
-<h3>Basic Settings & Options</h3>
+<p>You can pass along any of the following key/value pairs listed below to the iosSlider() function or modify them within the iosSlider JavaScript file directly.</p>
 
-<p>You can pass along any of the following key/value pairs listed below to the iosSlider() function or modify them at the bottom of the the iosSlider() JavaScript file directly.</p>
+<h3>Basic Settings & Options</h3>
 
 <table class="api">
 <thead>
@@ -327,6 +327,44 @@ $(document).ready(function() {
 
 <p>All callbacks return one object. The objects contents are as follows:</p>
 
+<table class="api">
+<thead>
+<tr>
+<th width="25%">Key</th>
+<th width="10%">Value</th>
+<th width="55%">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onSliderLoaded</td>
+<td>null</td>
+<td>(function) Executed when slider has finished loading initially.<br />
+See callback parameter object information and access below.</td>
+</tr>
+<tr>
+<td>onSlideStart</td>
+<td>null</td>
+<td>(function) Executed when the slider has begun to move.<br />
+See callback parameter object information and access below.</td>
+</tr>
+<tr>
+<td>onSlideChange</td>
+<td>null</td>
+<td>(function) Executed when the slider has entered the range of a new slide.<br />
+See callback parameter object information and access below.</td>
+</tr>
+<tr>
+<td>onSlideComplete</td>
+<td>null</td>
+<td>(function) Executed when the slider has come to a stop on a new slide.<br />
+See callback parameter object information and access below.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Callback parameter object contents:</p>
+
 <pre>
 args = {
 	settings: {
@@ -355,7 +393,11 @@ args = {
 	currentSlideNumber,
 	currentSliderOffset
 }
+</pre>
 
+<p>Accessing callback parameter data following the above object blueprint.</p>
+
+<pre>
 function anyCallback(args) {
 
 	/* accessing nested data */
@@ -365,42 +407,6 @@ function anyCallback(args) {
 
 }
 </pre>
-
-<table class="api">
-<thead>
-<tr>
-<th width="25%">Key</th>
-<th width="10%">Value</th>
-<th width="55%">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>onSliderLoaded</td>
-<td>null</td>
-<td>(function) Executed when slider has finished loading initially.<br />
-Returned parameter: 'args' (array) { settings, sliderContainerObject, sliderObject, currentSlideObject, currentSlideNumber, numberOfSlides }</td>
-</tr>
-<tr>
-<td>onSlideStart</td>
-<td>null</td>
-<td>(function) Executed when the slider has begun to move.<br />
-Returned parameter: 'args' (array) { settings, sliderContainerObject, sliderObject, currentSlideObject, currentSlideNumber, numberOfSlides }</td>
-</tr>
-<tr>
-<td>onSlideChange</td>
-<td>null</td>
-<td>(function) Executed when the slider has entered the range of a new slide.<br />
-Returned parameter: 'args' (array) { settings, sliderContainerObject, sliderObject, currentSlideObject, currentSlideNumber, numberOfSlides }</td>
-</tr>
-<tr>
-<td>onSlideComplete</td>
-<td>null</td>
-<td>(function) Executed when the slider has come to a stop on a new slide.<br />
-Returned parameter: 'args' (array) { settings, sliderContainerObject, sliderObject, currentSlideObject, currentSlideNumber, numberOfSlides }</td>
-</tr>
-</tbody>
-</table>
 					
 <h2>Public Methods</h2>
 
