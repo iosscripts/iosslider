@@ -325,7 +325,7 @@ $(document).ready(function() {
 
 <h3>Advanced Settings & Options</h3>
 
-<p>All callbacks return one object. The objects contents are as follows:</p>
+<p>Advanced callbacks allow further customization through end user created functions/hooks. For additional information regarding parameters supplied to these callbacks, see below callback list.</p>
 
 <table class="api">
 <thead>
@@ -339,36 +339,32 @@ $(document).ready(function() {
 <tr>
 <td>onSliderLoaded</td>
 <td>null</td>
-<td>(function) Executed when slider has finished loading initially.<br />
-See callback parameter object information and access below.</td>
+<td>(function) Executed when slider has finished loading initially.</td>
 </tr>
 <tr>
 <td>onSlideStart</td>
 <td>null</td>
-<td>(function) Executed when the slider has begun to move.<br />
-See callback parameter object information and access below.</td>
+<td>(function) Executed when the slider has begun to move.</td>
 </tr>
 <tr>
 <td>onSlideChange</td>
 <td>null</td>
-<td>(function) Executed when the slider has entered the range of a new slide.<br />
-See callback parameter object information and access below.</td>
+<td>(function) Executed when the slider has entered the range of a new slide.</td>
 </tr>
 <tr>
 <td>onSlideComplete</td>
 <td>null</td>
-<td>(function) Executed when the slider has come to a stop on a new slide.<br />
-See callback parameter object information and access below.</td>
+<td>(function) Executed when the slider has come to a stop on a new slide.</td>
 </tr>
 </tbody>
 </table>
 
-<p>Callback parameter object contents:</p>
+<p>Callback parameter object details.</p>
 
 <pre>
 args = {
 	settings: {
-		/* all settings from api */
+		/* all basic/advanced settings & options from above */
 	},
 	data: {
 		obj,
@@ -395,15 +391,20 @@ args = {
 }
 </pre>
 
-<p>Accessing callback parameter data following the above object blueprint.</p>
+<p>Accessing callback parameter data following the above object structure.</p>
 
 <pre>
+/* all callback functions return the same object, in this example we call this object 'args' */
 function anyCallback(args) {
-
-	/* accessing nested data */
-	args.settings.autoSlideToggleSelector;
-	args.data.sliderMax;
-	args.currentSlideNumber;
+	
+	/* accessing user defined settings from initialization */
+	var autoSlideToggleSelector = args.settings.autoSlideToggleSelector;
+	
+	/* accessing data from the slider object */
+	var sliderMax = args.data.sliderMax;
+	
+	/* additional calculated variables supplied to the 'args' object */
+	var currentSlideNumber = args.currentSlideNumber;
 
 }
 </pre>
