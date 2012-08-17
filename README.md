@@ -359,7 +359,7 @@ $(document).ready(function() {
 </tbody>
 </table>
 
-<h3>Callback parameter object details.</h3>
+<h3>Callback Parameter Object Details</h3>
 
 <p>All callback functions listed above return the same object, for our example, we will call this object 'args'.</p>
 
