@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.33 (08/15/2012)
+ * Version: v1.0.34 (08/15/2012)
  * Minimum requirements: jQuery v1.4+
  * 
  * Advanced requirements:
@@ -845,7 +845,6 @@
 							}
 							
 							$(this).css({
-								'float': 'left',
 								width: thisSlideWidth
 							});
 						
@@ -855,6 +854,10 @@
 	
 					$(slideNodes).each(function(j) {
 						
+						$(this).css({
+							'float': 'left'
+						});
+
 						childrenOffsets[j] = sliderMax * -1;
 						
 						sliderMax = sliderMax + $(this).outerWidth(true);
