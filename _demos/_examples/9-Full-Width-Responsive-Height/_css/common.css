@@ -34,3 +34,77 @@
 	width: 100%;
 	height: auto;
 }
+
+/* controls */
+.container .prevContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100px;
+	
+	padding: 0 0 19.5% 0;
+	z-index: 10;
+}
+
+.container .prevContainer .prev {
+	position: absolute;
+	bottom: -10%;
+	left: 0;
+	width: 100%;
+	height: 20%;
+	background: #aaa;
+}
+
+.container .nextContainer {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100px;
+	
+	padding: 0 0 19.5% 0;
+	z-index: 10;
+}
+
+.container .nextContainer .next {
+	position: absolute;
+	bottom: -10%;
+	left: 0;
+	width: 100%;
+	height: 20%;
+	background: #aaa;
+}
+
+.container .selectorsBlock {
+	position: absolute;
+	bottom: 10px;
+	width: 100%;
+	height: 5%;
+}
+
+.container .selectorsBlock .selectors {
+	position: relative;
+	top: 0;
+	left: 0;
+	margin: 0 auto;
+	width: 12%;
+	height: 100%;
+}
+
+.container .selectorsBlock .selectors .item {
+	position: relative;
+	top: 0;
+	left: 0;
+	float: left;
+	width: 16%;
+	height: 100%;
+	margin: 0 0 0 5%;
+	background: #aaa;
+}
+
+.container .selectorsBlock .selectors .selected {
+	background: #333;
+}
+
+.container .selectorsBlock .selectors .first {
+	margin-left: 0;
+}

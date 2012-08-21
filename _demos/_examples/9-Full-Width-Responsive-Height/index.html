@@ -24,10 +24,22 @@
 				
 				$('.iosSlider').iosSlider({
 					snapToChildren: true,
-					desktopClickDrag: true
+					desktopClickDrag: true,
+					keyboardControls: true,
+					navNextSelector: $('.next'),
+					navPrevSelector: $('.prev'),
+					navSlideSelector: $('.selectors .item'),
+					onSlideChange: slideChange
 				});
 				
 			}); 
+			
+			function slideChange(args) {
+				
+				$('.selectors .item').removeClass('selected');
+				$('.selectors .item:eq(' + args.currentSlideNumber + ')').addClass('selected');
+				
+			}
 		</script>
 		
 		<title>iosScripts/iosSlider demos - Full Width Collapse Height</title>
@@ -59,7 +71,27 @@
 					</div>
 				
 				</div>
-			
+				
+				<div class = 'prevContainer'>
+					<div class = 'prev'>Prev slide</div>
+				</div>
+				
+				<div class = 'nextContainer'>
+					<div class = 'next'>Next slide</div>
+				</div>
+				
+				<div class = 'selectorsBlock'>
+				
+					<div class = 'selectors'>
+						<div class = 'item first selected'></div>
+						<div class = 'item'></div>
+						<div class = 'item'></div>
+						<div class = 'item'></div>
+						<div class = 'item'></div>
+					</div>
+					
+				</div>
+
 			</div>
 						
 		</div>
