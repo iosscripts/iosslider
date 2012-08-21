@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.35 (08/17/2012)
+ * Version: v1.0.36 (08/21/2012)
  * Minimum requirements: jQuery v1.4+
  * 
  * Advanced requirements:
@@ -736,6 +736,7 @@
 				var infiniteSliderWidth;
 				var infiniteSliderOffset = numberOfSlides;
 				var isFirstInit = true;
+				var shortContent = false;
 				onChangeEventLastFired[sliderNumber] = -1;
 				var isAutoSlideToggleOn = false;
 				iosSliders[sliderNumber] = stageNode;
@@ -903,13 +904,14 @@
 					
 					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);
 					
-					if(sliderMax <= 0) {
+					shortContent = (sliderMax <= 0) ? true : false;
+					
+					if(shortContent) {
 						
 						$(scrollerNode).css({
 							cursor: 'default'
 						});
 						
-						return false;
 					}
 					
 					if(!isTouch && !settings.desktopClickDrag) {
@@ -920,7 +922,7 @@
 						
 					}
 					
-					if(settings.scrollbar) {
+					if(settings.scrollbar && !shortContent) {
 						
 						$('.' + scrollbarBlockClass).css({ 
 							margin: settings.scrollbarMargin,
@@ -980,7 +982,7 @@
 						
 					}
 					
-					if(settings.scrollbarDrag) {
+					if(settings.scrollbarDrag && !shortContent) {
 						$('.' + scrollbarBlockClass + ' .' + scrollbarClass).css({
 							cursor: grabOutCursor
 						});
@@ -1042,7 +1044,7 @@
 					
 					}
 					
-					if(settings.autoSlide) {
+					if(settings.autoSlide && !shortContent) {
 						
 						if(settings.autoSlideToggleSelector != '') {
 						
@@ -1073,7 +1075,7 @@
 						
 						}
 						
-						if(!isAutoSlideToggleOn) {
+						if(!isAutoSlideToggleOn && !shortContent) {
 							helpers.autoSlide(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 						}
 	
@@ -1084,7 +1086,7 @@
 							});
 							
 							$(stageNode).bind('mouseleave.iosSliderEvent', function() {
-								if(!isAutoSlideToggleOn) {
+								if(!isAutoSlideToggleOn && !shortContent) {
 									helpers.autoSlide(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 								}
 							});
@@ -1093,7 +1095,7 @@
 							
 							$(stageNode).bind('touchend.iosSliderEvent', function() {
 							
-								if(!isAutoSlideToggleOn) {
+								if(!isAutoSlideToggleOn && !shortContent) {
 									helpers.autoSlide(scrollerNode, scrollTimeouts, sliderMax, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
 								}
 							
@@ -1139,7 +1141,7 @@
 					
 				}
 				
-				if(settings.keyboardControls) {
+				if(settings.keyboardControls && !shortContent) {
 					
 					$(document).bind('keydown.iosSliderEvent', function(e) {
 						
@@ -1171,7 +1173,7 @@
 					
 				}
 					
-				if(isTouch || settings.desktopClickDrag) {
+				if(isTouch || settings.desktopClickDrag && !shortContent) {
 					
 					var touchStartEvent = isTouch ? 'touchstart.iosSliderEvent' : 'mousedown.iosSliderEvent';
 					var touchSelection = $(scrollerNode);
