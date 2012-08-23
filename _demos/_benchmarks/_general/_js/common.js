@@ -139,9 +139,41 @@ $(document).ready(function() {
 		infiniteSlider: true,
 		navSlideSelector: $('.callback-slider .paging .box'),
 		onSliderLoaded: callbackSliderLoadedChanged,
-		onSlideChange: callbackSliderLoadedChanged,
+		onSlideChange: callbackSliderChanged,
 		onSlideComplete: callbackSliderComplete,
-		onSlideStart: callbackSliderStart
+		onSlideStart: callbackSliderStart,
+		onSliderUpdate: callbackSliderUpdate
+	});
+	
+	$('.callback-slider-container .destInitBlock .dest').each(function(i) {
+	
+		$(this).bind('click', function() {
+			$('.callback-slider').iosSlider('destroy');
+		});
+	
+	});
+	
+	$('.callback-slider-container .destInitBlock .update').each(function(i) {
+	
+		$(this).bind('click', function() {
+			$('.callback-slider').iosSlider('update');
+		});
+	
+	});
+	
+	$('.callback-slider-container .destInitBlock .init').each(function(i) {
+	
+		$(this).bind('click', function() {
+			$('.callback-slider').iosSlider({
+				desktopClickDrag: true,
+				snapToChildren: true,
+				infiniteSlider: true,
+				autoSlide: true,
+				navNextSelector: $('.destroy-slider .next'),
+				navPrevSelector: $('.destroy-slider .prev')
+			});
+		});
+	
 	});
 	
 	$('.callback-slider-container .goToBlock .go').each(function(i) {
@@ -268,7 +300,29 @@ $(document).ready(function() {
 
 function callbackSliderStart(args) {
 
-	/* console.log('slide start: ' + args.currentSlideNumber); */
+	/*try {
+		console.log(args);
+	} catch(err) {}*/
+	
+}
+
+function callbackSliderUpdate(args) {
+	
+	try {
+		console.log('update:');
+		console.log(args);
+	} catch(err) {}
+	
+}
+
+function callbackSliderChanged(args) {
+	
+	try {
+		console.log(args);
+	} catch(err) {}
+	
+	$(args.sliderObject).siblings('.paging').children('.box').removeClass('selected');
+	$(args.sliderObject).siblings('.paging').children('.box:eq(' + args.currentSlideNumber + ')').addClass('selected');
 	
 }
 

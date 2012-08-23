@@ -692,6 +692,24 @@ p {
 	cursor: pointer;
 }
 
+.callback-slider-container .destInitBlock {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 36px;
+	height: 200px;
+}
+
+.callback-slider-container .destInitBlock .dest,
+.callback-slider-container .destInitBlock .init,
+.callback-slider-container .destInitBlock .update {
+	width: 36px;
+	height: 36px;
+	background: #aaa;
+	margin: 0 0 5px 0;
+	cursor: pointer;
+}
+
 /* full width */
 .full-width-slider {
 	position: relative;
