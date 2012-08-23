@@ -342,6 +342,11 @@ $(document).ready(function() {
 <td>(function) Executed when slider has finished loading initially.</td>
 </tr>
 <tr>
+<td>onSliderUpdate</td>
+<td>null</td>
+<td>(function) Executed when public method 'update' has been completed.</td>
+</tr>
+<tr>
 <td>onSlideStart</td>
 <td>null</td>
 <td>(function) Executed when the slider has begun to move.</td>
