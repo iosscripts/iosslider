@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.0.37 (08/23/2012)
+ * Version: v1.0.38 (08/23/2012)
  * Minimum requirements: jQuery v1.4+
  * 
  * Advanced requirements:
@@ -1254,8 +1254,10 @@
 								$(scrollerNode).children().each(function(i) {
 									
 									if((i%numberOfSlides == 0) && (i != activeChildOffsets[sliderNumber])) {
+										var offset = (i > activeChildOffsets[sliderNumber]) ? activeChildOffsets[sliderNumber] : (activeChildOffsets[sliderNumber] - 1);
+										
 										$(this).replaceWith(function() {
-											return $(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')').clone(true);
+											return $(scrollerNode).children(':eq(' + offset + ')').clone(true);
 										});
 									}
 									
@@ -1606,8 +1608,10 @@
 	    		}
 	    		
 	    		if(data.settings.infiniteSlider) {
+	    			var slides = $(this).children(':first-child').children(':nth-child(n+' + (data.numberOfSlides+1) + '):nth-child(-n+' + (data.numberOfSlides*2) + ')');
+	    			console.log(slides);
 	    			$(this).children(':first-child').html();
-	    			$(this).children(':first-child').html($(this).children(':first-child').children(':nth-child(-n+' + data.numberOfSlides + ')').clone(true));
+	    			$(this).children(':first-child').html($(this).children(':first-child').children(':nth-child(n+' + (data.numberOfSlides+1) + '):nth-child(-n+' + (data.numberOfSlides*2) + ')').clone(true));
 	    		}
 	    		
 	    		if(data.settings.scrollbar) {
