@@ -1543,8 +1543,6 @@
 							
 							if(!isEventCleared[sliderNumber]) {
 								
-								console.log(sliderNumber);
-								
 								$(touchSelection).css({
 									cursor: grabOutCursor
 								});
