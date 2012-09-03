@@ -141,12 +141,14 @@
 					scrollbar: true,
 					snapToChildren: true,
 					desktopClickDrag: true,
+					infiniteSlider: true, 
 					navSlideSelector: $('.iosSliderButtons .button'),
 					scrollbarHeight: '2',
 					scrollbarBorderRadius: '0',
 					scrollbarOpacity: '0.5',
 					onSlideChange: slideContentChange,
-					onSliderLoaded: slideContentChange
+					onSliderLoaded: slideContentChange,
+					startAtSlide: window.location.href.split('#')[1]
 				});
 				
 				function slideContentChange(args) {
@@ -172,28 +174,28 @@
 			
 				<div class = 'item' id = 'item1'>
 					<div class = 'caption'>
-						<span><strong>Touch Me.</strong> | Hardware accelerated using CSS3 for supported iOS, Android and WebKit</span>
+						<span><strong>1 Touch Me.</strong> | Hardware accelerated using CSS3 for supported iOS, Android and WebKit</span>
 						<div class = 'bg'></div>
 					</div>
 				</div>
 				
 				<div class = 'item' id = 'item2'>
 					<div class = 'caption'>
-						<span><strong>Responsive.</strong> | Respond to change in browser width and adjust automatically</span>
+						<span><strong>2 Responsive.</strong> | Respond to change in browser width and adjust automatically</span>
 						<div class = 'bg'></div>
 					</div>
 				</div>
 				
 				<div class = 'item' id = 'item3'>
 					<div class = 'caption'>
-						<span><strong>Flexible</strong> |Run multiple sliders on the same web page</span>
+						<span><strong>3 Flexible</strong> |Run multiple sliders on the same web page</span>
 						<div class = 'bg'></div>
 					</div>
 				</div>
 				
 				<div class = 'item' id = 'item4'>
 					<div class = 'caption'>
-						<span><strong>Customize.</strong> | Settings for momentum, elastic, scrollbars and more...</span>
+						<span><strong>4 Customize.</strong> | Settings for momentum, elastic, scrollbars and more...</span>
 						<div class = 'bg'></div>
 					</div>
 				</div>
