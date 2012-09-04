@@ -36,6 +36,7 @@
 			
 			function slideChange(args) {
 				
+				console.log(args);
 				$('.selectors .item').removeClass('selected');
 				$('.selectors .item:eq(' + args.currentSlideNumber + ')').addClass('selected');
 				
