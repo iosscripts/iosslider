@@ -382,11 +382,10 @@
 									
 								}
 								
-								nodeOffset = nodeOffset + tempChildrenOffsets[0] * -1;
+								//nodeOffset = nodeOffset + tempChildrenOffsets[0] * -1;
 								tempSliderMin = tempChildrenOffsets[0] * -1;
 								tempSliderMax = tempSliderMin + scrollerWidth - stageWidth;
-								tempInfiniteSliderOffset = 0;
-								console.log(nodeOffset);
+								//newChildOffset = (newChildOffset + numberOfSlides)%numberOfSlides;
 							
 							} else {
 								
@@ -412,12 +411,12 @@
 								tempChildrenOffsets.splice(0, 1);
 								tempChildrenOffsets.splice(tempChildrenOffsets.length, 0, tempSliderMax * -1 - $(slideNodes[lowSlideNumber]).outerWidth());
 								
-								tempInfiniteSliderOffset++;
+								newChildOffset--;
 								console.log(nodeOffset);
 							
 							}
 							
-							var newChildOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;	
+							//tempChildOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;	
 							
 						}
 						
@@ -448,7 +447,7 @@
 							
 								console.log('d');
 								
-								/*var highSlideNumber = 0;
+								var highSlideNumber = 0;
 								var highSlideOffset = tempSlideNodeOffsets[0];
 								for(var i = 0; i < tempSlideNodeOffsets.length; i++) {
 									
@@ -468,11 +467,11 @@
 								tempSliderMin = tempChildrenOffsets[0] * -1;
 								tempSliderMax = tempSliderMin + scrollerWidth - stageWidth;
 
-								tempInfiniteSliderOffset--;*/
+								newChildOffset++;
 							
 							}
 						
-							var newChildOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;	
+							//var newChildOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;	
 						
 						}
 						
