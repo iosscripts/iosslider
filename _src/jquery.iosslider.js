@@ -295,11 +295,10 @@
 			frictionCoefficient = settings.frictionCoefficient;
 			elasticFrictionCoefficient = settings.elasticFrictionCoefficient;
 			snapFrictionCoefficient = settings.snapFrictionCoefficient;
-			snapToChildren = settings.snapToChildren;
 				
-			if((xScrollDistance > 5) && snapToChildren) {
+			if((xScrollDistance > 5) && settings.snapToChildren) {
 				snapDirection = 1;
-			} else if((xScrollDistance < -5) && snapToChildren) {
+			} else if((xScrollDistance < -5) && settings.snapToChildren) {
 				snapDirection = -1;
 			}
 			
@@ -314,110 +313,104 @@
 				xScrollDistance = xScrollDistance * -2;
 			}
 			
-			var testNodeOffsets = helpers.getAnimationSteps(settings, xScrollDistance, nodeOffset, sliderNumber, childrenOffsets);
-			var newChildOffset = helpers.calcActiveOffset(settings, testNodeOffsets[testNodeOffsets.length-1], snapDirection, childrenOffsets, stageWidth, infiniteSliderOffset[sliderNumber], numberOfSlides, activeChildOffsets[sliderNumber]);
+			if(settings.infiniteSlider) {
 			
-			if((((testNodeOffsets[testNodeOffsets.length-1] < childrenOffsets[newChildOffset]) && (snapDirection < 0)) || ((testNodeOffsets[testNodeOffsets.length-1] > childrenOffsets[newChildOffset]) && (snapDirection > 0)) || !snapToChildren) && !settings.infiniteSlider) {
-				console.log(nodeOffset);
-				while((xScrollDistance > 1) || (xScrollDistance < -1)) {
-			
-					xScrollDistance = xScrollDistance * frictionCoefficient;
-					nodeOffset = nodeOffset + xScrollDistance;
-					
-					if((nodeOffset > (sliderMin[sliderNumber] * -1)) || (nodeOffset < (sliderMax[sliderNumber] * -1))) {
-						xScrollDistance = xScrollDistance * elasticFrictionCoefficient;
-						nodeOffset = nodeOffset + xScrollDistance;
-					}
-					
-					distanceOffsetArray[distanceOffsetArray.length] = nodeOffset;
-
-				}
+				var tempSliderMin = sliderMin[sliderNumber];
+				var tempSliderMax = sliderMax[sliderNumber];
+				var tempInfiniteSliderOffset = infiniteSliderOffset[sliderNumber];
+				var tempChildrenOffsets = new Array();
+				var tempSlideNodeOffsets = new Array();
 				
+				for(var i = 0; i < childrenOffsets.length; i++) {
+					
+					tempChildrenOffsets[i] = childrenOffsets[i];
+					tempSlideNodeOffsets[i] = helpers.getSliderOffset($(slideNodes[i]), 'x');
+					
+				}
+			
 			}
-
-			if(snapToChildren || (nodeOffset > (sliderMin[sliderNumber] * -1)) || (nodeOffset < (sliderMax[sliderNumber] * -1))) {
+			
+			while((xScrollDistance > 1) || (xScrollDistance < -1)) {
+		
+				xScrollDistance = xScrollDistance * frictionCoefficient;
+				nodeOffset = nodeOffset + xScrollDistance;
+				
+				if(((nodeOffset > (sliderMin[sliderNumber] * -1)) || (nodeOffset < (sliderMax[sliderNumber] * -1))) && !settings.infiniteSlider) {
+					xScrollDistance = xScrollDistance * elasticFrictionCoefficient;
+					nodeOffset = nodeOffset + xScrollDistance;
+				}
 				
 				if(settings.infiniteSlider) {
-				
-					var tempSliderMin = sliderMin[sliderNumber];
-					var tempSliderMax = sliderMax[sliderNumber];
-					var tempInfiniteSliderOffset = infiniteSliderOffset[sliderNumber];
-					var tempChildrenOffsets = new Array();
-					var tempSlideNodeOffsets = new Array();
 					
-					for(var i = 0; i < childrenOffsets.length; i++) {
+					if(nodeOffset <= (tempSliderMax * -1)) {
 						
-						tempChildrenOffsets[i] = childrenOffsets[i];
-						tempSlideNodeOffsets[i] = helpers.getSliderOffset($(slideNodes[i]), 'x');
+						var scrollerWidth = $(node).width();
+							
+						var lowSlideNumber = 0;
+						var lowSlideOffset = tempSlideNodeOffsets[0];
+						for(var i = 0; i < tempSlideNodeOffsets.length; i++) {
+							
+							if(tempSlideNodeOffsets[i] < lowSlideOffset) {
+								lowSlideOffset = tempSlideNodeOffsets[i];
+								lowSlideNumber = i;
+							}
+							
+						}
+						
+						var newOffset = tempSliderMin + scrollerWidth;
+						tempSlideNodeOffsets[lowSlideNumber] = newOffset;
+						
+						tempSliderMin = tempChildrenOffsets[1] * -1;
+						tempSliderMax = tempSliderMin + scrollerWidth - stageWidth;
+
+						tempChildrenOffsets.splice(0, 1);
+						tempChildrenOffsets.splice(tempChildrenOffsets.length, 0, tempSliderMax * -1 - $(slideNodes[lowSlideNumber]).outerWidth());
+						
+						tempInfiniteSliderOffset--;
 						
 					}
-				
+					
+					if(nodeOffset >= (tempSliderMin * -1)) {
+						
+						var scrollerWidth = $(node).width();
+						
+						var highSlideNumber = 0;
+						var highSlideOffset = tempSlideNodeOffsets[0];
+						for(var i = 0; i < tempSlideNodeOffsets.length; i++) {
+							
+							if(tempSlideNodeOffsets[i] > highSlideOffset) {
+								highSlideOffset = tempSlideNodeOffsets[i];
+								highSlideNumber = i;
+							}
+							
+						}
+
+						var newOffset = tempSliderMin - $(slideNodes[highSlideNumber]).width();
+						tempSlideNodeOffsets[highSlideNumber] = newOffset;
+						
+						tempChildrenOffsets.splice(0, 0, newOffset * -1);
+						tempChildrenOffsets.splice(tempChildrenOffsets.length-1, 1);
+
+						tempSliderMin = tempChildrenOffsets[0] * -1;
+						tempSliderMax = tempSliderMin + scrollerWidth - stageWidth;
+
+						tempInfiniteSliderOffset++;
+					
+					}
+						
 				}
 				
-				var j = 0;
+				distanceOffsetArray[distanceOffsetArray.length] = nodeOffset;
+
+			}
+			
+			var newChildOffset = helpers.calcActiveOffset(settings, nodeOffset, snapDirection, tempChildrenOffsets, stageWidth, infiniteSliderOffset[sliderNumber], numberOfSlides, activeChildOffsets[sliderNumber]);
+			
+			if(settings.snapToChildren || (nodeOffset > (sliderMin[sliderNumber] * -1)) || (nodeOffset < (sliderMax[sliderNumber] * -1))) {
+				
 				while((nodeOffset < (tempChildrenOffsets[newChildOffset] - 0.5)) || (nodeOffset > (tempChildrenOffsets[newChildOffset] + 0.5))) {
 					
 					nodeOffset = ((nodeOffset - (tempChildrenOffsets[newChildOffset])) * snapFrictionCoefficient) + (tempChildrenOffsets[newChildOffset]);
-
-					if(settings.infiniteSlider) {
-						
-						if(nodeOffset <= (tempSliderMax * -1)) {
-							
-							var scrollerWidth = $(node).width();
-								
-							var lowSlideNumber = 0;
-							var lowSlideOffset = tempSlideNodeOffsets[0];
-							for(var i = 0; i < tempSlideNodeOffsets.length; i++) {
-								
-								if(tempSlideNodeOffsets[i] < lowSlideOffset) {
-									lowSlideOffset = tempSlideNodeOffsets[i];
-									lowSlideNumber = i;
-								}
-								
-							}
-							
-							var newOffset = tempSliderMin + scrollerWidth;
-							tempSlideNodeOffsets[lowSlideNumber] = newOffset;
-							
-							tempSliderMin = tempChildrenOffsets[1] * -1;
-							tempSliderMax = tempSliderMin + scrollerWidth - stageWidth;
-
-							tempChildrenOffsets.splice(0, 1);
-							tempChildrenOffsets.splice(tempChildrenOffsets.length, 0, tempSliderMax * -1 - $(slideNodes[lowSlideNumber]).outerWidth());
-							
-							newChildOffset--;
-							
-						}
-						
-						if(nodeOffset >= (tempSliderMin * -1)) {
-							
-							var scrollerWidth = $(node).width();
-							
-							var highSlideNumber = 0;
-							var highSlideOffset = tempSlideNodeOffsets[0];
-							for(var i = 0; i < tempSlideNodeOffsets.length; i++) {
-								
-								if(tempSlideNodeOffsets[i] > highSlideOffset) {
-									highSlideOffset = tempSlideNodeOffsets[i];
-									highSlideNumber = i;
-								}
-								
-							}
-
-							var newOffset = tempSliderMin - $(slideNodes[highSlideNumber]).width();
-							tempSlideNodeOffsets[highSlideNumber] = newOffset;
-							
-							tempChildrenOffsets.splice(0, 0, newOffset * -1);
-							tempChildrenOffsets.splice(tempChildrenOffsets.length-1, 1);
-
-							tempSliderMin = tempChildrenOffsets[0] * -1;
-							tempSliderMax = tempSliderMin + scrollerWidth - stageWidth;
-
-							newChildOffset++;
-						
-						}
-							
-					}
 					
 					distanceOffsetArray[distanceOffsetArray.length] = nodeOffset;
 					
@@ -534,40 +527,6 @@
 				isIe9 = true;
 				isIe = true;
 			}
-			
-		},
-		
-		getAnimationSteps: function(settings, xScrollDistance, nodeOffset, sliderNumber, childrenOffsets) {
-			
-			var offsets = new Array();
-			
-			if((xScrollDistance <= 1) && (xScrollDistance >= 0)) {
-			
-				xScrollDistance = -2;
-			
-			} else if((xScrollDistance >= -1) && (xScrollDistance <= 0)) {
-			
-				xScrollDistance = 2;
-			
-			}
-			
-			while((xScrollDistance > 1) || (xScrollDistance < -1)) {
-				
-				xScrollDistance = xScrollDistance * settings.frictionCoefficient;
-				nodeOffset = nodeOffset + xScrollDistance;
-				
-				if((nodeOffset > sliderMin[sliderNumber]) || (nodeOffset < (sliderMax[sliderNumber] * -1))) {
-					xScrollDistance = xScrollDistance * settings.elasticFrictionCoefficient;
-					nodeOffset = nodeOffset + xScrollDistance;
-				}
-				
-				offsets[offsets.length] = nodeOffset;
-		
-			}
-			
-			
-			
-			return offsets;
 			
 		},
 		
