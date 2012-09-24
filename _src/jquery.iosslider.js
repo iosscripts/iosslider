@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1 (09/20/2012)
+ * Version: v1.1.0 (09/24/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -288,6 +288,7 @@
 		slowScrollHorizontal: function(node, slideNodes, scrollTimeouts, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, currentEventNode, snapOverride, settings) {
 			
 			var distanceOffsetArray = new Array();
+			var xScrollDistanceArray = new Array();
 			var nodeOffset = helpers.getSliderOffset(node, 'x');
 			var snapDirection = 0;
 			var maxSlideVelocity = 25 / 1024 * stageWidth;
@@ -332,10 +333,10 @@
 			}
 			
 			while((xScrollDistance > 1) || (xScrollDistance < -1)) {
-		
+				
 				xScrollDistance = xScrollDistance * frictionCoefficient;
 				nodeOffset = nodeOffset + xScrollDistance;
-				
+
 				if(((nodeOffset > (sliderMin[sliderNumber] * -1)) || (nodeOffset < (sliderMax[sliderNumber] * -1))) && !settings.infiniteSlider) {
 					xScrollDistance = xScrollDistance * elasticFrictionCoefficient;
 					nodeOffset = nodeOffset + xScrollDistance;
@@ -402,6 +403,7 @@
 				}
 				
 				distanceOffsetArray[distanceOffsetArray.length] = nodeOffset;
+				xScrollDistanceArray[xScrollDistanceArray.length] = xScrollDistance;
 
 			}
 
@@ -443,10 +445,20 @@
 
 			if(settings.snapToChildren || (nodeOffset > (sliderMin[sliderNumber] * -1)) || (nodeOffset < (sliderMax[sliderNumber] * -1))) {
 				
+				//nodeOffset = ((nodeOffset - (tempChildrenOffsets[newChildOffset])) * snapFrictionCoefficient) + (tempChildrenOffsets[newChildOffset]);
+				
+				//for(var i = 0; i < xScrollDistanceArray.length; i++) {
+				
+					//console.log(Math.abs(xScrollDistanceArray[i]) + ' - ' + Math.abs(nodeOffset - distanceOffsetArray[distanceOffsetArray.length - 1]));
+				
+				//}
+				
+				//distanceOffsetArray.splice(Math.floor(distanceOffsetArray.length/2), distanceOffsetArray.length);
+				//var distanceOffsetArray = new Array();
+				
 				while((nodeOffset < (tempChildrenOffsets[newChildOffset] - 0.5)) || (nodeOffset > (tempChildrenOffsets[newChildOffset] + 0.5))) {
 					
 					nodeOffset = ((nodeOffset - (tempChildrenOffsets[newChildOffset])) * snapFrictionCoefficient) + (tempChildrenOffsets[newChildOffset]);
-					
 					distanceOffsetArray[distanceOffsetArray.length] = nodeOffset;
 					
 				}
@@ -642,7 +654,7 @@
 			
 			if(settings.infiniteSlider) {
 				
-				slide = (slide - infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+				slide = (slide - infiniteSliderOffset[sliderNumber] + numberOfSlides * 2)%numberOfSlides;
 				endOffset = childrenOffsets[slide];
 				offsetDiff = endOffset - startOffset;
 				
@@ -700,27 +712,27 @@
 			
 			helpers.hideScrollbar(settings, scrollTimeouts, i, stepArray, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, sliderNumber);
 			
-			helpers.autoSlide(node, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderOffset[sliderNumber], infiniteSliderWidth, numberOfSlides, settings);
+			helpers.autoSlide(node, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, settings);
 			
 		},
 		
-		autoSlide: function(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings) {
+		autoSlide: function(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, settings) {
 			
 			if(!settings.autoSlide) return false;
 			
 			helpers.autoSlidePause(sliderNumber);
 
 			autoSlideTimeouts[sliderNumber] = setTimeout(function() {
-				
+
 				if(!settings.infiniteSlider && (activeChildOffsets[sliderNumber] > childrenOffsets.length-1)) {
 					activeChildOffsets[sliderNumber] = activeChildOffsets[sliderNumber] - numberOfSlides;
 				}
 				
-				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides + 1;
+				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+
+				helpers.changeSlide(nextSlide + 1, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, settings);
 				
-				helpers.changeSlide(nextSlide, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, settings);
-				
-				helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderOffset, infiniteSliderWidth, numberOfSlides, settings);
+				helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, settings);
 				
 			}, settings.autoSlideTimer + settings.autoSlideTransTimer);
 			
@@ -1278,7 +1290,7 @@
 									
 								} else {
 									
-									helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderOffset[sliderNumber], infiniteSliderWidth, numberOfSlides, settings);
+									helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, settings);
 									
 									isAutoSlideToggleOn = false;
 									
@@ -1291,7 +1303,7 @@
 						}
 						
 						if(!isAutoSlideToggleOn && !shortContent) {
-							helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderOffset[sliderNumber], infiniteSliderWidth, numberOfSlides, settings);
+							helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, settings);
 						}
 	
 						if(!isTouch) {
@@ -1302,7 +1314,7 @@
 							
 							$(stageNode).bind('mouseleave.iosSliderEvent', function() {
 								if(!isAutoSlideToggleOn && !shortContent) {
-									helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderOffset[sliderNumber], infiniteSliderWidth, numberOfSlides, settings);
+									helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, settings);
 								}
 							});
 						
@@ -1311,7 +1323,7 @@
 							$(stageNode).bind('touchend.iosSliderEvent', function() {
 							
 								if(!isAutoSlideToggleOn && !shortContent) {
-									helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderOffset[sliderNumber], infiniteSliderWidth, numberOfSlides, settings);
+									helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, settings);
 								}
 							
 							});
