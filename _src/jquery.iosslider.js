@@ -221,20 +221,20 @@
 			
 			if(settings.infiniteSlider) {
 								
-				if((tempOffset != activeChildInfOffsets[sliderNumber]) && (settings.onSlideChange != '')) {
+				if(tempOffset != activeChildInfOffsets[sliderNumber]) {
 					slideChanged = true;
 				}
 					
 			} else {
 			
-				if((newChildOffset != activeChildOffsets[sliderNumber]) && (settings.onSlideChange != '')) {
+				if(newChildOffset != activeChildOffsets[sliderNumber]) {
 					slideChanged = true;
 				}
 			
 			}
 			
-			if(slideChanged) {
-			
+			if(slideChanged && (settings.onSlideChange != '')) {
+				
 				settings.onSlideChange(new helpers.args(settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset));
 			
 			}
@@ -415,13 +415,13 @@
 			
 				if(settings.infiniteSlider) {
 				
-					if((tempOffset != activeChildInfOffsets[sliderNumber]) && (settings.onSlideChange != '')) {
+					if(tempOffset != activeChildInfOffsets[sliderNumber]) {
 						slideChanged = true;
 					}
 						
 				} else {
 				
-					if((newChildOffset != activeChildOffsets[sliderNumber]) && (settings.onSlideChange != '')) {
+					if(newChildOffset != activeChildOffsets[sliderNumber]) {
 						slideChanged = true;
 					}
 				
@@ -445,16 +445,8 @@
 
 			if(settings.snapToChildren || (nodeOffset > (sliderMin[sliderNumber] * -1)) || (nodeOffset < (sliderMax[sliderNumber] * -1))) {
 				
-				//nodeOffset = ((nodeOffset - (tempChildrenOffsets[newChildOffset])) * snapFrictionCoefficient) + (tempChildrenOffsets[newChildOffset]);
-				
-				//for(var i = 0; i < xScrollDistanceArray.length; i++) {
-				
-					//console.log(Math.abs(xScrollDistanceArray[i]) + ' - ' + Math.abs(nodeOffset - distanceOffsetArray[distanceOffsetArray.length - 1]));
-				
-				//}
-				
-				//distanceOffsetArray.splice(Math.floor(distanceOffsetArray.length/2), distanceOffsetArray.length);
-				//var distanceOffsetArray = new Array();
+				nodeOffset = helpers.getSliderOffset(node, 'x');
+				distanceOffsetArray.splice(0, distanceOffsetArray.length);
 				
 				while((nodeOffset < (tempChildrenOffsets[newChildOffset] - 0.5)) || (nodeOffset > (tempChildrenOffsets[newChildOffset] + 0.5))) {
 					
@@ -1499,9 +1491,11 @@
 							
 						} 
 						
-						xScrollStartPosition = (helpers.getSliderOffset(this, 'x') - eventX) * -1;
+						var scrollbarSubtractor = ($(this)[0] === $(scrollbarNode)[0]) ? (sliderMin[sliderNumber]) : 0;
+						
+						xScrollStartPosition = (helpers.getSliderOffset(this, 'x') - eventX - scrollbarSubtractor) * -1;
 						yScrollStartPosition = (helpers.getSliderOffset(this, 'y') - eventY) * -1;
-
+						
 						xCurrentScrollRate[1] = eventX;
 						yCurrentScrollRate[1] = eventY;
 						
@@ -1581,10 +1575,10 @@
 						if(xScrollStarted && !preventXScroll) {
 							
 							var scrollPosition = helpers.getSliderOffset(scrollerNode, 'x');
-
-							var scrollbarMultiplier = ($(this)[0] === $(scrollbarBlockNode)[0]) ? (-1 * (sliderMax[sliderNumber]) / (scrollbarStageWidth - scrollMargin - scrollbarWidth)) : 1;
+							var scrollbarSubtractor = ($(this)[0] === $(scrollbarBlockNode)[0]) ? (sliderMin[sliderNumber]) : 0;
+							var scrollbarMultiplier = ($(this)[0] === $(scrollbarBlockNode)[0]) ? ((sliderMin[sliderNumber] - sliderMax[sliderNumber]) / (scrollbarStageWidth - scrollMargin - scrollbarWidth)) : 1;
 							var elasticPullResistance = ($(this)[0] === $(scrollbarBlockNode)[0]) ? settings.scrollbarElasticPullResistance : settings.elasticPullResistance;
-							
+
 							if(isTouch) {
 								if(currentTouches != e.touches.length) {
 									xScrollStartPosition = (scrollPosition * -1) + eventX;
@@ -1699,19 +1693,20 @@
 
 								if(scrollPosition > (sliderMin[sliderNumber] * -1)) {
 									
-									edgeDegradation = (sliderMin[sliderNumber] + ((xScrollStartPosition - eventX) * -1 * scrollbarMultiplier)) * elasticPullResistance * -1 / scrollbarMultiplier;
+									edgeDegradation = (sliderMin[sliderNumber] + ((xScrollStartPosition - scrollbarSubtractor - eventX) * -1 * scrollbarMultiplier) - scrollbarSubtractor) * elasticPullResistance * -1 / scrollbarMultiplier;
+									console.log(edgeDegradation);
 									
 								}
 								
 								if(scrollPosition < (sliderMax[sliderNumber] * -1)) {
 									
-									edgeDegradation = (sliderMax[sliderNumber] + ((xScrollStartPosition - eventX) * -1 * scrollbarMultiplier)) * elasticPullResistance * -1 / scrollbarMultiplier;
+									edgeDegradation = (sliderMax[sliderNumber] + ((xScrollStartPosition - scrollbarSubtractor - eventX) * -1 * scrollbarMultiplier) - scrollbarSubtractor) * elasticPullResistance * -1 / scrollbarMultiplier;
 												
 								}
 							
 							}
 
-							helpers.setSliderOffset(scrollerNode, (xScrollStartPosition - eventX - edgeDegradation) * -1 * scrollbarMultiplier);
+							helpers.setSliderOffset(scrollerNode, ((xScrollStartPosition - scrollbarSubtractor - eventX - edgeDegradation) * -1 * scrollbarMultiplier) - scrollbarSubtractor);
 
 							if(settings.scrollbar) {
 								
@@ -1755,17 +1750,17 @@
 
 							var slideChanged = false;
 							var newChildOffset = helpers.calcActiveOffset(settings, (xScrollStartPosition - eventX - edgeDegradation) * -1, childrenOffsets, stageWidth, infiniteSliderOffset[sliderNumber], numberOfSlides, undefined, sliderNumber);
-							var tempOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;	
+							var tempOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
 
 							if(settings.infiniteSlider) {
 								
-								if((tempOffset != activeChildInfOffsets[sliderNumber]) && (settings.onSlideChange != '')) {
+								if(tempOffset != activeChildInfOffsets[sliderNumber]) {
 									slideChanged = true;
 								}
 									
 							} else {
 							
-								if((newChildOffset != activeChildOffsets[sliderNumber]) && (settings.onSlideChange != '')) {
+								if(newChildOffset != activeChildOffsets[sliderNumber]) {
 									slideChanged = true;
 								}
 							
@@ -1776,8 +1771,10 @@
 								activeChildOffsets[sliderNumber] = newChildOffset;
 								activeChildInfOffsets[sliderNumber] = tempOffset;
 								snapOverride = true;
-
-								settings.onSlideChange(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset));
+								
+								if(settings.onSlideChange != '') {
+									settings.onSlideChange(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset));
+								}
 								
 							}
 							
