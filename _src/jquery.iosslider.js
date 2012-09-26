@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.0 (09/24/2012)
+ * Version: v1.1.0 (09/26/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -443,7 +443,7 @@
 			
 			}
 
-			if(settings.snapToChildren || (nodeOffset > (sliderMin[sliderNumber] * -1)) || (nodeOffset < (sliderMax[sliderNumber] * -1))) {
+			if(settings.snapToChildren || (((nodeOffset > (sliderMin[sliderNumber] * -1)) || (nodeOffset < (sliderMax[sliderNumber] * -1))) && !settings.infiniteSlider)) {
 				
 				nodeOffset = helpers.getSliderOffset(node, 'x');
 				distanceOffsetArray.splice(0, distanceOffsetArray.length);
