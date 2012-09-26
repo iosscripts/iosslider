@@ -318,7 +318,7 @@ function callbackSliderUpdate(args) {
 function callbackSliderChanged(args) {
 	
 	try {
-		console.log(args);
+		/* console.log('changed: ' + args.currentSlideNumber); */
 	} catch(err) {}
 	
 	$(args.sliderObject).siblings('.paging').children('.box').removeClass('selected');
