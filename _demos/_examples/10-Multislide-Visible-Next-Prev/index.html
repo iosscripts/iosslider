@@ -36,7 +36,10 @@
 			});
 			
 			function sliderTest(args) {
-				console.log(args.targetSliderOffset);
+				try {
+					console.log(args);
+				} catch(err) {
+				}
 			}
 			
 			function slideComplete(args) {

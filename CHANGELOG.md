@@ -1,5 +1,13 @@
 <h1>Changelog</h1>
 
+<h4>2012/10/01 - v1.1.1</h4>
+
+<ul>
+	<li>Performance improvements</li>
+	<li>Updated infinite sliding to remove cloned slides</li>
+	<li>Added option <em>snapSlideCenter</em>: (boolean) When snapToChildren is true, this option will snap the slide to the center of the draggable area.</li>
+</ul>
+
 <h4>2012/08/23 - v1.0.38</h4>
 
 <ul>

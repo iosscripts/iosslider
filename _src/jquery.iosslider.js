@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.1 (09/27/2012)
+ * Version: v1.1.2 (10/01/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -122,7 +122,7 @@
 						var sum = originalOffsets[0] * -1;
 						$(slideNodes).each(function(i) {
 							
-							helpers.setSliderOffset($(slideNodes)[i], sum);
+							helpers.setSliderOffset($(slideNodes)[i], sum + centeredSlideOffset);
 							if(i < childrenOffsets.length) {
 								childrenOffsets[i] = sum * -1;
 							}
@@ -131,7 +131,7 @@
 						});
 						
 						newOffset = newOffset + childrenOffsets[0] * -1;
-						sliderMin[sliderNumber] = childrenOffsets[0] * -1;
+						sliderMin[sliderNumber] = childrenOffsets[0] * -1 + centeredSlideOffset;
 						sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
 						infiniteSliderOffset[sliderNumber] = 0;
 						
@@ -151,11 +151,11 @@
 						var tempOffset = sliderMin[sliderNumber] + scrollerWidth;
 						helpers.setSliderOffset($(slideNodes)[lowSlideNumber], tempOffset);
 						
-						sliderMin[sliderNumber] = childrenOffsets[1] * -1;
+						sliderMin[sliderNumber] = childrenOffsets[1] * -1 + centeredSlideOffset;
 						sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
 
 						childrenOffsets.splice(0, 1);
-						childrenOffsets.splice(childrenOffsets.length, 0, tempOffset * -1);
+						childrenOffsets.splice(childrenOffsets.length, 0, tempOffset * -1 + centeredSlideOffset);
 
 						infiniteSliderOffset[sliderNumber]++;
 						
@@ -362,11 +362,11 @@
 						var newOffset = tempSliderMin + scrollerWidth;
 						tempSlideNodeOffsets[lowSlideNumber] = newOffset;
 						
-						tempSliderMin = tempChildrenOffsets[1] * -1;
+						tempSliderMin = tempChildrenOffsets[1] * -1 + centeredSlideOffset;
 						tempSliderMax = tempSliderMin + scrollerWidth - stageWidth;
 
 						tempChildrenOffsets.splice(0, 1);
-						tempChildrenOffsets.splice(tempChildrenOffsets.length, 0, newOffset * -1);
+						tempChildrenOffsets.splice(tempChildrenOffsets.length, 0, newOffset * -1 + centeredSlideOffset);
 
 						tempInfiniteSliderOffset--;
 						
@@ -1605,7 +1605,7 @@
 										var sum = originalOffsets[0] * -1;
 										$(slideNodes).each(function(i) {
 											
-											helpers.setSliderOffset($(slideNodes)[i], sum);
+											helpers.setSliderOffset($(slideNodes)[i], sum + centeredSlideOffset);
 											if(i < childrenOffsets.length) {
 												childrenOffsets[i] = sum * -1;
 											}
@@ -1614,7 +1614,7 @@
 										});
 										
 										xScrollStartPosition = xScrollStartPosition - childrenOffsets[0] * -1;
-										sliderMin[sliderNumber] = childrenOffsets[0] * -1;
+										sliderMin[sliderNumber] = childrenOffsets[0] * -1 + centeredSlideOffset;
 										sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
 										infiniteSliderOffset[sliderNumber] = 0;
 										
@@ -1634,11 +1634,11 @@
 										var newOffset = sliderMin[sliderNumber] + scrollerWidth;
 										helpers.setSliderOffset($(slideNodes)[lowSlideNumber], newOffset);
 										
-										sliderMin[sliderNumber] = childrenOffsets[1] * -1;
+										sliderMin[sliderNumber] = childrenOffsets[1] * -1 + centeredSlideOffset;
 										sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
 
 										childrenOffsets.splice(0, 1);
-										childrenOffsets.splice(childrenOffsets.length, 0, newOffset * -1);
+										childrenOffsets.splice(childrenOffsets.length, 0, newOffset * -1 + centeredSlideOffset);
 
 										infiniteSliderOffset[sliderNumber]++;
 										

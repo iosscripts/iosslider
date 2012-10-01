@@ -166,6 +166,11 @@ $(document).ready(function() {
 <td>(boolean) Slider will slide to the closest child element on touch release.</td>
 </tr>
 <tr>
+	<td>snapSlideCenter</td>
+	<td>false</td>	
+	<td>(boolean) When snapToChildren is true, this option will snap the slide to the center of the draggable area.</td>
+</tr>
+<tr>
 <td>startAtSlide</td>
 <td>1</td>
 <td>(integer) Current slide when slider is initially loaded.</td>
