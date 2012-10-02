@@ -945,10 +945,6 @@
 				
 				if(!init()) return true;
 				
-				if(settings.infiniteSlider) {
-					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);	
-				}
-				
 				$(this).find('a').bind('mousedown', helpers.preventDrag);
 				$(this).find("[onclick]").bind('click', helpers.preventDrag).each(function() {
 					
@@ -1122,9 +1118,36 @@
 							count++;
 							
 						}
+						
+						if(activeChildOffsets[sliderNumber] == 0) {
+						
+							var highSlideNumber = 0;
+							var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
+							$(slideNodes).each(function(i) {
+								
+								if(helpers.getSliderOffset(this, 'x') > highSlideOffset) {
+									highSlideOffset = helpers.getSliderOffset(this, 'x');
+									highSlideNumber = i;
+								}
+								
+							});
+
+							var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth();
+							helpers.setSliderOffset($(slideNodes)[highSlideNumber], newOffset);
+							
+							childrenOffsets.splice(0, 0, newOffset * -1 + centeredSlideOffset);
+							childrenOffsets.splice(childrenOffsets.length-1, 1);
+
+							sliderMin[sliderNumber] = childrenOffsets[0] * -1 + centeredSlideOffset;
+							sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
+
+							infiniteSliderOffset[sliderNumber]--;
+							activeChildOffsets[sliderNumber]++;
+						
+						}
 					
 					}
-
+					
 					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);
 					
 					shortContent = (sliderMax[sliderNumber] <= 0) ? true : false;
