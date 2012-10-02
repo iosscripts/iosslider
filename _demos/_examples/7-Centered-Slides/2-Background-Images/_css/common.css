@@ -1,0 +1,71 @@
+body {
+	width: 100%;
+	overflow: hidden;
+}
+
+.containerOuter {
+	position: absolute;
+	left: 0;
+	right: 0;
+	background: #aaa;
+	height: 200px;
+	overflow: hidden;
+}
+
+.container {
+	position: relative;
+	width: 100%;
+	height: 200px;
+	margin: 0 auto;
+	overflow: visible;
+}
+
+.container .iosSliderContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 200px;
+	margin: 0 0 0 0;
+	overflow: visible;
+}
+
+.iosSlider {
+	position: relative;
+	top: 0;
+	left: 0;
+	overflow: visible;
+	width: 100%;
+	height: 200px;
+}
+
+.iosSlider .slider {
+	width: 10000px;
+	height: 100%;
+}
+
+.iosSlider .slider .item {
+	float: left;
+	width: 1000px;
+	height: 100%;
+}
+
+.iosSlider .slider .item1 {
+	background: url(../../../../_site-demo/_img/h-slider-1.jpg) no-repeat 50% 0;
+}
+
+.iosSlider .slider .item2 {
+	background: url(../../../../_site-demo/_img/h-slider-2.jpg) no-repeat 50% 0;
+}
+
+.iosSlider .slider .item3 {
+	background: url(../../../../_site-demo/_img/h-slider-3.jpg) no-repeat 50% 0;
+}
+
+.iosSlider .slider .item4 {
+	background: url(../../../../_site-demo/_img/h-slider-4.jpg) no-repeat 50% 0;
+}
+
+.iosSlider .slider .item5 {
+	background: url(../../../../_site-demo/_img/h-slider-5.jpg) no-repeat 50% 0;
+}

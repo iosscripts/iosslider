@@ -136,7 +136,7 @@ $(document).ready(function() {
 	$('.callback-slider').iosSlider({
 		desktopClickDrag: true,
 		snapToChildren: true,
-		infiniteSlider: true,
+		infiniteSlider: false,
 		navSlideSelector: $('.callback-slider .paging .box'),
 		onSliderLoaded: callbackSliderLoadedChanged,
 		onSlideChange: callbackSliderChanged,
@@ -318,7 +318,7 @@ function callbackSliderUpdate(args) {
 function callbackSliderChanged(args) {
 	
 	try {
-		/* console.log('changed: ' + args.currentSlideNumber); */
+		console.log('changed: ' + args.currentSlideNumber);
 	} catch(err) {}
 	
 	$(args.sliderObject).siblings('.paging').children('.box').removeClass('selected');

@@ -1,6 +1,6 @@
 <h1>iosSlider</h1>
 
-<p>iosSlider is a <a href="http://jquery.com" target="_blank">jQuery</a> plugin which turns any wide element into a touch enabled horizontal slider.</p>
+<p>iosSlider is a <a href="http://jquery.com" target="_blank">jQuery</a> plugin which allows you to integrate a customizable, cross-browser content slider into your web presence. Designed for use as a <strong>content slider</strong>, <strong>carousel</strong>, <strong>scrolling website banner</strong>, or <strong>image gallery</strong>.</p>
 					
 <h2>Features</h2>
 
