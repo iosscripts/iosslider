@@ -28,22 +28,12 @@
 					infiniteSlider: true,
 					snapSlideCenter: true,
 					onSlideChange: slideChange,
-					onSliderLoaded: sliderLoaded,
 					stageCSS: {
 						overflow: 'visible'
 					}
 				});
 				
-			}); 
-			
-			function sliderLoaded(args) {
-			
-				try {
-					console.log('changed: ' + args.currentSlideNumber);
-				} catch(err) {
-				}
-			
-			}
+			});
 			
 			function slideChange(args) {
 			
