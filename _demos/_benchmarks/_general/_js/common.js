@@ -136,7 +136,7 @@ $(document).ready(function() {
 	$('.callback-slider').iosSlider({
 		desktopClickDrag: true,
 		snapToChildren: true,
-		infiniteSlider: false,
+		infiniteSlider: true,
 		navSlideSelector: $('.callback-slider .paging .box'),
 		onSliderLoaded: callbackSliderLoadedChanged,
 		onSlideChange: callbackSliderChanged,

@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.2 (10/01/2012)
+ * Version: v1.1.4 (10/02/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -164,7 +164,7 @@
 				}
 				
 				if((newOffset >= (sliderMin[sliderNumber] * -1)) || (newOffset >= 0)) {
-					console.log(newOffset);
+
 					var scrollerWidth = $(node).width();
 					
 					if(newOffset >= 0) {
@@ -720,9 +720,9 @@
 					activeChildOffsets[sliderNumber] = activeChildOffsets[sliderNumber] - numberOfSlides;
 				}
 				
-				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides + 1)%numberOfSlides;
 
-				helpers.changeSlide(nextSlide + 1, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
+				helpers.changeSlide(nextSlide, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
 				
 				helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
 				
@@ -953,7 +953,12 @@
 				});
 				
 				if(settings.onSliderLoaded != '') {
-					settings.onSliderLoaded(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')'), activeChildOffsets[sliderNumber]));
+					
+					var newChildOffset = helpers.calcActiveOffset(settings, helpers.getSliderOffset($(scrollerNode), 'x'), childrenOffsets, stageWidth, infiniteSliderOffset[sliderNumber], numberOfSlides, undefined, sliderNumber);
+					var tempOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+
+					settings.onSliderLoaded(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset));
+					
 				}
 				
 				onChangeEventLastFired[sliderNumber] = activeChildOffsets[sliderNumber];
@@ -2053,23 +2058,7 @@
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 					
-				slide = (slide - 1 + infiniteSliderOffset[data.sliderNumber])%data.numberOfSlides;
-				
-				if(data.settings.infiniteSlider) {
-
-					var middle = data.numberOfSlides * 0.5;
-					var half = (middle + activeChildOffsets[data.sliderNumber]) % data.numberOfSlides;
-					var direction = (slide < half) ? 1 : -1;
-					/*slide = slide + data.infiniteSliderOffset;
-					
-					if((direction < 0) && ((activeChildOffsets[data.sliderNumber]%data.numberOfSlides) < middle)) {
-						slide = slide - data.infiniteSliderOffset;
-					}
-					
-					if((direction > 0) && ((activeChildOffsets[data.sliderNumber]%data.numberOfSlides) > middle)) {
-						slide = slide + data.infiniteSliderOffset;
-					}*/
-				}
+				slide = (slide - 1 + data.numberOfSlides)%data.numberOfSlides;
 				
 				helpers.changeSlide(slide, $(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
 				

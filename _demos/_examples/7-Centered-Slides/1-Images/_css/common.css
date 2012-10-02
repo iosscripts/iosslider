@@ -73,3 +73,25 @@ body {
 .iosSlider .slider .item img {
 	width: 100%;
 }
+
+.indicators {
+	position: relative;
+	top: 205px;
+	left: 0;
+	width: 1000px;
+	height: 10px;
+	margin: 0 auto;
+	z-index: 10;
+}
+
+.indicators .item {
+	float: left;
+	width: 8px;
+	height: 8px;
+	margin: 0 5px 0 0;
+	border: 1px solid #000;
+}
+
+.indicators .selected {
+	background: #666;
+}
