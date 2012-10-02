@@ -1626,7 +1626,10 @@
 						if(!xScrollStarted) {
 							
 							if(settings.onSlideStart != '') {
-								settings.onSlideStart(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')'), activeChildOffsets[sliderNumber]));
+							
+								var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+							
+								settings.onSlideStart(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + slide + ')'), slide));
 							}
 							
 						}

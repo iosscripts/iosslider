@@ -301,9 +301,10 @@ $(document).ready(function() {
 
 function callbackSliderStart(args) {
 
-	/*try {
+	try {
+		console.log('start:');
 		console.log(args);
-	} catch(err) {}*/
+	} catch(err) {}
 	
 }
 
