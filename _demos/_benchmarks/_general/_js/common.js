@@ -137,6 +137,7 @@ $(document).ready(function() {
 		desktopClickDrag: true,
 		snapToChildren: true,
 		infiniteSlider: true,
+		keyboardControls: true,
 		navSlideSelector: $('.callback-slider .paging .box'),
 		onSliderLoaded: callbackSliderLoadedChanged,
 		onSlideChange: callbackSliderChanged,
@@ -318,7 +319,8 @@ function callbackSliderUpdate(args) {
 function callbackSliderChanged(args) {
 	
 	try {
-		console.log('changed: ' + args.currentSlideNumber);
+		console.log('changed:');
+		console.log(args);
 	} catch(err) {}
 	
 	$(args.sliderObject).siblings('.paging').children('.box').removeClass('selected');
@@ -340,5 +342,9 @@ function callbackSliderComplete(args) {
 	
 	/* console.log(args); */
 	$(args.currentSlideObject).html('text-added');
+	try {
+		console.log('conplete:');
+		console.log(args);
+	} catch(err) {}
 	
 }
