@@ -712,7 +712,9 @@
 				}
 				
 				if((i == 0) && (settings.onSlideStart != '')) {
-					settings.onSlideStart(new helpers.args(settings, node, $(node).children(':eq(' + slide + ')'), slide));
+					var tempOffset = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;		
+				
+					settings.onSlideStart(new helpers.args(settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset));
 				}
 					
 			}
