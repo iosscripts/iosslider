@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.7 (10/03/2012)
+ * Version: v1.1.8 (10/03/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -495,7 +495,7 @@
 					
 			} else {
 			
-				if(slide != activeChildOffsets[sliderNumber]) {
+				if(newChildOffset != activeChildOffsets[sliderNumber]) {
 					slideChanged = true;
 				}
 			
@@ -2039,11 +2039,11 @@
 				if(data == undefined) return false;
 				
 				methods.destroy(false, this);
-				data.settings.startAtSlide = activeChildOffsets[data.sliderNumber] + 1;
+				data.settings.startAtSlide = (activeChildOffsets[data.sliderNumber] + 1 + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
 				methods.init(data.settings, this);
-
+				
 				if(data.settings.onSliderUpdate != '') {
-			    	data.settings.onSliderUpdate(new helpers.args(data.settings, data.scrollerNode, $(data.scrollerNode).children(':eq(' + activeChildOffsets[data.sliderNumber] + ')'), activeChildOffsets[data.sliderNumber]%data.infiniteSliderOffset));
+			    	data.settings.onSliderUpdate(new helpers.args(data.settings, data.scrollerNode, $(data.scrollerNode).children(':eq(' + (data.settings.startAtSlide - 1) + ')'), data.settings.startAtSlide - 1));
 			    }
 		    	
 			});
@@ -2113,7 +2113,6 @@
 			
 		},
 		
-		/* Locks the slider. Temporarily disabling touch events within the slider without unbinding them. */
 		lock: function() {
 			
 			return this.each(function() {
@@ -2128,7 +2127,6 @@
 			
 		},
 		
-		/* Unlocks the slider. Enables touch events previously disabled by the lock method. */
 		unlock: function() {
 		
 			return this.each(function() {
