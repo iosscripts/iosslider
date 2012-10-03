@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.5 (10/02/2012)
+ * Version: v1.1.6 (10/02/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -818,13 +818,14 @@
 		
 		},
 						
-		args: function(settings, node, activeSlideNode, newChildOffset) {
+		args: function(settings, node, activeSlideNode, newChildOffset, targetSlideOffset) {
 			this.settings = settings;
 			this.data = $(node).parent().data('iosslider');
 			this.sliderObject = node;
 			this.sliderContainerObject = $(node).parent();
 			this.currentSlideObject = activeSlideNode;
 			this.currentSlideNumber = newChildOffset;
+			this.targetSlideNumber = targetSlideOffset;
 			this.currentSliderOffset = helpers.getSliderOffset(node, 'x') * -1;
 		},
 		
