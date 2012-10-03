@@ -38,12 +38,12 @@
 			function slideChange(args) {
 			
 				try {
-					console.log('changed: ' + args.currentSlideNumber);
+					console.log('changed: ' + (args.currentSlideNumber - 1));
 				} catch(err) {
 				}
 				
 				$('.indicators .item').removeClass('selected');
-				$('.indicators .item:eq(' + args.currentSlideNumber + ')').addClass('selected');
+				$('.indicators .item:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
 			
 			}
 		</script>

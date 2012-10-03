@@ -38,7 +38,7 @@
 				
 				console.log(args);
 				$('.selectors .item').removeClass('selected');
-				$('.selectors .item:eq(' + args.currentSlideNumber + ')').addClass('selected');
+				$('.selectors .item:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
 				
 			}
 		</script>

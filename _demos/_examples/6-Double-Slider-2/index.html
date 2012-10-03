@@ -36,7 +36,7 @@
 					
 					slide_started = true;
 					
-					var current_slide = (e.currentSlideNumber+1);
+					var current_slide = (e.currentSlideNumber);
 					
 					if(type == 'thumbnail') {
 					
@@ -57,7 +57,7 @@
 					}
 		
 					$('.iosSlider2 .indicatorsBlock .indicators .item').removeClass('selected');
-					$('.iosSlider2 .indicatorsBlock .indicators .item').eq(current_slide-1).addClass('selected');
+					$('.iosSlider2 .indicatorsBlock .indicators .item').eq(current_slide).addClass('selected');
 					
 				}
 				

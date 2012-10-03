@@ -152,7 +152,7 @@ $(document).ready(function() {
 function callbackSliderLoadedChanged(args) {
 	
 	$(args.sliderObject).siblings('.paging').children('.box').removeClass('selected');
-	$(args.sliderObject).siblings('.paging').children('.box:eq(' + args.currentSlideNumber + ')').addClass('selected');
+	$(args.sliderObject).siblings('.paging').children('.box:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
 	
 }
 

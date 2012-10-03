@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.6 (10/03/2012)
+ * Version: v1.1.7 (10/03/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -824,7 +824,7 @@
 			this.sliderObject = node;
 			this.sliderContainerObject = $(node).parent();
 			this.currentSlideObject = activeSlideNode;
-			this.currentSlideNumber = newChildOffset;
+			this.currentSlideNumber = newChildOffset + 1;
 			/* this.targetSlideNumber = targetSlideOffset; */
 			this.currentSliderOffset = helpers.getSliderOffset(node, 'x') * -1;
 		},

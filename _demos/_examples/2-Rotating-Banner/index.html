@@ -131,7 +131,7 @@
 					
 					/* indicator */
 					$(args.sliderObject).parent().find('.iosSliderButtons .button').removeClass('selected');
-					$(args.sliderObject).parent().find('.iosSliderButtons .button:eq(' + args.currentSlideNumber + ')').addClass('selected');
+					$(args.sliderObject).parent().find('.iosSliderButtons .button:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
 					
 				}
 				
@@ -169,7 +169,7 @@
 					
 					/* indicator */
 					$(args.sliderObject).parent().find('.iosSliderButtons .button').removeClass('selected');
-					$(args.sliderObject).parent().find('.iosSliderButtons .button:eq(' + args.currentSlideNumber + ')').addClass('selected');
+					$(args.sliderObject).parent().find('.iosSliderButtons .button:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
 					
 				}
 				
