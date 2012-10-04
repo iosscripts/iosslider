@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.9 (10/03/2012)
+ * Version: v1.1.10 (10/03/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -135,8 +135,6 @@
 						sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
 						infiniteSliderOffset[sliderNumber] = 0;
 						
-						console.log('a');
-						
 					} else {
 
 						var lowSlideNumber = 0;
@@ -160,8 +158,6 @@
 						childrenOffsets.splice(childrenOffsets.length, 0, tempOffset * -1 + centeredSlideOffset);
 
 						infiniteSliderOffset[sliderNumber]++;
-						
-						console.log('b');
 						
 					}
 					
@@ -203,8 +199,6 @@
 							infiniteSliderOffset[sliderNumber]--;
 						
 						}
-						
-						console.log('c');
 
 					} else {
 						
@@ -217,8 +211,8 @@
 								highSlideNumber = i;
 							}
 							
-						});
-
+						});						
+					
 						var tempOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).width();
 						helpers.setSliderOffset($(slideNodes)[highSlideNumber], tempOffset);
 						
@@ -229,8 +223,6 @@
 						sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
 
 						infiniteSliderOffset[sliderNumber]--;
-						
-						console.log('d');
 						
 					}
 				
@@ -391,7 +383,7 @@
 						tempChildrenOffsets.splice(0, 1);
 						tempChildrenOffsets.splice(tempChildrenOffsets.length, 0, newOffset * -1 + centeredSlideOffset);
 
-						tempInfiniteSliderOffset--;
+						tempInfiniteSliderOffset++;
 						
 					}
 					
@@ -419,7 +411,7 @@
 						tempSliderMin = tempChildrenOffsets[0] * -1 + centeredSlideOffset;
 						tempSliderMax = tempSliderMin + scrollerWidth - stageWidth;
 
-						tempInfiniteSliderOffset++;
+						tempInfiniteSliderOffset--;
 					
 					}
 						
@@ -575,7 +567,7 @@
 		setSliderOffset: function(node, sliderOffset) {
 			
 			if(isTouch && isWebkit) {
-			
+				
 				$(node).css({
 					webkitTransform: 'matrix(1,0,0,1,' + sliderOffset + ',0)'
 				});
@@ -1089,6 +1081,7 @@
 					$(slideNodes).each(function(j) {
 						
 						$(this).css({
+							'webkitBackfaceVisibility': 'hidden',
 							position: 'absolute',
 							top: 0
 						});
@@ -1745,10 +1738,10 @@
 								if((scrollPosition >= (sliderMin[sliderNumber] * -1)) || (scrollPosition >= 0)) {
 										
 									var scrollerWidth = $(scrollerNode).width();
-
+									
 									if(scrollPosition >= 0) {
 										
-										/*var sum = originalOffsets[0] * -1;
+										var sum = originalOffsets[0] * -1;
 										$(slideNodes).each(function(i) {
 											
 											helpers.setSliderOffset($(slideNodes)[i], sum + centeredSlideOffset);
@@ -1777,7 +1770,7 @@
 					
 											infiniteSliderOffset[sliderNumber]--;
 										
-										}*/
+										}
 
 									} else {
 										
@@ -1791,9 +1784,9 @@
 											}
 											
 										});
-
+										
 										var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth();
-										helpers.setSliderOffset($(slideNodes)[highSlideNumber], newOffset);
+										helpers.setSliderOffset($(slideNodes)[highSlideNumber], newOffset);									
 										
 										childrenOffsets.splice(0, 0, newOffset * -1 + centeredSlideOffset);
 										childrenOffsets.splice(childrenOffsets.length-1, 1);
@@ -1823,6 +1816,7 @@
 							
 							}
 
+							$('.debug').html(((xScrollStartPosition - scrollbarSubtractor - eventX - edgeDegradation) * -1 * scrollbarMultiplier) - scrollbarSubtractor + '<br />' + $('.debug').html());
 							helpers.setSliderOffset(scrollerNode, ((xScrollStartPosition - scrollbarSubtractor - eventX - edgeDegradation) * -1 * scrollbarMultiplier) - scrollbarSubtractor);
 
 							if(settings.scrollbar) {
