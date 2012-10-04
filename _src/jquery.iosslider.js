@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.10 (10/03/2012)
+ * Version: v1.1.10 (10/04/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1804,7 +1804,7 @@
 
 								if(scrollPosition > (sliderMin[sliderNumber] * -1)) {
 									
-									edgeDegradation = (sliderMin[sliderNumber] + ((xScrollStartPosition - scrollbarSubtractor - eventX) * -1 * scrollbarMultiplier) - scrollbarSubtractor) * elasticPullResistance * -1 / scrollbarMultiplier;
+									edgeDegradation = (sliderMin[sliderNumber] + ((xScrollStartPosition - scrollbarSubtractor - eventX + centeredSlideOffset) * -1 * scrollbarMultiplier) - scrollbarSubtractor) * elasticPullResistance * -1 / scrollbarMultiplier;
 									
 								}
 								
@@ -1816,7 +1816,6 @@
 							
 							}
 
-							$('.debug').html(((xScrollStartPosition - scrollbarSubtractor - eventX - edgeDegradation) * -1 * scrollbarMultiplier) - scrollbarSubtractor + '<br />' + $('.debug').html());
 							helpers.setSliderOffset(scrollerNode, ((xScrollStartPosition - scrollbarSubtractor - eventX - edgeDegradation) * -1 * scrollbarMultiplier) - scrollbarSubtractor);
 
 							if(settings.scrollbar) {

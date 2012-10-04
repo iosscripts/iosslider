@@ -297,6 +297,12 @@ $(document).ready(function() {
 		keyboardControls: true
 	});
 	
+	$('.snap-center-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		snapSlideCenter: true
+	});
+	
 });
 
 function callbackSliderStart(args) {
