@@ -1,6 +1,6 @@
 <h1>Changelog</h1>
 
-<h4>2012/10/03 - v1.1.7</h4>
+<h4>2012/10/04 - v1.1.11</h4>
 
 <ul>
 	<li>args.currentSlideNumber changed from base 0 to base 1 number returned in callbacks</li>
