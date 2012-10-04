@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.10 (10/04/2012)
+ * Version: v1.1.11 (10/04/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -974,6 +974,7 @@
 				var tempInfiniteSliderOffset = 0;
 				var preventXScroll = false;
 				var snapOverride = false;
+				var clickEvent = isTouch ? 'touchstart.iosSliderEvent' : 'click.iosSliderEvent';
 				touchLocks[sliderNumber] = false;
 				slideTimeouts[sliderNumber] = new Array();
 				if(settings.scrollbarDrag) {
@@ -1106,7 +1107,7 @@
 					
 					});
 					
-					if(!settings.infiniteSlider) {
+					if(!settings.infiniteSlider && !settings.snapSlideCenter) {
 					
 						for(var i = 0; i < childrenOffsets.length; i++) {
 							
@@ -1137,7 +1138,7 @@
 						width: sliderMax[sliderNumber] + 'px'
 					});
 					
-					sliderMax[sliderNumber] = sliderMax[sliderNumber] * 2 - stageWidth;
+					sliderMax[sliderNumber] = sliderMax[sliderNumber] * 2 - stageWidth + centeredSlideOffset * 2;
 
 					containerHeight = $(stageNode).parent().outerHeight(true);
 					stageHeight = $(stageNode).height();
@@ -1311,7 +1312,7 @@
 								cursor: 'pointer'
 							});
 							
-							$(this).unbind('click.iosSliderEvent').bind('click.iosSliderEvent', function() {
+							$(this).unbind(clickEvent).bind(clickEvent, function() {
 
 								helpers.changeSlide(j, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
 								
@@ -1327,7 +1328,7 @@
 							cursor: 'pointer'
 						});
 						
-						$(settings.navPrevSelector).unbind('click.iosSliderEvent').bind('click.iosSliderEvent', function() {	
+						$(settings.navPrevSelector).unbind(clickEvent).bind(clickEvent, function() {	
 						
 							var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
 											
@@ -1344,7 +1345,7 @@
 							cursor: 'pointer'
 						});
 						
-						$(settings.navNextSelector).unbind('click.iosSliderEvent').bind('click.iosSliderEvent', function() {
+						$(settings.navNextSelector).unbind(clickEvent).bind(clickEvent, function() {
 							
 							var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
 							
@@ -1363,7 +1364,7 @@
 								cursor: 'pointer'
 							});
 							
-							$(settings.autoSlideToggleSelector).unbind('click.iosSliderEvent').bind('click.iosSliderEvent', function() {
+							$(settings.autoSlideToggleSelector).unbind(clickEvent).bind(clickEvent, function() {
 								
 								if(!isAutoSlideToggleOn) {
 								

@@ -303,6 +303,19 @@ $(document).ready(function() {
 		snapSlideCenter: true
 	});
 	
+	$('.snap-center-slider-2').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		snapSlideCenter: true,
+		infiniteSlider: true
+	});
+	
+	$('.snap-center-slider-3').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		snapSlideCenter: true
+	});
+	
 });
 
 function callbackSliderStart(args) {

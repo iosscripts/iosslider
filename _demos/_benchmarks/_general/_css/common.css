@@ -1309,38 +1309,59 @@ p {
 }
 
 /* center */
-.snap-center-slider {
+.snap-center-slider,
+.snap-center-slider-2,
+.snap-center-slider-3 {
 	position: relative;
 	overflow: hidden;
 	width: 900px;
 	height: 200px;
 }
 
-.snap-center-slider .slider {
+.snap-center-slider .slider,
+.snap-center-slider-2 .slider,
+.snap-center-slider-3 .slider {
 	height: 100%;
 }
 
-.snap-center-slider .slider .item {
+.snap-center-slider .slider .item,
+.snap-center-slider-2 .slider .item,
+.snap-center-slider-3 .slider .item {
 	width: 700px;
 	height: 100%;
 }
 
-.snap-center-slider .slider .item1 {
+.snap-center-slider .slider .item1,
+.snap-center-slider-2 .slider .item1,
+.snap-center-slider-3 .slider .item1 {
 	background: #666;
 }
 
-.snap-center-slider .slider .item2 {
+.snap-center-slider .slider .item2,
+.snap-center-slider-2 .slider .item2,
+.snap-center-slider-3 .slider .item2 {
 	background: #999;
 }
 
-.snap-center-slider .slider .item3 {
+.snap-center-slider .slider .item3,
+.snap-center-slider-2 .slider .item3,
+.snap-center-slider-3 .slider .item3 {
 	background: #aaa;
 }
 
-.snap-center-slider .slider .item4 {
+.snap-center-slider .slider .item4,
+.snap-center-slider-2 .slider .item4,
+.snap-center-slider-3 .slider .item4 {
 	background: #ddd;
 }
 
-.snap-center-slider .slider .item5 {
+.snap-center-slider .slider .item5,
+.snap-center-slider-2 .slider .item5,
+.snap-center-slider-3 .slider .item5 {
 	background: #777;
+}
+
+.snap-center-slider-3 .slider .item2,
+.snap-center-slider-3 .slider .item5 {
+	width: 500px;
 }
