@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.12 (10/04/2012)
+ * Version: v1.1.13 (10/04/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -486,7 +486,7 @@
 				clearTimeout(scrollTimeouts[j]);
 			}
 			
-			var endOffset = (newChildOffset + tempInfiniteSliderOffset + numberOfSlides)%numberOfSlides;;
+			/* var endOffset = (newChildOffset + tempInfiniteSliderOffset + numberOfSlides)%numberOfSlides; */
 			
 			var lastCheckOffset = 0;
 			for(var j = jStart; j < distanceOffsetArray.length; j = j + 2) {
@@ -842,6 +842,7 @@
 			this.sliderContainerObject = $(node).parent();
 			this.currentSlideObject = activeSlideNode;
 			this.currentSlideNumber = newChildOffset + 1;
+			this.targetSlideObject = $(node).children(':eq(' + targetSlideOffset + ')');
 			this.targetSlideNumber = targetSlideOffset + 1;
 			this.currentSliderOffset = helpers.getSliderOffset(node, 'x') * -1;
 		},
