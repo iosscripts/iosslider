@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.13 (10/04/2012)
+ * Version: v1.1.14 (10/08/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -486,8 +486,8 @@
 				clearTimeout(scrollTimeouts[j]);
 			}
 			
-			/* var endOffset = (newChildOffset + tempInfiniteSliderOffset + numberOfSlides)%numberOfSlides; */
-			
+			var endOffset = (newChildOffset + tempInfiniteSliderOffset + numberOfSlides)%numberOfSlides;
+
 			var lastCheckOffset = 0;
 			for(var j = jStart; j < distanceOffsetArray.length; j = j + 2) {
 				
@@ -2078,7 +2078,7 @@
 				methods.init(data.settings, this);
 				
 				if(data.settings.onSliderUpdate != '') {
-			    	data.settings.onSliderUpdate(new helpers.args(data.settings, data.scrollerNode, $(data.scrollerNode).children(':eq(' + (data.settings.startAtSlide - 1) + ')'), data.settings.startAtSlide - 1));
+			    	data.settings.onSliderUpdate(new helpers.args(data.settings, data.scrollerNode, $(data.scrollerNode).children(':eq(' + (data.settings.startAtSlide - 1) + ')'), data.settings.startAtSlide - 1, data.settings.startAtSlide - 1));
 			    }
 		    	
 			});
