@@ -397,6 +397,8 @@ args = {
 	},
 	sliderObject,
 	sliderContainerObject,
+	targetSlideObject,
+	targetSlideNumber,
 	currentSlideObject,
 	currentSlideNumber,
 	currentSliderOffset

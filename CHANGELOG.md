@@ -3,6 +3,7 @@
 <h4>2012/10/04 - v1.1.11</h4>
 
 <ul>
+	<li>targetSlideNumber/targetSlideObject added to callback array</li>
 	<li>args.currentSlideNumber changed from base 0 to base 1 number returned in callbacks</li>
 	<li>Performance improvements</li>
 	<li>Updated infinite sliding to remove cloned slides</li>
