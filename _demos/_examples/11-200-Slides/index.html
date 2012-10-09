@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    	
+		<!-- META -->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta name = "apple-mobile-web-app-capable" content = "yes" /> 
+		
+		<style type="text/css">
+			.iosSlider {
+				width: 900px;
+				height: 400px;
+			}
+			
+			.iosSlider .slider {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.iosSlider .slider .item {
+				position: relative;
+				top: 0;
+				left: 0;
+				
+				width: 900px;
+				height: 300px;
+				background: #fff;
+				margin: 0 0 0 0;
+			}
+			
+			.iosSlider .slider .item1 {
+				background: url(h-slider-1.jpg) no-repeat 0 0;
+			}
+			
+			.iosSlider .slider .item2 {
+				background: url(h-slider-2.jpg) no-repeat 0 0;
+			}
+			
+			.iosSlider .slider .item3 {
+				background: url(h-slider-3.jpg) no-repeat 0 0;
+			}
+			
+			.iosSlider .slider .item4 {
+				background: url(h-slider-4.jpg) no-repeat 0 0;
+			}
+			
+			.iosSlider .slider .item5 {
+				background: url(h-slider-5.jpg) no-repeat 0 0;
+			}
+		</style>
+		
+		<!-- jQuery library -->
+		<script type="text/javascript" src = "../../../_lib/jquery-1.4.min.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../../_src/jquery.iosslider.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				$('body').bind('click', function() {
+				
+					for(var i = 0; i < 250; i++) {						
+						//$('.slider').append("<div class = 'item item" + (i%5+1) + "'></div>");
+						$('.slider').append("<div class = 'item' id = 'id-" + i + "'><img src = 'h-slider-" + (i%5+1) + ".jpg' /></div>");
+					}
+					
+					$('.iosSlider').iosSlider({
+						snapToChildren: true,
+			            scrollbar: true,
+			            desktopClickDrag: true,
+			            keyboardControls: true,
+			            responsiveSlideContainer: true,
+			            responsiveSlides: true
+					});
+				
+				});
+				
+			});
+		</script>
+		
+		<title>Ex #1: Default</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'iosSlider'>
+		
+			<div class = 'slider'>
+			
+			</div>
+		
+		</div>
+	
+	</body>
+
+</html>

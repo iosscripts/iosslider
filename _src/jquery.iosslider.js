@@ -2174,7 +2174,19 @@
 			
 			});
 		
-		}
+		},
+		
+		/*autoSlide: function(boolean) {
+			
+			helpers.autoSlidePause(data.sliderNumber);
+		
+		},
+		
+		autoSlidePlay: function() {
+		
+			helpers.autoSlide($(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
+			
+		}*/
 	
 	}
 	
