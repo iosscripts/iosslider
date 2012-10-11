@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.14 (10/08/2012)
+ * Version: v1.1.15 (10/10/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -518,7 +518,7 @@
 			
 			}
 				
-			if(slideChanged && (settings.onSlideComplete != '')) {
+			if(settings.onSlideComplete != '') {
 
 				scrollTimeouts[scrollTimeouts.length] = helpers.onSlideCompleteTimer(scrollIntervalTime * (j + 1), settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, sliderNumber);
 				
@@ -2174,7 +2174,7 @@
 			
 			});
 		
-		},
+		}
 		
 		/*autoSlide: function(boolean) {
 			

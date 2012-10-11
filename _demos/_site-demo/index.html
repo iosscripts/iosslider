@@ -42,7 +42,7 @@
 			function slideChange(args) {
 			
 				$('.sliderContainer .slideSelectors .item').removeClass('selected');
-				$('.sliderContainer .slideSelectors .item:eq(' + args.currentSlideNumber + ')').addClass('selected');
+				$('.sliderContainer .slideSelectors .item:eq(' + (args.currentSlideNumber-1) + ')').addClass('selected');
 				try {
 					console.log(args);
 				} catch(err) {
