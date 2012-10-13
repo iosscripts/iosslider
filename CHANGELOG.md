@@ -1,6 +1,6 @@
 <h1>Changelog</h1>
 
-<h4>2012/10/04 - v1.1.15</h4>
+<h4>2012/13/04 - v1.1.17</h4>
 
 <ul>
 	<li>targetSlideNumber/targetSlideObject added to callback array</li>
