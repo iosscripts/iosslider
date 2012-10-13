@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.15 (10/10/2012)
+ * Version: v1.1.16 (10/13/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -168,7 +168,7 @@
 					var scrollerWidth = $(node).width();
 					
 					if(newOffset >= 0) {
-						
+
 						var sum = originalOffsets[0] * -1;
 						$(slideNodes).each(function(i) {
 							
@@ -185,19 +185,31 @@
 						sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
 						infiniteSliderOffset[sliderNumber] = numberOfSlides;
 						
-						if(settings.snapSlideCenter) {
-						
-							var tempOffset = sliderMin[sliderNumber] - $(slideNodes[numberOfSlides-1]).width();
-							helpers.setSliderOffset($(slideNodes)[numberOfSlides-1], tempOffset);
+						while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > (helpers.getSliderOffset(node, 'x') * -1)) && settings.snapSlideCenter) {
+
+							var highSlideNumber = 0;
+							var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
+							$(slideNodes).each(function(i) {
+								
+								if(helpers.getSliderOffset(this, 'x') > highSlideOffset) {
+									highSlideOffset = helpers.getSliderOffset(this, 'x');
+									highSlideNumber = i;
+								}
+								
+							});
+
+							var tempOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth();
+							helpers.setSliderOffset($(slideNodes)[highSlideNumber], tempOffset);
 							
 							childrenOffsets.splice(0, 0, tempOffset * -1 + centeredSlideOffset);
 							childrenOffsets.splice(childrenOffsets.length-1, 1);
-	
+
 							sliderMin[sliderNumber] = childrenOffsets[0] * -1 + centeredSlideOffset;
 							sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
-	
+
 							infiniteSliderOffset[sliderNumber]--;
-						
+							activeChildOffsets[sliderNumber]++;
+							
 						}
 
 					} else {
@@ -1185,9 +1197,9 @@
 							count++;
 							
 						}
-						
-						if(activeChildOffsets[sliderNumber] == 0 && settings.snapSlideCenter) {
-						
+
+						while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > (helpers.getSliderOffset(scrollerNode, 'x') * -1)) && settings.snapSlideCenter) {
+
 							var highSlideNumber = 0;
 							var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
 							$(slideNodes).each(function(i) {
@@ -1210,11 +1222,11 @@
 
 							infiniteSliderOffset[sliderNumber]--;
 							activeChildOffsets[sliderNumber]++;
-						
+							
 						}
 					
 					}
-					
+
 					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);
 					
 					shortContent = (sliderMax[sliderNumber] <= 0) ? true : false;
@@ -1740,11 +1752,11 @@
 								}
 								
 								if((scrollPosition >= (sliderMin[sliderNumber] * -1)) || (scrollPosition >= 0)) {
-										
+		
 									var scrollerWidth = $(scrollerNode).width();
 									
 									if(scrollPosition >= 0) {
-										
+									
 										var sum = originalOffsets[0] * -1;
 										$(slideNodes).each(function(i) {
 											
@@ -1761,23 +1773,35 @@
 										sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
 										infiniteSliderOffset[sliderNumber] = numberOfSlides;
 										
-										if(settings.snapSlideCenter) {
-						
-											var newOffset = sliderMin[sliderNumber] - $(slideNodes[numberOfSlides-1]).width();
-											helpers.setSliderOffset($(slideNodes)[numberOfSlides-1], newOffset);
+										while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > (helpers.getSliderOffset(scrollerNode, 'x') * -1)) && settings.snapSlideCenter) {
+				
+											var highSlideNumber = 0;
+											var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
+											$(slideNodes).each(function(i) {
+												
+												if(helpers.getSliderOffset(this, 'x') > highSlideOffset) {
+													highSlideOffset = helpers.getSliderOffset(this, 'x');
+													highSlideNumber = i;
+												}
+												
+											});
+				
+											var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth();
+											helpers.setSliderOffset($(slideNodes)[highSlideNumber], newOffset);
 											
 											childrenOffsets.splice(0, 0, newOffset * -1 + centeredSlideOffset);
 											childrenOffsets.splice(childrenOffsets.length-1, 1);
-					
+				
 											sliderMin[sliderNumber] = childrenOffsets[0] * -1 + centeredSlideOffset;
 											sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
-					
+				
 											infiniteSliderOffset[sliderNumber]--;
-										
+											activeChildOffsets[sliderNumber]++;
+											
 										}
 
 									} else {
-										
+
 										var highSlideNumber = 0;
 										var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
 										$(slideNodes).each(function(i) {
