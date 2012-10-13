@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.16 (10/13/2012)
+ * Version: v1.1.17 (10/13/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -959,7 +959,6 @@
 				var scrollMargin;
 				var scrollBorder;
 				var lastTouch;
-				activeChildOffsets[sliderNumber] = settings.startAtSlide-1;
 				activeChildInfOffsets[sliderNumber] = activeChildOffsets[sliderNumber];
 				var newChildOffset = -1;
 				var webkitTransformArray = new Array();
@@ -989,6 +988,7 @@
 				var tempInfiniteSliderOffset = 0;
 				var preventXScroll = false;
 				var snapOverride = false;
+				var scrollerWidth;
 				var clickEvent = isTouch ? 'touchstart.iosSliderEvent' : 'click.iosSliderEvent';
 				touchLocks[sliderNumber] = false;
 				slideTimeouts[sliderNumber] = new Array();
@@ -1143,6 +1143,9 @@
 						originalOffsets[i] = childrenOffsets[i];
 					}
 					
+					settings.startAtSlide = (settings.startAtSlide > childrenOffsets.length) ? childrenOffsets.length : settings.startAtSlide;
+					activeChildOffsets[sliderNumber] = settings.startAtSlide-1;
+					
 					sliderMin[sliderNumber] = sliderMax[sliderNumber] + centeredSlideOffset;
 					
 					$(scrollerNode).css({
@@ -1153,8 +1156,19 @@
 						width: sliderMax[sliderNumber] + 'px'
 					});
 					
+					scrollerWidth = sliderMax[sliderNumber];
 					sliderMax[sliderNumber] = sliderMax[sliderNumber] * 2 - stageWidth + centeredSlideOffset * 2;
+					
+					shortContent = (scrollerWidth < stageWidth) ? true : false;
 
+					if(shortContent) {
+						
+						$(scrollerNode).css({
+							cursor: 'default'
+						});
+						
+					}
+					
 					containerHeight = $(stageNode).parent().outerHeight(true);
 					stageHeight = $(stageNode).height();
 					
@@ -1166,10 +1180,9 @@
 						height: stageHeight
 					});
 					
-					if(settings.infiniteSlider) {
+					if(settings.infiniteSlider && !shortContent) {
 						
 						var currentScrollOffset = helpers.getSliderOffset($(scrollerNode), 'x');
-						var scrollerWidth = $(scrollerNode).width();
 						var count = (infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides * -1;
 
 						while(count < 0) {
@@ -1228,16 +1241,6 @@
 					}
 
 					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);
-					
-					shortContent = (sliderMax[sliderNumber] <= 0) ? true : false;
-					
-					if(shortContent) {
-						
-						$(scrollerNode).css({
-							cursor: 'default'
-						});
-						
-					}
 					
 					if(!isTouch && !settings.desktopClickDrag) {
 						
@@ -1505,7 +1508,7 @@
 					
 				}
 					
-				if(isTouch || settings.desktopClickDrag && !shortContent) {
+				if(isTouch || settings.desktopClickDrag) {
 					
 					var touchStartEvent = isTouch ? 'touchstart.iosSliderEvent' : 'mousedown.iosSliderEvent';
 					var touchSelection = $(scrollerNode);
@@ -1522,7 +1525,7 @@
 					
 					$(touchSelection).bind(touchStartEvent, function(e) {
 						
-						if(touchLocks[sliderNumber]) return true;
+						if(touchLocks[sliderNumber] || shortContent) return true;
 						
 						isUnselectable = helpers.isUnselectable(e.target, settings);
 						
@@ -2004,6 +2007,8 @@
 							}
 							
 							if(!isEventCleared[sliderNumber]) {
+							
+								if(shortContent) return true;
 								
 								$(touchSelection).css({
 									cursor: grabOutCursor
