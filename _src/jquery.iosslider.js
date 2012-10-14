@@ -959,6 +959,7 @@
 				var scrollMargin;
 				var scrollBorder;
 				var lastTouch;
+				var isFirstInit = true;
 				activeChildInfOffsets[sliderNumber] = activeChildOffsets[sliderNumber];
 				var newChildOffset = -1;
 				var webkitTransformArray = new Array();
@@ -1143,8 +1144,10 @@
 						originalOffsets[i] = childrenOffsets[i];
 					}
 					
-					settings.startAtSlide = (settings.startAtSlide > childrenOffsets.length) ? childrenOffsets.length : settings.startAtSlide;
-					activeChildOffsets[sliderNumber] = settings.startAtSlide-1;
+					if(isFirstInit) {
+						settings.startAtSlide = (settings.startAtSlide > childrenOffsets.length) ? childrenOffsets.length : settings.startAtSlide;
+						activeChildOffsets[sliderNumber] = settings.startAtSlide-1;
+					}
 					
 					sliderMin[sliderNumber] = sliderMax[sliderNumber] + centeredSlideOffset;
 					
@@ -1455,6 +1458,8 @@
 						infiniteSliderOffset: infiniteSliderOffset[sliderNumber], 
 						infiniteSliderWidth: infiniteSliderWidth
 					});
+					
+					isFirstInit = false;
 					
 					return true;
 				
