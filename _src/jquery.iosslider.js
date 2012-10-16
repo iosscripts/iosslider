@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.17 (10/13/2012)
+ * Version: v1.1.18 (10/16/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1036,9 +1036,9 @@
 				}
 				
 				onChangeEventLastFired[sliderNumber] = tempOffset;
-				
+
 				function init() {
-					
+
 					helpers.autoSlidePause(sliderNumber);
 					
 					$(stageNode).css('width', '');
@@ -1147,6 +1147,7 @@
 					if(isFirstInit) {
 						settings.startAtSlide = (settings.startAtSlide > childrenOffsets.length) ? childrenOffsets.length : settings.startAtSlide;
 						activeChildOffsets[sliderNumber] = settings.startAtSlide-1;
+						isFirstInit = false;
 					}
 					
 					sliderMin[sliderNumber] = sliderMax[sliderNumber] + centeredSlideOffset;
@@ -1242,7 +1243,7 @@
 						}
 					
 					}
-
+					
 					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);
 					
 					if(!isTouch && !settings.desktopClickDrag) {
@@ -1309,7 +1310,7 @@
 						});
 						
 						scrollbarNode = $('.' + scrollbarBlockClass + ' .' + scrollbarClass);
-						scrollbarBlockNode = $('.' + scrollbarBlockClass);
+						scrollbarBlockNode = $('.' + scrollbarBlockClass);						
 						
 					}
 					
@@ -1458,8 +1459,6 @@
 						infiniteSliderOffset: infiniteSliderOffset[sliderNumber], 
 						infiniteSliderWidth: infiniteSliderWidth
 					});
-					
-					isFirstInit = false;
 					
 					return true;
 				
@@ -2108,7 +2107,7 @@
 				if(data == undefined) return false;
 				
 				methods.destroy(false, this);
-				data.settings.startAtSlide = (activeChildOffsets[data.sliderNumber] + 1 + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
+				data.settings.startAtSlide = (data.numberOfSlides == 1) ? data.settings.startAtSlide : (activeChildOffsets[data.sliderNumber] + 1 + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
 				methods.init(data.settings, this);
 				
 				if(data.settings.onSliderUpdate != '') {
