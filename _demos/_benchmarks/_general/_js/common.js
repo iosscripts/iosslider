@@ -234,6 +234,11 @@ $(document).ready(function() {
 		scrollbarHide: false
 	});
 	
+	$('.short-content-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true
+	});
+	
 	$('.add-remove-slide-slider-container .destInitBlock .add').bind('click', function() {
 		
 		var slide = $("<div/>", {
