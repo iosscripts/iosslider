@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.18 (10/16/2012)
+ * Version: v1.1.19 (10/17/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1303,7 +1303,7 @@
 							boxShadow: settings.scrollbarShadow
 						});
 						
-						helpers.setSliderOffset($('.' + scrollbarBlockClass + ' .' + scrollbarClass), Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1 - sliderMin[sliderNumber]) / (sliderMax[sliderNumber] - sliderMin[sliderNumber]) * (scrollbarStageWidth - scrollMargin - scrollbarWidth)));
+						helpers.setSliderOffset($('.' + scrollbarBlockClass + ' .' + scrollbarClass), Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1 - sliderMin[sliderNumber] + centeredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber]) * (scrollbarStageWidth - scrollMargin - scrollbarWidth)));
 		
 						$('.' + scrollbarBlockClass).css({
 							display: 'block'
@@ -1528,7 +1528,7 @@
 					}
 					
 					$(touchSelection).bind(touchStartEvent, function(e) {
-						
+
 						if(touchLocks[sliderNumber] || shortContent) return true;
 						
 						isUnselectable = helpers.isUnselectable(e.target, settings);
@@ -1582,11 +1582,11 @@
 						}
 						
 						var scrollPosition = helpers.getSliderOffset(scrollerNode, 'x');
-						
-						if(scrollPosition > (sliderMin[sliderNumber] * -1)) {
-						
-							scrollPosition = sliderMin[sliderNumber];
+
+						if(scrollPosition > (sliderMin[sliderNumber] * -1 + centeredSlideOffset + scrollerWidth)) {
 							
+							scrollPosition = sliderMin[sliderNumber] * -1 + centeredSlideOffset + scrollerWidth;
+
 							helpers.setSliderOffset($('.' + scrollbarClass), scrollPosition);
 							
 							$('.' + scrollbarClass).css({
@@ -1596,9 +1596,7 @@
 						} else if(scrollPosition < (sliderMax[sliderNumber] * -1)) {
 						
 							scrollPosition = sliderMax[sliderNumber] * -1;
-							
-							helpers.setSliderOffset(scrollerNode, scrollPosition);
-							
+
 							helpers.setSliderOffset($('.' + scrollbarClass), (scrollbarStageWidth - scrollMargin - scrollbarWidth));
 							
 							$('.' + scrollbarClass).css({
@@ -1836,9 +1834,11 @@
 								}
 								
 							} else {
+								
+								var scrollerWidth = $(scrollerNode).width();
+								
+								if(scrollPosition > (sliderMin[sliderNumber] * -1 + centeredSlideOffset)) {
 
-								if(scrollPosition > (sliderMin[sliderNumber] * -1)) {
-									
 									edgeDegradation = (sliderMin[sliderNumber] + ((xScrollStartPosition - scrollbarSubtractor - eventX + centeredSlideOffset) * -1 * scrollbarMultiplier) - scrollbarSubtractor) * elasticPullResistance * -1 / scrollbarMultiplier;
 									
 								}
@@ -1856,13 +1856,13 @@
 							if(settings.scrollbar) {
 								
 								helpers.showScrollbar(settings, scrollbarClass);
-								
-								scrollbarDistance = Math.floor((xScrollStartPosition - eventX - edgeDegradation - sliderMin[sliderNumber]) / (sliderMax[sliderNumber] - sliderMin[sliderNumber]) * (scrollbarStageWidth - scrollMargin - scrollbarWidth) * scrollbarMultiplier);
+
+								scrollbarDistance = Math.floor((xScrollStartPosition - eventX - edgeDegradation - sliderMin[sliderNumber] + centeredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber]) * (scrollbarStageWidth - scrollMargin - scrollbarWidth) * scrollbarMultiplier);
 								
 								var width = scrollbarWidth;
 								
-								if(scrollPosition >= (sliderMin[sliderNumber] * -1)) {
-									
+								if(scrollPosition >= (sliderMin[sliderNumber] * -1 + centeredSlideOffset + scrollerWidth)) {
+
 									width = scrollbarWidth - scrollBorder - (scrollbarDistance * -1);
 									
 									helpers.setSliderOffset($('.' + scrollbarClass), 0);
@@ -1882,7 +1882,7 @@
 									});
 									
 								} else {
-									
+
 									helpers.setSliderOffset($('.' + scrollbarClass), scrollbarDistance);
 									
 								}

@@ -1061,32 +1061,46 @@ p {
 	height: 200px;
 }
 
-.drag-scrollbar-slider .slider {
-	height: 100%;
-}
-
-.drag-scrollbar-slider .slider .item {
+.drag-scrollbar-slider-2 {
+	position: relative;
+	overflow: hidden;
 	width: 100%;
+	height: 200px;
+}
+
+.drag-scrollbar-slider .slider,
+.drag-scrollbar-slider-2 .slider {
 	height: 100%;
 }
 
-.drag-scrollbar-slider .slider .item1 {
+.drag-scrollbar-slider .slider .item,
+.drag-scrollbar-slider-2 .slider .item {
+	width: 900px;
+	height: 100%;
+}
+
+.drag-scrollbar-slider .slider .item1,
+.drag-scrollbar-slider-2 .slider .item1 {
 	background: #666;
 }
 
-.drag-scrollbar-slider .slider .item2 {
+.drag-scrollbar-slider .slider .item2,
+.drag-scrollbar-slider-2 .slider .item2 {
 	background: #999;
 }
 
-.drag-scrollbar-slider .slider .item3 {
+.drag-scrollbar-slider .slider .item3,
+.drag-scrollbar-slider-2 .slider .item3 {
 	background: #aaa;
 }
 
-.drag-scrollbar-slider .slider .item4 {
+.drag-scrollbar-slider .slider .item4,
+.drag-scrollbar-slider-2 .slider .item4 {
 	background: #ddd;
 }
 
-.drag-scrollbar-slider .slider .item5 {
+.drag-scrollbar-slider .slider .item5,
+.drag-scrollbar-slider-2 .slider .item5 {
 	background: #999;
 }
 
@@ -1094,6 +1108,14 @@ p {
 	position: relative;
 	width: 900px;
 	height: 40px;
+}
+
+.drag-scrollbar-scroll-container-2 {
+	position: relative;
+	width: 900px;
+	margin: 0 auto;
+	height: 10px;
+	background: #ddd;
 }
 
 /* lock slider */

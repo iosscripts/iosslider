@@ -263,6 +263,18 @@ $(document).ready(function() {
 		scrollbarOpacity: 1
 	});
 	
+	$('.drag-scrollbar-slider-2').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		scrollbarDrag: true,
+		snapSlideCenter: true,
+		scrollbarContainer: '.drag-scrollbar-scroll-container-2',
+		scrollbarMargin: '0 15px',
+		scrollbarHeight: '10px',
+		scrollbarBorderRadius: 0,
+		scrollbarOpacity: 1
+	});
+	
 	$('.lock-slider').iosSlider({
 		desktopClickDrag: true,
 		snapToChildren: true
