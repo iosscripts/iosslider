@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.19 (10/17/2012)
+ * Version: v1.1.20 (10/18/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -991,6 +991,9 @@
 				var snapOverride = false;
 				var scrollerWidth;
 				var clickEvent = isTouch ? 'touchstart.iosSliderEvent' : 'click.iosSliderEvent';
+				var anchorEvents;
+				var onclickEvents;
+				var allScrollerNodeChildren;
 				touchLocks[sliderNumber] = false;
 				slideTimeouts[sliderNumber] = new Array();
 				if(settings.scrollbarDrag) {
@@ -1038,8 +1041,12 @@
 				onChangeEventLastFired[sliderNumber] = tempOffset;
 
 				function init() {
-
+				
 					helpers.autoSlidePause(sliderNumber);
+					
+					anchorEvents = $(scrollerNode).find('a');
+					onclickEvents = $(scrollerNode).find('[onclick]');
+					allScrollerNodeChildren = $(scrollerNode).find('*');
 					
 					$(stageNode).css('width', '');
 					$(stageNode).css('height', '');
@@ -1962,14 +1969,14 @@
 						}
 						
 						$(eventObject).bind('mouseup.iosSliderEvent' + sliderNumber, function(e) {
-
+							
 							if(xScrollStarted) {
-								$(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')').find('a').unbind('click.disableClick').bind('click.disableClick', helpers.preventClick);
+								anchorEvents.unbind('click.disableClick').bind('click.disableClick', helpers.preventClick);
 							} else {
-								$(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')').find('a').unbind('click.disableClick').bind('click.disableClick', helpers.enableClick);
+								anchorEvents.unbind('click.disableClick').bind('click.disableClick', helpers.enableClick);
 							}
 							
-							$(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')').find("[onclick]").each(function() {
+							onclickEvents.each(function() {
 								
 								this.onclick = function(event) {
 									if(xScrollStarted) { 
@@ -1983,10 +1990,10 @@
 							
 							if(parseFloat($().jquery) >= 1.6) {
 							
-								$(scrollerNode).children(':eq(' + activeChildOffsets[sliderNumber] + ')').find('*').each(function() {
-													
+								allScrollerNodeChildren.each(function() {
+										
 									var clickObject = $(this).data('events');
-
+									
 									if(clickObject != undefined) {
 										if(clickObject.click != undefined) {
 
