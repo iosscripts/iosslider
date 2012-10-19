@@ -1,8 +1,9 @@
 <h1>Changelog</h1>
 
-<h4>2012/13/04 - v1.1.17</h4>
+<h4>2012/18/04 - v1.1.20</h4>
 
 <ul>
+	<li>slideChanged added to callback array</li>
 	<li>targetSlideNumber/targetSlideObject added to callback array</li>
 	<li>args.currentSlideNumber changed from base 0 to base 1 number returned in callbacks</li>
 	<li>Performance improvements</li>

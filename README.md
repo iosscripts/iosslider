@@ -395,6 +395,7 @@ args = {
 		infiniteSliderOffset, 
 		infiniteSliderWidth
 	},
+	slideChanged,
 	sliderObject,
 	sliderContainerObject,
 	targetSlideObject,
