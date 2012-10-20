@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.21 (10/18/2012)
+ * Version: v1.1.22 (10/20/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1991,7 +1991,34 @@
 								
 							});
 							
-							if(parseFloat($().jquery) >= 1.6) {
+							if(parseFloat($().jquery) >= 1.8) {
+								
+								allScrollerNodeChildren.each(function() {
+										
+									var clickObject = $._data(this, 'events');
+									
+									if(clickObject != undefined) {
+										if(clickObject.click != undefined) {
+
+											if(clickObject.click[0].namespace != 'iosSliderEvent') {
+												
+												if(!xScrollStarted) { 
+													return false;
+												}
+											
+												$(this).one('click.disableClick', helpers.preventClick);
+											    var handlers = $._data(this, 'events').click;
+											    var handler = handlers.pop();
+											    handlers.splice(0, 0, handler);
+												
+											}
+											
+										}
+									}
+									
+								});
+							
+							} else if(parseFloat($().jquery) >= 1.6) {
 							
 								allScrollerNodeChildren.each(function() {
 										
@@ -2018,6 +2045,7 @@
 									
 								});
 							
+							} else {
 							}
 							
 							if(!isEventCleared[sliderNumber]) {
