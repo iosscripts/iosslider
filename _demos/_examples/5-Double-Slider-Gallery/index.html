@@ -108,7 +108,7 @@
 			.doubleSlider-2 {
 				float: left;
 				margin: 10px 10px 0 10px;
-				width: 840px;
+				width: 820px;
 				height: 60px;
 			}
 			
@@ -158,10 +158,6 @@
 				background: url(h-slider-4-thumb.jpg) no-repeat 0 0;
 			}
 			
-			.doubleSlider-2 .first {
-				margin-left: 0;
-			}
-			
 			.doubleSlider-2 .selected {
 				opacity: 1;
 				filter: alpha(opacity:100);
@@ -169,7 +165,8 @@
 		</style>
 		
 		<!-- jQuery library -->
-		<script type="text/javascript" src = "../../../_lib/jquery-1.4.min.js"></script>
+		<!-- <script type="text/javascript" src = "../../../_lib/jquery-1.4.min.js"></script> -->
+		<script type="text/javascript" src = "../../../_lib/jquery-1.7.min.js"></script>
 		
 		<!-- iosSlider plugin -->
 		<script src = "../../../_src/jquery.iosslider.js"></script>
@@ -181,6 +178,7 @@
 					scrollbar: true,
 					snapToChildren: true,
 					desktopClickDrag: true,
+					infiniteSlider: true,
 					navSlideSelector: $('.doubleSlider-2 .button'),
 					navPrevSelector: $('.doubleSliderPrevButton'),
 					navNextSelector: $('.doubleSliderNextButton'),
@@ -192,14 +190,20 @@
 				});
 				
 				$('.doubleSlider-2').iosSlider({
-					desktopClickDrag: true
+					desktopClickDrag: true,
+					snapToChildren: true,
+					snapSlideCenter: true,
+					infiniteSlider: true
 				});
 				
 				function doubleSlider2Load(args) {
 					
-					/* indicator */
+					//currentSlide = args.currentSlideNumber;
+					$('.doubleSlider-2').iosSlider('goToSlide', args.currentSlideNumber);
+					
+					/* update indicator */
 					$('.doubleSlider-2 .button').removeClass('selected');
-					$('.doubleSlider-2 .button:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
+					$('.doubleSlider-2 .button:eq(' + (args.currentSlideNumber-1) + ')').addClass('selected');
 					
 				}
 				

@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.22 (10/20/2012)
+ * Version: v1.1.23 (10/20/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -126,7 +126,7 @@
 							if(i < childrenOffsets.length) {
 								childrenOffsets[i] = sum * -1;
 							}
-							sum = sum + $(this).outerWidth();
+							sum = sum + $(this).outerWidth(true);
 							
 						});
 						
@@ -176,7 +176,7 @@
 							if(i < childrenOffsets.length) {
 								childrenOffsets[i] = sum * -1;
 							}
-							sum = sum + $(this).outerWidth();
+							sum = sum + $(this).outerWidth(true);
 							
 						});
 						
@@ -198,7 +198,7 @@
 								
 							});
 
-							var tempOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth();
+							var tempOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth(true);
 							helpers.setSliderOffset($(slideNodes)[highSlideNumber], tempOffset);
 							
 							childrenOffsets.splice(0, 0, tempOffset * -1 + centeredSlideOffset);
@@ -225,7 +225,7 @@
 							
 						});						
 					
-						var tempOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).width();
+						var tempOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth(true);
 						helpers.setSliderOffset($(slideNodes)[highSlideNumber], tempOffset);
 						
 						childrenOffsets.splice(0, 0, tempOffset * -1 + centeredSlideOffset);
@@ -414,7 +414,7 @@
 							
 						}
 
-						var newOffset = tempSliderMin - $(slideNodes[highSlideNumber]).outerWidth();
+						var newOffset = tempSliderMin - $(slideNodes[highSlideNumber]).outerWidth(true);
 						tempSlideNodeOffsets[highSlideNumber] = newOffset;
 						
 						tempChildrenOffsets.splice(0, 0, newOffset * -1 + centeredSlideOffset);
@@ -1091,7 +1091,7 @@
 								thisSlideWidth = stageWidth + ($(this).outerWidth(true) - $(this).width()) * -1;
 							
 							} else {
-								
+							
 								thisSlideWidth = $(this).width();
 								
 							}
@@ -1119,7 +1119,7 @@
 					});
 					
 					if(settings.snapSlideCenter) {
-						centeredSlideOffset = (stageWidth - ($(slideNodes[0]).outerWidth())) * 0.5;
+						centeredSlideOffset = (stageWidth - ($(slideNodes[0]).outerWidth(true))) * 0.5;
 					}
 					
 					sliderAbsMax[sliderNumber] = sliderMax[sliderNumber] * 2;
@@ -1238,7 +1238,7 @@
 								
 							});
 
-							var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth();
+							var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth(true);
 							helpers.setSliderOffset($(slideNodes)[highSlideNumber], newOffset);
 							
 							childrenOffsets.splice(0, 0, newOffset * -1 + centeredSlideOffset);
@@ -1729,7 +1729,7 @@
 											if(i < childrenOffsets.length) {
 												childrenOffsets[i] = sum * -1;
 											}
-											sum = sum + $(this).outerWidth();
+											sum = sum + $(this).outerWidth(true);
 											
 										});
 										
@@ -1779,7 +1779,7 @@
 											if(i < childrenOffsets.length) {
 												childrenOffsets[i] = sum * -1;
 											}
-											sum = sum + $(this).outerWidth();
+											sum = sum + $(this).outerWidth(true);
 											
 										});
 										
@@ -1801,7 +1801,7 @@
 												
 											});
 				
-											var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth();
+											var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth(true);
 											helpers.setSliderOffset($(slideNodes)[highSlideNumber], newOffset);
 											
 											childrenOffsets.splice(0, 0, newOffset * -1 + centeredSlideOffset);
@@ -1828,7 +1828,7 @@
 											
 										});
 										
-										var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth();
+										var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth(true);
 										helpers.setSliderOffset($(slideNodes)[highSlideNumber], newOffset);									
 										
 										childrenOffsets.splice(0, 0, newOffset * -1 + centeredSlideOffset);
