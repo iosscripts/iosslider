@@ -1630,7 +1630,9 @@
 					var touchMoveEvent = isTouch ? 'touchmove.iosSliderEvent' : 'mousemove.iosSliderEvent';
 					
 					$(touchSelectionMove).bind(touchMoveEvent, function(e) {
-						
+
+						if(touchLocks[sliderNumber] || shortContent) return true;
+
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
