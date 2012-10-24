@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.24 (10/23/2012)
+ * Version: v1.1.25 (10/24/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1165,7 +1165,7 @@
 					$(scrollerNode).css({
 						position: 'relative',
 						cursor: grabOutCursor,
-						'webkitPerspective': 1000,
+						'webkitPerspective': '0',
 						'webkitBackfaceVisibility': 'hidden',
 						width: sliderMax[sliderNumber] + 'px'
 					});
