@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.23 (10/20/2012)
+ * Version: v1.1.24 (10/23/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1635,6 +1635,8 @@
 							var e = e.originalEvent;
 						}
 						
+						if(touchLocks[sliderNumber] || shortContent) return true;
+						
 						if(isUnselectable) return true;
 						
 						var edgeDegradation = 0;
@@ -1940,6 +1942,8 @@
 					$(touchSelection).bind('touchend.iosSliderEvent', function(e) {
 
 						var e = e.originalEvent;
+						
+						if(touchLocks[sliderNumber] || shortContent) return true;
 						
 						if(isUnselectable) return true;
 						
