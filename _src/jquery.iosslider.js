@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.26 (10/30/2012)
+ * Version: v1.1.27 (10/31/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -164,7 +164,7 @@
 				}
 				
 				if((newOffset >= (sliderMin[sliderNumber] * -1)) || (newOffset >= 0)) {
-
+					
 					var scrollerWidth = $(node).width();
 					
 					if(newOffset >= 0) {
@@ -212,8 +212,10 @@
 							
 						}
 
-					} else {
-						
+					} 
+					
+					if(newOffset < 0) {
+					
 						var highSlideNumber = 0;
 						var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
 						$(slideNodes).each(function(i) {
@@ -268,7 +270,7 @@
 			
 			activeChildOffsets[sliderNumber] = newChildOffset;
 			activeChildInfOffsets[sliderNumber] = tempOffset;
-
+			
 			newOffset = Math.floor(newOffset);
 			
 			helpers.setSliderOffset(node, newOffset);
