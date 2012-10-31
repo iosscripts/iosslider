@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.25 (10/24/2012)
+ * Version: v1.1.26 (10/30/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -116,7 +116,7 @@
 				if(newOffset <= (sliderMax[sliderNumber] * -1)) {
 
 					var scrollerWidth = $(node).width();
-					
+
 					if(newOffset <= (sliderAbsMax[sliderNumber] * -1)) {
 						
 						var sum = originalOffsets[0] * -1;
@@ -136,7 +136,7 @@
 						infiniteSliderOffset[sliderNumber] = 0;
 						
 					} else {
-
+						
 						var lowSlideNumber = 0;
 						var lowSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
 						$(slideNodes).each(function(i) {
@@ -699,10 +699,24 @@
 			if(settings.infiniteSlider) {
 				
 				slide = (slide - infiniteSliderOffset[sliderNumber] + numberOfSlides * 2)%numberOfSlides;
+				
+				var appendArray = false;
+				if((slide == 0) && (numberOfSlides == 2)) {
+					
+					slide = numberOfSlides;
+					childrenOffsets[slide] = childrenOffsets[slide-1] - $(slideNodes).eq(0).outerWidth(true);
+					appendArray = true;
+					
+				}
+				
 				endOffset = childrenOffsets[slide];
 				offsetDiff = endOffset - startOffset;
 				
 				var offsets = new Array(childrenOffsets[slide] - $(node).width(), childrenOffsets[slide] + $(node).width());
+				
+				if(appendArray) {
+					childrenOffsets.splice(childrenOffsets.length-1, 1);
+				}
 				
 				for(var i = 0; i < offsets.length; i++) {
 					
