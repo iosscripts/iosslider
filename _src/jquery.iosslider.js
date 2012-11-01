@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.27 (10/31/2012)
+ * Version: v1.1.28 (10/31/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1280,7 +1280,7 @@
 						
 					}
 					
-					if(settings.scrollbar && !shortContent) {
+					if(settings.scrollbar) {
 						
 						$('.' + scrollbarBlockClass).css({ 
 							margin: settings.scrollbarMargin,
