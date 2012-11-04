@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.28 (10/31/2012)
+ * Version: v1.1.29 (11/04/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -353,11 +353,14 @@
 			
 			var tempChildrenOffsets = new Array();
 			var tempSlideNodeOffsets = new Array();
-			
+
 			for(var i = 0; i < childrenOffsets.length; i++) {
 				
 				tempChildrenOffsets[i] = childrenOffsets[i];
-				tempSlideNodeOffsets[i] = helpers.getSliderOffset($(slideNodes[i]), 'x');
+				
+				if(i < slideNodes.length) {
+					tempSlideNodeOffsets[i] = helpers.getSliderOffset($(slideNodes[i]), 'x');
+				}
 				
 			}
 			
@@ -1554,7 +1557,7 @@
 					}
 					
 					$(touchSelection).bind(touchStartEvent, function(e) {
-
+						
 						if(touchLocks[sliderNumber] || shortContent) return true;
 						
 						isUnselectable = helpers.isUnselectable(e.target, settings);
@@ -1956,7 +1959,7 @@
 					});
 					
 					$(touchSelection).bind('touchend.iosSliderEvent', function(e) {
-
+						
 						var e = e.originalEvent;
 						
 						if(touchLocks[sliderNumber] || shortContent) return true;
