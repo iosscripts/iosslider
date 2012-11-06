@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.29 (11/04/2012)
+ * Version: v1.1.30 (11/05/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -47,6 +47,7 @@
 	var isTouch = 'ontouchstart' in window;
 	var supportsOrientationChange = 'onorientationchange' in window;
 	var isWebkit = false;
+	var has3DTransform = false;
 	var isIe7 = false;
 	var isIe8 = false;
 	var isIe9 = false;
@@ -562,7 +563,7 @@
 		},
 		
 		getSliderOffset: function(node, xy) {
-
+			
 			var sliderOffset = 0;
 			if(xy == 'x') {
 				xy = 4;
@@ -570,10 +571,27 @@
 				xy = 5;
 			}
 			
-			if(isTouch && isWebkit) {
-			
-				var webkitTransformArray = $(node).css('-webkit-transform').split(',');
-				sliderOffset = parseInt(webkitTransformArray[xy], 10);
+			if(has3DTransform && !isIe7 && !isIe8) {
+				
+				var transforms = new Array('-webkit-transform', '-moz-transform', 'transform');
+				
+				for(var i = 0; i < transforms.length; i++) {
+					
+					if($(node).css(transforms[i]) != undefined) {
+						
+						if($(node).css(transforms[i]).length > 0) {
+						
+							var transformArray = $(node).css(transforms[i]).split(',');		
+							
+							break;
+							
+						}
+					
+					}
+				
+				}
+				
+				sliderOffset = parseInt(transformArray[xy], 10);
 					
 			} else {
 			
@@ -587,10 +605,12 @@
 		
 		setSliderOffset: function(node, sliderOffset) {
 			
-			if(isTouch && isWebkit) {
+			if(has3DTransform && !isIe7 && !isIe8) {
 				
 				$(node).css({
-					webkitTransform: 'matrix(1,0,0,1,' + sliderOffset + ',0)'
+					'webkitTransform': 'matrix(1,0,0,1,' + sliderOffset + ',0)',
+					'MozTransform': 'matrix(1,0,0,1,' + sliderOffset + ',0)',
+					'transform': 'matrix(1,0,0,1,' + sliderOffset + ',0)'
 				});
 			
 			} else {
@@ -604,7 +624,7 @@
 		},
 		
 		setBrowserInfo: function() {
-
+			
 			if(navigator.userAgent.match('WebKit') != null) {
 				isWebkit = true;
 				grabOutCursor = '-webkit-grab';
@@ -623,6 +643,26 @@
 				isIe9 = true;
 				isIe = true;
 			}
+			
+		},
+		
+		has3DTransform: function() {
+			
+			var has3D = false;
+			
+			var testElement = $('<div />').css({
+				'webkitTransform': 'matrix(1,1,1,1,1,1)',
+				'MozTransform': 'matrix(1,1,1,1,1,1)',
+				'transform': 'matrix(1,1,1,1,1,1)'
+			});
+			
+			$('body').append(testElement);
+			
+			if(testElement.attr('style') != undefined) {
+				has3D = true;
+			}
+			
+			return has3D;
 			
 		},
 		
@@ -901,6 +941,8 @@
     var methods = {
 		
 		init: function(options, node) {
+			
+			has3DTransform = helpers.has3DTransform();
 			
 			var settings = $.extend(true, {
 				'elasticPullResistance': 0.6, 		
