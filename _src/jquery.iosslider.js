@@ -656,7 +656,9 @@
 				'transform': 'matrix(1,1,1,1,1,1)'
 			});
 			
-			if(testElement.attr('style') != undefined) {
+			if(testElement.attr('style') == '') {
+				has3D = false;
+			} else if(testElement.attr('style') != undefined) {
 				has3D = true;
 			}
 			
