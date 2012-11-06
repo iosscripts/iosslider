@@ -656,8 +656,6 @@
 				'transform': 'matrix(1,1,1,1,1,1)'
 			});
 			
-			$('body').append(testElement);
-			
 			if(testElement.attr('style') != undefined) {
 				has3D = true;
 			}
