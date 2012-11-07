@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.31 (11/07/2012)
+ * Version: v1.1.32 (11/07/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -560,7 +560,7 @@
 			
 			var isChanged = (onChangeEventLastFired[sliderNumber] != newChildOffset) ? true : false;
 			var args = new helpers.args(settings, $(node), slideNode, newChildOffset, newChildOffset, isChanged);
-			$(stageNode).data('args', args);
+			$(node).parent().data('args', args);
 				
 			if(settings.onSlideComplete != '') {
 				
