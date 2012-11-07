@@ -426,6 +426,41 @@ function someCallback(args) {
 
 }
 </pre>
+
+<h3>jQuery .data() Object Details</h3>
+
+<p>Additional public information is stored using the <a href = 'http://api.jquery.com/data/' target = '_blank'>jQuery.data()</a> object. For usage and access instructions, please consult the <a href = 'http://api.jquery.com/data/' target = '_blank'>jQuery.data() object reference</a>.</p>
+			
+<pre>
+$('.iosSlider').iosSlider('data', {
+	obj,
+	settings,
+	scrollerNode,
+	numberOfSlides,
+	sliderNumber,
+	childrenOffsets,
+	sliderMax,
+	scrollbarClass,
+	scrollbarWidth, 
+	scrollbarStageWidth,
+	stageWidth, 
+	scrollMargin, 
+	scrollBorder, 
+	infiniteSliderOffset, 
+	infiniteSliderWidth
+});
+
+/* Dynamic variables. These variables are updated with every user interaction. */
+$('.iosSlider').iosSlider('args', {
+	sliderObject,
+	sliderContainerObject,
+	targetSlideObject,
+	targetSlideNumber,
+	currentSlideObject,
+	currentSlideNumber,
+	currentSliderOffset
+}
+</pre>
 					
 <h2>Public Methods</h2>
 
