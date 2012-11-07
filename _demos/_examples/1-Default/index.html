@@ -45,13 +45,6 @@
 			.iosSlider .slider #item4 {
 				background: url(h-slider-4.jpg) no-repeat 0 0;
 			}
-			
-			.button {
-				width: 100px;
-				height: 100px;
-				background: #aaa;
-				cursor: pointer;
-			}
 		</style>
 		
 		<!-- jQuery library -->
@@ -65,12 +58,6 @@
 			
 				$('.iosSlider').iosSlider({
 					desktopClickDrag: true
-				});
-				
-				$('.button').bind('click', function() {
-					
-					console.log($('.iosSlider').data('args'));
-					
 				});
 				
 			});
@@ -97,8 +84,6 @@
 			</div>
 		
 		</div>
-		
-		<div class = 'button'></div>
 	
 	</body>
 
