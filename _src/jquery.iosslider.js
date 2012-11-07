@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.30 (11/05/2012)
+ * Version: v1.1.31 (11/07/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -263,9 +263,16 @@
 			
 			}
 			
-			if(slideChanged && (settings.onSlideChange != '')) {
+			if(slideChanged) {
 				
-				settings.onSlideChange(new helpers.args(settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, endOffset, true));
+				var args = new helpers.args(settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, endOffset, true);
+				$(node).parent().data('args', args);
+				
+				if(settings.onSlideChange != '') {
+				
+					settings.onSlideChange(args);
+				
+				}
 			
 			}
 			
@@ -344,11 +351,12 @@
 				xScrollDistance = xScrollDistance * -2;
 			}
 			
+			var tempInfiniteSliderOffset = infiniteSliderOffset[sliderNumber];
+			
 			if(settings.infiniteSlider) {
 			
 				var tempSliderMin = sliderMin[sliderNumber];
 				var tempSliderMax = sliderMax[sliderNumber];
-				var tempInfiniteSliderOffset = infiniteSliderOffset[sliderNumber];
 			
 			}
 			
@@ -550,11 +558,13 @@
 		
 		onSlideComplete: function(settings, node, slideNode, newChildOffset, sliderNumber) {
 			
+			var isChanged = (onChangeEventLastFired[sliderNumber] != newChildOffset) ? true : false;
+			var args = new helpers.args(settings, $(node), slideNode, newChildOffset, newChildOffset, isChanged);
+			$(stageNode).data('args', args);
+				
 			if(settings.onSlideComplete != '') {
 				
-				var isChanged = (onChangeEventLastFired[sliderNumber] != newChildOffset) ? true : false;
-				
-				settings.onSlideComplete(new helpers.args(settings, $(node), slideNode, newChildOffset, newChildOffset, isChanged));
+				settings.onSlideComplete(args);
 			
 			}
 			
@@ -1094,10 +1104,13 @@
 				
 				var newChildOffset = helpers.calcActiveOffset(settings, helpers.getSliderOffset($(scrollerNode), 'x'), childrenOffsets, stageWidth, infiniteSliderOffset[sliderNumber], numberOfSlides, undefined, sliderNumber);
 				var tempOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
-					
+				
+				var args = new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset, tempOffset, false);
+				$(stageNode).data('args', args);
+
 				if(settings.onSliderLoaded != '') {
 
-					settings.onSliderLoaded(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset, tempOffset, false));
+					settings.onSliderLoaded(args);
 					
 				}
 				
@@ -1528,7 +1541,7 @@
 						scrollMargin: scrollMargin, 
 						scrollBorder: scrollBorder, 
 						infiniteSliderOffset: infiniteSliderOffset[sliderNumber], 
-						infiniteSliderWidth: infiniteSliderWidth
+						infiniteSliderWidth: infiniteSliderWidth						
 					});
 					
 					return true;
@@ -1737,12 +1750,13 @@
 						yScrollDistance = (yCurrentScrollRate[1] - yCurrentScrollRate[0]) / 2;
 						
 						if(!xScrollStarted) {
-							
+						
+							var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+							var args = new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + slide + ')'), slide, slide, false);
+							$(stageNode).data('args', args);
+
 							if(settings.onSlideStart != '') {
-							
-								var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
-							
-								settings.onSlideStart(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + slide + ')'), slide, slide, false));
+								settings.onSlideStart(args);
 							}
 							
 						}
@@ -1990,8 +2004,11 @@
 								activeChildInfOffsets[sliderNumber] = tempOffset;
 								snapOverride = true;
 								
+								var args = new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset, tempOffset, true);
+								$(stageNode).data('args', args);
+								
 								if(settings.onSlideChange != '') {
-									settings.onSlideChange(new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset, tempOffset, true));
+									settings.onSlideChange(args);
 								}
 								
 							}
@@ -2213,8 +2230,11 @@
 				data.settings.startAtSlide = (data.numberOfSlides == 1) ? data.settings.startAtSlide : (activeChildOffsets[data.sliderNumber] + 1 + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
 				methods.init(data.settings, this);
 				
+				var args = new helpers.args(data.settings, data.scrollerNode, $(data.scrollerNode).children(':eq(' + (data.settings.startAtSlide - 1) + ')'), data.settings.startAtSlide - 1, data.settings.startAtSlide - 1, false);
+				$(stageNode).data('args', args);
+				
 				if(data.settings.onSliderUpdate != '') {
-			    	data.settings.onSliderUpdate(new helpers.args(data.settings, data.scrollerNode, $(data.scrollerNode).children(':eq(' + (data.settings.startAtSlide - 1) + ')'), data.settings.startAtSlide - 1, data.settings.startAtSlide - 1, false));
+			    	data.settings.onSliderUpdate(args);
 			    }
 		    	
 			});
@@ -2309,6 +2329,20 @@
 				touchLocks[data.sliderNumber] = false;
 			
 			});
+		
+		},
+		
+		getData: function() {
+		
+			return this.each(function() {
+			
+				var $this = $(this);
+				var data = $this.data('iosslider');
+				if(data == undefined) return false;
+				
+				return data;
+			
+			});	
 		
 		}
 		
