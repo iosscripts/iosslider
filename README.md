@@ -432,6 +432,7 @@ function someCallback(args) {
 <p>Additional public information is stored using the <a href = 'http://api.jquery.com/data/' target = '_blank'>jQuery.data()</a> object. For usage and access instructions, please consult the <a href = 'http://api.jquery.com/data/' target = '_blank'>jQuery.data() object reference</a>.</p>
 			
 <pre>
+/* General variables. These variables are set during initialization, window resize, orientation change, and via the 'update' public method */
 $('.iosSlider').iosSlider('data', {
 	obj,
 	settings,
