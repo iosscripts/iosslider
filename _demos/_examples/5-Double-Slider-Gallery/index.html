@@ -179,7 +179,6 @@
 					snapToChildren: true,
 					desktopClickDrag: true,
 					infiniteSlider: true,
-					navSlideSelector: $('.doubleSlider-2 .button'),
 					navPrevSelector: $('.doubleSliderPrevButton'),
 					navNextSelector: $('.doubleSliderNextButton'),
 					scrollbarHeight: '2',
@@ -187,6 +186,16 @@
 					scrollbarOpacity: '0.5',
 					onSliderLoaded: doubleSlider2Load,
 					onSlideChange: doubleSlider2Load
+				});
+				
+				$('.doubleSlider-2 .button').each(function(i) {
+				
+					$(this).bind('click', function() {
+
+						$('.doubleSlider-1').iosSlider('goToSlide', i+1);
+						
+					});
+				
 				});
 				
 				$('.doubleSlider-2').iosSlider({
