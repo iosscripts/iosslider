@@ -2264,19 +2264,52 @@
 		
 		},
 		
-		removeSlide: function(slideNumber) {
-		
-			return this.each(function() {
-			
-				var $this = $(this);
-				var data = $this.data('iosslider');
-				if(data == undefined) return false;
+		removeSlide:function (slide) {
+	            return this.each(function () {
+	                var $this = $(this);
+	                var data = $this.data('iosslider');\
+	                if (data == undefined) return false;
+	
+	                //Create a var for the slider number
+	                var slideNumber = null;
+	                //check if the input is a jquery object (not a number) or an index
+	                if (isNaN(slide)) {
+	                    //Loop through all slides in the slider
+	                    $(data.scrollerNode).children().each(function (index, element) {
+	                        //Check if the two containing html elements are equal
+	                        if ($(element)[0] === slide) {
+	                            //Slide found, translate index from base 0 selection to base 1
+	                            slideNumber = (index + 1);
+	                            //break out of the each loop
+	                            return false;
+	                        }
+	                    });
+	                    //If it wasn't found in this slider, call the slider it belongs to
+	                    if (slideNumber == null) {
+	                        //the below line should return the whichever slider the selected slide belongs to
+	                        //Considering slider's structure is ()Slider --> scrollerNode --> Slides)
+	                        var possibleSlider = $(slide).parent().parent();
+	                        //check to see if the element has slider data. It should if the selected element is a slide.
+	                        var otherSliderData = possibleSlider.data('iosslider');
+	                        //if undefined, return. The selected element is not a slide in a live slider.
+	                        if (otherSliderData == undefined) {
+	                            return false;
+	                        }
+	                        //call remove on the slider containing the selected slide
+	                        possibleSlider.iosSlider('removeSlide', slide);
+	                        //Don't do anything else in this slider for removing
+	                        return;
+	                    }
+	                } else {
+	                    //If it is a number just use it
+	                    slideNumber = slide;
+	                }
 
-				$(data.scrollerNode).children(':eq(' + (slideNumber - 1) + ')').remove();
-				if(activeChildOffsets[data.sliderNumber] > (slideNumber - 1)) {
-					activeChildOffsets[data.sliderNumber]--;
-				}
-				methods.update(this);
+			$(data.scrollerNode).children(':eq(' + (slideNumber - 1) + ')').remove();
+			if(activeChildOffsets[data.sliderNumber] > (slideNumber - 1)) {
+				activeChildOffsets[data.sliderNumber]--;
+			}
+			methods.update(this);
 			
 			});
 		
