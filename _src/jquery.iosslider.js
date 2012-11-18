@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.32 (11/07/2012)
+ * Version: v1.1.34 (11/18/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -186,7 +186,7 @@
 						sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
 						infiniteSliderOffset[sliderNumber] = numberOfSlides;
 						
-						while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > (helpers.getSliderOffset(node, 'x') * -1)) && settings.snapSlideCenter) {
+						while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > 0)) {
 
 							var highSlideNumber = 0;
 							var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
@@ -591,7 +591,7 @@
 						
 						if($(node).css(transforms[i]).length > 0) {
 						
-							var transformArray = $(node).css(transforms[i]).split(',');		
+							var transformArray = $(node).css(transforms[i]).split(',');
 							
 							break;
 							
@@ -1231,7 +1231,6 @@
 						settings.startAtSlide = (settings.startAtSlide > childrenOffsets.length) ? childrenOffsets.length : settings.startAtSlide;
 						activeChildOffsets[sliderNumber] = settings.startAtSlide-1;
 						activeChildInfOffsets[sliderNumber] = activeChildOffsets[sliderNumber];
-						isFirstInit = false;
 					}
 					
 					sliderMin[sliderNumber] = sliderMax[sliderNumber] + centeredSlideOffset;
@@ -1268,6 +1267,8 @@
 						height: stageHeight
 					});
 					
+					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);
+					
 					if(settings.infiniteSlider && !shortContent) {
 						
 						var currentScrollOffset = helpers.getSliderOffset($(scrollerNode), 'x');
@@ -1298,9 +1299,9 @@
 							count++;
 							
 						}
-
-						while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > (helpers.getSliderOffset(scrollerNode, 'x') * -1)) && settings.snapSlideCenter) {
-
+						
+						while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > 0) && settings.snapSlideCenter && isFirstInit) {
+							
 							var highSlideNumber = 0;
 							var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
 							$(slideNodes).each(function(i) {
@@ -1544,6 +1545,8 @@
 						infiniteSliderWidth: infiniteSliderWidth						
 					});
 					
+					isFirstInit = false;
+					
 					return true;
 				
 				}
@@ -1620,12 +1623,14 @@
 						if(isUnselectable) return true;
 						
 						currentEventNode = ($(this)[0] === $(scrollbarNode)[0]) ? scrollbarNode : scrollerNode;
-
+						
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
 
 						helpers.autoSlidePause(sliderNumber);
+						
+						allScrollerNodeChildren.unbind('.disableClick');
 						
 						if(!isTouch) {
 							
@@ -1704,7 +1709,7 @@
 					var touchMoveEvent = isTouch ? 'touchmove.iosSliderEvent' : 'mousemove.iosSliderEvent';
 					
 					$(touchSelectionMove).bind(touchMoveEvent, function(e) {
-						
+
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
@@ -1865,7 +1870,7 @@
 										sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
 										infiniteSliderOffset[sliderNumber] = numberOfSlides;
 										
-										while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > (helpers.getSliderOffset(scrollerNode, 'x') * -1)) && settings.snapSlideCenter) {
+										while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > 0)) {
 				
 											var highSlideNumber = 0;
 											var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
