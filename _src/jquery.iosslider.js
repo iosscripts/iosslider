@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.34 (11/18/2012)
+ * Version: v1.1.35 (11/21/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1741,9 +1741,10 @@
 							eventX = e.pageX;
 							eventY = e.pageY;
 							
-							if(!isMouseDown) {
+							if(!isMouseDown || (typeof e.webkitMovementX != 'undefined' || typeof e.webkitMovementY != 'undefined') && e.webkitMovementY === 0 && e.webkitMovementX === 0) {
 								return false;
 							}
+							
 						}
 						
 						xCurrentScrollRate[0] = xCurrentScrollRate[1];
