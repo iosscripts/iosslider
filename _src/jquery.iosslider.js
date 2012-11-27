@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.36 (11/26/2012)
+ * Version: v1.1.37 (11/27/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -2239,7 +2239,7 @@
 				methods.init(data.settings, this);
 				
 				var args = new helpers.args(data.settings, data.scrollerNode, $(data.scrollerNode).children(':eq(' + (data.settings.startAtSlide - 1) + ')'), data.settings.startAtSlide - 1, data.settings.startAtSlide - 1, false);
-				$(stageNode).data('args', args);
+				$(data.stageNode).data('args', args);
 				
 				if(data.settings.onSliderUpdate != '') {
 			    	data.settings.onSliderUpdate(args);
