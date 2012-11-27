@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.35 (11/21/2012)
+ * Version: v1.1.36 (11/26/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1044,6 +1044,8 @@
 				var currentTouches = 0;
 				var scrollerNode = $(this).children(':first-child');
 				var slideNodes;
+				var slideNodeWidths;
+				var slideNodeOuterWidths;
 				var numberOfSlides = $(scrollerNode).children().not('script').size();
 				var xScrollStarted = false;
 				var lastChildOffset = 0;
@@ -1127,7 +1129,10 @@
 					$(stageNode).css('width', '');
 					$(stageNode).css('height', '');
 					$(scrollerNode).css('width', '');
-					slideNodes = $(scrollerNode).children().not('script');
+					slideNodes = $(scrollerNode).children().not('script').get();
+					slideNodeWidths = new Array();
+					slideNodeOuterWidths = new Array();
+					
 					$(slideNodes).css('width', '');
 					
 					sliderMax[sliderNumber] = 0;
@@ -1153,34 +1158,31 @@
 					$(settings.unselectableSelector).css({
 						cursor: 'default'
 					});
-					
-					if(settings.responsiveSlides) {
 						
-						$(slideNodes).each(function(j) {
-
-							var thisSlideWidth = $(this).outerWidth(true);
-
-							if(thisSlideWidth > stageWidth) {
+					for(var j = 0; j < slideNodes.length; j++) {
+						
+						slideNodeWidths[j] = $(slideNodes[j]).width();
+						slideNodeOuterWidths[j] = $(slideNodes[j]).outerWidth(true);
+						
+						if(settings.responsiveSlides) {
+	
+							if(slideNodeOuterWidths[j] > stageWidth) {
 								
-								thisSlideWidth = stageWidth + ($(this).outerWidth(true) - $(this).width()) * -1;
+								slideNodeOuterWidths[j] = stageWidth + (slideNodeOuterWidths[j] - slideNodeWidths[j]) * -1;
 							
 							} else {
 							
-								thisSlideWidth = $(this).width();
+								slideNodeOuterWidths[j] = slideNodeWidths[j];
 								
 							}
 							
-							$(this).css({
-								width: thisSlideWidth
+							$(slideNodes[j]).css({
+								width: slideNodeOuterWidths[j]
 							});
-						
-						});
 					
-					}
-	
-					$(slideNodes).each(function(j) {
+						}
 						
-						$(this).css({
+						$(slideNodes[j]).css({
 							'webkitBackfaceVisibility': 'hidden',
 							position: 'absolute',
 							top: 0
@@ -1188,23 +1190,23 @@
 						
 						childrenOffsets[j] = sliderMax[sliderNumber] * -1;
 						
-						sliderMax[sliderNumber] = sliderMax[sliderNumber] + $(this).outerWidth(true);
-						
-					});
+						sliderMax[sliderNumber] = sliderMax[sliderNumber] + slideNodeOuterWidths[j];
+					
+					}
 					
 					if(settings.snapSlideCenter) {
-						centeredSlideOffset = (stageWidth - ($(slideNodes[0]).outerWidth(true))) * 0.5;
+						centeredSlideOffset = (stageWidth - slideNodeOuterWidths[0]) * 0.5;
 					}
 					
 					sliderAbsMax[sliderNumber] = sliderMax[sliderNumber] * 2;
 					
-					$(slideNodes).each(function(j) {
+					for(var j = 0; j < slideNodes.length; j++) {
 						
-						helpers.setSliderOffset($(this), childrenOffsets[j] * -1 + sliderMax[sliderNumber] + centeredSlideOffset);
+						helpers.setSliderOffset($(slideNodes[j]), childrenOffsets[j] * -1 + sliderMax[sliderNumber] + centeredSlideOffset);
 						
 						childrenOffsets[j] = childrenOffsets[j] - sliderMax[sliderNumber];
 					
-					});
+					}
 					
 					if(!settings.infiniteSlider && !settings.snapSlideCenter) {
 					
@@ -1260,7 +1262,7 @@
 					stageHeight = $(stageNode).height();
 					
 					if(settings.responsiveSlideContainer) {
-						stageHeight = ($(stageNode).height() > containerHeight) ? containerHeight : $(stageNode).height();
+						stageHeight = (stageHeight > containerHeight) ? containerHeight : stageHeight;
 					}
 					
 					$(stageNode).css({
@@ -1313,7 +1315,7 @@
 								
 							});
 
-							var newOffset = sliderMin[sliderNumber] - $(slideNodes[highSlideNumber]).outerWidth(true);
+							var newOffset = sliderMin[sliderNumber] - slideNodeOuterWidths[highSlideNumber];
 							helpers.setSliderOffset($(slideNodes)[highSlideNumber], newOffset);
 							
 							childrenOffsets.splice(0, 0, newOffset * -1 + centeredSlideOffset);
