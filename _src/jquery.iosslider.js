@@ -746,6 +746,10 @@
 				clearTimeout(scrollTimeouts[j]);
 			}
 			
+			if((slide > (childrenOffsets.length-1)) && !settings.infiniteSlider) {
+				slide--;
+			}
+			
 			var steps = Math.ceil(settings.autoSlideTransTimer / 10) + 1;
 			var startOffset = helpers.getSliderOffset(node, 'x');
 			var endOffset = childrenOffsets[slide];
