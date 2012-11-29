@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.38 (11/28/2012)
+ * Version: v1.1.39 (11/28/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1167,21 +1167,22 @@
 						
 						slideNodeWidths[j] = $(slideNodes[j]).width();
 						slideNodeOuterWidths[j] = $(slideNodes[j]).outerWidth(true);
+						var newWidth = slideNodeOuterWidths[j];
 						
 						if(settings.responsiveSlides) {
 	
 							if(slideNodeOuterWidths[j] > stageWidth) {
 								
-								slideNodeOuterWidths[j] = stageWidth + (slideNodeOuterWidths[j] - slideNodeWidths[j]) * -1;
+								newWidth = stageWidth + (slideNodeOuterWidths[j] - slideNodeWidths[j]) * -1;
 							
 							} else {
-							
-								slideNodeOuterWidths[j] = slideNodeWidths[j];
+
+								newWidth = slideNodeWidths[j];
 								
 							}
 							
 							$(slideNodes[j]).css({
-								width: slideNodeOuterWidths[j]
+								width: newWidth
 							});
 					
 						}
