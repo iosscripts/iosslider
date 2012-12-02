@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.40 (11/29/2012)
+ * Version: v1.1.41 (12/02/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -2303,7 +2303,7 @@
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 				
-				slide = ((slide - 1) > data.childrenOffsets.length) ? data.childrenOffsets.length - 1 : slide - 1;
+				slide = (slide > data.childrenOffsets.length) ? data.childrenOffsets.length - 1 : slide - 1;
 				
 				helpers.changeSlide(slide, $(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
 				
