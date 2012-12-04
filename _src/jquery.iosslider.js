@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.41 (12/02/2012)
+ * Version: v1.1.42 (12/03/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1170,7 +1170,7 @@
 							if(slideNodeOuterWidths[j] > stageWidth) {
 								
 								newWidth = stageWidth + (slideNodeOuterWidths[j] - slideNodeWidths[j]) * -1;
-							
+								
 							} else {
 
 								newWidth = slideNodeWidths[j];
@@ -1197,6 +1197,10 @@
 					
 					if(settings.snapSlideCenter) {
 						centeredSlideOffset = (stageWidth - slideNodeOuterWidths[0]) * 0.5;
+						
+						if(settings.responsiveSlides && (slideNodeOuterWidths[0] > stageWidth)) {
+							centeredSlideOffset = 0;
+						}
 					}
 					
 					sliderAbsMax[sliderNumber] = sliderMax[sliderNumber] * 2;
@@ -1744,8 +1748,14 @@
 							eventX = e.pageX;
 							eventY = e.pageY;
 							
-							if(!isMouseDown || (typeof e.webkitMovementX != 'undefined' || typeof e.webkitMovementY != 'undefined') && e.webkitMovementY === 0 && e.webkitMovementX === 0) {
+							if(!isMouseDown) {
 								return false;
+							}
+							
+							if(!isIe) {
+								if((typeof e.webkitMovementX != 'undefined' || typeof e.webkitMovementY != 'undefined') && e.webkitMovementY === 0 && e.webkitMovementX === 0) {
+									return false;
+								}
 							}
 							
 						}
