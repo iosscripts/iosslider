@@ -1235,7 +1235,6 @@
 					}
 					
 					if(isFirstInit) {
-						console.log(settings.startAtSlide + ' > ' + childrenOffsets.length);
 						settings.startAtSlide = (settings.startAtSlide > childrenOffsets.length) ? childrenOffsets.length : settings.startAtSlide;
 						settings.startAtSlide = ((settings.startAtSlide - 1) < 0) ? childrenOffsets.length-1 : settings.startAtSlide;
 						activeChildOffsets[sliderNumber] = (settings.startAtSlide-1);
@@ -2246,8 +2245,6 @@
 				var $this = $(this);
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
-				
-				console.log($this.data('args'));
 				
 				methods.destroy(false, this);
 				data.settings.startAtSlide = $this.data('args').currentSlideNumber + 1;
