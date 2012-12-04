@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.42 (12/03/2012)
+ * Version: v1.1.43 (12/04/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1143,7 +1143,7 @@
 					if(settings.responsiveSlideContainer) {
 						stageWidth = ($(stageNode).outerWidth(true) > containerWidth) ? containerWidth : $(stageNode).outerWidth(true);
 					}
-					
+
 					$(stageNode).css({
 						position: settings.stageCSS.position,
 						top: settings.stageCSS.top,
@@ -1236,7 +1236,8 @@
 					
 					if(isFirstInit) {
 						settings.startAtSlide = (settings.startAtSlide > childrenOffsets.length) ? childrenOffsets.length : settings.startAtSlide;
-						activeChildOffsets[sliderNumber] = settings.startAtSlide-1;
+						settings.startAtSlide = ((settings.startAtSlide - 1) < 0) ? childrenOffsets.length-1 : settings.startAtSlide;
+						activeChildOffsets[sliderNumber] = (settings.startAtSlide-1);
 						activeChildInfOffsets[sliderNumber] = activeChildOffsets[sliderNumber];
 					}
 					
@@ -1273,7 +1274,7 @@
 					$(stageNode).css({
 						height: stageHeight
 					});
-					
+
 					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);
 					
 					if(settings.infiniteSlider && !shortContent) {
@@ -2268,15 +2269,24 @@
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 				
-				if(slidePosition <= data.numberOfSlides) {
-					$(data.scrollerNode).children(':eq(' + (slidePosition - 1) + ')').before(slideNode);
+				if(!data.settings.infiniteSlider) {
+				
+					if(slidePosition <= data.numberOfSlides) {
+						$(data.scrollerNode).children(':eq(' + (slidePosition - 1) + ')').before(slideNode);
+					} else {
+						$(data.scrollerNode).children(':eq(' + (slidePosition - 2) + ')').after(slideNode);
+					}
+					
+					if(activeChildOffsets[data.sliderNumber] > (slidePosition - 2)) {
+						activeChildOffsets[data.sliderNumber]++;
+					}
+					
 				} else {
+				
 					$(data.scrollerNode).children(':eq(' + (slidePosition - 2) + ')').after(slideNode);
+
 				}
 				
-				if(activeChildOffsets[data.sliderNumber] > (slidePosition - 2)) {
-					activeChildOffsets[data.sliderNumber]++;
-				}
 				methods.update(this);
 			
 			});
