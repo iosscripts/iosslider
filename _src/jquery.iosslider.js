@@ -1119,7 +1119,7 @@
 				onChangeEventLastFired[sliderNumber] = tempOffset;
 
 				function init() {
-				
+					
 					helpers.autoSlidePause(sliderNumber);
 					
 					anchorEvents = $(scrollerNode).find('a');
@@ -1235,6 +1235,7 @@
 					}
 					
 					if(isFirstInit) {
+						console.log(settings.startAtSlide + ' > ' + childrenOffsets.length);
 						settings.startAtSlide = (settings.startAtSlide > childrenOffsets.length) ? childrenOffsets.length : settings.startAtSlide;
 						settings.startAtSlide = ((settings.startAtSlide - 1) < 0) ? childrenOffsets.length-1 : settings.startAtSlide;
 						activeChildOffsets[sliderNumber] = (settings.startAtSlide-1);
@@ -2246,8 +2247,15 @@
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 				
+				console.log($this.data('args'));
+				
 				methods.destroy(false, this);
-				data.settings.startAtSlide = (data.numberOfSlides == 1) ? data.settings.startAtSlide : (activeChildOffsets[data.sliderNumber] + 1 + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
+				data.settings.startAtSlide = $this.data('args').currentSlideNumber + 1;
+				
+				if((data.numberOfSlides != 1) && data.settings.infiniteSlider) {
+				 	data.settings.startAtSlide = (activeChildOffsets[data.sliderNumber] + 1 + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
+				}
+
 				methods.init(data.settings, this);
 				
 				var args = new helpers.args(data.settings, data.scrollerNode, $(data.scrollerNode).children(':eq(' + (data.settings.startAtSlide - 1) + ')'), data.settings.startAtSlide - 1, data.settings.startAtSlide - 1, false);
