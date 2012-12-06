@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.45 (12/05/2012)
+ * Version: v1.1.46 (12/06/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1167,7 +1167,7 @@
 						var newWidth = slideNodeOuterWidths[j];
 						
 						if(settings.responsiveSlides) {
-	
+
 							if(slideNodeOuterWidths[j] > stageWidth) {
 								
 								newWidth = stageWidth + (slideNodeOuterWidths[j] - slideNodeWidths[j]) * -1;
@@ -1192,7 +1192,7 @@
 						
 						childrenOffsets[j] = sliderMax[sliderNumber] * -1;
 						
-						sliderMax[sliderNumber] = sliderMax[sliderNumber] + slideNodeOuterWidths[j];
+						sliderMax[sliderNumber] = sliderMax[sliderNumber] + newWidth;
 					
 					}
 					
