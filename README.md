@@ -352,6 +352,11 @@ $(document).ready(function() {
 <td>(function) Executed when public method 'update' has been completed.</td>
 </tr>
 <tr>
+<td>onSliderResize</td>
+<td>null</td>
+<td>(function) Executed when the window has been resized or a device has been rotated.</td>
+</tr>
+<tr>
 <td>onSlideStart</td>
 <td>null</td>
 <td>(function) Executed when the slider has begun to move.</td>
