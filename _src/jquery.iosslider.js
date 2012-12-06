@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.44 (12/04/2012)
+ * Version: v1.1.45 (12/05/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1567,6 +1567,12 @@
 							
 						if(!init()) return true;
 						
+						var args = $(stageNode).data('args');
+				
+						if(settings.onSliderUpdate != '') {
+					    	settings.onSliderUpdate(args);
+					    }
+						
 					});
 					
 				}
@@ -2247,7 +2253,7 @@
 				if(data == undefined) return false;
 				
 				methods.destroy(false, this);
-				data.settings.startAtSlide = $this.data('args').currentSlideNumber + 1;
+				data.settings.startAtSlide = $this.data('args').currentSlideNumber;
 				
 				if((data.numberOfSlides != 1) && data.settings.infiniteSlider) {
 				 	data.settings.startAtSlide = (activeChildOffsets[data.sliderNumber] + 1 + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
