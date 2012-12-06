@@ -997,6 +997,7 @@
 				'unselectableSelector': '',
 				'onSliderLoaded': '',
 				'onSliderUpdate': '',
+				'onSliderResize': '',
 				'onSlideStart': '',
 				'onSlideChange': '',
 				'onSlideComplete': ''
@@ -1569,8 +1570,8 @@
 						
 						var args = $(stageNode).data('args');
 				
-						if(settings.onSliderUpdate != '') {
-					    	settings.onSliderUpdate(args);
+						if(settings.onSliderResize != '') {
+					    	settings.onSliderResize(args);
 					    }
 						
 					});
