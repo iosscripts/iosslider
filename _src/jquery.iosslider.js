@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.46 (12/06/2012)
+ * Version: v1.1.47 (12/13/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -265,7 +265,8 @@
 			
 			if(slideChanged) {
 				
-				var args = new helpers.args(settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, endOffset, true);
+				var startOffset = activeChildInfOffsets[sliderNumber];
+				var args = new helpers.args(settings, node, $(node).children(':eq(' + tempOffset + ')'), startOffset, endOffset, true);
 				$(node).parent().data('args', args);
 				
 				if(settings.onSlideChange != '') {
@@ -2026,12 +2027,13 @@
 							}
 							
 							if(slideChanged) {
-
+								
+								var startOffset = activeChildInfOffsets[sliderNumber];
 								activeChildOffsets[sliderNumber] = newChildOffset;
 								activeChildInfOffsets[sliderNumber] = tempOffset;
 								snapOverride = true;
 								
-								var args = new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset, tempOffset, true);
+								var args = new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), startOffset, tempOffset, true);
 								$(stageNode).data('args', args);
 								
 								if(settings.onSlideChange != '') {
