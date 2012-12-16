@@ -137,6 +137,8 @@
 				
 				function slideContentComplete(args) {
 					
+					if(!args.slideChanged) return false;
+					
 					/* animation */
 					$(args.sliderObject).find('.text1, .text2').attr('style', '');
 					
