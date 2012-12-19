@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.48 (12/18/2012)
+ * Version: v1.1.49 (12/19/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -919,6 +919,7 @@
 		},
 						
 		args: function(settings, node, activeSlideNode, newChildOffset, targetSlideOffset, isChanged) {
+
 			this.settings = settings;
 			this.data = $(node).parent().data('iosslider');
 			this.slideChanged = isChanged;
@@ -929,6 +930,19 @@
 			this.targetSlideObject = $(node).children(':eq(' + targetSlideOffset + ')');
 			this.targetSlideNumber = targetSlideOffset + 1;
 			this.currentSliderOffset = helpers.getSliderOffset(node, 'x') * -1;
+			
+			try {
+				if($(node).parent().data('args') == undefined) {
+					this.prevSlideNumber = settings.startAtSlide;
+				} else if($(node).parent().data('args').prevSlideNumber == this.currentSlideNumber) {
+					this.prevSlideNumber = $(node).parent().data('args').currentSlideNumber;					
+				} else {
+					this.prevSlideNumber = $(node).parent().data('args').prevSlideNumber;
+				}
+				
+				this.prevSlideObject = $(node).children(':eq(' + this.prevSlideNumber + ')');
+			} catch(e) {}
+
 		},
 		
 		preventDrag: function(event) {
