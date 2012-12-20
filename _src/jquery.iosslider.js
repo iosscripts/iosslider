@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.49 (12/19/2012)
+ * Version: v1.1.50 (12/20/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -2228,6 +2228,7 @@
 		    	isEventCleared[data.sliderNumber] = true;
 		    	$(window).unbind('.iosSliderEvent-' + data.sliderNumber);
 		    	$(document).unbind('.iosSliderEvent-' + data.sliderNumber);
+		    	$(document).unbind('keydown.iosSliderEvent');
 		    	$(this).unbind('.iosSliderEvent');
 	    		$(this).children(':first-child').unbind('.iosSliderEvent');
 	    		$(this).children(':first-child').children().unbind('.iosSliderEvent');
@@ -2350,6 +2351,7 @@
 				if(activeChildOffsets[data.sliderNumber] > (slideNumber - 1)) {
 					activeChildOffsets[data.sliderNumber]--;
 				}
+
 				methods.update(this);
 			
 			});
