@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.50 (12/20/2012)
+ * Version: v1.1.51 (12/26/2012)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -285,10 +285,10 @@
 
 			if(settings.scrollbar) {
 				
-				scrollbarDistance = Math.floor((newOffset * -1 - sliderMin[sliderNumber]) / (sliderMax[sliderNumber] - sliderMin[sliderNumber]) * (scrollbarStageWidth - scrollMargin - scrollbarWidth));
+				scrollbarDistance = Math.floor((newOffset * -1 - sliderMin[sliderNumber] + centeredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber] + centeredSlideOffset) * (scrollbarStageWidth - scrollMargin - scrollbarWidth));
 				var width = scrollbarWidth - scrollBorder;
 				
-				if(newOffset >= (sliderMin[sliderNumber] * -1)) {
+				if(newOffset >= (sliderMin[sliderNumber] * -1 + centeredSlideOffset)) {
 
 					width = scrollbarWidth - scrollBorder - (scrollbarDistance * -1);
 					
@@ -1416,7 +1416,7 @@
 							boxShadow: settings.scrollbarShadow
 						});
 						
-						helpers.setSliderOffset($('.' + scrollbarBlockClass + ' .' + scrollbarClass), Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1 - sliderMin[sliderNumber] + centeredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber]) * (scrollbarStageWidth - scrollMargin - scrollbarWidth)));
+						helpers.setSliderOffset($('.' + scrollbarBlockClass + ' .' + scrollbarClass), Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1 - sliderMin[sliderNumber] + centeredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber] + centeredSlideOffset) * (scrollbarStageWidth - scrollMargin - scrollbarWidth)));
 		
 						$('.' + scrollbarBlockClass).css({
 							display: 'block'
@@ -1825,10 +1825,12 @@
 						if(xScrollStarted && !preventXScroll) {
 							
 							var scrollPosition = helpers.getSliderOffset(scrollerNode, 'x');
-							var scrollbarSubtractor = ($(this)[0] === $(scrollbarBlockNode)[0]) ? (sliderMin[sliderNumber]) : 0;
+							var scrollbarSubtractor = ($(this)[0] === $(scrollbarBlockNode)[0]) ? (sliderMin[sliderNumber]) : centeredSlideOffset;
 							var scrollbarMultiplier = ($(this)[0] === $(scrollbarBlockNode)[0]) ? ((sliderMin[sliderNumber] - sliderMax[sliderNumber]) / (scrollbarStageWidth - scrollMargin - scrollbarWidth)) : 1;
 							var elasticPullResistance = ($(this)[0] === $(scrollbarBlockNode)[0]) ? settings.scrollbarElasticPullResistance : settings.elasticPullResistance;
-
+							var snapCenteredSlideOffset = (settings.snapSlideCenter && ($(this)[0] === $(scrollbarBlockNode)[0])) ? 0 : centeredSlideOffset;
+							var snapCenteredSlideOffsetScrollbar = (settings.snapSlideCenter && ($(this)[0] === $(scrollbarBlockNode)[0])) ? (centeredSlideOffset) : 0;
+							
 							if(isTouch) {
 								if(currentTouches != e.touches.length) {
 									xScrollStartPosition = (scrollPosition * -1) + eventX;
@@ -1972,11 +1974,11 @@
 								
 								if(scrollPosition > (sliderMin[sliderNumber] * -1 + centeredSlideOffset)) {
 
-									edgeDegradation = (sliderMin[sliderNumber] + ((xScrollStartPosition - scrollbarSubtractor - eventX + centeredSlideOffset) * -1 * scrollbarMultiplier) - scrollbarSubtractor) * elasticPullResistance * -1 / scrollbarMultiplier;
+									edgeDegradation = (sliderMin[sliderNumber] + ((xScrollStartPosition - scrollbarSubtractor - eventX + snapCenteredSlideOffset) * -1 * scrollbarMultiplier) - scrollbarSubtractor) * elasticPullResistance * -1 / scrollbarMultiplier;
 									
 								}
 								
-								if(scrollPosition < (sliderMax[sliderNumber] * -1)) {
+								if(scrollPosition < (sliderMax[sliderNumber] * -1 + centeredSlideOffset)) {
 									
 									edgeDegradation = (sliderMax[sliderNumber] + ((xScrollStartPosition - scrollbarSubtractor - eventX) * -1 * scrollbarMultiplier) - scrollbarSubtractor) * elasticPullResistance * -1 / scrollbarMultiplier;
 												
@@ -1984,17 +1986,17 @@
 							
 							}
 
-							helpers.setSliderOffset(scrollerNode, ((xScrollStartPosition - scrollbarSubtractor - eventX - edgeDegradation) * -1 * scrollbarMultiplier) - scrollbarSubtractor);
+							helpers.setSliderOffset(scrollerNode, ((xScrollStartPosition - scrollbarSubtractor - eventX - edgeDegradation) * -1 * scrollbarMultiplier) - scrollbarSubtractor + snapCenteredSlideOffsetScrollbar);
 
 							if(settings.scrollbar) {
 								
 								helpers.showScrollbar(settings, scrollbarClass);
 
-								scrollbarDistance = Math.floor((xScrollStartPosition - eventX - edgeDegradation - sliderMin[sliderNumber] + centeredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber]) * (scrollbarStageWidth - scrollMargin - scrollbarWidth) * scrollbarMultiplier);
+								scrollbarDistance = Math.floor((xScrollStartPosition - eventX - edgeDegradation - sliderMin[sliderNumber] + snapCenteredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber] + snapCenteredSlideOffset) * (scrollbarStageWidth - scrollMargin - scrollbarWidth) * scrollbarMultiplier);
 								
 								var width = scrollbarWidth;
 								
-								if(scrollPosition >= (sliderMin[sliderNumber] * -1 + centeredSlideOffset + scrollerWidth)) {
+								if(scrollPosition >= (sliderMin[sliderNumber] * -1 + snapCenteredSlideOffset + scrollerWidth)) {
 
 									width = scrollbarWidth - scrollBorder - (scrollbarDistance * -1);
 									
