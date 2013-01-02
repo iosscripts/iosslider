@@ -2230,6 +2230,7 @@
 		    	$(window).unbind('.iosSliderEvent-' + data.sliderNumber);
 		    	$(document).unbind('.iosSliderEvent-' + data.sliderNumber);
 		    	$(document).unbind('keydown.iosSliderEvent');
+		    	$(window).unbind('.iosSliderEvent');
 		    	$(this).unbind('.iosSliderEvent');
 	    		$(this).children(':first-child').unbind('.iosSliderEvent');
 	    		$(this).children(':first-child').children().unbind('.iosSliderEvent');
@@ -2256,7 +2257,7 @@
 					clearTimeout(scrollTimeouts[i]);
 				}
 	    		
-	    		$this.removeData('iosslider');
+	    		$this.removeData( ['iosslider', 'args'] );
 		    	
 			});
 		
