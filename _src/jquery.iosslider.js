@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.51 (01/02/2013)
+ * Version: v1.1.52 (01/02/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -2228,6 +2228,7 @@
 	    		helpers.autoSlidePause(data.sliderNumber);
 		    	isEventCleared[data.sliderNumber] = true;
 		    	$(window).unbind('.iosSliderEvent-' + data.sliderNumber);
+		    	$(window).unbind('.iosSliderEvent');
 		    	$(document).unbind('.iosSliderEvent-' + data.sliderNumber);
 		    	$(document).unbind('keydown.iosSliderEvent');
 		    	$(this).unbind('.iosSliderEvent');
@@ -2256,7 +2257,7 @@
 					clearTimeout(scrollTimeouts[i]);
 				}
 	    		
-	    		$this.removeData('iosslider');
+	    		$this.removeData(['iosslider', 'args']);
 		    	
 			});
 		
