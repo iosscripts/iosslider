@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.52 (01/02/2013)
+ * Version: v1.1.53 (01/08/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1206,7 +1206,7 @@
 						
 						childrenOffsets[j] = sliderMax[sliderNumber] * -1;
 						
-						sliderMax[sliderNumber] = sliderMax[sliderNumber] + newWidth;
+						sliderMax[sliderNumber] = sliderMax[sliderNumber] + newWidth + (slideNodeOuterWidths[j] - slideNodeWidths[j]);
 					
 					}
 					
