@@ -1601,7 +1601,7 @@
 				if( (settings.keyboardControls || settings.tabToAdvance) && !shortContent) {
 					
 					$(document).bind('keydown.iosSliderEvent', function(e) {
-					
+										
 						var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides,
 							prevSlide = function() {
 								if((slide > 0) || settings.infiniteSlider) {
@@ -1625,12 +1625,15 @@
 								case 37:
 									
 									prevSlide(); 
+									e.preventDefault();
+
 									
 								break;
 								
 								case 39:
 									
 									nextSlide();
+									e.preventDefault();
 									
 								break;
 								
@@ -1642,12 +1645,12 @@
 						
 							if(e.keyCode === 9) {
 								nextSlide();
+								e.preventDefault();
+
 							}
 						
 						}
-						
-						e.preventDefault();
-					
+											
 					});
 					
 				}
