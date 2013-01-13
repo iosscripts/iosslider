@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.53 (01/08/2013)
+ * Version: v1.1.54 (01/08/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1877,6 +1877,7 @@
 										});
 										
 										var newOffset = sliderMin[sliderNumber] + scrollerWidth;
+										helpers.setSliderOffset($(slideNodes)[lowSlideNumber], newOffset);	
 										
 										sliderMin[sliderNumber] = childrenOffsets[1] * -1 + centeredSlideOffset;
 										sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
