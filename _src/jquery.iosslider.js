@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.54 (01/08/2013)
+ * Version: v1.1.55 (01/16/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -2276,8 +2276,8 @@
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 				
-				methods.destroy(false, this);
 				data.settings.startAtSlide = $this.data('args').currentSlideNumber;
+				methods.destroy(false, this);
 				
 				if((data.numberOfSlides != 1) && data.settings.infiniteSlider) {
 				 	data.settings.startAtSlide = (activeChildOffsets[data.sliderNumber] + 1 + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
