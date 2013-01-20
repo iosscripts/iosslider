@@ -314,6 +314,12 @@ $(document).ready(function() {
 		keyboardControls: true
 	});
 	
+	$('.tab-control-slider').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		tabToAdvance: true
+	});
+	
 	$('.snap-center-slider').iosSlider({
 		desktopClickDrag: true,
 		snapToChildren: true,

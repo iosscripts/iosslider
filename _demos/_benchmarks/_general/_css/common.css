@@ -1330,6 +1330,48 @@ p {
 	background: #000;
 }
 
+/* tab control slider */
+.tab-control-slider {
+	position: relative;
+	overflow: hidden;
+	width: 900px;
+	height: 200px;
+}
+
+.tab-control-slider .slider {
+	width: 100%;
+	height: 100%;
+}
+
+.tab-control-slider .slider .item {
+	width: 900px;
+	height: 200px;
+}
+
+.tab-control-slider .slider .item1 {
+	background: #666;
+}
+
+.tab-control-slider .slider .item2 {
+	background: #999;
+}
+
+.tab-control-slider .slider .item3 {
+	background: #aaa;
+}
+
+.tab-control-slider .slider .item4 {
+	background: #ddd;
+}
+
+.tab-control-slider .slider .item5 {
+	background: #999;
+}
+
+.tab-control-slider .slider .item6 {
+	background: #000;
+}
+
 /* center */
 .snap-center-slider,
 .snap-center-slider-2,

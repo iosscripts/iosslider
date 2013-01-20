@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.55 (01/16/2013)
+ * Version: v1.1.56 (01/20/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -991,6 +991,7 @@
 				'scrollbarElasticPullResistance': 0.9,
 				'desktopClickDrag': false,
 				'keyboardControls': false,
+				'tabToAdvance': false,
 				'responsiveSlideContainer': true,
 				'responsiveSlides': true,
 				'navSlideSelector': '',
@@ -1597,36 +1598,34 @@
 					
 				}
 				
-				if(settings.keyboardControls && !shortContent) {
-					
+				if((settings.keyboardControls || settings.tabToAdvance) && !shortContent) {
+
 					$(document).bind('keydown.iosSliderEvent', function(e) {
 						
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
 						
-						switch(e.keyCode) {
+						if((e.keyCode == 37) && settings.keyboardControls) {
 							
-							case 37:
-								
-								var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+							e.preventDefault();
+							
+							var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
 
-								if((slide > 0) || settings.infiniteSlider) {
-									helpers.changeSlide(slide - 1, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
-								} 
+							if((slide > 0) || settings.infiniteSlider) {
+								helpers.changeSlide(slide - 1, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
+							} 
 								
-							break;
+						} else if(((e.keyCode == 39) && settings.keyboardControls) || ((e.keyCode == 9) && settings.tabToAdvance)) {
 							
-							case 39:
-								
-								var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
-								
-								if((slide < childrenOffsets.length-1) || settings.infiniteSlider) {
-									helpers.changeSlide(slide + 1, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
-								}
-								
-							break;
+							e.preventDefault();
 							
+							var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+								
+							if((slide < childrenOffsets.length-1) || settings.infiniteSlider) {
+								helpers.changeSlide(slide + 1, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
+							}
+								
 						}
 					
 					});
