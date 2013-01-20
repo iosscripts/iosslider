@@ -1,5 +1,11 @@
 <h1>Changelog</h1>
 
+<h4>2013/01/20 - v1.1.56</h4>
+
+<ul>
+	<li>Added option: <em>tabToAdvance</em></li>
+</ul>
+
 <h4>2012/11/07 - v1.1.32</h4>
 
 <ul>

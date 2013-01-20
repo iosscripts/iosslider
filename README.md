@@ -257,6 +257,12 @@ $(document).ready(function() {
 </tr>
 
 <tr>
+	<td>tabToAdvance</td>
+	<td>false</td>
+	<td>(boolean) Tab key can be used to navigate the slider forward.</td>
+</tr>
+
+<tr>
 <td>responsiveSlideContainer</td>
 <td>true</td>
 <td>(boolean) Width of slide container becomes responsive to the width/height of its parent element. Slide container dynamically collapse to the width/height of the parent element when wider/taller.</td>
