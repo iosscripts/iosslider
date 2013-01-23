@@ -1149,7 +1149,7 @@
 					slideNodeWidths = new Array();
 					slideNodeOuterWidths = new Array();
 					
-					//$(slideNodes).css('width', '');
+					$(slideNodes).css('width', '');
 					
 					sliderMax[sliderNumber] = 0;
 					childrenOffsets = new Array();
