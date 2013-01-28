@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.58 (01/24/2013)
+ * Version: v1.1.59 (01/28/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -2285,7 +2285,8 @@
 					clearTimeout(scrollTimeouts[i]);
 				}
 	    		
-	    		$this.removeData(['iosslider', 'args']);
+	    		$this.removeData('iosslider');
+	    		$this.removeData('args');
 		    	
 			});
 		
