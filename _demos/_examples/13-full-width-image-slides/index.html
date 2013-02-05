@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	
+		<!-- META -->
+		<meta charset = "utf-8">
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta name = "apple-mobile-web-app-capable" content = "yes" /> 
+		
+		<style type="text/css">
+			.fluidHeight {
+				position: relative;
+				width: 100%;
+				height: 300px;
+			}
+			
+			/* 
+			 * below 900px, switch to percentage based responsive height.
+			 * padding of 33.333% is calculated by using the 
+			 * image ratio 300px/900px = .333 * 100% = 33.333% 
+			 */
+			@media screen and (max-width: 900px) {
+				
+				.fluidHeight {
+					height: 0;
+					padding: 0 0 33.333% 0;
+				}
+				
+			}
+			
+			.sliderContainer {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+			}
+
+			.iosSlider {
+				width: 100%;
+				height: 100%;
+				background: #aaa;
+			}
+			
+			.iosSlider .slider {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.iosSlider .slider .item {
+				position: relative;
+				top: 0;
+				left: 0;
+				
+				max-width: 900px;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.iosSlider .slider .item img {
+				position: relative;
+				top: 0;
+				left: 0;
+				max-width: 900px;
+				width: 100%;
+				margin: 0 auto;
+			}
+		</style>
+		
+		<!-- jQuery library -->
+		<script type="text/javascript" src = "../../../_lib/jquery-1.4.min.js"></script>
+		<script type="text/javascript" src = "../../../_lib/jquery.easing-1.3.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../../_src/jquery.iosslider.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+			
+				$('.iosSlider').iosSlider({
+					snapToChildren: true,
+					desktopClickDrag: true,
+					infiniteSlider: true,
+					snapSlideCenter: true
+				});
+				
+			});
+		</script>
+		
+		<title>Ex #12: Image Slides</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'fluidHeight'>
+			
+			<div class = 'sliderContainer'>
+			
+				<div class = 'iosSlider'>
+				
+					<div class = 'slider'>
+					
+						<div class = 'item'>
+							<img src = 'h-slider-1.jpg' />
+						</div>
+						
+						<div class = 'item'>
+							<img src = 'h-slider-2.jpg' />
+						</div>
+						
+						<div class = 'item'>
+							<img src = 'h-slider-3.jpg' />
+						</div>
+						
+						<div class = 'item'>
+							<img src = 'h-slider-4.jpg' />
+						</div>
+					
+					</div>
+				
+				</div>
+			
+			</div>
+		
+		</div>
+			
+	</body>
+
+</html>
