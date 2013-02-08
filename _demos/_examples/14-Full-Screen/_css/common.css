@@ -1,0 +1,47 @@
+.sliderContainer {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.iosSlider {
+	position: relative;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+.iosSlider .slider {
+	width: 100%;
+	height: 100%;
+}
+
+.iosSlider .slider .item {
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+
+.iosSlider .slider .item1 {
+	background: #666;
+}
+
+.iosSlider .slider .item2 {
+	background: #999;
+}
+
+.iosSlider .slider .item3 {
+	background: #aaa;
+}
+
+.iosSlider .slider .item4 {
+	background: #ddd;
+}
+
+.iosSlider .slider .item5 {
+	background: #777;
+}
