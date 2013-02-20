@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.59 (01/28/2013)
+ * Version: v1.1.60 (02/19/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -2216,7 +2216,7 @@
 								isMouseDown = false;
 								
 								if(currentSlider == undefined) {
-									return false;
+									return true;
 								}
 
 								helpers.slowScrollHorizontal(currentSlider, slideNodes, scrollTimeouts, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, currentEventNode, snapOverride, centeredSlideOffset, settings);
