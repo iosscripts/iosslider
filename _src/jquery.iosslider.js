@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.60 (02/19/2013)
+ * Version: v1.1.61 (02/23/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -2332,7 +2332,12 @@
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 				
-				if(!data.settings.infiniteSlider) {
+				if($(data.scrollerNode).children().size() == 0) {
+				
+					$(data.scrollerNode).append(slideNode);
+					$this.data('args').currentSlideNumber = 1;
+					
+				} else if(!data.settings.infiniteSlider) {
 				
 					if(slidePosition <= data.numberOfSlides) {
 						$(data.scrollerNode).children(':eq(' + (slidePosition - 1) + ')').before(slideNode);
