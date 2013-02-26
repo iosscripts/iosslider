@@ -27,10 +27,7 @@
 					desktopClickDrag: true,
 					infiniteSlider: true,
 					snapSlideCenter: true,
-					onSlideChange: slideChange,
-					stageCSS: {
-						overflow: 'visible'
-					}
+					onSlideChange: slideChange
 				});
 				
 			});
@@ -54,40 +51,36 @@
 	
 	<body>
 		
-		<div class = 'containerOuter'>
-		
-			<div class = 'container'>
+		<div class = 'fluidHeight'>
+			
+			<div class = 'sliderContainer'>
 				
-				<div class = 'iosSliderContainer'>
+				<div class = 'iosSlider'>
+				
+					<div class = 'slider'>
 					
-					<div class = 'iosSlider'>
-					
-						<div class = 'slider'>
-						
-							<div class = 'item item1'>
-								<img src = '../../../_site-demo/_img/h-slider-1.jpg' />
-							</div>
-							<div class = 'item item2'>
-								<img src = '../../../_site-demo/_img/h-slider-2.jpg' />
-							</div>
-							<div class = 'item item3'>
-								<img src = '../../../_site-demo/_img/h-slider-3.jpg' />
-							</div>
-							<div class = 'item item4'>
-								<img src = '../../../_site-demo/_img/h-slider-4.jpg' />
-							</div>
-							<div class = 'item item5'>
-								<img src = '../../../_site-demo/_img/h-slider-5.jpg' />
-							</div>
-						
+						<div class = 'item'>
+							<img src = '../../../_site-demo/_img/h-slider-1.jpg' />
+						</div>
+						<div class = 'item'>
+							<img src = '../../../_site-demo/_img/h-slider-2.jpg' />
+						</div>
+						<div class = 'item'>
+							<img src = '../../../_site-demo/_img/h-slider-3.jpg' />
+						</div>
+						<div class = 'item'>
+							<img src = '../../../_site-demo/_img/h-slider-4.jpg' />
+						</div>
+						<div class = 'item'>
+							<img src = '../../../_site-demo/_img/h-slider-5.jpg' />
 						</div>
 					
 					</div>
-					
+				
 				</div>
-			
+				
 			</div>
-					
+		
 		</div>
 		
 		<div class = 'indicators'>

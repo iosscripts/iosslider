@@ -3,40 +3,35 @@ body {
 	overflow: hidden;
 }
 
-.containerOuter {
-	position: absolute;
-	left: 0;
-	right: 0;
-	background: #aaa;
-	height: 200px;
-	overflow: hidden;
-}
-
-.container {
+.fluidHeight {
 	position: relative;
 	width: 100%;
-	height: 200px;
-	margin: 0 auto;
-	overflow: visible;
+	height: 300px;
 }
 
-.container .iosSliderContainer {
+/* 
+ * below 900px, switch to percentage based responsive height.
+ * padding of 33.333% is calculated by using the 
+ * image ratio 300px/900px = .333 * 100% = 33.333% 
+ */
+@media screen and (max-width: 900px) {
+	
+	.fluidHeight {
+		height: 0;
+		padding: 0 0 33.333% 0;
+	}
+	
+}
+
+.sliderContainer {
 	position: absolute;
-	top: 0;
-	left: 0;
 	width: 100%;
-	height: 200px;
-	margin: 0 0 0 0;
-	overflow: visible;
+	height: 100%;
 }
 
 .iosSlider {
-	position: relative;
-	top: 0;
-	left: 0;
-	overflow: visible;
 	width: 100%;
-	height: 200px;
+	height: 100%;
 }
 
 .iosSlider .slider {
@@ -45,42 +40,29 @@ body {
 }
 
 .iosSlider .slider .item {
-	float: left;
-	width: 100%;
+	position: relative;
+	top: 0;
+	left: 0;
+	
+	width: 80%;
 	height: 100%;
-	padding: 0 50px;
-	margin: 0 -100px;
-}
-
-.iosSlider .slider .item1 {
-	background: #666;
-}
-
-.iosSlider .slider .item2 {
-	background: #999;
-}
-
-.iosSlider .slider .item3 {
-	background: #aaa;
-}
-
-.iosSlider .slider .item4 {
-	background: #ddd;
-}
-
-.iosSlider .slider .item5 {
-	background: #777;
+	text-align: center;
 }
 
 .iosSlider .slider .item img {
+	position: relative;
+	top: 0;
+	left: 0;
+	max-width: 90%;
 	width: 100%;
+	margin: 0 auto;
 }
 
 .indicators {
 	position: relative;
-	top: 205px;
+	top: 10px;
 	left: 0;
-	width: 1000px;
+	width: 800px;
 	height: 10px;
 	margin: 0 auto;
 	z-index: 10;
