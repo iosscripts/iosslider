@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.61 (02/23/2013)
+ * Version: v1.1.62 (02/28/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1803,12 +1803,12 @@
 							eventY = e.pageY;
 							
 							if(!isMouseDown) {
-								return false;
+								return true;
 							}
 							
 							if(!isIe) {
 								if((typeof e.webkitMovementX != 'undefined' || typeof e.webkitMovementY != 'undefined') && e.webkitMovementY === 0 && e.webkitMovementX === 0) {
-									return false;
+									return true;
 								}
 							}
 							
