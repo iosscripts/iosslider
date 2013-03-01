@@ -1,5 +1,8 @@
 $(document).ready(function() {
 	
+	$('.debug #touch').html('isTouch: <strong>' + ('ontouchstart' in window) + '</strong>');
+	$('.debug #orientation').html('orientationChange: <strong>' + ('onorientationchange' in window) + '</strong>');
+	
 	$('.default-slider').iosSlider({
 		desktopClickDrag: true,
 		navNextSelector: $('.default-slider .next'),

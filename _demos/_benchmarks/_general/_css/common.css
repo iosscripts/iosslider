@@ -9,7 +9,7 @@ p {
 }
 
 .debug {
-	position: fixed;
+	/*position: fixed;
 	bottom: 0;
 	right: 0;
 	width: 200px;
@@ -17,7 +17,14 @@ p {
 	background: #fff;
 	border: 1px solid #000;
 	z-index: 20;
-	display: none;
+	display: none;*/
+	
+	padding: 10px 0;
+}
+
+.debug ul {
+	margin: 10px 0 10px 30px;
+	list-style-type: disc;
 }
 
 /* defalut */
