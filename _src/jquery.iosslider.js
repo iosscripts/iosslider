@@ -1786,12 +1786,7 @@
 								width: (scrollbarWidth - scrollBorder) + 'px'
 							});
 							
-						} 
-						
-						//var scrollbarSubtractor = ($(this)[0] === $(scrollbarNode)[0]) ? (sliderMin[sliderNumber]) : 0;
-						
-						//xScrollStartPosition = (helpers.getSliderOffset(this, 'x') - eventX - scrollbarSubtractor) * -1;
-						//yScrollStartPosition = (helpers.getSliderOffset(this, 'y') - eventY) * -1;
+						}
 
 						xCurrentScrollRate[1] = eventX;
 						yCurrentScrollRate[1] = eventY;
