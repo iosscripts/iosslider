@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.63 (03/02/2013)
+ * Version: v1.1.64 (03/11/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -265,7 +265,7 @@
 			
 			if(slideChanged) {
 				
-				var args = new helpers.args(settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, endOffset, true);
+				var args = new helpers.args('change', settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, endOffset);
 				$(node).parent().data('args', args);
 				
 				if(settings.onSlideChange != '') {
@@ -559,7 +559,7 @@
 		onSlideComplete: function(settings, node, slideNode, newChildOffset, sliderNumber) {
 			
 			var isChanged = (onChangeEventLastFired[sliderNumber] != newChildOffset) ? true : false;
-			var args = new helpers.args(settings, $(node), slideNode, newChildOffset, newChildOffset, isChanged);
+			var args = new helpers.args('complete', settings, $(node), slideNode, newChildOffset, newChildOffset);
 			$(node).parent().data('args', args);
 				
 			if(settings.onSlideComplete != '') {
@@ -814,7 +814,7 @@
 				if((i == 0) && (settings.onSlideStart != '')) {
 					var tempOffset = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;		
 				
-					settings.onSlideStart(new helpers.args(settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, slide, false));
+					settings.onSlideStart(new helpers.args('start', settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, slide));
 				}
 					
 			}
@@ -918,30 +918,32 @@
 		
 		},
 						
-		args: function(settings, node, activeSlideNode, newChildOffset, targetSlideOffset, isChanged) {
-
+		args: function(func, settings, node, activeSlideNode, newChildOffset, targetSlideOffset) {
+			
+			this.prevSlideNumber = ($(node).parent().data('args') == undefined) ? undefined : $(node).parent().data('args').prevSlideNumber;
+			this.prevSlideObject = ($(node).parent().data('args') == undefined) ? undefined : $(node).parent().data('args').prevSlideObject;
+			this.targetSlideNumber = undefined;
+			this.targetSlideObject = undefined;
+			this.slideChanged = false;
+			
+			if(func == 'load') {
+			} else if(func == 'start') {
+			} else if(func == 'change') {
+				this.slideChanged = true;
+				this.prevSlideNumber = ($(node).parent().data('args') == undefined) ? settings.startAtSlide : $(node).parent().data('args').currentSlideNumber;	
+				this.prevSlideObject = $(node).children(':eq(' + this.prevSlideNumber + ')');
+			} else if(func == 'complete') {
+				this.slideChanged = $(node).parent().data('args').slideChanged;
+			}
+			
 			this.settings = settings;
 			this.data = $(node).parent().data('iosslider');
-			this.slideChanged = isChanged;
 			this.sliderObject = node;
 			this.sliderContainerObject = $(node).parent();
+
 			this.currentSlideObject = activeSlideNode;
 			this.currentSlideNumber = newChildOffset + 1;
-			this.targetSlideObject = $(node).children(':eq(' + targetSlideOffset + ')');
-			this.targetSlideNumber = targetSlideOffset + 1;
 			this.currentSliderOffset = helpers.getSliderOffset(node, 'x') * -1;
-			
-			try {
-				if($(node).parent().data('args') == undefined) {
-					this.prevSlideNumber = settings.startAtSlide;
-				} else if($(node).parent().data('args').prevSlideNumber == this.currentSlideNumber) {
-					this.prevSlideNumber = $(node).parent().data('args').currentSlideNumber;					
-				} else {
-					this.prevSlideNumber = $(node).parent().data('args').prevSlideNumber;
-				}
-				
-				this.prevSlideObject = $(node).children(':eq(' + this.prevSlideNumber + ')');
-			} catch(e) {}
 
 		},
 		
@@ -1123,7 +1125,7 @@
 				var newChildOffset = helpers.calcActiveOffset(settings, helpers.getSliderOffset($(scrollerNode), 'x'), childrenOffsets, stageWidth, infiniteSliderOffset[sliderNumber], numberOfSlides, undefined, sliderNumber);
 				var tempOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
 				
-				var args = new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset, tempOffset, false);
+				var args = new helpers.args('load', settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset, tempOffset);
 				$(stageNode).data('args', args);
 
 				if(settings.onSliderLoaded != '') {
@@ -1860,7 +1862,7 @@
 							yScrollStartPosition = (helpers.getSliderOffset(this, 'y') - eventY) * -1;
 							
 							var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
-							var args = new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + slide + ')'), slide, slide, false);
+							var args = new helpers.args('start', settings, scrollerNode, $(scrollerNode).children(':eq(' + slide + ')'), slide, slide);
 							$(stageNode).data('args', args);
 
 							if(settings.onSlideStart != '') {
@@ -2114,7 +2116,7 @@
 								activeChildInfOffsets[sliderNumber] = tempOffset;
 								snapOverride = true;
 								
-								var args = new helpers.args(settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset, tempOffset, true);
+								var args = new helpers.args('change', settings, scrollerNode, $(scrollerNode).children(':eq(' + tempOffset + ')'), tempOffset, tempOffset);
 								$(stageNode).data('args', args);
 								
 								if(settings.onSlideChange != '') {
@@ -2352,7 +2354,7 @@
 
 				methods.init(data.settings, this);
 				
-				var args = new helpers.args(data.settings, data.scrollerNode, $(data.scrollerNode).children(':eq(' + (data.settings.startAtSlide - 1) + ')'), data.settings.startAtSlide - 1, data.settings.startAtSlide - 1, false);
+				var args = new helpers.args('update', data.settings, data.scrollerNode, $(data.scrollerNode).children(':eq(' + (data.settings.startAtSlide - 1) + ')'), data.settings.startAtSlide - 1, data.settings.startAtSlide - 1);
 				$(data.stageNode).data('args', args);
 				
 				if(data.settings.onSliderUpdate != '') {
