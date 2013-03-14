@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.64 (03/11/2013)
+ * Version: v1.1.65 (03/13/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1798,12 +1798,6 @@
 					});
 					
 					$(touchSelectionMove).bind('touchmove.iosSliderEvent mousemove.iosSliderEvent', function(e) {
-						
-						if(e.type == 'touchmove') {
-							$(touchSelectionMove).unbind('mousemove.iosSliderEvent');
-						} else {
-							$(touchSelectionMove).unbind('touchmove.iosSliderEvent');
-						}
 						
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
