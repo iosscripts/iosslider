@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.66 (03/19/2013)
+ * Version: v1.1.67 (03/19/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1716,7 +1716,10 @@
 						
 						isUnselectable = helpers.isUnselectable(e.target, settings);
 						
-						if(isUnselectable) return true;
+						if(isUnselectable) {
+							touchStartFlag = false;
+							return true;
+						}
 						
 						currentEventNode = ($(this)[0] === $(scrollbarNode)[0]) ? scrollbarNode : scrollerNode;
 						
