@@ -65,6 +65,30 @@ $(document).ready(function() {
 		});
 	});
 	
+	$('.autoslide-slider4').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		infiniteSlider: true,
+		autoSlide: false,
+		autoSlideTimer: 2000,
+		startAtSlide: '2',
+		scrollbar: true,
+		navNextSelector: $('.autoslide-slider4 .next'),
+		navPrevSelector: $('.autoslide-slider4 .prev')
+	});
+	
+	$('.autoslide-slider4-container .goToBlock .go').eq(0).bind('click', function() {
+	
+		$('.autoslide-slider4').iosSlider('autoSlidePlay');
+	
+	});
+
+	$('.autoslide-slider4-container .goToBlock .go').eq(1).bind('click', function() {
+	
+		$('.autoslide-slider4').iosSlider('autoSlidePause');
+	
+	});
+	
 	$('.variable-width-slider').iosSlider({
 		desktopClickDrag: true,
 		snapToChildren: true

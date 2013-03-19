@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.65 (03/13/2013)
+ * Version: v1.1.66 (03/19/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -851,7 +851,7 @@
 		
 		autoSlide: function(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings) {
 			
-			if(!settings.autoSlide) return false;
+			if(!iosSliderSettings[sliderNumber].autoSlide) return false;
 			
 			helpers.autoSlidePause(sliderNumber);
 
@@ -2491,19 +2491,41 @@
 			
 			});	
 		
-		}
+		},
 		
-		/*autoSlide: function(boolean) {
+		autoSlidePause: function() {
 			
-			helpers.autoSlidePause(data.sliderNumber);
+			return this.each(function() {
+			
+				var $this = $(this);
+				var data = $this.data('iosslider');
+				if(data == undefined) return false;
+				
+				helpers.autoSlidePause(data.sliderNumber);
+				
+				return data;
+			
+			});	
 		
 		},
 		
 		autoSlidePlay: function() {
-		
-			helpers.autoSlide($(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.slideNodeOuterWidths, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
 			
-		}*/
+			return this.each(function() {
+			
+				var $this = $(this);
+				var data = $this.data('iosslider');
+				if(data == undefined) return false;
+				
+				iosSliderSettings[data.sliderNumber].autoSlide = true;
+				
+				helpers.autoSlide($(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.slideNodeOuterWidths, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
+				
+				return data;
+			
+			});	
+			
+		}
 	
 	}
 	

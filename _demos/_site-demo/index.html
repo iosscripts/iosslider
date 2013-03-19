@@ -26,17 +26,20 @@
 				$('.iosSlider').iosSlider({
 					desktopClickDrag: true,
 					snapToChildren: true,
+					infiniteSlider: true,
 					navSlideSelector: '.sliderContainer .slideSelectors .item',
 					onSlideComplete: slideComplete,
 					onSliderLoaded: sliderLoaded,
 					onSlideChange: slideChange,
 					autoSlide: true,
+					autoSlideTimer: 2000,
 					scrollbar: true,
 					scrollbarContainer: '.sliderContainer .scrollbarContainer',
 					scrollbarMargin: '0',
-					scrollbarBorderRadius: '0'
+					scrollbarBorderRadius: '0',
+					keyboardControls: true
 				});
-				
+			
 			});
 			
 			function slideChange(args) {
