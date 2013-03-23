@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.1.68 (03/20/2013)
+ * Version: v1.2.0 (03/23/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1170,6 +1170,7 @@
 						zIndex: settings.stageCSS.zIndex,
 						'webkitPerspective': 1000,
 						'webkitBackfaceVisibility': 'hidden',
+						'-ms-touch-action': 'pan-y',
 						width: stageWidth
 					});
 					
@@ -1702,7 +1703,7 @@
 					}
 					
 					$(touchSelection).bind('mousedown.iosSliderEvent touchstart.iosSliderEvent', function(e) {
-					
+						
 						if(touchStartFlag) return true;
 						touchStartFlag = true;
 						
