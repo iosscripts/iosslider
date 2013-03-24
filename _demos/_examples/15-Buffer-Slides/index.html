@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		
+		<!-- META -->
+		<meta charset = "utf-8">
+		
+		<!-- CSS -->
+		<link rel = "stylesheet" href = "_css/default.css" />
+		<link rel = "stylesheet" media = "screen" href = "_css/common.css" />
+		
+		<!-- JS -->
+		<script src = "../../../_lib/jquery-1.4.min.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../../_src/jquery.iosslider.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				var arrayOfImages = new Array();
+				var bufferDistance = 4;
+				
+				$('.iosSlider').iosSlider({
+					snapToChildren: true,
+					desktopClickDrag: true,
+					onSlideChange: function(args) {
+						
+						$('.item:eq(' + (args.currentSlideNumber + bufferDistance - 2) + ')').addClass('item' + (args.currentSlideNumber + bufferDistance - 1));
+						
+					}
+				});
+				
+			}); 
+		</script>
+		
+		<title>iosScripts/iosSlider demos - Full Screen Slides</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'sliderContainer'>
+		
+			<div class = 'iosSlider'>
+			
+				<div class = 'slider'>
+				
+					<div class = 'item item1'></div>
+					<div class = 'item item2'></div>
+					<div class = 'item item3'></div>
+					<div class = 'item item4'></div>
+					<div class = 'item item5'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+					<div class = 'item'></div>
+				
+				</div>
+			
+			</div>
+		
+		</div>
+						
+	</body>
+	
+</html>
