@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.2.0 (03/23/2013)
+ * Version: v1.2.1 (03/31/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1699,7 +1699,7 @@
 					
 						touchSelection = touchSelection.add(scrollbarNode);
 						touchSelectionMove = touchSelectionMove.add(scrollbarBlockNode);
-						
+
 					}
 					
 					$(touchSelection).bind('mousedown.iosSliderEvent touchstart.iosSliderEvent', function(e) {
@@ -1724,7 +1724,7 @@
 						}
 						
 						currentEventNode = ($(this)[0] === $(scrollbarNode)[0]) ? scrollbarNode : scrollerNode;
-						
+
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
@@ -1794,7 +1794,12 @@
 							});
 							
 						}
-
+						
+						var scrollbarSubtractor = ($(this)[0] === $(scrollbarNode)[0]) ? (sliderMin[sliderNumber]) : 0;
+						
+						xScrollStartPosition = (helpers.getSliderOffset(this, 'x') - eventX - scrollbarSubtractor) * -1;
+						yScrollStartPosition = (helpers.getSliderOffset(this, 'y') - eventY) * -1;
+						
 						xCurrentScrollRate[1] = eventX;
 						yCurrentScrollRate[1] = eventY;
 						
@@ -1803,7 +1808,7 @@
 					});
 					
 					$(touchSelectionMove).bind('touchmove.iosSliderEvent mousemove.iosSliderEvent', function(e) {
-						
+
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
@@ -1855,11 +1860,7 @@
 						yScrollDistance = (yCurrentScrollRate[1] - yCurrentScrollRate[0]) / 2;
 
 						if(!xScrollStarted) {
-							
-							var scrollbarSubtractor = ($(this)[0] === $(scrollbarNode)[0]) ? (sliderMin[sliderNumber]) : 0;
-							xScrollStartPosition = (helpers.getSliderOffset(this, 'x') - eventX - scrollbarSubtractor) * -1;
-							yScrollStartPosition = (helpers.getSliderOffset(this, 'y') - eventY) * -1;
-							
+
 							var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
 							var args = new helpers.args('start', settings, scrollerNode, $(scrollerNode).children(':eq(' + slide + ')'), slide, slide);
 							$(stageNode).data('args', args);
@@ -1901,7 +1902,7 @@
 								
 								currentTouches = e.touches.length;
 							}
-							
+
 							if(settings.infiniteSlider) {
 
 								if(scrollPosition <= (sliderMax[sliderNumber] * -1)) {
@@ -2056,7 +2057,7 @@
 								helpers.showScrollbar(settings, scrollbarClass);
 
 								scrollbarDistance = Math.floor((xScrollStartPosition - eventX - edgeDegradation - sliderMin[sliderNumber] + snapCenteredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber] + centeredSlideOffset) * (scrollbarStageWidth - scrollMargin - scrollbarWidth) * scrollbarMultiplier);
-								
+
 								var width = scrollbarWidth;
 								
 								if(scrollPosition >= (sliderMin[sliderNumber] * -1 + snapCenteredSlideOffset + scrollerWidth)) {
