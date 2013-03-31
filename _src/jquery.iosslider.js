@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.2.1 (03/31/2013)
+ * Version: v1.2.2 (03/31/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1872,19 +1872,18 @@
 						}
 						
 						if(((yScrollDistance > 3) || (yScrollDistance < -3)) && ((xScrollDistance < 3) && (xScrollDistance > -3)) && (e.type == 'touchmove') && (!xScrollStarted)) {
+						
 							preventXScroll = true;
+							
 						}
 						
 						if(((xScrollDistance > 5) || (xScrollDistance < -5)) && (e.type == 'touchmove')) {
 						
 							e.preventDefault();
-							xScrollStarted = true;
-							
-						} else if(e.type != 'touchmove') {
-							
-							xScrollStarted = true;
 							
 						}
+						
+						xScrollStarted = true;
 						
 						if(xScrollStarted && !preventXScroll) {
 
