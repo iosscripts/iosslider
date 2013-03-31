@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.2.2 (03/31/2013)
+ * Version: v1.2.3 (03/31/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1747,7 +1747,11 @@
 									window.getSelection().removeAllRanges();
 								}
 							} else if (document.selection) {
-								document.selection.empty();
+								if(isIe8) {
+									try { document.selection.empty(); } catch(e) { /* absorb ie8 bug */ }
+								} else {
+									document.selection.empty();
+								}
 							}
 							
 							eventX = e.pageX;
@@ -1833,7 +1837,11 @@
 									window.getSelection().removeAllRanges();
 								}
 							} else if (document.selection) {
-								document.selection.empty();
+								if(isIe8) {
+									try { document.selection.empty(); } catch(e) { /* absorb ie8 bug */ }
+								} else {
+									document.selection.empty();
+								}
 							}
 						
 							eventX = e.pageX;
