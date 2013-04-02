@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.2.3 (03/31/2013)
+ * Version: v1.2.4 (04/01/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -2146,8 +2146,6 @@
 					
 					$(touchSelection).bind('touchend.iosSliderEvent', function(e) {
 						
-						$(eventObject).unbind('mouseup.iosSliderEvent' + sliderNumber);
-						
 						var e = e.originalEvent;
 						
 						if(touchLocks[sliderNumber] || shortContent) return true;
@@ -2176,8 +2174,6 @@
 					});
 						
 					$(eventObject).bind('mouseup.iosSliderEvent' + sliderNumber, function(e) {
-
-						$(touchSelection).unbind('touchend.iosSliderEvent');
 
 						if(xScrollStarted) {
 							anchorEvents.unbind('click.disableClick').bind('click.disableClick', helpers.preventClick);
