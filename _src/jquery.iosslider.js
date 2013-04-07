@@ -1816,7 +1816,7 @@
 					});
 					
 					$(touchSelectionMove).bind('touchmove.iosSliderEvent mousemove.iosSliderEvent', function(e) {
-
+						
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
@@ -1834,13 +1834,15 @@
 							
 						} else {
 						
-							if (window.getSelection) {
-								if (window.getSelection().empty) {
+							if(window.getSelection) {
+								if(window.getSelection().empty) {
+									//console.log(window.getSelection().empty);
+									//return true;
 									window.getSelection().empty();
-								} else if (window.getSelection().removeAllRanges) {
+								} else if(window.getSelection().removeAllRanges) {
 									window.getSelection().removeAllRanges();
 								}
-							} else if (document.selection) {
+							} else if(document.selection) {
 								if(isIe8) {
 									try { document.selection.empty(); } catch(e) { /* absorb ie8 bug */ }
 								} else {
@@ -1896,7 +1898,7 @@
 							
 						}
 						
-						if(((xScrollDistance > settings.slideStartVelocityThreshold) || (xScrollDistance < (settings.slideStartVelocityThreshold * -1))) && (e.type == 'touchmove')) {
+						if(((xScrollDistance > settings.slideStartVelocityThreshold) || (xScrollDistance < (settings.slideStartVelocityThreshold * -1)))) {
 						
 							xScrollStarted = true;
 						
@@ -2183,7 +2185,7 @@
 					});
 						
 					$(eventObject).bind('mouseup.iosSliderEvent' + sliderNumber, function(e) {
-
+						
 						if(xScrollStarted) {
 							anchorEvents.unbind('click.disableClick').bind('click.disableClick', helpers.preventClick);
 						} else {
