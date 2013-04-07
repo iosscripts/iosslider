@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.2.4 (04/01/2013)
+ * Version: v1.2.5 (04/06/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -334,9 +334,9 @@
 			elasticFrictionCoefficient = settings.elasticFrictionCoefficient;
 			snapFrictionCoefficient = settings.snapFrictionCoefficient;
 				
-			if((xScrollDistance > 5) && settings.snapToChildren && !snapOverride) {
+			if((xScrollDistance > settings.snapVelocityThreshold) && settings.snapToChildren && !snapOverride) {
 				snapDirection = 1;
-			} else if((xScrollDistance < -5) && settings.snapToChildren && !snapOverride) {
+			} else if((xScrollDistance < (settings.snapVelocityThreshold * -1)) && settings.snapToChildren && !snapOverride) {
 				snapDirection = -1;
 			}
 			
@@ -1004,6 +1004,10 @@
 				'autoSlideTimer': 5000,
 				'autoSlideTransTimer': 750,
 				'infiniteSlider': false,
+				'snapVelocityThreshold': 5,
+				'slideStartVelocityThreshold': 0,
+				'horizontalSlideLockThreshold': 5,
+				'verticalSlideLockThreshold': 3,
 				'stageCSS': {
 					position: 'relative',
 					top: '0',
@@ -1879,19 +1883,24 @@
 							
 						}
 						
-						if(((yScrollDistance > 3) || (yScrollDistance < -3)) && ((xScrollDistance < 3) && (xScrollDistance > -3)) && (e.type == 'touchmove') && (!xScrollStarted)) {
+						//if(((yScrollDistance > 3) || (yScrollDistance < -3)) && ((xScrollDistance < 3) && (xScrollDistance > -3)) && (e.type == 'touchmove') && (!xScrollStarted)) {
+						if(((yScrollDistance > settings.verticalSlideLockThreshold) || (yScrollDistance < (settings.verticalSlideLockThreshold * -1))) && (e.type == 'touchmove') && (!xScrollStarted)) {
 						
 							preventXScroll = true;
 							
 						}
 						
-						if(((xScrollDistance > 5) || (xScrollDistance < -5)) && (e.type == 'touchmove')) {
+						if(((xScrollDistance > settings.horizontalSlideLockThreshold) || (xScrollDistance < (settings.horizontalSlideLockThreshold * -1))) && (e.type == 'touchmove')) {
 						
 							e.preventDefault();
 							
 						}
 						
-						xScrollStarted = true;
+						if(((xScrollDistance > settings.slideStartVelocityThreshold) || (xScrollDistance < (settings.slideStartVelocityThreshold * -1))) && (e.type == 'touchmove')) {
+						
+							xScrollStarted = true;
+						
+						}
 						
 						if(xScrollStarted && !preventXScroll) {
 
