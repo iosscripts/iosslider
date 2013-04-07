@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.2.5 (04/06/2013)
+ * Version: v1.2.6 (04/06/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1836,9 +1836,7 @@
 						
 							if(window.getSelection) {
 								if(window.getSelection().empty) {
-									//console.log(window.getSelection().empty);
-									//return true;
-									window.getSelection().empty();
+									//window.getSelection().empty(); /* removed to enable input fields within the slider */
 								} else if(window.getSelection().removeAllRanges) {
 									window.getSelection().removeAllRanges();
 								}
