@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.2.6 (04/06/2013)
+ * Version: v1.2.7 (04/11/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -111,7 +111,7 @@
 		},
 		
 		slowScrollHorizontalInterval: function(node, slideNodes, newOffset, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, activeChildOffset, originalOffsets, childrenOffsets, infiniteSliderWidth, numberOfSlides, slideNodeOuterWidths, sliderNumber, centeredSlideOffset, endOffset, settings) {
-
+			
 			if(settings.infiniteSlider) {
 				
 				if(newOffset <= (sliderMax[sliderNumber] * -1)) {
@@ -450,6 +450,7 @@
 
 			var slideChanged = false;
 			var newChildOffset = helpers.calcActiveOffset(settings, nodeOffset, tempChildrenOffsets, stageWidth, tempInfiniteSliderOffset, numberOfSlides, activeChildOffsets[sliderNumber], sliderNumber);
+
 			var tempOffset = (newChildOffset + tempInfiniteSliderOffset + numberOfSlides)%numberOfSlides;
 
 			if(settings.snapToChildren) {
@@ -483,10 +484,9 @@
 				}
 			
 			}
-
+			
 			if(settings.snapToChildren || (((nodeOffset > (sliderMin[sliderNumber] * -1)) || (nodeOffset < (sliderMax[sliderNumber] * -1))) && !settings.infiniteSlider)) {
 				
-				nodeOffset = helpers.getSliderOffset(node, 'x');
 				distanceOffsetArray.splice(0, distanceOffsetArray.length);
 				
 				while((nodeOffset < (tempChildrenOffsets[newChildOffset] - 0.5)) || (nodeOffset > (tempChildrenOffsets[newChildOffset] + 0.5))) {
@@ -497,7 +497,7 @@
 				}
 
 				distanceOffsetArray[distanceOffsetArray.length] = tempChildrenOffsets[newChildOffset];
-	
+				
 			}
 
 			var jStart = 1;
@@ -683,13 +683,16 @@
 		}, 
 
         calcActiveOffset: function(settings, offset, childrenOffsets, stageWidth, infiniteSliderOffset, numberOfSlides, activeChildOffset, sliderNumber) {
-								
+
 			var isFirst = false;
 			var arrayOfOffsets = new Array();
 			var newChildOffset;
-
+			
+			if(offset > childrenOffsets[0]) newChildOffset = 0;
+			if(offset < (childrenOffsets[childrenOffsets.length-1])) newChildOffset = numberOfSlides - 1;
+			
 			for(var i = 0; i < childrenOffsets.length; i++) {
-				
+								
 				if((childrenOffsets[i] <= offset) && (childrenOffsets[i] > (offset - stageWidth))) {
 				
 					if(!isFirst && (childrenOffsets[i] != offset)) {
@@ -716,7 +719,7 @@
 			for(var i = 0; i < arrayOfOffsets.length; i++) {
 				
 				var newDistance = Math.abs(offset - arrayOfOffsets[i]);
-				
+
 				if(newDistance < distance) {
 					closestChildOffset = arrayOfOffsets[i];
 					distance = newDistance;
@@ -727,9 +730,8 @@
 			for(var i = 0; i < childrenOffsets.length; i++) {
 				
 				if(closestChildOffset == childrenOffsets[i]) {
-					
 					newChildOffset = i;
-					
+						
 				}
 				
 			}
@@ -1170,7 +1172,7 @@
 						position: settings.stageCSS.position,
 						top: settings.stageCSS.top,
 						left: settings.stageCSS.left,
-						overflow: settings.stageCSS.overflow,
+						overflow: 'visible',
 						zIndex: settings.stageCSS.zIndex,
 						'webkitPerspective': 1000,
 						'webkitBackfaceVisibility': 'hidden',
@@ -2065,7 +2067,7 @@
 								}
 							
 							}
-
+							
 							helpers.setSliderOffset(scrollerNode, ((xScrollStartPosition - scrollbarSubtractor - eventX - edgeDegradation) * -1 * scrollbarMultiplier) - scrollbarSubtractor + snapCenteredSlideOffsetScrollbar);
 							
 							if(settings.scrollbar) {
@@ -2107,11 +2109,11 @@
 							if(e.type == 'touchmove') {
 								lastTouch = e.touches[0].pageX;
 							}
-
+							
 							var slideChanged = false;
 							var newChildOffset = helpers.calcActiveOffset(settings, (xScrollStartPosition - eventX - edgeDegradation) * -1, childrenOffsets, stageWidth, infiniteSliderOffset[sliderNumber], numberOfSlides, undefined, sliderNumber);
 							var tempOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
-
+							
 							if(settings.infiniteSlider) {
 								
 								if(tempOffset != activeChildInfOffsets[sliderNumber]) {
@@ -2125,7 +2127,7 @@
 								}
 							
 							}
-							
+
 							if(slideChanged) {
 								
 								activeChildOffsets[sliderNumber] = newChildOffset;
