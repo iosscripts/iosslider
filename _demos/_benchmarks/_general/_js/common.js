@@ -78,13 +78,13 @@ $(document).ready(function() {
 	});
 	
 	$('.autoslide-slider4-container .goToBlock .go').eq(0).bind('click', function() {
-		console.log('play');
+
 		$('.autoslide-slider4').iosSlider('autoSlidePlay');
 	
 	});
 
 	$('.autoslide-slider4-container .goToBlock .go').eq(1).bind('click', function() {
-		console.log('pause');
+
 		$('.autoslide-slider4').iosSlider('autoSlidePause');
 	
 	});
@@ -102,13 +102,13 @@ $(document).ready(function() {
 	});
 	
 	$('.autoslide-slider5-container .goToBlock .go').eq(0).bind('click', function() {
-		console.log('play');
+
 		$('.autoslide-slider5').iosSlider('autoSlidePlay');
 	
 	});
 
 	$('.autoslide-slider5-container .goToBlock .go').eq(1).bind('click', function() {
-		console.log('pause');
+
 		$('.autoslide-slider5').iosSlider('autoSlidePause');
 	
 	});
