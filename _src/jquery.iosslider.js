@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.2.7 (04/11/2013)
+ * Version: v1.2.8 (04/11/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -874,7 +874,7 @@
 		},
 		
 		autoSlidePause: function(sliderNumber) {
-			
+
 			clearTimeout(autoSlideTimeouts[sliderNumber]);
 
 		},
@@ -1586,32 +1586,26 @@
 							});
 						
 						}
-						
-						if(!isAutoSlideToggleOn && !shortContent) {
-							helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
-						}
-							
-						$(stageNode).bind('mouseenter.iosSliderEvent', function() {
-							helpers.autoSlidePause(sliderNumber);
-						});
-						
-						$(stageNode).bind('mouseleave.iosSliderEvent', function() {
-						
-							if(!isAutoSlideToggleOn && !shortContent) {
-								helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
-							}
-							
-						});
-						
-						$(stageNode).bind('touchend.iosSliderEvent', function() {
-						
-							if(!isAutoSlideToggleOn && !shortContent) {
-								helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
-							}
-						
-						});
 					
 					}
+					
+					helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
+
+					$(stageNode).bind('mouseleave.iosSliderEvent', function() {
+
+						helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
+						
+					});
+					
+					$(stageNode).bind('touchend.iosSliderEvent', function() {
+					
+						helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
+					
+					});
+
+					$(stageNode).bind('mouseenter.iosSliderEvent', function() {
+						helpers.autoSlidePause(sliderNumber);
+					});
 					
 					$(stageNode).data('iosslider', {
 						obj: $this,
@@ -2520,6 +2514,8 @@
 				var $this = $(this);
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
+				
+				iosSliderSettings[data.sliderNumber].autoSlide = false;
 				
 				helpers.autoSlidePause(data.sliderNumber);
 				

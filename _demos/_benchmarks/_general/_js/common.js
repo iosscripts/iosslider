@@ -78,14 +78,38 @@ $(document).ready(function() {
 	});
 	
 	$('.autoslide-slider4-container .goToBlock .go').eq(0).bind('click', function() {
-	
+		console.log('play');
 		$('.autoslide-slider4').iosSlider('autoSlidePlay');
 	
 	});
 
 	$('.autoslide-slider4-container .goToBlock .go').eq(1).bind('click', function() {
-	
+		console.log('pause');
 		$('.autoslide-slider4').iosSlider('autoSlidePause');
+	
+	});
+	
+	$('.autoslide-slider5').iosSlider({
+		desktopClickDrag: true,
+		snapToChildren: true,
+		infiniteSlider: true,
+		autoSlide: true,
+		autoSlideTimer: 2000,
+		startAtSlide: '2',
+		scrollbar: true,
+		navNextSelector: $('.autoslide-slider4 .next'),
+		navPrevSelector: $('.autoslide-slider4 .prev')
+	});
+	
+	$('.autoslide-slider5-container .goToBlock .go').eq(0).bind('click', function() {
+		console.log('play');
+		$('.autoslide-slider5').iosSlider('autoSlidePlay');
+	
+	});
+
+	$('.autoslide-slider5-container .goToBlock .go').eq(1).bind('click', function() {
+		console.log('pause');
+		$('.autoslide-slider5').iosSlider('autoSlidePause');
 	
 	});
 	

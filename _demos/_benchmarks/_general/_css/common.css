@@ -267,7 +267,8 @@ p {
 .autoslide-slider1,
 .autoslide-slider2,
 .autoslide-slider3,
-.autoslide-slider4 {
+.autoslide-slider4,
+.autoslide-slider5 {
 	position: relative;
 	overflow: hidden;
 	width: 900px;
@@ -277,14 +278,16 @@ p {
 .autoslide-slider1 .slider,
 .autoslide-slider2 .slider,
 .autoslide-slider3 .slider,
-.autoslide-slider4 .slider {
+.autoslide-slider4 .slider,
+.autoslide-slider5 .slider {
 	height: 100%;
 }
 
 .autoslide-slider1 .slider .item,
 .autoslide-slider2 .slider .item,
 .autoslide-slider3 .slider .item,
-.autoslide-slider4 .slider .item {
+.autoslide-slider4 .slider .item,
+.autoslide-slider5 .slider .item {
 	width: 900px;
 	height: 100%;
 }
@@ -302,35 +305,40 @@ p {
 .autoslide-slider1 .slider #item1,
 .autoslide-slider2 .slider #item1,
 .autoslide-slider3 .slider #item1,
-.autoslide-slider4 .slider #item1 {
+.autoslide-slider4 .slider #item1,
+.autoslide-slider5 .slider #item1 {
 	background: #666;
 }
 
 .autoslide-slider1 .slider #item2,
 .autoslide-slider2 .slider #item2,
 .autoslide-slider3 .slider #item2,
-.autoslide-slider4 .slider #item2 {
+.autoslide-slider4 .slider #item2,
+.autoslide-slider5 .slider #item2 {
 	background: #999;
 }
 
 .autoslide-slider1 .slider #item3,
 .autoslide-slider2 .slider #item3,
 .autoslide-slider3 .slider #item3,
-.autoslide-slider4 .slider #item3 {
+.autoslide-slider4 .slider #item3,
+.autoslide-slider5 .slider #item3 {
 	background: #aaa;
 }
 
 .autoslide-slider1 .slider #item4,
 .autoslide-slider2 .slider #item4,
 .autoslide-slider3 .slider #item4,
-.autoslide-slider4 .slider #item4 {
+.autoslide-slider4 .slider #item4,
+.autoslide-slider5 .slider #item4 {
 	background: #ddd;
 }
 
 .autoslide-slider1 .slider #item5,
 .autoslide-slider2 .slider #item5,
 .autoslide-slider3 .slider #item5,
-.autoslide-slider4 .slider #item5 {
+.autoslide-slider4 .slider #item5,
+.autoslide-slider5 .slider #item5 {
 	background: #777;
 }
 
