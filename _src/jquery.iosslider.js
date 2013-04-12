@@ -1172,7 +1172,7 @@
 						position: settings.stageCSS.position,
 						top: settings.stageCSS.top,
 						left: settings.stageCSS.left,
-						overflow: 'visible',
+						overflow: settings.stageCSS.overflow,
 						zIndex: settings.stageCSS.zIndex,
 						'webkitPerspective': 1000,
 						'webkitBackfaceVisibility': 'hidden',
