@@ -6,7 +6,7 @@
  * 
  * Copyright (c) 2012 Marc Whitbread
  * 
- * Version: v1.2.8 (04/11/2013)
+ * Version: v1.2.9 (04/16/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1107,6 +1107,10 @@
 
 				if(settings.infiniteSlider) {
 					settings.scrollbar = false;
+				}
+				
+				if(settings.infiniteSlider && (numberOfSlides == 1)) {
+					settings.infiniteSlider = false;
 				}
 						
 				if(settings.scrollbar) {
