@@ -1,12 +1,15 @@
 /*
  * iosSlider - http://iosscripts.com/iosslider/
  * 
- * A jQuery Horizontal Slider for iPhone/iPad Safari 
- * This plugin turns any wide element into a touch enabled horizontal slider.
+ * Touch Enabled, Responsive jQuery Horizontal Content Slider/Carousel/Image Gallery Plugin
+ *
+ * A jQuery plugin which allows you to integrate a customizable, cross-browser 
+ * content slider into your web presence. Designed for use as a content slider, carousel, 
+ * scrolling website banner, or image gallery.
  * 
- * Copyright (c) 2012 Marc Whitbread
+ * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.9 (04/16/2013)
+ * Version: v1.2.10 (04/19/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -970,6 +973,8 @@
 		
 		init: function(options, node) {
 			
+			console.log(window.location.href);
+
 			has3DTransform = helpers.has3DTransform();
 			
 			var settings = $.extend(true, {
@@ -1180,7 +1185,7 @@
 						zIndex: settings.stageCSS.zIndex,
 						'webkitPerspective': 1000,
 						'webkitBackfaceVisibility': 'hidden',
-						'-ms-touch-action': 'pan-y',
+						'msTouchAction': 'pan-y',
 						width: stageWidth
 					});
 					
