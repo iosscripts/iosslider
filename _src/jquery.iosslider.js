@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.10 (04/19/2013)
+ * Version: v1.2.11 (04/22/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -972,8 +972,6 @@
     var methods = {
 		
 		init: function(options, node) {
-			
-			console.log(window.location.href);
 
 			has3DTransform = helpers.has3DTransform();
 			
@@ -1722,7 +1720,11 @@
 							$(touchSelectionMove).unbind('touchstart.iosSliderEvent');
 						}
 						
-						if(touchLocks[sliderNumber] || shortContent) return true;
+						if(touchLocks[sliderNumber] || shortContent) {
+							touchStartFlag = false;
+							xScrollStarted = false;
+							return true;
+						}
 						
 						isUnselectable = helpers.isUnselectable(e.target, settings);
 						
@@ -2491,7 +2493,7 @@
 		unlock: function() {
 		
 			return this.each(function() {
-			
+
 				var $this = $(this);
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
