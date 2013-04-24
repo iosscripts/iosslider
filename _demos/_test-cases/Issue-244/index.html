@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	
+		<!-- META -->
+		<meta charset = "utf-8">
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta name = "apple-mobile-web-app-capable" content = "yes" /> 
+		
+		<style type="text/css">			
+			.iosSlider {
+				width: 100%;
+				height: 300px;
+			}
+			
+			.iosSlider .slider {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.iosSlider .slider .item {
+				position: relative;
+				top: 0;
+				left: 0;
+				width: 33.333%;
+				height: 300px;
+				margin: 0 0 0 0;
+				background: #aaa;
+			}
+			
+			.iosSlider .slider .item1 {
+				background: #0fc;
+			}
+			
+			.iosSlider .slider .item2 {
+				background: #fc0;
+			}
+			
+			.iosSlider .slider .item3 {
+				background: #f0c;
+			}
+			
+			.iosSlider .slider .item4 {
+				background: #0cf;
+			}
+			
+			.iosSlider .slider .item5 {
+				background: #cf0;
+			}
+			
+			.iosSlider .slider .item6 {
+				background: #c0f;
+			}
+		</style>
+		
+		<!-- jQuery library -->
+		<script type="text/javascript" src = "../../../_lib/jquery-1.4.min.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../../_src/jquery.iosslider.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+			
+				$('.iosSlider').iosSlider({
+					scrollbar: true,
+					snapToChildren: true,
+					desktopClickDrag: true,
+					infiniteSlider: true,
+					navSlideSelector: $('.iosSliderButtons .button'),
+					scrollbarHeight: '2px',
+					scrollbarBorderRadius: '0',
+					scrollbarOpacity: '0.5',
+					onSlideChange: slideContentChange,
+					onSliderLoaded: slideContentChange,
+					keyboardControls: true
+				});
+				
+				function slideContentChange(args) {
+					
+					/* indicator */
+					$('.iosSliderButtons .button').removeClass('selected');
+					$('.iosSliderButtons .button:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
+					
+				}
+				
+			});
+		</script>
+		
+		<title>Ex #17: Ref Issue #244</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'iosSlider'>
+		
+			<div class = 'slider'>
+			
+				<div class = 'item item1'>1</div>
+				
+				<div class = 'item item2'>2</div>
+				
+				<div class = 'item item3'>3</div>
+				
+				<div class = 'item item4'>4</div>
+				
+				<div class = 'item item5'>5</div>
+				
+				<div class = 'item item6'>6</div>
+			
+			</div>
+			
+		</div>
+	
+	</body>
+
+</html>

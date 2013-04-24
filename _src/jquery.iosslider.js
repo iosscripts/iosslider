@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.12 (04/23/2013)
+ * Version: v1.2.13 (04/24/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -283,7 +283,7 @@
 			activeChildInfOffsets[sliderNumber] = tempOffset;
 			
 			newOffset = Math.floor(newOffset);
-			
+
 			helpers.setSliderOffset(node, newOffset);
 
 			if(settings.scrollbar) {
@@ -327,9 +327,9 @@
 		
 		slowScrollHorizontal: function(node, slideNodes, scrollTimeouts, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, currentEventNode, snapOverride, centeredSlideOffset, settings) {
 			
+			var nodeOffset = helpers.getSliderOffset(node, 'x');
 			var distanceOffsetArray = new Array();
 			var xScrollDistanceArray = new Array();
-			var nodeOffset = helpers.getSliderOffset(node, 'x');
 			var snapDirection = 0;
 			var maxSlideVelocity = 25 / 1024 * stageWidth;
 			var changeSlideFired = false;
@@ -445,10 +445,10 @@
 					}
 						
 				}
-				
+
 				distanceOffsetArray[distanceOffsetArray.length] = nodeOffset;
 				xScrollDistanceArray[xScrollDistanceArray.length] = xScrollDistance;
-
+				
 			}
 
 			var slideChanged = false;
@@ -485,22 +485,26 @@
 					if((newChildOffset < 0) && !settings.infinteSlider) newChildOffset = 0;
 					
 				}
-			
+				
 			}
-			
+
 			if(settings.snapToChildren || (((nodeOffset > (sliderMin[sliderNumber] * -1)) || (nodeOffset < (sliderMax[sliderNumber] * -1))) && !settings.infiniteSlider)) {
 				
-				distanceOffsetArray.splice(0, distanceOffsetArray.length);
-				
+				if(((nodeOffset > (sliderMin[sliderNumber] * -1)) || (nodeOffset < (sliderMax[sliderNumber] * -1))) && !settings.infiniteSlider) {
+					distanceOffsetArray.splice(0, distanceOffsetArray.length);					
+				} else {
+					distanceOffsetArray.splice(distanceOffsetArray.length * 0.10, distanceOffsetArray.length);
+					nodeOffset = distanceOffsetArray[distanceOffsetArray.length-1];
+				}
+
 				while((nodeOffset < (tempChildrenOffsets[newChildOffset] - 0.5)) || (nodeOffset > (tempChildrenOffsets[newChildOffset] + 0.5))) {
 					
 					nodeOffset = ((nodeOffset - (tempChildrenOffsets[newChildOffset])) * snapFrictionCoefficient) + (tempChildrenOffsets[newChildOffset]);
 					distanceOffsetArray[distanceOffsetArray.length] = nodeOffset;
-					
-				}
 
-				distanceOffsetArray[distanceOffsetArray.length] = tempChildrenOffsets[newChildOffset];
+				}
 				
+				distanceOffsetArray[distanceOffsetArray.length] = tempChildrenOffsets[newChildOffset];
 			}
 
 			var jStart = 1;
@@ -1444,7 +1448,7 @@
 						} else {
 							$('.' + scrollbarBlockClass).css('bottom', '0');
 						}
-						
+
 						$('.' + scrollbarBlockClass + ' .' + scrollbarClass).css({ 
 							borderRadius: settings.scrollbarBorderRadius,
 							background: settings.scrollbarBackground,
