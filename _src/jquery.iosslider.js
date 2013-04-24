@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.11 (04/22/2013)
+ * Version: v1.2.12 (04/23/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1646,8 +1646,8 @@
 					
 					var orientationEvent = supportsOrientationChange ? 'orientationchange' : 'resize';
 					
-					$(window).bind(orientationEvent + '.iosSliderEvent', function() {
-							
+					$(window).bind(orientationEvent + '.iosSliderEvent-' + sliderNumber, function() {
+
 						if(!init()) return true;
 						
 						var args = $(stageNode).data('args');
@@ -2316,7 +2316,6 @@
 	    		helpers.autoSlidePause(data.sliderNumber);
 		    	isEventCleared[data.sliderNumber] = true;
 		    	$(window).unbind('.iosSliderEvent-' + data.sliderNumber);
-		    	$(window).unbind('.iosSliderEvent');
 		    	$(document).unbind('.iosSliderEvent-' + data.sliderNumber);
 		    	$(document).unbind('keydown.iosSliderEvent');
 		    	$(this).unbind('.iosSliderEvent');
