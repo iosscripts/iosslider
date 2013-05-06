@@ -72,7 +72,7 @@
 	var sliderAbsMax = new Array();
 	var touchLocks = new Array();
 	
-	/* private functions */
+	== private functions */
 	var helpers = {
     
         showScrollbar: function(settings, scrollbarClass) {
@@ -1114,11 +1114,7 @@
 
 				if(settings.infiniteSlider) {
 					settings.scrollbar = false;
-				}
-				
-				if(settings.infiniteSlider && (numberOfSlides == 1)) {
-					settings.infiniteSlider = false;
-				}
+				}=
 						
 				if(settings.scrollbar) {
 					
