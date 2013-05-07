@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.13 (04/24/2013)
+ * Version: v1.2.14 (04/24/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -36,7 +36,7 @@
  * GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
  * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
- * OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 ;(function($) {
@@ -1568,7 +1568,7 @@
 								cursor: 'pointer'
 							});
 							
-							$(settings.autoSlideToggleSelector).unbind(clickEvent).bind(clickEvent, function() {
+							$(settings.autoSlideToggleSelector).unbind(clickEvent).bind(clickEvent, function(e) {
 								
 								if(e.type == 'touchstart') {
 									$(this).unbind('click.iosSliderEvent');
