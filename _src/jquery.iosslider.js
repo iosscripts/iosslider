@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.14 (04/24/2013)
+ * Version: v1.2.15 (05/08/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -759,6 +759,7 @@
 			var startOffset = helpers.getSliderOffset(node, 'x');
 			var endOffset = childrenOffsets[slide];
 			var offsetDiff = endOffset - startOffset;
+			var direction = slide - (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
 			
 			if(settings.infiniteSlider) {
 				
@@ -775,7 +776,7 @@
 				
 				endOffset = childrenOffsets[slide];
 				offsetDiff = endOffset - startOffset;
-				
+								
 				var offsets = new Array(childrenOffsets[slide] - $(node).width(), childrenOffsets[slide] + $(node).width());
 				
 				if(appendArray) {
@@ -788,6 +789,12 @@
 						offsetDiff = (offsets[i] - startOffset);
 					}
 				
+				}
+				
+				if((offsetDiff < 0) && (direction == -1)) {
+					offsetDiff += $(node).width();
+				} else if((offsetDiff > 0) && (direction == 1)) {
+					offsetDiff -= $(node).width();
 				}
 				
 			}
@@ -2087,7 +2094,7 @@
 
 								var width = scrollbarWidth;
 								
-								if(scrollPosition >= (sliderMin[sliderNumber] * -1 + snapCenteredSlideOffset + scrollerWidth)) {
+								if(scrollbarDistance <= 0) {
 
 									width = scrollbarWidth - scrollBorder - (scrollbarDistance * -1);
 									
@@ -2097,7 +2104,7 @@
 										width: width + 'px'
 									});
 									
-								} else if(scrollPosition <= ((sliderMax[sliderNumber] * -1) + 1)) {
+								} else if(scrollbarDistance >= (scrollbarStageWidth - scrollMargin - scrollBorder - scrollbarWidth)) {
 
 									width = scrollbarStageWidth - scrollMargin - scrollBorder - scrollbarDistance;
 									
