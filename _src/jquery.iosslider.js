@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.16 (05/08/2013)
+ * Version: v1.2.17 (05/08/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -494,7 +494,7 @@
 					distanceOffsetArray.splice(0, distanceOffsetArray.length);					
 				} else {
 					distanceOffsetArray.splice(distanceOffsetArray.length * 0.10, distanceOffsetArray.length);
-					nodeOffset = distanceOffsetArray[distanceOffsetArray.length-1];
+					nodeOffset = (distanceOffsetArray.length > 0) ? distanceOffsetArray[distanceOffsetArray.length-1] : nodeOffset;
 				}
 
 				while((nodeOffset < (tempChildrenOffsets[newChildOffset] - 0.5)) || (nodeOffset > (tempChildrenOffsets[newChildOffset] + 0.5))) {
