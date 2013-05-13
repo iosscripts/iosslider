@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.17 (05/08/2013)
+ * Version: v1.2.18 (05/13/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -520,7 +520,7 @@
 			}
 			
 			var endOffset = (newChildOffset + tempInfiniteSliderOffset + numberOfSlides)%numberOfSlides;
-
+			
 			var lastCheckOffset = 0;
 			for(var j = jStart; j < distanceOffsetArray.length; j = j + 2) {
 				
@@ -553,7 +553,7 @@
 				
 			if(settings.onSlideComplete != '') {
 
-				scrollTimeouts[scrollTimeouts.length] = helpers.onSlideCompleteTimer(scrollIntervalTime * (j + 1), settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, sliderNumber);
+				scrollTimeouts[scrollTimeouts.length] = helpers.onSlideCompleteTimer(scrollIntervalTime * (j + 1), settings, node, $(node).children(':eq(' + tempOffset + ')'), endOffset, sliderNumber);
 				
 			}
 			
@@ -938,12 +938,16 @@
 			
 			this.prevSlideNumber = ($(node).parent().data('args') == undefined) ? undefined : $(node).parent().data('args').prevSlideNumber;
 			this.prevSlideObject = ($(node).parent().data('args') == undefined) ? undefined : $(node).parent().data('args').prevSlideObject;
-			this.targetSlideNumber = undefined;
-			this.targetSlideObject = undefined;
+			this.targetSlideNumber = targetSlideOffset + 1;
+			this.targetSlideObject = $(node).children(':eq(' + this.targetSlideOffset + ')');
 			this.slideChanged = false;
 			
 			if(func == 'load') {
+				this.targetSlideNumber = undefined;
+				this.targetSlideObject = undefined;
 			} else if(func == 'start') {
+				this.targetSlideNumber = undefined;
+				this.targetSlideObject = undefined;
 			} else if(func == 'change') {
 				this.slideChanged = true;
 				this.prevSlideNumber = ($(node).parent().data('args') == undefined) ? settings.startAtSlide : $(node).parent().data('args').currentSlideNumber;	
@@ -1892,7 +1896,7 @@
 						if(!xScrollStarted) {
 
 							var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
-							var args = new helpers.args('start', settings, scrollerNode, $(scrollerNode).children(':eq(' + slide + ')'), slide, slide);
+							var args = new helpers.args('start', settings, scrollerNode, $(scrollerNode).children(':eq(' + slide + ')'), slide, undefined);
 							$(stageNode).data('args', args);
 
 							if(settings.onSlideStart != '') {
@@ -1901,7 +1905,6 @@
 							
 						}
 						
-						//if(((yScrollDistance > 3) || (yScrollDistance < -3)) && ((xScrollDistance < 3) && (xScrollDistance > -3)) && (e.type == 'touchmove') && (!xScrollStarted)) {
 						if(((yScrollDistance > settings.verticalSlideLockThreshold) || (yScrollDistance < (settings.verticalSlideLockThreshold * -1))) && (e.type == 'touchmove') && (!xScrollStarted)) {
 						
 							preventXScroll = true;
