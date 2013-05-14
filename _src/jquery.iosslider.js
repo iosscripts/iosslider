@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.18 (05/13/2013)
+ * Version: v1.2.19 (05/14/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -2482,6 +2482,46 @@
 				slide = (slide > data.childrenOffsets.length) ? data.childrenOffsets.length - 1 : slide - 1;
 				
 				helpers.changeSlide(slide, $(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.slideNodeOuterWidths, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
+				
+				activeChildOffsets[data.sliderNumber] = slide;
+
+			});
+			
+		},
+		
+		goToPrevSlide: function() {
+			
+			return this.each(function() {
+					
+				var $this = $(this);
+				var data = $this.data('iosslider');
+				if(data == undefined) return false;
+				
+				var slide = (activeChildOffsets[data.sliderNumber] + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
+				
+				if((slide > 0) || data.settings.infiniteSlider) {
+					helpers.changeSlide(slide - 1, $(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.slideNodeOuterWidths, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
+				}
+				
+				activeChildOffsets[data.sliderNumber] = slide;
+
+			});
+			
+		},
+		
+		goToNextSlide: function() {
+			
+			return this.each(function() {
+					
+				var $this = $(this);
+				var data = $this.data('iosslider');
+				if(data == undefined) return false;
+				
+				var slide = (activeChildOffsets[data.sliderNumber] + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
+				
+				if((slide < data.childrenOffsets.length-1) || data.settings.infiniteSlider) {
+					helpers.changeSlide(slide + 1, $(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.slideNodeOuterWidths, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
+				}
 				
 				activeChildOffsets[data.sliderNumber] = slide;
 
