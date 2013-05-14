@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.19 (05/14/2013)
+ * Version: v1.2.20 (05/14/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -550,8 +550,8 @@
 				}
 			
 			}
-				
-			if(settings.onSlideComplete != '') {
+
+			if(settings.onSlideComplete != '' && (distanceOffsetArray.length > 1)) {
 
 				scrollTimeouts[scrollTimeouts.length] = helpers.onSlideCompleteTimer(scrollIntervalTime * (j + 1), settings, node, $(node).children(':eq(' + tempOffset + ')'), endOffset, sliderNumber);
 				
@@ -950,7 +950,7 @@
 				this.targetSlideObject = undefined;
 			} else if(func == 'change') {
 				this.slideChanged = true;
-				this.prevSlideNumber = ($(node).parent().data('args') == undefined) ? settings.startAtSlide : $(node).parent().data('args').currentSlideNumber;	
+				this.prevSlideNumber = ($(node).parent().data('args') == undefined) ? settings.startAtSlide : $(node).parent().data('args').currentSlideNumber;
 				this.prevSlideObject = $(node).children(':eq(' + this.prevSlideNumber + ')');
 			} else if(func == 'complete') {
 				this.slideChanged = $(node).parent().data('args').slideChanged;
@@ -964,7 +964,7 @@
 			this.currentSlideObject = activeSlideNode;
 			this.currentSlideNumber = newChildOffset + 1;
 			this.currentSliderOffset = helpers.getSliderOffset(node, 'x') * -1;
-
+			
 		},
 		
 		preventDrag: function(event) {
