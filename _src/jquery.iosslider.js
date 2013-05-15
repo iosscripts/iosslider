@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.20 (05/14/2013)
+ * Version: v1.2.21 (05/15/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -877,7 +877,7 @@
 					activeChildOffsets[sliderNumber] = activeChildOffsets[sliderNumber] - numberOfSlides;
 				}
 				
-				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides+1;
+				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides + 1)%numberOfSlides;
 
 				helpers.changeSlide(nextSlide, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
 				
@@ -2203,7 +2203,7 @@
 						
 					});
 						
-					$(eventObject).bind('mouseup.iosSliderEvent' + sliderNumber, function(e) {
+					$(eventObject).bind('mouseup.iosSliderEvent-' + sliderNumber, function(e) {
 						
 						if(xScrollStarted) {
 							anchorEvents.unbind('click.disableClick').bind('click.disableClick', helpers.preventClick);
