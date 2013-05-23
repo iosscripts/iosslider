@@ -1296,7 +1296,7 @@
 					sliderMin[sliderNumber] = sliderMax[sliderNumber] + centeredSlideOffset;
 
 					$(scrollerNode).css({
-						position: 'relative',
+						position: !isIe8 ? 'relative' : 'absolute',
 						cursor: grabOutCursor,
 						'webkitPerspective': '0',
 						'webkitBackfaceVisibility': 'hidden',
