@@ -4,20 +4,29 @@
 	src: url('../_fonts/norican/Norican-Regular.ttf');
 }
 
-.fluidHeight {
+.iosSliderDemo {
+	clear: both;
 	width: 100%;
-	padding: 0 0 30% 0;
-	margin: 50px 0 0 0;
+	/* padding: 0 0 30% 0; */
+	padding: 0 0 479px;
+	margin: 0 0 0 0;
 	position: relative;
 }
 
-.sliderContainer {
+.fluidHeight {
 	position: absolute;
 	width: 100%;
-	height: 100%;
-	padding: 4% 0;
-	background: url(../../../_resources/container-bg.jpg) repeat 50% 0;
+	/* height: 87%; */
+	height: 400px;
+	padding: 4% 0 4% 0;
+	background: #363739 url(../../../_resources/container-bg.jpg) repeat 50% 0;
 	box-shadow: inset 0 3px 10px -4px #000, inset 0 -3px 10px -4px #000;
+}
+
+.sliderContainer {
+	height: 100%;
+	max-height: 400px;
+	padding: 0 0;
 }
 
 .iosSlider {
@@ -26,7 +35,7 @@
 	left: 0;
 	overflow: hidden;
 	width: 100%;
-	height: 400px;
+	height: 100%;
 }
 
 .iosSlider .slider {
@@ -37,7 +46,7 @@
 .iosSlider .slider .item {
 	width: 100%;
 	height: 100%;
-	padding: 5px 0 5px 0;
+	padding: 0 0 0 0;
 }
 
 .iosSlider .slider .item .inner {
@@ -68,12 +77,15 @@
     position: absolute;
     right: 150px;
     top: 30px;
-    padding: 5px 2px 0 7px;
+    padding: 0 2px 0 7px;
+    height: 70px;
 }
 
 .iosSlider .slider .item .inner .text1 span {
-	color: #FFFFFF;
-    font: 50px/65px Norican;
+	color: #fff;
+    font-family: Norican;
+    font-size: 420%;
+    line-height: 73px;
     padding: 0 8px;
 }
 
@@ -88,8 +100,10 @@
 }
 
 .iosSlider .slider .item .inner .text2 span {
-	color: #FFFFFF;
-    font: 16px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: #fff;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 120%;
+    line-height: 120%;
 }
 
 .iosSlider .slider .item1 .inner {
@@ -149,7 +163,15 @@
 	z-index: 1;
 }
 
-@media screen and (max-width: 1105px) {
+@media screen and (max-width: 1113px) {
+	
+	.iosSliderDemo {
+		padding-bottom: 40%;
+	}
+	
+	.fluidHeight {
+		height: 87%;
+	}
 	
 	.iosSlider .slider .item .inner {
 		width: 92%;
@@ -171,16 +193,35 @@
 
 @media screen and (max-width: 768px) {
 	
+	.iosSlider .slider .item .inner .text1 {
+		top: 15px;
+		height: 50px;
+	}
+	
 	.iosSlider .slider .item .inner .text1 span {
-		font: 40px/50px Norican;
+		font-size: 300%;
+	    line-height: 53px;
 	}
 	
 	.iosSlider .slider .item .inner .text2 {
-		top: 85px;
+		top: 65px;
 	}
 	
 	.iosSlider .slider .item .inner .text2 span {
-		font: 12px/18px "Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-size: 100%;
+	    line-height: 105%;
+	}
+	
+}
+
+@media screen and (max-width: 500px) {
+	
+	.iosSlider .slider .item .inner .text1 {
+		display: none;
+	}
+	
+	.iosSlider .slider .item .inner .text2 {
+		display: none;
 	}
 	
 }

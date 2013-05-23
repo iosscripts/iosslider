@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.21 (05/15/2013)
+ * Version: v1.2.22 (05/22/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1441,7 +1441,7 @@
 						scrollMargin = parseInt($('.' + scrollbarBlockClass).css('marginLeft')) + parseInt($('.' + scrollbarBlockClass).css('marginRight'));
 						scrollBorder = parseInt($('.' + scrollbarBlockClass + ' .' + scrollbarClass).css('borderLeftWidth'), 10) + parseInt($('.' + scrollbarBlockClass + ' .' + scrollbarClass).css('borderRightWidth'), 10);
 						scrollbarStageWidth = (settings.scrollbarContainer != '') ? $(settings.scrollbarContainer).width() : stageWidth;
-						scrollbarWidth = (scrollbarStageWidth - scrollMargin) / numberOfSlides;
+						scrollbarWidth = (stageWidth / scrollerWidth) * (scrollbarStageWidth - scrollMargin);
 		
 						if(!settings.scrollbarHide) {
 							scrollbarStartOpacity = settings.scrollbarOpacity;
@@ -2489,7 +2489,7 @@
 			
 		},
 		
-		goToPrevSlide: function() {
+		prevSlide: function() {
 			
 			return this.each(function() {
 					
@@ -2509,7 +2509,7 @@
 			
 		},
 		
-		goToNextSlide: function() {
+		nextSlide: function() {
 			
 			return this.each(function() {
 					
