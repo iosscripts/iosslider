@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.23 (05/24/2013)
+ * Version: v1.2.24 (05/24/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -570,7 +570,6 @@
 			$(node).parent().data('args', args);
 				
 			if(settings.onSlideComplete != '') {
-				
 				settings.onSlideComplete(args);
 			
 			}
@@ -816,6 +815,8 @@
 				
 			}
 			
+			var tempOffset = (slide + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+			
 			var lastCheckOffset = 0;
 			for(var i = 0; i < stepArray.length; i++) {
 				
@@ -823,7 +824,7 @@
 
 					lastCheckOffset	= stepArray[i];
 					
-					scrollTimeouts[i] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * (i + 1), node, slideNodes, stepArray[i], scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, slide, originalOffsets, childrenOffsets, infiniteSliderWidth, numberOfSlides, slideNodeOuterWidths, sliderNumber, centeredSlideOffset, slide, settings);
+					scrollTimeouts[i] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * (i + 1), node, slideNodes, stepArray[i], scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, slide, originalOffsets, childrenOffsets, infiniteSliderWidth, numberOfSlides, slideNodeOuterWidths, sliderNumber, centeredSlideOffset, tempOffset, settings);
 						
 				}
 				
@@ -836,7 +837,6 @@
 			}
 
 			var slideChanged = false;
-			var tempOffset = (slide + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
 			
 			if(settings.infiniteSlider) {
 				
@@ -855,6 +855,7 @@
 			if(slideChanged && (settings.onSlideComplete != '')) {
 
 				scrollTimeouts[scrollTimeouts.length] = helpers.onSlideCompleteTimer(scrollIntervalTime * (i + 1), settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, sliderNumber);
+				
 			}
 			
 			slideTimeouts[sliderNumber] = scrollTimeouts;
@@ -915,7 +916,7 @@
 		},
 		
 		onSlideCompleteTimer: function(scrollIntervalTime, settings, node, slideNode, slide, scrollbarNumber) {
-			
+
 			var scrollTimeout = setTimeout(function() {
 				helpers.onSlideComplete(settings, node, slideNode, slide, scrollbarNumber);
 			}, scrollIntervalTime);
