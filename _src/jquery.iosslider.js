@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.22 (05/22/2013)
+ * Version: v1.2.23 (05/24/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1023,6 +1023,7 @@
 				'autoSlide': false,
 				'autoSlideTimer': 5000,
 				'autoSlideTransTimer': 750,
+				'autoSlideHoverPause': true,
 				'infiniteSlider': false,
 				'snapVelocityThreshold': 5,
 				'slideStartVelocityThreshold': 0,
@@ -1625,9 +1626,11 @@
 					
 					});
 
-					$(stageNode).bind('mouseenter.iosSliderEvent', function() {
-						helpers.autoSlidePause(sliderNumber);
-					});
+					if(settings.autoSlidePauseHover) {
+						$(stageNode).bind('mouseenter.iosSliderEvent', function() {
+							helpers.autoSlidePause(sliderNumber);
+						});
+					}
 					
 					$(stageNode).data('iosslider', {
 						obj: $this,
