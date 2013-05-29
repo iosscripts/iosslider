@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    	
+		<!-- META -->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta name = "apple-mobile-web-app-capable" content = "yes" /> 
+		
+		<style type="text/css">
+			.responsiveHeight {
+				height: 0;
+				padding: 0 0 40% 0; /* responsive slider height = 40% of the browser width */
+				position: relative;
+				overflow: visible;
+			}
+			
+			.responsiveHeight > .inner {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				
+			}
+			
+			.iosSlider {
+				width: 100%;
+				height: 100%;
+				
+			}
+			
+			.iosSlider .slider {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.iosSlider .slider img {
+				float: left;
+				height: 100%;
+			}
+		</style>
+		
+		<!-- jQuery library -->
+		<script type="text/javascript" src = "../../../../_lib/jquery-1.4.min.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../../../_src/jquery.iosslider.js"></script>
+		
+		<script type="text/javascript">
+			$(window).load(function() {
+			
+				$('.iosSlider').iosSlider({ desktopClickDrag: true });
+				
+			});
+		</script>
+		
+		<title>Ex #1: Default</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'responsiveHeight'>
+		
+			<div class = 'inner'>
+				
+				<div class = 'iosSlider'>
+				
+					<div class = 'slider'>
+					
+						<img src = 'http://placehold.it/400x400/ff00cc/' />
+						<img src = 'http://placehold.it/300x400/ffcc00/' />
+						<img src = 'http://placehold.it/200x400/ccff00/' />
+						<img src = 'http://placehold.it/400x400/cc00ff/' />
+						<img src = 'http://placehold.it/100x400/00ccff/' />
+						<img src = 'http://placehold.it/500x400/00ffcc/' />
+					
+					</div>
+				
+				</div>
+				
+			</div>
+		
+		</div>
+	
+	</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		
+		<!-- META -->
+		<meta charset = "utf-8">
+		
+		<!-- CSS -->
+		<link rel = "stylesheet" href = "_css/default.css" />
+		<link rel = "stylesheet" media = "screen" href = "_css/common.css" />
+		
+		<!-- JS -->
+		<script src = "../../../../_lib/jquery-1.4.min.js"></script>
+		<script src = "../../../../_lib/jquery.easing-1.3.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../../../_src/jquery.iosslider.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				$('.iosSlider').iosSlider({
+					snapToChildren: true,
+					desktopClickDrag: true,
+					keyboardControls: true,
+					navNextSelector: $('.next'),
+					navPrevSelector: $('.prev'),
+					navSlideSelector: $('.selectors .item'),
+					onSlideChange: slideChange
+				});
+				
+			}); 
+			
+			function slideChange(args) {
+				
+				$('.selectors .item').removeClass('selected');
+				$('.selectors .item:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
+				
+			}
+		</script>
+		
+		<title>iosScripts/iosSlider demos - Full Width Collapse Height</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'container'>
+			
+			<div class = 'iosSlider'>
+			
+				<div class = 'slider'>
+
+					<div class = 'item'>
+						<img src="../../../_resources/h-slider-1.jpg" />
+					</div>
+					<div class = 'item'>
+						<img src="../../../_resources/h-slider-2.jpg" />
+					</div>
+					<div class = 'item'>
+						<img src="../../../_resources/h-slider-3.jpg" />
+					</div>
+					<div class = 'item'>
+						<img src="../../../_resources/h-slider-4.jpg" />
+					</div>
+					<div class = 'item'>
+						<img src="../../../_resources/h-slider-5.jpg" />
+					</div>
+				
+				</div>
+				
+				<div class = 'prevContainer'>
+					<div class = 'prev'>Prev slide</div>
+				</div>
+				
+				<div class = 'nextContainer'>
+					<div class = 'next'>Next slide</div>
+				</div>
+				
+				<div class = 'selectorsBlock'>
+				
+					<div class = 'selectors'>
+						<div class = 'item first selected'></div>
+						<div class = 'item'></div>
+						<div class = 'item'></div>
+						<div class = 'item'></div>
+						<div class = 'item'></div>
+					</div>
+					
+				</div>
+
+			</div>
+						
+		</div>
+			
+	</body>
+	
+</html>
