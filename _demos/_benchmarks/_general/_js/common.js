@@ -2,6 +2,7 @@ $(document).ready(function() {
 	
 	$('.debug #touch').html('isTouch: <strong>' + ('ontouchstart' in window) + '</strong>');
 	$('.debug #orientation').html('orientationChange: <strong>' + ('onorientationchange' in window) + '</strong>');
+	$('.debug #css3dTransform').html('css3dTransform: <strong>' + hasCss3dTransform() + '</strong>');
 	
 	$('.default-slider').iosSlider({
 		desktopClickDrag: true,
@@ -442,4 +443,24 @@ function callbackSliderComplete(args) {
 		console.log(args);
 	} catch(err) {}
 	
+}
+
+function hasCss3dTransform() {
+
+	var has3D = false;
+			
+	var testElement = $('<div />').css({
+		'webkitTransform': 'matrix(1,1,1,1,1,1)',
+		'MozTransform': 'matrix(1,1,1,1,1,1)',
+		'transform': 'matrix(1,1,1,1,1,1)'
+	});
+	
+	if(testElement.attr('style') == '') {
+		has3D = false;
+	} else if(testElement.attr('style') != undefined) {
+		has3D = true;
+	}
+	
+	return has3D;
+
 }
