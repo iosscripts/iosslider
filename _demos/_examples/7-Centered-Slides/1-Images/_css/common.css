@@ -3,31 +3,17 @@ body {
 	overflow: hidden;
 }
 
-.containerOuter {
-	position: absolute;
-	left: 0;
-	right: 0;
-	background: #aaa;
-	height: 200px;
-	overflow: hidden;
-}
-
-.container {
+.responsiveHeight {
+	height: 400px;
+	padding-bottom: 0;
 	position: relative;
-	width: 100%;
-	height: 200px;
-	margin: 0 auto;
 	overflow: visible;
 }
 
-.container .iosSliderContainer {
+.responsiveHeight > .inner {
 	position: absolute;
-	top: 0;
-	left: 0;
 	width: 100%;
-	height: 200px;
-	margin: 0 0 0 0;
-	overflow: visible;
+	height: 100%;
 }
 
 .iosSlider {
@@ -36,18 +22,19 @@ body {
 	left: 0;
 	overflow: visible;
 	width: 100%;
-	height: 200px;
+	height: 100%;
 }
 
 .iosSlider .slider {
-	width: 10000px;
+	width: 100%;
 	height: 100%;
 }
 
 .iosSlider .slider .item {
 	float: left;
-	width: 800px;
+	width: 1024px;
 	height: 100%;
+	text-align: center;
 }
 
 .iosSlider .slider .item1 {
@@ -76,9 +63,9 @@ body {
 
 .indicators {
 	position: relative;
-	top: 205px;
+	top: 10px;
 	left: 0;
-	width: 1000px;
+	width: 1024px;
 	height: 10px;
 	margin: 0 auto;
 	z-index: 10;
@@ -94,4 +81,17 @@ body {
 
 .indicators .selected {
 	background: #666;
+}
+
+@media screen and (max-width: 1024px) {
+	
+	.responsiveHeight {
+		height: 0;
+		padding: 0 0 39% 0; /* responsive slider height = 40% of the browser width */ /* 1024/400 = 0.39 */
+	}
+	
+	.indicators {
+		width: 100%;
+	}
+	
 }
