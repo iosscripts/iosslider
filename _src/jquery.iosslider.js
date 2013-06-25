@@ -1,4 +1,4 @@
-	/*
+/*
  * iosSlider - http://iosscripts.com/iosslider/
  * 
  * Touch Enabled, Responsive jQuery Horizontal Content Slider/Carousel/Image Gallery Plugin
@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.2.27 (06/03/2013)
+ * Version: v1.3.0 (06/25/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1181,7 +1181,9 @@
 					slideNodeWidths = new Array();
 					slideNodeOuterWidths = new Array();
 					
-					$(slideNodes).css('width', '');
+					if(settings.responsiveSlides) {
+						$(slideNodes).css('width', '');
+					}
 					
 					sliderMax[sliderNumber] = 0;
 					childrenOffsets = new Array();
@@ -1236,6 +1238,7 @@
 						
 						$(slideNodes[j]).css({
 							'webkitBackfaceVisibility': 'hidden',
+							overflow: 'hidden',
 							position: 'absolute',
 							top: 0
 						});
@@ -1310,7 +1313,7 @@
 					scrollerWidth = sliderMax[sliderNumber];
 					sliderMax[sliderNumber] = sliderMax[sliderNumber] * 2 - stageWidth + centeredSlideOffset * 2;
 					
-					shortContent = (scrollerWidth < stageWidth) ? true : false;
+					shortContent = ((scrollerWidth < stageWidth) || (stageWidth == 0)) ? true : false;
 
 					if(shortContent) {
 						
