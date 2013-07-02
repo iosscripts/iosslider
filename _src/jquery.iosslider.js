@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.0 (06/25/2013)
+ * Version: v1.3.2 (07/01/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -118,7 +118,7 @@
 			if(settings.infiniteSlider) {
 				
 				if(newOffset <= (sliderMax[sliderNumber] * -1)) {
-
+					
 					var scrollerWidth = $(node).width();
 
 					if(newOffset <= (sliderAbsMax[sliderNumber] * -1)) {
@@ -233,7 +233,7 @@
 					
 						var tempOffset = sliderMin[sliderNumber] - slideNodeOuterWidths[highSlideNumber];
 						helpers.setSliderOffset($(slideNodes)[highSlideNumber], tempOffset);
-						
+
 						childrenOffsets.splice(0, 0, tempOffset * -1 + centeredSlideOffset);
 						childrenOffsets.splice(childrenOffsets.length-1, 1);
 
@@ -408,7 +408,7 @@
 						
 						tempSliderMin = tempChildrenOffsets[1] * -1 + centeredSlideOffset;
 						tempSliderMax = tempSliderMin + scrollerWidth - stageWidth;
-
+						
 						tempChildrenOffsets.splice(0, 1);
 						tempChildrenOffsets.splice(tempChildrenOffsets.length, 0, newOffset * -1 + centeredSlideOffset);
 
@@ -673,6 +673,9 @@
 			});
 			
 			if(testElement.attr('style') == '') {
+				has3D = false;
+			} else if(parseInt(navigator.userAgent.split('/')[3], 10) >= 22.0) {
+				//bug in v22+ which does not render slides properly in 3D
 				has3D = false;
 			} else if(testElement.attr('style') != undefined) {
 				has3D = true;
@@ -1239,8 +1242,7 @@
 						$(slideNodes[j]).css({
 							'webkitBackfaceVisibility': 'hidden',
 							overflow: 'hidden',
-							position: 'absolute',
-							top: 0
+							position: 'absolute'
 						});
 						
 						childrenOffsets[j] = sliderMax[sliderNumber] * -1;
@@ -1985,9 +1987,9 @@
 											}
 											
 										});
-										
+
 										var newOffset = sliderMin[sliderNumber] + scrollerWidth;
-										helpers.setSliderOffset($(slideNodes)[lowSlideNumber], newOffset);	
+										helpers.setSliderOffset($(slideNodes)[lowSlideNumber], newOffset);
 										
 										sliderMin[sliderNumber] = childrenOffsets[1] * -1 + centeredSlideOffset;
 										sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
