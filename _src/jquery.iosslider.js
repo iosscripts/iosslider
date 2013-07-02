@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.2 (07/01/2013)
+ * Version: v1.3.3 (07/02/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -943,7 +943,7 @@
 			this.prevSlideNumber = ($(node).parent().data('args') == undefined) ? undefined : $(node).parent().data('args').prevSlideNumber;
 			this.prevSlideObject = ($(node).parent().data('args') == undefined) ? undefined : $(node).parent().data('args').prevSlideObject;
 			this.targetSlideNumber = targetSlideOffset + 1;
-			this.targetSlideObject = $(node).children(':eq(' + this.targetSlideOffset + ')');
+			this.targetSlideObject = $(node).children(':eq(' + targetSlideOffset + ')');
 			this.slideChanged = false;
 			
 			if(func == 'load') {
