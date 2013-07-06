@@ -27,8 +27,9 @@
 				var slide_text = true;
 				var slide_thumbnail = true;
 				var slide_started = false;
+				var current_slide = 1;
 				
-				var sliderChange = function(e, type) {
+				var sliderChange = function(args, type) {
 					
 					if(slide_started) {
 						return false;
@@ -36,7 +37,7 @@
 					
 					slide_started = true;
 					
-					var current_slide = (e.currentSlideNumber);
+					var current_slide = (args.currentSlideNumber);
 					
 					if(type == 'thumbnail') {
 					
@@ -56,8 +57,7 @@
 					
 					}
 		
-					$('.iosSlider2 .indicatorsBlock .indicators .item').removeClass('selected');
-					$('.iosSlider2 .indicatorsBlock .indicators .item').eq(current_slide).addClass('selected');
+					$('.iosSlider2 .indicatorsBlock .indicators .item').removeClass('selected').eq(current_slide-1).addClass('selected');
 					
 				}
 				
@@ -71,7 +71,12 @@
 					snapToChildren: true,
 					desktopClickDrag: true,
 					infiniteSlider: true,
-					onSlideChange: function(e){ slide_text = true; slide_thumbnail = false; sliderChange(e, 'text'); },
+					onSlideStart: function(args) { 
+						slide_started = false;
+					},
+					onSlideChange: function(args) { 
+						slide_text = true; slide_thumbnail = false; sliderChange(args, 'text'); 
+					},
 					onSlideComplete: slideComplete,
 					navNextSelector: $('.iosSlider2 .next'),
 					navPrevSelector: $('.iosSlider2 .prev')
@@ -81,7 +86,12 @@
 					snapToChildren: true,
 					desktopClickDrag: false,
 					infiniteSlider: true,
-					onSlideChange: function(e){ slide_text = false; slide_thumbnail = true; sliderChange(e, 'thumbnail') },
+					onSlideStart: function(args) { 
+						slide_started = false;
+					},
+					onSlideChange: function(args) { 
+						slide_text = false; slide_thumbnail = true; sliderChange(args, 'thumbnail') 
+					},
 					onSlideComplete: slideComplete
 				});
 			}); 
