@@ -606,9 +606,11 @@
 					}
 				
 				}
-				
-				sliderOffset = parseInt(transformArray[xy], 10);
-					
+
+        sliderOffset = transformArray && transformArray.length >= xy ?
+          parseInt(transformArray[xy], 10) :
+          parseInt($(node).css('left'), 10) || $(node).position().left;
+
 			} else {
 			
 				sliderOffset = parseInt($(node).css('left'), 10);
