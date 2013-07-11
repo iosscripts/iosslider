@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.4 (07/05/2013)
+ * Version: v1.3.5 (07/11/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -581,15 +581,12 @@
 		getSliderOffset: function(node, xy) {
 			
 			var sliderOffset = 0;
-			if(xy == 'x') {
-				xy = 4;
-			} else {
-				xy = 5;
-			}
+			xy = (xy == 'x') ? 4 : 5;
 			
 			if(has3DTransform && !isIe7 && !isIe8) {
 				
 				var transforms = new Array('-webkit-transform', '-moz-transform', 'transform');
+				var transformArray;
 				
 				for(var i = 0; i < transforms.length; i++) {
 					
@@ -597,7 +594,7 @@
 						
 						if($(node).css(transforms[i]).length > 0) {
 						
-							var transformArray = $(node).css(transforms[i]).split(',');
+							transformArray = $(node).css(transforms[i]).split(',');
 							
 							break;
 							
@@ -607,8 +604,8 @@
 				
 				}
 				
-				sliderOffset = parseInt(transformArray[xy], 10);
-					
+				sliderOffset = (transformArray[xy] == undefined) ? 0 : parseInt(transformArray[xy], 10);
+
 			} else {
 			
 				sliderOffset = parseInt($(node).css('left'), 10);
@@ -674,8 +671,8 @@
 			
 			if(testElement.attr('style') == '') {
 				has3D = false;
-			} else if(parseInt(navigator.userAgent.split('/')[3], 10) >= 22.0) {
-				//bug in v22+ which does not render slides properly in 3D
+			} else if(isGecko && !isTouch && (parseInt(navigator.userAgent.split('/')[3], 10) >= 21)) {
+				//bug in v21+ which does not render slides properly in 3D
 				has3D = false;
 			} else if(testElement.attr('style') != undefined) {
 				has3D = true;
