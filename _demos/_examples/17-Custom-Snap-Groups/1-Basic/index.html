@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    	
+		<!-- META -->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta name = "apple-mobile-web-app-capable" content = "yes" /> 
+		
+		<style type="text/css">
+			body {
+				/* overflow: hidden; */
+				margin: 0;
+			}
+			
+			.responsive_height {
+				height: 0;
+				padding: 0 0 40% 0; /* responsive slider height = 40% of the browser width; ie. slide image aspect ratio: w10xh4 */
+				position: relative;
+				overflow: visible;
+			}
+			
+			.responsive_height > .container {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+			
+			.iosSlider {
+				width: 100%;
+				height: 100%;
+				background: #aaa;
+			}
+			
+			.iosSlider .slider {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.iosSlider .slider .item {
+				position: relative;
+				top: 0;
+				left: 0;
+				
+				width: 20%;
+				height: 100%;
+				margin: 0 0 0 0;
+			}
+			
+			.iosSlider .slider .item img {
+				width: 100%;
+			}
+		</style>
+		
+		<!-- jQuery library -->
+		<script type="text/javascript" src = "../../../../_lib/jquery-1.8.2.min.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../../../_src/jquery.iosslider.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+				var SNAP_MULTIPLE = 5;
+				
+				$('.iosSlider').iosSlider({
+					desktopClickDrag: true,
+					snapToChildren: false
+				});
+				
+				up();
+				
+				function up() {
+					
+					$('.iosSlider').one('mousedown', function(e) {
+					
+						down();
+						
+					});
+					
+				}
+				
+				function down() {
+				
+					$('.iosSlider').one('mouseup', function(e) {
+					
+						var data = $('.iosSlider').data('args');
+						var round = SNAP_MULTIPLE * Math.round((data.currentSlideNumber - 1) / SNAP_MULTIPLE) + 1;
+						
+						setTimeout(function() {
+							$('.iosSlider').iosSlider('goToSlide', round);
+						}, 10);
+						
+						up();
+						
+					});
+				
+				}
+				
+			});
+		</script>
+		
+		<title>Ex #17.1: Custom Snap Grouping</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'responsive_height'>
+			<div class = 'container'>
+			
+				<div class = 'iosSlider'>
+					<div class = 'slider'>
+					
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/ff00cc/' />
+						</div>
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/00ffcc/' />
+						</div>
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/ffcc00/' />
+						</div>
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/00ccff/' />
+						</div>
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/cc00ff/' />
+						</div>
+						
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/ff00cc/' />
+						</div>
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/00ffcc/' />
+						</div>
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/ffcc00/' />
+						</div>
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/00ccff/' />
+						</div>
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/cc00ff/' />
+						</div>
+						
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/ff00cc/' />
+						</div>
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/00ffcc/' />
+						</div>
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/ffcc00/' />
+						</div>
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/00ccff/' />
+						</div>
+						<div class = 'item'>
+							<img src = 'http://placehold.it/200x400/cc00ff/' />
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	</body>
+
+</html>
