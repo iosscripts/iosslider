@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.7 (08/04/2013)
+ * Version: v1.3.8 (08/05/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -788,12 +788,6 @@
 						offsetDiff = (offsets[i] - startOffset);
 					}
 				
-				}
-				
-				if((offsetDiff < 0) && (direction == -1)) {
-					offsetDiff += $(node).width();
-				} else if((offsetDiff > 0) && (direction == 1)) {
-					offsetDiff -= $(node).width();
 				}
 				
 			}
