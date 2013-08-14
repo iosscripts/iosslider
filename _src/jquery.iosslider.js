@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.8 (08/05/2013)
+ * Version: v1.3.9 (08/14/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1625,7 +1625,7 @@
 					
 					});
 
-					if(settings.autoSlidePauseHover) {
+					if(settings.autoSlideHoverPause) {
 						$(stageNode).bind('mouseenter.iosSliderEvent', function() {
 							helpers.autoSlidePause(sliderNumber);
 						});
