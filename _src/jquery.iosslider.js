@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.9 (08/14/2013)
+ * Version: v1.3.10 (08/27/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -476,13 +476,13 @@
 				
 					newChildOffset++;
 					
-					if((newChildOffset >= childrenOffsets.length) && !settings.infinteSlider) newChildOffset = childrenOffsets.length - 1;
+					if((newChildOffset >= childrenOffsets.length) && !settings.infiniteSlider) newChildOffset = childrenOffsets.length - 1;
 					
 				} else if((snapDirection > 0) && !slideChanged) {
 				
 					newChildOffset--;
 					
-					if((newChildOffset < 0) && !settings.infinteSlider) newChildOffset = 0;
+					if((newChildOffset < 0) && !settings.infiniteSlider) newChildOffset = 0;
 					
 				}
 				
@@ -617,6 +617,8 @@
 		},
 		
 		setSliderOffset: function(node, sliderOffset) {
+			
+			sliderOffset = parseInt(sliderOffset, 10);
 			
 			if(has3DTransform && !isIe7 && !isIe8) {
 				
@@ -1141,8 +1143,9 @@
 				
 				$(this).find('a').bind('mousedown', helpers.preventDrag);
 				$(this).find("[onclick]").bind('click', helpers.preventDrag).each(function() {
-					
-					$(this).data('onclick', this.onclick);
+				
+					if(!$(this).data('onclick'))
+						$(this).data('onclick', this.onclick);
 				
 				});
 				
