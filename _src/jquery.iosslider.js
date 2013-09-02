@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.10 (08/28/2013)
+ * Version: v1.3.11 (09/02/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -254,20 +254,18 @@
 			
 			if(settings.infiniteSlider) {
 								
-				if(tempOffset != activeChildInfOffsets[sliderNumber]) {
-					slideChanged = true;
-				}
+				if(tempOffset != activeChildInfOffsets[sliderNumber]) slideChanged = true;
 					
 			} else {
 			
-				if(newChildOffset != activeChildOffsets[sliderNumber]) {
-					slideChanged = true;
-				}
+				if(newChildOffset != activeChildOffsets[sliderNumber]) slideChanged = true;
 			
 			}
 			
 			if(slideChanged) {
 				
+				console.log(newOffset, childrenOffsets, newChildOffset, activeChildOffsets[sliderNumber]);
+
 				var args = new helpers.args('change', settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, endOffset);
 				$(node).parent().data('args', args);
 				
@@ -825,9 +823,10 @@
 				}
 				
 				if((i == 0) && (settings.onSlideStart != '')) {
-					var tempOffset2 = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;		
-
+				
+					var tempOffset2 = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;	
 					settings.onSlideStart(new helpers.args('start', settings, node, $(node).children(':eq(' + tempOffset2 + ')'), tempOffset2, slide));
+					
 				}
 					
 			}
@@ -853,6 +852,10 @@
 				scrollTimeouts[scrollTimeouts.length] = helpers.onSlideCompleteTimer(scrollIntervalTime * (i + 1), settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, sliderNumber);
 				
 			}
+			
+			scrollTimeouts[scrollTimeouts.length] = setTimeout(function() {
+				activeChildOffsets[sliderNumber] = slide;
+			}, scrollIntervalTime * (i + 1));
 			
 			slideTimeouts[sliderNumber] = scrollTimeouts;
 			
@@ -2487,8 +2490,6 @@
 				slide = (slide > data.childrenOffsets.length) ? data.childrenOffsets.length - 1 : slide - 1;
 				
 				helpers.changeSlide(slide, $(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.slideNodeOuterWidths, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
-				
-				activeChildOffsets[data.sliderNumber] = slide;
 
 			});
 			
