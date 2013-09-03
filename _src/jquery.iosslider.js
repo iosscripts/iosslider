@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.11 (09/02/2013)
+ * Version: v1.3.12 (09/03/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -263,8 +263,6 @@
 			}
 			
 			if(slideChanged) {
-				
-				console.log(newOffset, childrenOffsets, newChildOffset, activeChildOffsets[sliderNumber]);
 
 				var args = new helpers.args('change', settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, endOffset);
 				$(node).parent().data('args', args);
