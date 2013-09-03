@@ -896,7 +896,7 @@
 		isUnselectable: function(node, settings) {
 
 			if(settings.unselectableSelector != '') {
-				if($(node).closest(settings.unselectableSelector).size() == 1) return true;
+				if($(node).closest(settings.unselectableSelector).length == 1) return true;
 			}
 			
 			return false;
@@ -1089,7 +1089,7 @@
 				var slideNodes;
 				var slideNodeWidths;
 				var slideNodeOuterWidths;
-				var numberOfSlides = $(scrollerNode).children().not('script').size();
+				var numberOfSlides = $(scrollerNode).children().not('script').length;
 				var xScrollStarted = false;
 				var lastChildOffset = 0;
 				var isMouseDown = false;
@@ -2413,7 +2413,7 @@
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 				
-				if($(data.scrollerNode).children().size() == 0) {
+				if($(data.scrollerNode).children().length == 0) {
 				
 					$(data.scrollerNode).append(slideNode);
 					$this.data('args').currentSlideNumber = 1;
