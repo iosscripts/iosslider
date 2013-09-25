@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.12 (09/03/2013)
+ * Version: v1.3.16 (09/24/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -757,7 +757,7 @@
 			var endOffset = childrenOffsets[slide];
 			var offsetDiff = endOffset - startOffset;
 			var direction = slide - (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
-			
+
 			if(settings.infiniteSlider) {
 				
 				slide = (slide - infiniteSliderOffset[sliderNumber] + numberOfSlides * 2)%numberOfSlides;
@@ -851,9 +851,9 @@
 				
 			}
 			
-			scrollTimeouts[scrollTimeouts.length] = setTimeout(function() {
-				activeChildOffsets[sliderNumber] = slide;
-			}, scrollIntervalTime * (i + 1));
+			/*scrollTimeouts[scrollTimeouts.length] = setTimeout(function() {
+				activeChildOffsets[sliderNumber] = activeChildOffsets[sliderNumber];
+			}, scrollIntervalTime * (i + 1));*/
 			
 			slideTimeouts[sliderNumber] = scrollTimeouts;
 			
@@ -894,7 +894,7 @@
 		isUnselectable: function(node, settings) {
 
 			if(settings.unselectableSelector != '') {
-				if($(node).closest(settings.unselectableSelector).size() == 1) return true;
+				if($(node).closest(settings.unselectableSelector).length == 1) return true;
 			}
 			
 			return false;
@@ -1052,7 +1052,7 @@
 				scrollbarNumber++;
 				var sliderNumber = scrollbarNumber;
 				var scrollTimeouts = new Array();
-				iosSliderSettings[sliderNumber] = settings;
+				iosSliderSettings[sliderNumber] = $.extend({}, settings);
 				sliderMin[sliderNumber] = 0;
 				sliderMax[sliderNumber] = 0;
 				var minTouchpoints = 0;
@@ -1087,7 +1087,7 @@
 				var slideNodes;
 				var slideNodeWidths;
 				var slideNodeOuterWidths;
-				var numberOfSlides = $(scrollerNode).children().not('script').size();
+				var numberOfSlides = $(scrollerNode).children().not('script').length;
 				var xScrollStarted = false;
 				var lastChildOffset = 0;
 				var isMouseDown = false;
@@ -1144,9 +1144,8 @@
 				
 				$(this).find('a').bind('mousedown', helpers.preventDrag);
 				$(this).find("[onclick]").bind('click', helpers.preventDrag).each(function() {
-				
-					if(!$(this).data('onclick'))
-						$(this).data('onclick', this.onclick);
+						
+					$(this).data('onclick', this.onclick);
 				
 				});
 				
@@ -1189,7 +1188,7 @@
 					stageWidth = $(stageNode).outerWidth(true);
 					
 					if(settings.responsiveSlideContainer) {
-						stageWidth = ($(stageNode).outerWidth(true) > containerWidth) ? containerWidth : $(stageNode).outerWidth(true);
+						stageWidth = ($(stageNode).outerWidth(true) > containerWidth) ? containerWidth : $(stageNode).width();
 					}
 
 					$(stageNode).css({
@@ -1286,12 +1285,13 @@
 					}
 					
 					if(isFirstInit) {
-						settings.startAtSlide = (iosSliderSettings[sliderNumber].startAtSlide > childrenOffsets.length) ? childrenOffsets.length : iosSliderSettings[sliderNumber].startAtSlide;
+						
+						iosSliderSettings[sliderNumber].startAtSlide = (iosSliderSettings[sliderNumber].startAtSlide > childrenOffsets.length) ? childrenOffsets.length : iosSliderSettings[sliderNumber].startAtSlide;
 						if(settings.infiniteSlider) {
-							settings.startAtSlide = (iosSliderSettings[sliderNumber].startAtSlide - 1 + numberOfSlides)%numberOfSlides;
+							iosSliderSettings[sliderNumber].startAtSlide = (iosSliderSettings[sliderNumber].startAtSlide - 1 + numberOfSlides)%numberOfSlides;
 							activeChildOffsets[sliderNumber] = (iosSliderSettings[sliderNumber].startAtSlide);
 						} else {
-							settings.startAtSlide = ((iosSliderSettings[sliderNumber].startAtSlide - 1) < 0) ? childrenOffsets.length-1 : iosSliderSettings[sliderNumber].startAtSlide;	
+							iosSliderSettings[sliderNumber].startAtSlide = ((iosSliderSettings[sliderNumber].startAtSlide - 1) < 0) ? childrenOffsets.length-1 : iosSliderSettings[sliderNumber].startAtSlide;	
 							activeChildOffsets[sliderNumber] = (iosSliderSettings[sliderNumber].startAtSlide-1);
 						}
 						activeChildInfOffsets[sliderNumber] = activeChildOffsets[sliderNumber];
@@ -2227,6 +2227,8 @@
 								$(this).data('onclick').call(this, event || window.event);
 							}
 							
+							this.onclick = $(this).data('onclick');
+							
 						});
 						
 						if(parseFloat($().jquery) >= 1.8) {
@@ -2384,6 +2386,7 @@
 				if(data == undefined) return false;
 				
 				data.settings.startAtSlide = $this.data('args').currentSlideNumber;
+				
 				methods.destroy(false, this);
 				
 				if((data.numberOfSlides != 1) && data.settings.infiniteSlider) {
@@ -2411,7 +2414,7 @@
 				var data = $this.data('iosslider');
 				if(data == undefined) return false;
 				
-				if($(data.scrollerNode).children().size() == 0) {
+				if($(data.scrollerNode).children().length == 0) {
 				
 					$(data.scrollerNode).append(slideNode);
 					$this.data('args').currentSlideNumber = 1;
