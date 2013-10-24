@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.16 (09/24/2013)
+ * Version: v1.3.17 (10/24/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -669,7 +669,7 @@
 			
 			if(testElement.attr('style') == '') {
 				has3D = false;
-			} else if(isGecko && !isTouch && (parseInt(navigator.userAgent.split('/')[3], 10) >= 21)) {
+			} else if(isGecko && (parseInt(navigator.userAgent.split('/')[3], 10) >= 21)) {
 				//bug in v21+ which does not render slides properly in 3D
 				has3D = false;
 			} else if(testElement.attr('style') != undefined) {
