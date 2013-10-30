@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.17 (10/24/2013)
+ * Version: v1.3.18 (10/30/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1310,7 +1310,7 @@
 					scrollerWidth = sliderMax[sliderNumber];
 					sliderMax[sliderNumber] = sliderMax[sliderNumber] * 2 - stageWidth + centeredSlideOffset * 2;
 					
-					shortContent = ((scrollerWidth < stageWidth) || (stageWidth == 0)) ? true : false;
+					shortContent = (((scrollerWidth + centeredSlideOffset) < stageWidth) || (stageWidth == 0)) ? true : false;
 
 					if(shortContent) {
 						
