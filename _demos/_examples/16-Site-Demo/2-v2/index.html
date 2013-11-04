@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	
+		<!-- META -->
+		<meta charset = "utf-8">
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta name = "apple-mobile-web-app-capable" content = "yes" /> 
+		
+		<!-- CSS -->
+		<link rel = "stylesheet" href = "_css/default.css" />
+		<link rel = "stylesheet" media = "screen" href = "_css/common.css" />
+		
+		<!-- jQuery library -->
+		<script type="text/javascript" src = "../../../../_lib/jquery-1.4.min.js"></script>
+		
+		<script src = "../../../../_lib/jquery.easing-1.3.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../../../_src/jquery.iosslider.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+		
+				$('.iosSlider').iosSlider({
+					desktopClickDrag: true,
+					snapToChildren: true,
+					infiniteSlider: true,
+					snapSlideCenter: true,
+					navSlideSelector: '.sliderContainer .slideSelectors .item',
+					navPrevSelector: '.sliderContainer .slideSelectors .prev',
+					navNextSelector: '.sliderContainer .slideSelectors .next',
+					onSlideComplete: slideComplete,
+					onSliderLoaded: sliderLoaded,
+					onSlideChange: slideChange,
+					autoSlide: true,
+					scrollbar: true,
+					scrollbarContainer: '.sliderContainer .scrollbarContainer',
+					scrollbarMargin: '0',
+					scrollbarBorderRadius: '0',
+					keyboardControls: true
+				});
+			
+			});
+			
+			function slideChange(args) {
+						
+				$('.sliderContainer .slideSelectors .item').removeClass('selected');
+				$('.sliderContainer .slideSelectors .item:eq(' + (args.currentSlideNumber - 1) + ')').addClass('selected');
+			
+			}
+			
+			function slideComplete(args) {
+				
+				if(!args.slideChanged) return false;
+					
+				$(args.sliderObject).find('.text1, .text2').attr('style', '');
+				
+				$(args.currentSlideObject).find('.text1').animate({
+					left: '30px',
+					opacity: '0.8'
+				}, 700, 'easeOutQuint');
+				
+				$(args.currentSlideObject).find('.text2').delay(200).animate({
+					left: '30px',
+					opacity: '0.8'
+				}, 600, 'easeOutQuint');
+				
+			}
+			
+			function sliderLoaded(args) {
+					
+				$(args.sliderObject).find('.text1, .text2').attr('style', '');
+				
+				$(args.currentSlideObject).find('.text1').animate({
+					left: '30px',
+					opacity: '0.8'
+				}, 700, 'easeOutQuint');
+				
+				$(args.currentSlideObject).find('.text2').delay(200).animate({
+					left: '30px',
+					opacity: '0.8'
+				}, 600, 'easeOutQuint');
+				
+				slideChange(args);
+				
+			}
+		</script>
+		
+		<title>iosScripts.com demo</title>
+		
+	</head>
+	
+	<body>
+		
+		<section class = 'iosSliderDemo'>
+			
+			<div class = 'fluidHeight'>
+				
+				<div class = 'sliderContainer'>
+				
+					<div class = 'iosSlider'>
+					
+						<div class = 'slider'>
+						
+							<div class = 'item item1'>
+								<div class = 'inner'>
+									<img src = '../../../_resources/h-slider-1-l.jpg' />
+
+									<div class = 'selectorShadow'></div>
+									
+									<div class = 'text1'><span>Lorem ipsum</span></div>
+						
+									<div class = 'text2'><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit,<br />sed do eiusmod tempor incididunt ut labore et dolore.</span></div>
+								</div>
+							</div>
+							
+							<div class = 'item item2'>
+								<div class = 'inner'>
+									<img src = '../../../_resources/h-slider-2-l.jpg' />
+									
+									<div class = 'selectorShadow'></div>
+									
+									<div class = 'text1'><span>Powerful</span></div>
+						
+									<div class = 'text2'><span>Hardware accelerated using CSS3 for supported<br />iOS, Surface, Android and WebKit browsers.</span></div>
+								</div>
+							</div>
+							
+							<div class = 'item item3'>
+								<div class = 'inner'>
+									<img src = '../../../_resources/h-slider-3-l.jpg' />
+									
+									<div class = 'selectorShadow'></div>
+									
+									<div class = 'text1'><span>Responsive</span></div>
+						
+									<div class = 'text2'><span>Works with the most dynamic desktop<br />and mobile web applicaitons.</span></div>
+								</div>
+							</div>
+							
+							<div class = 'item item4'>
+								<div class = 'inner'>
+									<img src = '../../../_resources/h-slider-4-l.jpg' />
+									
+									<div class = 'selectorShadow'></div>
+									
+									<div class = 'text1'><span>Multi-platform</span></div>
+						
+									<div class = 'text2'><span>Support for the latest desktop, iOS, Microsoft Surface,<br />and Android web browsers.</span></div>
+								</div>
+							</div>
+							
+							<div class = 'item item5'>
+								<div class = 'inner'>
+									<img src = '../../../_resources/h-slider-5-l.jpg' />
+									
+									<div class = 'selectorShadow'></div>
+									
+									<div class = 'text1'><span>Customize</span></div>
+						
+									<div class = 'text2'><span>Set momentum, elasticity, scrollbars and more to<br />get the perfect look & feel for your online application.</span></div>
+								</div>
+							</div>
+						
+						</div>
+					
+					</div>
+					
+					<div class = 'slideSelectors'>
+						
+						<div class = 'prev'></div>
+						
+						<div class = 'item selected'></div>
+						
+						<div class = 'item'></div>
+						
+						<div class = 'item'></div>
+						
+						<div class = 'item'></div>
+						
+						<div class = 'item'></div>
+						
+						<div class = 'next'></div>
+					
+					</div>
+					
+					<div class = 'scrollbarContainer'></div>
+					
+				</div>
+			
+			</div>
+		
+		</section>
+	
+	</body>
+
+</html>
