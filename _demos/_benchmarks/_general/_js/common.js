@@ -75,7 +75,8 @@ $(document).ready(function() {
 		startAtSlide: '2',
 		scrollbar: true,
 		navNextSelector: $('.autoslide-slider4 .next'),
-		navPrevSelector: $('.autoslide-slider4 .prev')
+		navPrevSelector: $('.autoslide-slider4 .prev'),
+		autoSlideToggleSelector: $('.autoslide-slider6-container .goToBlock .go').eq(2)
 	});
 	
 	$('.autoslide-slider4-container .goToBlock .go').eq(0).bind('click', function() {

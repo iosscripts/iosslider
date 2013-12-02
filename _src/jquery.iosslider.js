@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.19 (11/17/2013)
+ * Version: v1.3.20 (12/01/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1618,13 +1618,17 @@
 					helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
 
 					$(stageNode).bind('mouseleave.iosSliderEvent', function() {
-
+						
+						if(isAutoSlideToggleOn) return true;
+						
 						helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
 						
 					});
 					
 					$(stageNode).bind('touchend.iosSliderEvent', function() {
-					
+						
+						if(isAutoSlideToggleOn) return true;
+						
 						helpers.autoSlide(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
 					
 					});

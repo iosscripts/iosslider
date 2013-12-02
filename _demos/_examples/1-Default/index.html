@@ -10,8 +10,12 @@
 		
 		<style type="text/css">
 			.iosSlider {
-				width: 900px;
-				height: 400px;
+				left: 0;
+			    overflow: hidden;
+			    position: relative;
+			    top: 0;
+			    width: 100%;
+			    height: 100%;
 			}
 			
 			.iosSlider .slider {
@@ -20,29 +24,26 @@
 			}
 			
 			.iosSlider .slider .item {
-				position: relative;
-				top: 0;
-				left: 0;
-				
-				width: 900px;
-				height: 300px;
-				background: #fff;
-				margin: 0 0 0 0;
+				float: left;
+			    width: 33.333%;
+			    height: 100%;
+			    padding: 0 5px 5px 5px;
+			    background: #000;
 			}
 			
-			.iosSlider .slider #item1 {
+			.iosSlider .slider .item1 {
 				background: url(../../_resources/h-slider-1.jpg) no-repeat 0 0;
 			}
 			
-			.iosSlider .slider #item2 {
+			.iosSlider .slider .item2 {
 				background: url(../../_resources/h-slider-2.jpg) no-repeat 0 0;
 			}
 			
-			.iosSlider .slider #item3 {
+			.iosSlider .slider .item3 {
 				background: url(../../_resources/h-slider-3.jpg) no-repeat 0 0;
 			}
 			
-			.iosSlider .slider #item4 {
+			.iosSlider .slider .item4 {
 				background: url(../../_resources/h-slider-4.jpg) no-repeat 0 0;
 			}
 		</style>
@@ -57,7 +58,8 @@
 			$(document).ready(function() {
 			
 				$('.iosSlider').iosSlider({
-					desktopClickDrag: true
+					desktopClickDrag: true,
+					snapToChildren: true
 				});
 				
 			});
@@ -73,13 +75,10 @@
 		
 			<div class = 'slider'>
 			
-				<div class = 'item' id = 'item1'></div>
-				
-				<div class = 'item' id = 'item2'></div>
-				
-				<div class = 'item' id = 'item3'></div>
-				
-				<div class = 'item' id = 'item4'></div>
+				<div class = 'item item1'></div>
+				<div class = 'item item2'></div>
+				<div class = 'item item3'></div>
+				<div class = 'item item4'></div>
 			
 			</div>
 		
