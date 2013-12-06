@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.21 (12/04/2013)
+ * Version: v1.3.22 (12/05/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1848,14 +1848,12 @@
 					});
 					
 					$(document).bind('touchmove.iosSliderEvent mousemove.iosSliderEvent', function(e) {
-						
+					
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
 						
-						if(touchLocks[sliderNumber] || shortContent) return true;
-						
-						if(isUnselectable) return true;
+						if(touchLocks[sliderNumber] || shortContent || isUnselectable || !touchStartFlag) return true;
 						
 						var edgeDegradation = 0;
 
@@ -2173,8 +2171,6 @@
 							}
 							
 						}
-						
-						touchStartFlag = false;
 						
 					});
 					
