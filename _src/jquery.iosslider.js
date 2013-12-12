@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.22 (12/05/2013)
+ * Version: v1.3.23 (12/12/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1638,7 +1638,7 @@
 							helpers.autoSlidePause(sliderNumber);
 						});
 					}
-					
+						
 					$(stageNode).data('iosslider', {
 						obj: $this,
 						settings: settings,
@@ -1658,7 +1658,8 @@
 						scrollBorder: scrollBorder, 
 						infiniteSliderOffset: infiniteSliderOffset[sliderNumber], 
 						infiniteSliderWidth: infiniteSliderWidth,
-						slideNodeOuterWidths: slideNodeOuterWidths
+						slideNodeOuterWidths: slideNodeOuterWidths,
+						shortContent: shortContent
 					});
 					
 					isFirstInit = false;
@@ -2486,7 +2487,8 @@
 					
 				var $this = $(this);
 				var data = $this.data('iosslider');
-				if(data == undefined) return false;
+				
+				if((data == undefined) || data.shortContent) return false;
 				
 				slide = (slide > data.childrenOffsets.length) ? data.childrenOffsets.length - 1 : slide - 1;
 				
@@ -2502,7 +2504,7 @@
 					
 				var $this = $(this);
 				var data = $this.data('iosslider');
-				if(data == undefined) return false;
+				if((data == undefined) || data.shortContent) return false;
 				
 				var slide = (activeChildOffsets[data.sliderNumber] + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
 				
@@ -2522,7 +2524,7 @@
 					
 				var $this = $(this);
 				var data = $this.data('iosslider');
-				if(data == undefined) return false;
+				if((data == undefined) || data.shortContent) return false;
 				
 				var slide = (activeChildOffsets[data.sliderNumber] + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
 				
@@ -2542,7 +2544,7 @@
 			
 				var $this = $(this);
 				var data = $this.data('iosslider');
-				if(data == undefined) return false;
+				if((data == undefined) || data.shortContent) return false;
 				
 				$(data.scrollerNode).css({
 					cursor: 'default'
@@ -2559,7 +2561,7 @@
 
 				var $this = $(this);
 				var data = $this.data('iosslider');
-				if(data == undefined) return false;
+				if((data == undefined) || data.shortContent) return false;
 			
 				$(data.scrollerNode).css({
 					cursor: grabOutCursor
@@ -2576,7 +2578,7 @@
 			
 				var $this = $(this);
 				var data = $this.data('iosslider');
-				if(data == undefined) return false;
+				if((data == undefined) || data.shortContent) return false;
 				
 				return data;
 			
@@ -2590,7 +2592,7 @@
 			
 				var $this = $(this);
 				var data = $this.data('iosslider');
-				if(data == undefined) return false;
+				if((data == undefined) || data.shortContent) return false;
 				
 				iosSliderSettings[data.sliderNumber].autoSlide = false;
 				
@@ -2608,7 +2610,7 @@
 			
 				var $this = $(this);
 				var data = $this.data('iosslider');
-				if(data == undefined) return false;
+				if((data == undefined) || data.shortContent) return false;
 				
 				iosSliderSettings[data.sliderNumber].autoSlide = true;
 				
