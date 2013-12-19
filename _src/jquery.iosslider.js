@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.23 (12/12/2013)
+ * Version: v1.3.24 (12/19/2013)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1693,6 +1693,8 @@
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
+						
+						if(touchLocks[sliderNumber]) return true;
 						
 						if((e.keyCode == 37) && settings.keyboardControls) {
 							
