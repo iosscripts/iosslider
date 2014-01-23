@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+    	
+		<!-- META -->
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name = "viewport" content = "width=device-width, minimum-scale=1, maximum-scale=1">
+		<meta name = "apple-mobile-web-app-capable" content = "yes" /> 
+		
+		<style type="text/css">
+			.iosSlider {
+				direction: rtl;
+				left: 0;
+			    overflow: hidden;
+			    position: relative;
+			    top: 0;
+			    width: 1024px;
+			    height: 400px;
+			}
+			
+			.iosSlider .slider {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.iosSlider .slider .item {
+				float: left;
+			    width: 100%;
+			    height: 100%;
+			    padding: 0;
+			    background: #000;
+			}
+			
+			.iosSlider .slider .item1 {
+				background: url(../../_resources/h-slider-1-l.jpg) no-repeat 0 0;
+			}
+			
+			.iosSlider .slider .item2 {
+				background: url(../../_resources/h-slider-2-l.jpg) no-repeat 0 0;
+			}
+			
+			.iosSlider .slider .item3 {
+				background: url(../../_resources/h-slider-3-l.jpg) no-repeat 0 0;
+			}
+			
+			.iosSlider .slider .item4 {
+				background: url(../../_resources/h-slider-4-l.jpg) no-repeat 0 0;
+			}
+		</style>
+		
+		<!-- jQuery library -->
+		<script type="text/javascript" src = "../../../_lib/jquery-1.4.min.js"></script>
+		
+		<!-- iosSlider plugin -->
+		<script src = "../../../_src/jquery.iosslider.js"></script>
+		
+		<script type="text/javascript">
+			var autoslide_timeout = undefined;
+			
+			$(document).ready(function() {
+				
+				var start_at_slide = 1;
+				
+				if(is_rtl()) {
+					//make slides rtl
+					$('.iosSlider .item').css({
+						direction: 'rtl'
+					});
+					
+					//remove rtl from slider
+					$('.iosSlider').css({
+						direction: 'ltr'
+					});
+					
+					//reorder slides
+					$('.iosSlider .slider').children().each(function(i, slide) { 
+						$('.iosSlider .slider').prepend(slide);
+					});
+					
+					//start at last slide
+					start_at_slide = $('.iosSlider .slider .item').length;
+				}
+				
+				$('.iosSlider').iosSlider({
+					desktopClickDrag: true,
+					snapToChildren: true,
+					startAtSlide: start_at_slide
+				});
+				
+				custom_autoslide();
+				
+				//stop autoslide on hover
+				$('.iosSlider').hover(function() {
+					clearTimeout(autoslide_timeout);
+				}, function() {
+					custom_autoslide();
+				});
+			});
+			
+			var is_rtl = function() {
+				
+				var rtl = $('.iosSlider').css('direction');
+				
+				if(rtl == 'rtl')
+					return true;
+				
+				return false;
+				
+			}
+			
+			//reversed autoslide
+			var custom_autoslide = function() {
+				
+				autoslide_timeout = setTimeout(function() {
+					
+					if($('.iosSlider').data('args').currentSlideNumber == 1) {
+						$('.iosSlider').iosSlider('goToSlide', $('.iosSlider .slider .item').length);
+					} else {
+						$('.iosSlider').iosSlider('prevSlide');
+					}
+					
+					custom_autoslide();
+				
+				}, 2000);
+				
+			}
+		</script>
+		
+		<title>Ex #18: RTL</title>
+		
+	</head>
+	
+	<body>
+		
+		<div class = 'iosSlider'>
+		
+			<div class = 'slider'>
+			
+				<div class = 'item item1'><img src="../../_resources/h-slider-1-l.jpg" /></div>
+				<div class = 'item item2'><img src="../../_resources/h-slider-2-l.jpg" /></div>
+				<div class = 'item item3'><img src="../../_resources/h-slider-3-l.jpg" /></div>
+				<div class = 'item item4'><img src="../../_resources/h-slider-4-l.jpg" /></div>
+			
+			</div>
+		
+		</div>
+		
+		<a href = '#' onclick = "$('.iosSlider').iosSlider('lock'); return false;">LOCK</a><br />
+		<a href = '#' onclick = "$('.iosSlider').iosSlider('unlock'); return false;">UNLOCK</a>
+	
+	</body>
+
+</html>

@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.24 (12/19/2013)
+ * Version: v1.3.25 (01/21/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1120,8 +1120,8 @@
 				var data = $this.data('iosslider');	
 				if(data != undefined) return true;
            		
-           		$(this).find('img').bind('dragstart.iosSliderEvent', function(event) { event.preventDefault(); });
-
+				$(this).delegate('img', 'dragstart.iosSliderEvent', function(event) { event.preventDefault(); });
+				
 				if(settings.infiniteSlider) {
 					settings.scrollbar = false;
 				}
