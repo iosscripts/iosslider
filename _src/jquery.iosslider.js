@@ -1119,9 +1119,9 @@
 				var $this = $(this);
 				var data = $this.data('iosslider');	
 				if(data != undefined) return true;
-           		
-				$(this).delegate('img', 'dragstart.iosSliderEvent', function(event) { event.preventDefault(); });
-				
+
+           		$(this).delegate('img', 'dragstart.iosSliderEvent', function(event) { event.preventDefault(); });
+
 				if(settings.infiniteSlider) {
 					settings.scrollbar = false;
 				}
