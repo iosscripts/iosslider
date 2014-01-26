@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.25 (01/21/2014)
+ * Version: v1.3.26 (01/26/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1119,9 +1119,13 @@
 				var $this = $(this);
 				var data = $this.data('iosslider');	
 				if(data != undefined) return true;
-
-           		$(this).delegate('img', 'dragstart.iosSliderEvent', function(event) { event.preventDefault(); });
-
+				
+				if(parseInt($().jquery.split('.').join(''), 10) >= 14.2) {
+					$(this).delegate('img', 'dragstart.iosSliderEvent', function(event) { event.preventDefault(); });	
+				} else {
+					$(this).find('img').bind('dragstart.iosSliderEvent', function(event) { event.preventDefault(); });
+				}
+		   		
 				if(settings.infiniteSlider) {
 					settings.scrollbar = false;
 				}
