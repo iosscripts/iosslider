@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.26 (01/26/2014) (Demo Version)
+ * Version: v1.3.28 (02/25/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -47,7 +47,7 @@
 	var yScrollDistance = 0;
 	var scrollIntervalTime = 10;
 	var scrollbarDistance = 0;
-	var isTouch = 'ontouchstart' in window;
+	var isTouch = 'ontouchstart' in window || (navigator.msMaxTouchPoints > 0);
 	var supportsOrientationChange = 'onorientationchange' in window;
 	var isWebkit = false;
 	var has3DTransform = false;
@@ -619,6 +619,7 @@
 			if(has3DTransform && !isIe7 && !isIe8) {
 				
 				$(node).css({
+					'msTransform': 'matrix(1,0,0,1,' + sliderOffset + ',0)',
 					'webkitTransform': 'matrix(1,0,0,1,' + sliderOffset + ',0)',
 					'MozTransform': 'matrix(1,0,0,1,' + sliderOffset + ',0)',
 					'transform': 'matrix(1,0,0,1,' + sliderOffset + ',0)'
@@ -662,6 +663,7 @@
 			var has3D = false;
 			
 			var testElement = $('<div />').css({
+				'msTransform': 'matrix(1,1,1,1,1,1)',
 				'webkitTransform': 'matrix(1,1,1,1,1,1)',
 				'MozTransform': 'matrix(1,1,1,1,1,1)',
 				'transform': 'matrix(1,1,1,1,1,1)'
@@ -1731,7 +1733,7 @@
 					});
 					
 				}
-					
+
 				if(isTouch || settings.desktopClickDrag) {
 					
 					var touchStartFlag = false;
@@ -2236,8 +2238,8 @@
 								if(xScrollStarted) { 
 									return false;
 								}
-							
-								$(this).data('onclick').call(this, event || window.event);
+								
+								if($(this).data('onclick')) $(this).data('onclick').call(this, event || window.event);
 							}
 							
 							this.onclick = $(this).data('onclick');
@@ -2303,11 +2305,18 @@
 						if(!isEventCleared[sliderNumber]) {
 						
 							if(shortContent) return true;
-							if(touchLocks[sliderNumber]) return true;
 							
-							$(touchSelection).css({
-								cursor: grabOutCursor
-							});
+							if(settings.desktopClickDrag) {
+								$(scrollerNode).css({
+									cursor: grabOutCursor
+								});
+							}
+							
+							if(settings.scrollbarDrag) {
+								$(scrollbarNode).css({
+									cursor: grabOutCursor
+								});
+							}
 							
 							isMouseDown = false;
 							
@@ -2482,6 +2491,8 @@
 				if(activeChildOffsets[data.sliderNumber] > (slideNumber - 1)) {
 					activeChildOffsets[data.sliderNumber]--;
 				}
+				
+				$this.data('iosslider').numberOfSlides--;
 
 				methods.update(this);
 			
