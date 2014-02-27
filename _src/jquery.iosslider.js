@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.28 (02/25/2014)
+ * Version: v1.3.29 (02/27/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -171,8 +171,8 @@
 					
 					var scrollerWidth = $(node).width();
 					
-					if(newOffset >= 0) {
-
+					if(newOffset > 0) {
+					
 						var sum = originalOffsets[0] * -1;
 						$(slideNodes).each(function(i) {
 							
