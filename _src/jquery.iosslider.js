@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.30 (03/13/2014)
+ * Version: v1.3.31 (03/13/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -2197,8 +2197,6 @@
 						
 						if(touchEndFlag) return false;
 						touchEndFlag = true;
-						
-						$('#debug').html(e.type + '<br />' + $('#debug').html());
 						
 						if(touchLocks[sliderNumber] || shortContent) return true;
 						
