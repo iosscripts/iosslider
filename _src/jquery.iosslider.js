@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.29 (02/27/2014)
+ * Version: v1.3.30 (03/13/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1737,6 +1737,7 @@
 				if(isTouch || settings.desktopClickDrag) {
 					
 					var touchStartFlag = false;
+					var touchEndFlag = false;
 					var touchSelection = $(scrollerNode);
 					var touchSelectionMove = $(scrollerNode);
 					var preventDefault = null;
@@ -1753,6 +1754,7 @@
 						
 						if(touchStartFlag) return true;
 						touchStartFlag = true;
+						touchEndFlag = false;
 						
 						if(e.type == 'touchstart') {
 							$(touchSelectionMove).unbind('mousedown.iosSliderEvent');
@@ -2190,14 +2192,19 @@
 					});
 					
 					var eventObject = $(window);
-
+					
 					if(isIe8 || isIe7) {
 						var eventObject = $(document); 
 					}
 					
-					$(touchSelection).bind('touchend.iosSliderEvent', function(e) {
+					$(touchSelection).bind('touchcancel.iosSliderEvent touchend.iosSliderEvent', function(e) {
 						
 						var e = e.originalEvent;
+						
+						if(touchEndFlag) return false;
+						touchEndFlag = true;
+						
+						$('#debug').html(e.type + '<br />' + $('#debug').html());
 						
 						if(touchLocks[sliderNumber] || shortContent) return true;
 						
@@ -2221,6 +2228,8 @@
 						
 						preventXScroll = false;
 						touchStartFlag = false;
+						
+						return false;
 						
 					});
 						
