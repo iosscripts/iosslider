@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.32 (03/16/2014)
+ * Version: v1.3.34 (03/24/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1752,6 +1752,9 @@
 					
 					$(touchSelection).bind('mousedown.iosSliderEvent touchstart.iosSliderEvent', function(e) {
 						
+						//if scroll starts, unbind dom from slider touch override
+						$(window).one('scroll.iosSliderEvent', function(e) { touchStartFlag = false; });
+						
 						if(touchStartFlag) return true;
 						touchStartFlag = true;
 						touchEndFlag = false;
@@ -1865,7 +1868,7 @@
 					});
 					
 					$(document).bind('touchmove.iosSliderEvent mousemove.iosSliderEvent', function(e) {
-					
+						
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
