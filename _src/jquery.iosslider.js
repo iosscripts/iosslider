@@ -1121,12 +1121,6 @@
 				var $this = $(this);
 				var data = $this.data('iosslider');	
 				if(data != undefined) return true;
-				
-				var xArray = ['d', 'e', 'm', 'o', ' ', 'v', 'e', 'r', 's', 'i', 'o', 'n'];
-				var xClass = Math.floor(Math.random()*12317);
-				$(scrollerNode).parent().append("<i class = 'i" + xClass + "'></i>").append("<i class = 'i" + xClass + "'></i>");
-				$('.i' + xClass).css({ position: 'absolute', right: '10px', bottom: '10px', zIndex: 1000, fontStyle: 'normal', background: '#fff', opacity: 0.2 }).eq(1).css({ bottom: 'auto', right: 'auto', top: '10px', left: '10px' });
-				for(var i = 0; i < xArray.length; i++) { $('.i' + xClass).html($('.i' + xClass).html() + xArray[i]); }
 
 				if(parseInt($().jquery.split('.').join(''), 10) >= 14.2) {
 					$(this).delegate('img', 'dragstart.iosSliderEvent', function(event) { event.preventDefault(); });	
