@@ -747,7 +747,7 @@
 		},
 		
 		changeSlide: function(slide, node, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings) {
-
+			
 			helpers.autoSlidePause(sliderNumber);
 			
 			for(var j = 0; j < scrollTimeouts.length; j++) {
@@ -790,6 +790,12 @@
 				
 				}
 				
+			}
+			
+			if((offsetDiff < 0) && (direction == -1)) {
+				offsetDiff += $(node).width();
+			} else if((offsetDiff > 0) && (direction == 1)) {
+				offsetDiff -= $(node).width();
 			}
 			
 			var stepArray = new Array();
@@ -877,7 +883,7 @@
 					activeChildOffsets[sliderNumber] = activeChildOffsets[sliderNumber] - numberOfSlides;
 				}
 				
-				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + childrenOffsets.length + 1)%childrenOffsets.length;
+				var nextSlide = activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + 1;
 
 				helpers.changeSlide(nextSlide, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
 				
