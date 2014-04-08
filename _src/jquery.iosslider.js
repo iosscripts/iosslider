@@ -939,6 +939,22 @@
 			return scrollTimeout;
 		
 		},
+		
+		updateBackfaceVisibility: function(slideNodes, sliderNumber, numberOfSlides, settings) {
+			
+			var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+			
+			console.log(slide, sliderNumber, activeChildOffsets[sliderNumber], infiniteSliderOffset[sliderNumber], slideNodes, numberOfSlides, settings.infiniteSlider, settings);
+			
+			$(slideNodes).css('background', '').css('-webkit-backface-visibility', '');
+			
+			for(var i = slide; i < 10; i++) {
+				
+				$(slideNodes[(i + slide - 5)%slideNodes.length]).css('-webkit-backface-visibility', 'hidden').css('background', '#000');
+				
+			}		
+			
+		},
 						
 		args: function(func, settings, node, activeSlideNode, newChildOffset, targetSlideOffset) {
 			
@@ -1246,7 +1262,6 @@
 						}
 						
 						$(slideNodes[j]).css({
-							'webkitBackfaceVisibility': 'hidden',
 							overflow: 'hidden',
 							position: 'absolute'
 						});
@@ -1433,6 +1448,8 @@
 					}
 					
 					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);
+					
+					helpers.updateBackfaceVisibility(slideNodes, sliderNumber, numberOfSlides, settings);
 					
 					if(!settings.desktopClickDrag) {
 						
@@ -2187,6 +2204,8 @@
 								if(settings.onSlideChange != '') {
 									settings.onSlideChange(args);
 								}
+								
+								helpers.updateBackfaceVisibility(slideNodes, sliderNumber, numberOfSlides, settings);
 								
 							}
 							
