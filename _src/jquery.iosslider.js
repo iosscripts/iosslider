@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.35 (04/04/2014)
+ * Version: v1.3.36 (04/08/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -546,12 +546,14 @@
 				}
 			
 			}
-
+			
 			if(settings.onSlideComplete != '' && (distanceOffsetArray.length > 1)) {
 				
 				scrollTimeouts[scrollTimeouts.length] = helpers.onSlideCompleteTimer(scrollIntervalTime * (j + 1), settings, node, $(node).children(':eq(' + tempOffset + ')'), endOffset, sliderNumber);
 				
 			}
+			
+			scrollTimeouts[scrollTimeouts.length] = helpers.updateBackfaceVisibilityTimer(scrollIntervalTime * (j + 1), slideNodes, sliderNumber, numberOfSlides, settings);
 			
 			slideTimeouts[sliderNumber] = scrollTimeouts;
 			
@@ -567,7 +569,6 @@
 				
 			if(settings.onSlideComplete != '') {
 				settings.onSlideComplete(args);
-			
 			}
 			
 			onChangeEventLastFired[sliderNumber] = newChildOffset;
@@ -939,6 +940,39 @@
 			return scrollTimeout;
 		
 		},
+		
+		updateBackfaceVisibilityTimer: function(scrollIntervalTime, slideNodes, sliderNumber, numberOfSlides, settings) {
+		
+			var scrollTimeout = setTimeout(function() {
+				helpers.updateBackfaceVisibility(slideNodes, sliderNumber, numberOfSlides, settings);
+			}, scrollIntervalTime);
+			
+			return scrollTimeout;
+			
+		},
+		
+		updateBackfaceVisibility: function(slideNodes, sliderNumber, numberOfSlides, settings) {
+
+			var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+			
+			//loop through buffered slides
+			for(var i = 0; i < (settings.hardwareAccelBuffer * 2); i++) {
+				
+				var slide_eq = slide+i-settings.hardwareAccelBuffer;
+				
+				//check if backface visibility applied
+				if($(slideNodes).eq(slide_eq).css('-webkit-backface-visibility') == 'visible') {
+				
+					//buffer backface visibility
+					$(slideNodes).eq(slide_eq).css('-webkit-backface-visibility', 'hidden');
+					$(slideNodes).eq(slide_eq+settings.hardwareAccelBuffer*2).css('-webkit-backface-visibility', '');
+					$(slideNodes).eq(slide_eq-settings.hardwareAccelBuffer*2).css('-webkit-backface-visibility', '');
+					
+				}
+				
+			}
+			
+		},
 						
 		args: function(func, settings, node, activeSlideNode, newChildOffset, targetSlideOffset) {
 			
@@ -1035,6 +1069,7 @@
 				'slideStartVelocityThreshold': 0,
 				'horizontalSlideLockThreshold': 5,
 				'verticalSlideLockThreshold': 3,
+				'hardwareAccelBuffer': 5,
 				'stageCSS': {
 					position: 'relative',
 					top: '0',
@@ -1252,7 +1287,6 @@
 						}
 						
 						$(slideNodes[j]).css({
-							'webkitBackfaceVisibility': 'hidden',
 							overflow: 'hidden',
 							position: 'absolute'
 						});
@@ -1439,6 +1473,8 @@
 					}
 					
 					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);
+					
+					helpers.updateBackfaceVisibility(slideNodes, sliderNumber, numberOfSlides, settings);
 					
 					if(!settings.desktopClickDrag) {
 						
@@ -2193,6 +2229,8 @@
 								if(settings.onSlideChange != '') {
 									settings.onSlideChange(args);
 								}
+								
+								helpers.updateBackfaceVisibility(slideNodes, sliderNumber, numberOfSlides, settings);
 								
 							}
 							
