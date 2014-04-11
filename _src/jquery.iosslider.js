@@ -117,7 +117,7 @@
 			
 			if(settings.infiniteSlider) {
 				
-				if(newOffset <= (sliderMax[sliderNumber] * -1)) {
+				if((newOffset <= (sliderMax[sliderNumber] * -1)) || (newOffset <= (sliderAbsMax[sliderNumber] * -1))) {
 					
 					var scrollerWidth = $(node).width();
 
@@ -139,7 +139,9 @@
 						sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
 						infiniteSliderOffset[sliderNumber] = 0;
 						
-					} else {
+					}
+						
+					while(newOffset <= (sliderMax[sliderNumber] * -1)) {
 						
 						var lowSlideNumber = 0;
 						var lowSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
@@ -191,8 +193,6 @@
 						
 						while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > 0)) {
 							
-							console.log(count);
-							
 							var highSlideNumber = 0;
 							var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
 							$(slideNodes).each(function(i) {
@@ -220,9 +220,7 @@
 
 					} 
 					
-					var count = 0;
-					console.log(newOffset, sliderMin[sliderNumber]*-1);
-					while(newOffset > sliderMin[sliderNumber]*-1) {
+					while(newOffset > (sliderMin[sliderNumber] * -1)) {
 						
 						var highSlideNumber = 0;
 						var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
@@ -245,9 +243,6 @@
 						sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
 
 						infiniteSliderOffset[sliderNumber]--;
-						
-						//if(count > 10) break;
-						count++;
 						
 					}
 				
