@@ -473,30 +473,35 @@ p {
 
 .short-width-slider .slider #item1,
 .short-width-slider-2 .slider #item1,
+.short-width-slider-2 .slider .item1,
 .short-width-slider-3 .slider #item1 {
 	background: #666;
 }
 
 .short-width-slider .slider #item2,
 .short-width-slider-2 .slider #item2,
+.short-width-slider-2 .slider .item2,
 .short-width-slider-3 .slider #item2 {
 	background: #999;
 }
 
 .short-width-slider .slider #item3,
 .short-width-slider-2 .slider #item3,
+.short-width-slider-2 .slider .item3,
 .short-width-slider-3 .slider #item3 {
 	background: #aaa;
 }
 
 .short-width-slider .slider #item4,
 .short-width-slider-2 .slider #item4,
+.short-width-slider-2 .slider .item4,
 .short-width-slider-3 .slider #item4 {
 	background: #ddd;
 }
 
 .short-width-slider .slider #item5,
 .short-width-slider-2 .slider #item5,
+.short-width-slider-2 .slider .item5,
 .short-width-slider-3 .slider #item5 {
 	background: #777;
 }
