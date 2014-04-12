@@ -315,6 +315,7 @@ $(document).ready(function() {
 		desktopClickDrag: true,
 		snapToChildren: true,
 		scrollbarDrag: true,
+		scrollbarPaging: true,
 		scrollbarContainer: '.drag-scrollbar-scroll-container',
 		scrollbarMargin: 0,
 		scrollbarHeight: '40px',
