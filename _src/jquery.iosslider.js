@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.34 (03/24/2014)
+ * Version: v1.3.37 (04/11/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -117,7 +117,7 @@
 			
 			if(settings.infiniteSlider) {
 				
-				if(newOffset <= (sliderMax[sliderNumber] * -1)) {
+				if((newOffset <= (sliderMax[sliderNumber] * -1)) || (newOffset <= (sliderAbsMax[sliderNumber] * -1))) {
 					
 					var scrollerWidth = $(node).width();
 
@@ -139,7 +139,9 @@
 						sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth;
 						infiniteSliderOffset[sliderNumber] = 0;
 						
-					} else {
+					}
+						
+					while(newOffset <= (sliderMax[sliderNumber] * -1)) {
 						
 						var lowSlideNumber = 0;
 						var lowSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
@@ -168,11 +170,11 @@
 				}
 				
 				if((newOffset >= (sliderMin[sliderNumber] * -1)) || (newOffset >= 0)) {
-					
+
 					var scrollerWidth = $(node).width();
 					
 					if(newOffset > 0) {
-					
+						
 						var sum = originalOffsets[0] * -1;
 						$(slideNodes).each(function(i) {
 							
@@ -190,7 +192,7 @@
 						infiniteSliderOffset[sliderNumber] = numberOfSlides;
 						
 						while(((childrenOffsets[0] * -1 - scrollerWidth + centeredSlideOffset) > 0)) {
-
+							
 							var highSlideNumber = 0;
 							var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
 							$(slideNodes).each(function(i) {
@@ -218,8 +220,8 @@
 
 					} 
 					
-					if(newOffset < 0) {
-
+					while(newOffset > (sliderMin[sliderNumber] * -1)) {
+						
 						var highSlideNumber = 0;
 						var highSlideOffset = helpers.getSliderOffset($(slideNodes[0]), 'x');
 						$(slideNodes).each(function(i) {
@@ -546,12 +548,14 @@
 				}
 			
 			}
-
+			
 			if(settings.onSlideComplete != '' && (distanceOffsetArray.length > 1)) {
 				
 				scrollTimeouts[scrollTimeouts.length] = helpers.onSlideCompleteTimer(scrollIntervalTime * (j + 1), settings, node, $(node).children(':eq(' + tempOffset + ')'), endOffset, sliderNumber);
 				
 			}
+			
+			scrollTimeouts[scrollTimeouts.length] = helpers.updateBackfaceVisibilityTimer(scrollIntervalTime * (j + 1), slideNodes, sliderNumber, numberOfSlides, settings);
 			
 			slideTimeouts[sliderNumber] = scrollTimeouts;
 			
@@ -567,7 +571,6 @@
 				
 			if(settings.onSlideComplete != '') {
 				settings.onSlideComplete(args);
-			
 			}
 			
 			onChangeEventLastFired[sliderNumber] = newChildOffset;
@@ -747,7 +750,7 @@
 		},
 		
 		changeSlide: function(slide, node, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings) {
-
+			
 			helpers.autoSlidePause(sliderNumber);
 			
 			for(var j = 0; j < scrollTimeouts.length; j++) {
@@ -790,6 +793,12 @@
 				
 				}
 				
+			}
+			
+			if((offsetDiff < 0) && (direction == -1)) {
+				offsetDiff += $(node).width();
+			} else if((offsetDiff > 0) && (direction == 1)) {
+				offsetDiff -= $(node).width();
 			}
 			
 			var stepArray = new Array();
@@ -865,6 +874,111 @@
 			
 		},
 		
+		changeOffset: function(endOffset, node, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings) {
+		
+			helpers.autoSlidePause(sliderNumber);
+			
+			for(var j = 0; j < scrollTimeouts.length; j++) {
+				clearTimeout(scrollTimeouts[j]);
+			}
+			
+			if(!settings.infiniteSlider) {
+				endOffset = (endOffset > (sliderMin[sliderNumber] * -1 + centeredSlideOffset)) ? sliderMin[sliderNumber] * -1 + centeredSlideOffset : endOffset;
+				endOffset = (endOffset < (sliderMax[sliderNumber] * -1)) ? sliderMax[sliderNumber] * -1 : endOffset;
+			}
+			
+			var steps = Math.ceil(settings.autoSlideTransTimer / 10) + 1;
+			var startOffset = helpers.getSliderOffset(node, 'y');
+			var slide = (helpers.calcActiveOffset(settings, endOffset, childrenOffsets, stageWidth, infiniteSliderOffset, numberOfSlides, activeChildOffsets[sliderNumber], sliderNumber) + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+			var testOffsets = childrenOffsets.slice();
+			
+			if(settings.snapToChildren && !settings.infiniteSlider) {
+				endOffset = childrenOffsets[slide];
+			} else if(settings.infiniteSlider && settings.snapToChildren) {
+				while(endOffset >= testOffsets[0]) {
+					testOffsets.splice(0, 0, testOffsets[numberOfSlides-1] + $(node).width());
+					testOffsets.splice(numberOfSlides, 1);
+				}
+				
+				while(endOffset <= testOffsets[numberOfSlides-1]) {
+					testOffsets.splice(numberOfSlides, 0, testOffsets[0] - $(node).width());
+					testOffsets.splice(0, 1);
+				}
+				
+				slide = helpers.calcActiveOffset(settings, endOffset, testOffsets, stageWidth, infiniteSliderOffset, numberOfSlides, activeChildOffsets[sliderNumber], sliderNumber);
+				endOffset = testOffsets[slide];
+				
+			}
+			
+			var offsetDiff = endOffset - startOffset;
+						
+			var stepArray = new Array();
+			var t;
+			var nextStep;
+
+			helpers.showScrollbar(settings, scrollbarClass);
+
+			for(var i = 0; i <= steps; i++) {
+
+				t = i;
+				t /= steps;
+				t--;
+				nextStep = startOffset + offsetDiff*(Math.pow(t,5) + 1);
+				
+				stepArray[stepArray.length] = nextStep;
+				
+			}
+			
+			var tempOffset = (slide + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+			
+			var lastCheckOffset = 0;
+			for(var i = 0; i < stepArray.length; i++) {
+				
+				if((i == 0) || (Math.abs(stepArray[i] - lastCheckOffset) > 1) || (i >= (stepArray.length - 2))) {
+
+					lastCheckOffset	= stepArray[i];
+					
+					scrollTimeouts[i] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * (i + 1), node, slideNodes, stepArray[i], scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, slide, originalOffsets, childrenOffsets, infiniteSliderWidth, numberOfSlides, slideNodeOuterWidths, sliderNumber, centeredSlideOffset, tempOffset, settings);
+						
+				}
+				
+				if((i == 0) && (settings.onSlideStart != '')) {
+					var tempOffset = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;		
+				
+					settings.onSlideStart(new helpers.args('start', settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, slide));
+				}
+					
+			}
+
+			var slideChanged = false;
+			
+			if(settings.infiniteSlider) {
+				
+				if(tempOffset != activeChildInfOffsets[sliderNumber]) {
+					slideChanged = true;
+				}
+					
+			} else {
+			
+				if(slide != activeChildOffsets[sliderNumber]) {
+					slideChanged = true;
+				}
+			
+			}
+				
+			if(slideChanged && (settings.onSlideComplete != '')) {
+
+				scrollTimeouts[scrollTimeouts.length] = helpers.onSlideCompleteTimer(scrollIntervalTime * (i + 1), settings, node, $(node).children(':eq(' + tempOffset + ')'), tempOffset, sliderNumber);
+			}
+			
+			slideTimeouts[sliderNumber] = scrollTimeouts;
+			
+			helpers.hideScrollbar(settings, scrollTimeouts, i, stepArray, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, sliderNumber);
+			
+			helpers.autoSlide(node, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
+			
+		},
+		
 		autoSlide: function(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings) {
 			
 			if(!iosSliderSettings[sliderNumber].autoSlide) return false;
@@ -877,7 +991,7 @@
 					activeChildOffsets[sliderNumber] = activeChildOffsets[sliderNumber] - numberOfSlides;
 				}
 				
-				var nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + childrenOffsets.length + 1)%childrenOffsets.length;
+				var nextSlide = activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + 1;
 
 				helpers.changeSlide(nextSlide, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings);
 				
@@ -886,7 +1000,7 @@
 			}, settings.autoSlideTimer + settings.autoSlideTransTimer);
 			
 		},
-		
+				
 		autoSlidePause: function(sliderNumber) {
 
 			clearTimeout(autoSlideTimeouts[sliderNumber]);
@@ -932,6 +1046,39 @@
 		
 			return scrollTimeout;
 		
+		},
+		
+		updateBackfaceVisibilityTimer: function(scrollIntervalTime, slideNodes, sliderNumber, numberOfSlides, settings) {
+		
+			var scrollTimeout = setTimeout(function() {
+				helpers.updateBackfaceVisibility(slideNodes, sliderNumber, numberOfSlides, settings);
+			}, scrollIntervalTime);
+			
+			return scrollTimeout;
+			
+		},
+		
+		updateBackfaceVisibility: function(slideNodes, sliderNumber, numberOfSlides, settings) {
+
+			var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+			
+			//loop through buffered slides
+			for(var i = 0; i < (settings.hardwareAccelBuffer * 2); i++) {
+				
+				var slide_eq = slide+i-settings.hardwareAccelBuffer;
+				
+				//check if backface visibility applied
+				if($(slideNodes).eq(slide_eq).css('-webkit-backface-visibility') == 'visible') {
+				
+					//buffer backface visibility
+					$(slideNodes).eq(slide_eq).css('-webkit-backface-visibility', 'hidden');
+					$(slideNodes).eq(slide_eq+settings.hardwareAccelBuffer*2).css('-webkit-backface-visibility', '');
+					$(slideNodes).eq(slide_eq-settings.hardwareAccelBuffer*2).css('-webkit-backface-visibility', '');
+					
+				}
+				
+			}
+			
 		},
 						
 		args: function(func, settings, node, activeSlideNode, newChildOffset, targetSlideOffset) {
@@ -1029,6 +1176,7 @@
 				'slideStartVelocityThreshold': 0,
 				'horizontalSlideLockThreshold': 5,
 				'verticalSlideLockThreshold': 3,
+				'hardwareAccelBuffer': 5,
 				'stageCSS': {
 					position: 'relative',
 					top: '0',
@@ -1246,7 +1394,6 @@
 						}
 						
 						$(slideNodes[j]).css({
-							'webkitBackfaceVisibility': 'hidden',
 							overflow: 'hidden',
 							position: 'absolute'
 						});
@@ -1433,6 +1580,8 @@
 					}
 					
 					helpers.setSliderOffset(scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]);
+					
+					helpers.updateBackfaceVisibility(slideNodes, sliderNumber, numberOfSlides, settings);
 					
 					if(!settings.desktopClickDrag) {
 						
@@ -2188,6 +2337,8 @@
 									settings.onSlideChange(args);
 								}
 								
+								helpers.updateBackfaceVisibility(slideNodes, sliderNumber, numberOfSlides, settings);
+								
 							}
 							
 						}
@@ -2569,6 +2720,46 @@
 
 			});
 			
+		},
+		
+		prevPage: function(node) {
+			
+			if(node == undefined) {
+				node = this;
+			}
+			
+			return $(node).each(function() {
+
+				var $this = $(this);
+				var data = $this.data('iosslider');
+				if(data == undefined) return false;
+				
+				var newOffset = helpers.getSliderOffset(data.scrollerNode, 'x') + data.stageWidth;
+				
+				helpers.changeOffset(newOffset, $(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.slideNodeOuterWidths, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
+			
+			});
+		
+		},
+		
+		nextPage: function(node) {
+			
+			if(node == undefined) {
+				node = this;
+			}
+			
+			return $(node).each(function() {
+
+				var $this = $(this);
+				var data = $this.data('iosslider');
+				if(data == undefined) return false;
+				
+				var newOffset = helpers.getSliderOffset(data.scrollerNode, 'x') - data.stageWidth;
+				
+				helpers.changeOffset(newOffset, $(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.slideNodeOuterWidths, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
+			
+			});
+		
 		},
 		
 		lock: function() {
