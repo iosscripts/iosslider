@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.37 (04/11/2014)
+ * Version: v1.3.39 (04/11/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1148,6 +1148,7 @@
 				'scrollbar': false,
 				'scrollbarDrag': false,
 				'scrollbarHide': true,
+				'scrollbarPaging': false,
 				'scrollbarLocation': 'top',
 				'scrollbarContainer': '',
 				'scrollbarOpacity': 0.4,
@@ -1827,6 +1828,26 @@
 					
 					return true;
 				
+				}
+				
+				if(settings.scrollbarPaging && settings.scrollbar && !shortContent) {
+					
+					$(scrollbarBlockNode).css('cursor', 'pointer');
+					
+					$(scrollbarBlockNode).bind('click.iosSliderEvent', function(e) {
+						
+						if(this == e.target) {
+							
+							if(e.pageX > $(scrollbarNode).offset().left) {
+								methods.nextPage(stageNode);
+							} else {
+								methods.prevPage(stageNode);
+							}
+							
+						}
+					
+					});
+					
 				}
 				
 				if(iosSliderSettings[sliderNumber].responsiveSlides || iosSliderSettings[sliderNumber].responsiveSlideContainer) {
@@ -2526,12 +2547,13 @@
 		    	$(this).unbind('.iosSliderEvent');
 	    		$(this).children(':first-child').unbind('.iosSliderEvent');
 	    		$(this).children(':first-child').children().unbind('.iosSliderEvent');
+		    	$(data.settings.scrollbarBlockNode).unbind('.iosSliderEvent');
 		    	
 		    	if(clearStyle) {
 	    			$(this).attr('style', '');
 		    		$(this).children(':first-child').attr('style', '');
 		    		$(this).children(':first-child').children().attr('style', '');
-		    		
+
 		    		$(data.settings.navSlideSelector).attr('style', '');
 		    		$(data.settings.navPrevSelector).attr('style', '');
 		    		$(data.settings.navNextSelector).attr('style', '');
