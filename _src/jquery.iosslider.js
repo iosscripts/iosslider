@@ -888,7 +888,7 @@
 			}
 			
 			var steps = Math.ceil(settings.autoSlideTransTimer / 10) + 1;
-			var startOffset = helpers.getSliderOffset(node, 'y');
+			var startOffset = helpers.getSliderOffset(node, 'x');
 			var slide = (helpers.calcActiveOffset(settings, endOffset, childrenOffsets, stageWidth, infiniteSliderOffset, numberOfSlides, activeChildOffsets[sliderNumber], sliderNumber) + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
 			var testOffsets = childrenOffsets.slice();
 			
