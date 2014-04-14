@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.39 (04/11/2014)
+ * Version: v1.3.40 (04/14/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -888,7 +888,7 @@
 			}
 			
 			var steps = Math.ceil(settings.autoSlideTransTimer / 10) + 1;
-			var startOffset = helpers.getSliderOffset(node, 'y');
+			var startOffset = helpers.getSliderOffset(node, 'x');
 			var slide = (helpers.calcActiveOffset(settings, endOffset, childrenOffsets, stageWidth, infiniteSliderOffset, numberOfSlides, activeChildOffsets[sliderNumber], sliderNumber) + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
 			var testOffsets = childrenOffsets.slice();
 			
