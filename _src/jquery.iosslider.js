@@ -1061,23 +1061,41 @@
 		updateBackfaceVisibility: function(slideNodes, sliderNumber, numberOfSlides, settings) {
 
 			var slide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides)%numberOfSlides;
+			var usedSlideArray = Array();
 			
 			//loop through buffered slides
 			for(var i = 0; i < (settings.hardwareAccelBuffer * 2); i++) {
 				
-				var slide_eq = slide+i-settings.hardwareAccelBuffer;
+				var slide_eq = helpers.mod(slide+i-settings.hardwareAccelBuffer, numberOfSlides);
 				
 				//check if backface visibility applied
 				if($(slideNodes).eq(slide_eq).css('-webkit-backface-visibility') == 'visible') {
-				
+					
+					usedSlideArray[usedSlideArray.length] = slide_eq;
+					
+					var eq_h = helpers.mod(slide_eq+settings.hardwareAccelBuffer*2, numberOfSlides);
+					var eq_l = helpers.mod(slide_eq-settings.hardwareAccelBuffer*2, numberOfSlides);
+					
 					//buffer backface visibility
 					$(slideNodes).eq(slide_eq).css('-webkit-backface-visibility', 'hidden');
-					$(slideNodes).eq(slide_eq+settings.hardwareAccelBuffer*2).css('-webkit-backface-visibility', '');
-					$(slideNodes).eq(slide_eq-settings.hardwareAccelBuffer*2).css('-webkit-backface-visibility', '');
+					
+					if(usedSlideArray.indexOf(eq_l) == -1) 
+						$(slideNodes).eq(eq_l).css('-webkit-backface-visibility', '');
+						
+					if(usedSlideArray.indexOf(eq_h) == -1) 
+						$(slideNodes).eq(eq_h).css('-webkit-backface-visibility', '');
 					
 				}
 				
 			}
+			
+		},
+		
+		mod: function(x, mod) {
+		
+			var rem = x % mod;
+			
+		    return rem < 0 ? rem + mod : rem;
 			
 		},
 						
