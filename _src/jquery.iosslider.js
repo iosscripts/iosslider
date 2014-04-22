@@ -9,7 +9,7 @@
  * 
  * Copyright (c) 2013 Marc Whitbread
  * 
- * Version: v1.3.41 (04/16/2014)
+ * Version: v1.3.42 (04/22/2014)
  * Minimum requirements: jQuery v1.4+
  *
  * Advanced requirements:
@@ -1893,6 +1893,8 @@
 						if((!isIe7) && (!isIe8)) {
 							var e = e.originalEvent;
 						}
+						
+						if(e.target.nodeName == 'INPUT') return true;
 						
 						if(touchLocks[sliderNumber]) return true;
 						
