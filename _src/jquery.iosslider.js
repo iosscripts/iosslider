@@ -1888,6 +1888,8 @@
 							var e = e.originalEvent;
 						}
 						
+						if(e.target.nodeName == 'INPUT') return true;
+						
 						if(touchLocks[sliderNumber]) return true;
 						
 						if((e.keyCode == 37) && settings.keyboardControls) {
