@@ -2698,7 +2698,7 @@
 		
 		},
 		
-		goToSlide: function(slide, node) {
+		goToSlide: function(slide, duration, node) {
 			
 			if(node == undefined) {
 				node = this;
@@ -2712,6 +2712,9 @@
 				if((data == undefined) || data.shortContent) return false;
 				
 				slide = (slide > data.childrenOffsets.length) ? data.childrenOffsets.length - 1 : slide - 1;
+
+				if(duration != undefined)
+					data.settings.autoSlideTransTimer = duration;
 				
 				helpers.changeSlide(slide, $(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.slideNodeOuterWidths, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
 
@@ -2719,7 +2722,7 @@
 			
 		},
 		
-		prevSlide: function() {
+		prevSlide: function(duration) {
 			
 			return this.each(function() {
 					
@@ -2728,6 +2731,9 @@
 				if((data == undefined) || data.shortContent) return false;
 				
 				var slide = (activeChildOffsets[data.sliderNumber] + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
+				
+				if(duration != undefined)
+					data.settings.autoSlideTransTimer = duration;
 				
 				if((slide > 0) || data.settings.infiniteSlider) {
 					helpers.changeSlide(slide - 1, $(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.slideNodeOuterWidths, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
@@ -2739,7 +2745,7 @@
 			
 		},
 		
-		nextSlide: function() {
+		nextSlide: function(duration) {
 			
 			return this.each(function() {
 					
@@ -2748,6 +2754,9 @@
 				if((data == undefined) || data.shortContent) return false;
 				
 				var slide = (activeChildOffsets[data.sliderNumber] + infiniteSliderOffset[data.sliderNumber] + data.numberOfSlides)%data.numberOfSlides;
+				
+				if(duration != undefined)
+					data.settings.autoSlideTransTimer = duration;
 				
 				if((slide < data.childrenOffsets.length-1) || data.settings.infiniteSlider) {
 					helpers.changeSlide(slide + 1, $(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.slideNodeOuterWidths, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
@@ -2759,7 +2768,7 @@
 			
 		},
 		
-		prevPage: function(node) {
+		prevPage: function(duration, node) {
 			
 			if(node == undefined) {
 				node = this;
@@ -2773,13 +2782,16 @@
 				
 				var newOffset = helpers.getSliderOffset(data.scrollerNode, 'x') + data.stageWidth;
 				
+				if(duration != undefined)
+					data.settings.autoSlideTransTimer = duration;
+				
 				helpers.changeOffset(newOffset, $(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.slideNodeOuterWidths, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
 			
 			});
 		
 		},
 		
-		nextPage: function(node) {
+		nextPage: function(duration, node) {
 			
 			if(node == undefined) {
 				node = this;
@@ -2792,6 +2804,9 @@
 				if(data == undefined) return false;
 				
 				var newOffset = helpers.getSliderOffset(data.scrollerNode, 'x') - data.stageWidth;
+				
+				if(duration != undefined)
+					data.settings.autoSlideTransTimer = duration;
 				
 				helpers.changeOffset(newOffset, $(data.scrollerNode), $(data.slideNodes), slideTimeouts[data.sliderNumber], data.scrollbarClass, data.scrollbarWidth, data.stageWidth, data.scrollbarStageWidth, data.scrollMargin, data.scrollBorder, data.originalOffsets, data.childrenOffsets, data.slideNodeOuterWidths, data.sliderNumber, data.infiniteSliderWidth, data.numberOfSlides, data.centeredSlideOffset, data.settings);
 			
