@@ -281,7 +281,8 @@
 			activeChildInfOffsets[sliderNumber] = tempOffset;
 			
 			newOffset = Math.floor(newOffset);
-
+			
+			if(sliderNumber != $(node).parent().data('args').data.sliderNumber) return true;
 			helpers.setSliderOffset(node, newOffset);
 
 			if(settings.scrollbar) {
