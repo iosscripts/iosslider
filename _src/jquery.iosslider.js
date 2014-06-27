@@ -1112,8 +1112,6 @@
 				this.targetSlideNumber = undefined;
 				this.targetSlideObject = undefined;
 			} else if(func == 'start') {
-				this.targetSlideNumber = undefined;
-				this.targetSlideObject = undefined;
 			} else if(func == 'change') {
 				this.slideChanged = true;
 				this.prevSlideNumber = ($(node).parent().data('args') == undefined) ? settings.startAtSlide : $(node).parent().data('args').currentSlideNumber;
