@@ -583,7 +583,7 @@
 			var sliderOffset = 0;
 			xy = (xy == 'x') ? 4 : 5;
 			
-			if(has3DTransform && !isIe7 && !isIe8) {
+			if(has3DTransform) {
 				
 				var transforms = new Array('-webkit-transform', '-moz-transform', 'transform');
 				var transformArray;
@@ -620,7 +620,7 @@
 			
 			sliderOffset = parseInt(sliderOffset, 10);
 			
-			if(has3DTransform && !isIe7 && !isIe8) {
+			if(has3DTransform) {
 				
 				$(node).css({
 					'msTransform': 'matrix(1,0,0,1,' + sliderOffset + ',0)',
@@ -677,6 +677,9 @@
 				has3D = false;
 			} else if(isGecko && (parseInt(navigator.userAgent.split('/')[3], 10) >= 21)) {
 				//bug in v21+ which does not render slides properly in 3D
+				has3D = false;
+			} else if (isIe7 || isIe8 || isIe9) {
+				// http://caniuse.com/#feat=transforms3d
 				has3D = false;
 			} else if(testElement.attr('style') != undefined) {
 				has3D = true;
