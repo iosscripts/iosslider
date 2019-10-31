@@ -982,7 +982,7 @@
 		
 		autoSlide: function(scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings) {
 			
-			if(!iosSliderSettings[sliderNumber].autoSlide) return false;
+			if(!iosSliderSettings[sliderNumber].autoSlide || stageWidth < 1 || numberOfSlides < 1) return false;
 			
 			helpers.autoSlidePause(sliderNumber);
 
